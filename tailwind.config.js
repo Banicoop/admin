@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       colors: {
          bgPurple: '#6922D1',
-         bgWhite: '#fff'
+         bgWhite: '#fff',
+         bgR: '#fafafa'
       }
     },
   },

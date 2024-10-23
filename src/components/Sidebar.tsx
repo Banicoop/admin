@@ -17,7 +17,7 @@ const Sidebar = () => {
 
          { i.items.map((item) => (
           <Link to={item.url} className="flex items-center gap-2 px-3 py-5 hover:bg-[#fafafa] hover:text-[#6922D1] rounded-full">
-            <img src={item.icon} alt="" className="ml-[20px]" />
+            <img src={item.icon} alt="" className="ml-[20px] text-bgPurple" />
             <span className='text-[14px]'>{item.name}</span>
           </Link>
          ))}

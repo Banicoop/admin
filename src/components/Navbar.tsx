@@ -13,11 +13,11 @@ const Navbar = () => {
 
         <div className="flex p-5 rounded-full bg-[#fafafa] relative cursor-pointer">
           <img src="/notification.svg" alt="" className="" />
-          <span className="flex items-center rounded-full absolute justify-center h-7 w-7 bg-[#FF0E00] text-[#fff] font-[600] -top-[1px] -right-2">8</span>
+          <span className="flex items-center rounded-full absolute justify-center h-6 w-6 bg-[#FF0E00] text-[#fff] font-[600] -top-[0px] -right-2">8</span>
         </div>
         <div className="flex p-5 rounded-full bg-[#fafafa] relative cursor-pointer">
           <img src="/message.svg" alt="" className="" />
-          <span className="flex items-center rounded-full absolute justify-center h-7 w-7 bg-[#FF0E00] text-[#fff] font-[600] -top-[1px] -right-2">3</span>
+          <span className="flex items-center rounded-full absolute justify-center h-6 w-6 bg-[#FF0E00] text-[#fff] font-[600] -top-[0px] -right-2">3</span>
         </div>
 
         <div className="relative">
