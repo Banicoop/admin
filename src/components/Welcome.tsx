@@ -24,17 +24,17 @@ const Welcome = () => {
     const [activeItem, setActiveItem] = useState('Today');
 
   return (
-    <div className='flex items-center justify-between mt-5'>
+    <div className='flex items-center justify-between px-8 pt-8 pb-2 '>
         <div className="flex items-center gap-4">
             <span className='text-[#000] text-[14px]'>Welcome Dominic 👋</span>
             <img src="/alert-circle.svg" alt="" className="" />
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
             { list.map((l) => (
                 <span  
                 onClick={() => setActiveItem(l.label)} 
-                className={`py-4 px-7 rounded-3xl text-[14px] cursor-pointer ${activeItem === l.label ? 'bg-bgR text-bgPurple' : 'hover:bg-bgR hover:text-bgPurple'}`} 
+                className={`py-3 px-7 rounded-3xl text-[14px] cursor-pointer ${activeItem === l.label ? 'bg-bgR text-bgPurple' : 'hover:bg-bgR hover:text-bgPurple'}`} 
                 key={l.label}>{l.label}</span>
             ))
             }

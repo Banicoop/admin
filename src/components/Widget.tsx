@@ -35,13 +35,13 @@ const Widget: FC<WidgetProps> = ({type}) => {
             default:
                 throw new Error();
         }
-    }
+}
 
     const details = wigetDetails();
   return (
     <div className='min-h-[108px] flex items-center border-[1px] rounded-3xl gap-4 p-4 w-full justify-between'>
         <div className="flex items-center gap-4">
-            <div className="bg-bgR p-5 rounded-3xl">
+            <div className="bg-bgR p-3 rounded-2xl">
                 <img src={details.icon} alt="" className="" />
             </div>
 
@@ -51,7 +51,7 @@ const Widget: FC<WidgetProps> = ({type}) => {
             </div>
         </div>
 
-        <div className="flex  p-3 rounded-2xl bg-bgR mr-3">
+        <div className="flex py-1 px-3 rounded-2xl bg-bgR mr-3">
             <span className='' style={{color: `${details.bgColor}`}}>{details.text2}%</span>
             <img src={details.icon2} alt="" className="" />
         </div>
