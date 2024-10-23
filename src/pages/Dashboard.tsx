@@ -1,6 +1,7 @@
 import React from 'react'
 import Welcome from '../components/Welcome';
 import Widget from '../components/Widget';
+import Chart from '../sections/Chart';
 
 const Dashboard = () => {
   return (
@@ -12,6 +13,7 @@ const Dashboard = () => {
             <Widget type='customers'/>
             <Widget type='cells'/>
         </div>
+        <Chart/>
     </div>
   )
 }
