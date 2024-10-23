@@ -6,9 +6,9 @@ import Dashboard from './pages/Dashboard';
 
 function DashboardLayout(){
   return(
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen min-w-full">
         <Sidebar/>
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-full w-full">
         <Navbar/>
         <Outlet/>
       </div>

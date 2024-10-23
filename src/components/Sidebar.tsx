@@ -1,17 +1,28 @@
 import React from 'react'
+import { menuData } from '../utils/menuData';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
     <div className='w-[250px] min-h-full border-r-[1px] flex flex-col'>
       <div className="p-4">
-        <div className="flex gap-4 items-center mt-4 ml-[20px]">
+        <div className="flex gap-4 items-center mt-6 ml-[20px]">
           <img src="/logo1.svg" alt="" className="" />
           <img src="/banicoop.svg" alt="" className="" />
         </div>
 
-        <div className="flex flex-col ">
+      { menuData.map((i) => (
+        <div className="flex flex-col p-4 gap-6 mt-10">
+          <h2 className='text-[14px] m-6'>{i.title}</h2>
 
+         { i.items.map((item) => (
+          <Link to={item.url} className="flex items-center gap-2 px-3 py-5 hover:bg-[#fafafa] hover:text-[#6922D1] rounded-full">
+            <img src={item.icon} alt="" className="ml-[20px]" />
+            <span className='text-[14px]'>{item.name}</span>
+          </Link>
+         ))}
         </div>
+      ))}
       </div>
 
 

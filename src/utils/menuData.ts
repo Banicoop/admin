@@ -4,19 +4,23 @@ export const menuData = [
         items: [
            {
              name: 'Dashboard',
-             icon: '/vector.svg'
+             icon: '/vector.svg',
+             url: '/'
            },
            {
             name: 'Customers',
-            icon: '/user.svg'
+            icon: '/user.svg',
+            url: '/customers'
           },
           {
             name: 'Transactions',
-            icon: '/card.svg'
+            icon: '/card.svg',
+            url: '/transactions'
           },
           {
             name: 'Cells',
-            icon: '/cells.svg'
+            icon: '/cells.svg',
+            url: '/cells'
           },
         ],
     },
@@ -25,15 +29,18 @@ export const menuData = [
         items: [
            {
              name: 'Help & Support',
-             icon: '/help.svg'
+             icon: '/help.svg',
+             url: 'account/help'
            },
            {
             name: 'Account Settings',
-            icon: '/setting.svg'
+            icon: '/setting.svg',
+            url: 'account/settings'
           },
           {
             name: 'Logout',
-            icon: '/logout.svg'
+            icon: '/logout.svg',
+            url: '#'
           },
         ]
     }
