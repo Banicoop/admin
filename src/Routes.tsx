@@ -6,18 +6,10 @@ import Dashboard from './pages/Dashboard';
 import Welcome from './components/Welcome';
 import Widget from './components/Widget';
 import Cells from './pages/cells/Cells';
+import CellDetails from './pages/cells/CellDetails';
+import Customers from './pages/Customers';
+import Transaction from './pages/Transaction';
 
-function DashboardLayout1(){
-  return(
-    <div className="flex min-h-screen min-w-full">
-        <Sidebar/>
-      <div className="flex flex-col h-full w-full">
-        <Navbar/>
-        <Outlet/>
-      </div>
-    </div>
-  )
-}
 
 
 function CellLayout(){
@@ -51,7 +43,19 @@ const router = createBrowserRouter([
       {
         path: '/cells',
         element: <Cells/>
-      }
+      },
+      {
+        path: '/cells/:id',
+        element: <CellDetails/>
+      },
+      {
+        path: '/transactions',
+        element: <Transaction/>
+      },
+      {
+        path: '/customers',
+        element: <Customers/>
+      },
     ]
   },
 ])

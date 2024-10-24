@@ -1,78 +1,78 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid,  ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, CartesianGrid,  ResponsiveContainer, Legend } from 'recharts';
 
 
 const data = [
     {
-      name: 'JAN',
-      uv: 4000,
-      pv: 2400,
+      name: '01',
+      'Last 6 days': 4000,
+      'Last week': 2400,
       amt: 2400,
     },
     {
-      name: 'FEB',
-      uv: 3000,
-      pv: 1398,
+      name: '02',
+      'Last 6 days': 3000,
+      'Last week': 1398,
       amt: 2210,
     },
     {
-      name: 'MAR',
-      uv: 2000,
-      pv: 9800,
+      name: '03',
+      'Last 6 days': 2000,
+      'Last week': 9800,
       amt: 2290,
     },
     {
-      name: 'APR',
-      uv: 2780,
-      pv: 3908,
+      name: '04',
+      'Last 6 days': 2780,
+      'Last week': 3908,
       amt: 2000,
     },
     {
-      name: 'MAY',
-      uv: 1890,
-      pv: 4800,
+      name: '05',
+      'Last 6 days': 1890,
+      'Last week': 4800,
       amt: 2181,
     },
     {
-      name: 'JUN',
-      uv: 2390,
-      pv: 3800,
+      name: '06',
+      'Last 6 days': 2390,
+      'Last week': 3800,
       amt: 2500,
     },
     {
-      name: 'JUL',
-      uv: 3490,
-      pv: 4300,
+      name: '07',
+      'Last 6 days': 3490,
+      'Last week': 4300,
       amt: 2100,
     },
     {
-      name: 'AUG',
-      uv: 3000,
-      pv: 1398,
+      name: '08',
+      'Last 6 days': 3000,
+      'Last week': 1398,
       amt: 2210,
     },
     {
-      name: 'SEP',
-      uv: 2000,
-      pv: 9800,
+      name: '09',
+      'Last 6 days': 2000,
+      'Last week': 9800,
       amt: 2290,
     },
     {
-      name: 'OCT',
-      uv: 2780,
-      pv: 3908,
+      name: '10',
+      'Last 6 days': 2780,
+      'Last week': 3908,
       amt: 2000,
     },
     {
-      name: 'NOV',
-      uv: 1890,
-      pv: 4800,
+      name: '11',
+      'Last 6 days': 1890,
+      'Last week': 4800,
       amt: 2181,
     },
     {
-      name: 'DEC',
-      uv: 2390,
-      pv: 3800,
+      name: '12',
+      'Last 6 days': 2390,
+      'Last week': 3800,
       amt: 2500,
     },
   ];
@@ -88,16 +88,19 @@ const Chart = () => {
                 <img src="/arrow-down.svg" alt="" className="" />
             </div>
         </div>
-        <div className="w-[300px] lg:w-[690px] h-[300px] flex justify-center items-center mt-3">
+        <div className="w-[300px] md:w-[600px] lg:w-[1000px] h-[400px] flex justify-center items-center mt-3">
         <ResponsiveContainer width="100%" height="90%">
             <BarChart
                 data={data}
+                
             >
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke='#ddd'/>
             <XAxis dataKey="name" tickLine={false}/>
-            <YAxis axisLine={false} tickLine={false}/>
-            <Bar dataKey="pv" fill="#F1F1F2" />
-            <Bar dataKey="uv" fill="#E6E6E7" />
+            <Legend
+            align="left"
+          />
+            <Bar dataKey="Last 6 days" fill="#6922D1" barSize={10}  radius={[10, 10, 10, 10]}/>
+            <Bar dataKey="Last week" fill="#E6E8EC" barSize={10}  radius={[10, 10, 10, 10]}/>
             </BarChart>
         </ResponsiveContainer>
 
