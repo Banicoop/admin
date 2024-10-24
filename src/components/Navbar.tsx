@@ -1,15 +1,17 @@
 import React from 'react'
+import Search from './Search';
 
 const Navbar = () => {
   return (
-    <div className='flex justify-between items-center p-4 w-full border-b-[1px] '>
+    <div className='flex justify-between items-center py-4 px-8 w-full border-b-[1px] '>
       <h1 className='text-[#000] text-[14px]'>Dashboard Overview</h1>
 
       <div className="flex items-center gap-5">
-        <div className="flex items-center border-[1px] rounded-full px-5 py-3 gap-3 bg-[#fafafa]">
+        <Search onClick={() => {}}/>
+        {/* <div className="flex items-center border-[1px] rounded-full px-5 py-3 gap-3 bg-[#fafafa]">
           <img src="/search.svg" alt="" className="" />
           <input type="text" className="w-[260px] outline-none bg-inherit text-[13px]" placeholder='Search' />
-        </div>
+        </div> */}
 
         <div className="flex p-3 rounded-full bg-[#fafafa] relative cursor-pointer">
           <img src="/notification.svg" alt="" className="" />

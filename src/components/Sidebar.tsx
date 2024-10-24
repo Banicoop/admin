@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 const Sidebar = () => {
   return (
     <div className='w-[250px] min-h-full border-r-[1px] flex flex-col'>
-      <div className="p-1">
-        <div className="flex gap-4 items-center mt-6 ml-[20px]">
+      <div className="px-1 py-6">
+        <div className="flex gap-4 items-center ml-[20px]">
           <img src="/logo1.svg" alt="" className="" />
           <img src="/banicoop.svg" alt="" className="" />
         </div>
