@@ -1,6 +1,6 @@
 import { Table, TableContainer, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import React, { FC } from 'react';
-import { ActionBtn } from '../ExportBtn';
+import { ActionBtn } from '../buttons/ExportBtn';
 import Status from '../infos/Status';
 
 interface ITbale {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Info from '../../components/infos/Info';
 import Search from '../../components/Search';
-import ExportBtn from '../../components/ExportBtn';
+import ExportBtn from '../../components/buttons/ExportBtn';
 import BasicTable from '../../components/tables/BasicTable';
 
 
