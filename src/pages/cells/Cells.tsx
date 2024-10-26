@@ -1,8 +1,8 @@
 import React from 'react'
-import Info from '../../components/Info';
+import Info from '../../components/infos/Info';
 import Search from '../../components/Search';
 import ExportBtn from '../../components/ExportBtn';
-import BasicTable from '../../components/BasicTable';
+import BasicTable from '../../components/tables/BasicTable';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -42,7 +42,7 @@ const Cells = () => {
     navigate(':id');
   };
 
-  const tableData = Array(1)
+  const tableData = Array(5)
   .fill("")
   .map((_, i) => ({
     cellName: "Eze's Cell",
@@ -59,7 +59,7 @@ const Cells = () => {
     <div className="px-8">
       <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
         <div className="flex justify-between items-center w-full">
-          <Info/>
+          <Info text='Cell information'/>
 
           <div className="flex items-center gap-4">
             <Search onClick={() => {}}/>
