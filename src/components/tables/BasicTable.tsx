@@ -1,6 +1,7 @@
 import { Table, TableContainer, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import React, { FC } from 'react';
 import { ActionBtn } from '../ExportBtn';
+import Status from '../infos/Status';
 
 interface ITbale {
   headcells: any;
@@ -30,7 +31,9 @@ const BasicTable:FC<ITbale> = ({headcells, tableData, onNavigate}) => {
 									{row[col.key]}
                   {col.key === "action" && (
                     <ActionBtn onClick={() => onNavigate(row.id)}/>
-                  )
+                  )}
+                  { col.key === 'status' &&
+                  <Status text='Pending'/>
                   }
 								</TableCell>
 							))}
