@@ -14,7 +14,7 @@ import Transaction from './pages/Transaction';
 
 function CellLayout(){
   return(
-    <div className="flex min-h-screen min-w-full">
+    <div className="flex min-h-screen min-w-full overflow-y-scroll">
         <Sidebar/>
       <div className="flex flex-col h-full w-full">
         <Navbar/>

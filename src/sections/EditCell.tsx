@@ -2,7 +2,7 @@ import React from 'react'
 
 const EditCell = () => {
   return (
-    <div>EditCell</div>
+    <div className='p'>EditCell</div>
   )
 }
 

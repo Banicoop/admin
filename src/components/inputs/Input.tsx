@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { FC } from 'react';
 
-const Input = () => {
+
+interface IInput {
+    type: string;
+    placeholder: string;
+    name?: string;
+}
+
+const Input:FC<IInput> = ({type, placeholder}) => {
   return (
-    <input type="text" placeholder='Cell Name' className="p-2 rounded-2xl border-[1px] w-[342px] outline-none"  />
+    <input type={type} placeholder={placeholder} className="px-2 py-3 rounded-2xl border-[1px] w-[342px] outline-none"  />
   )
 }
 

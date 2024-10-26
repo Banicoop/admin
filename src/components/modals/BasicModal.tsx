@@ -7,6 +7,8 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 'maxContent',
+    maxHeight: '100%', 
+    overflowY: 'auto',
     bgcolor: 'background.paper',
     border: 'none',
     borderRadius: '20px',
@@ -34,8 +36,8 @@ const BasicModal:FC<BasicModalProps> = ({ open, onClose, children, h2, p }) => {
   return (
     <Modal open={open} onClose={onClose}>
         <Box sx={style}>
-            <Typography variant='h1' sx={{color: '#000', fontSize: '18px', fontWeight: 600}}>{h2}</Typography>
-            <Typography variant='h4' sx={{color: '#000', fontSize: '14px', fontWeight: 500}}>{p}</Typography>
+            <Typography variant='h1' sx={{color: '#000', fontSize: '18px', fontWeight: 500}}>{h2}</Typography>
+            <Typography variant='h4' sx={{color: '#111', fontSize: '14px', fontWeight: 500}}>{p}</Typography>
             {children}
         </Box>
     </Modal>

@@ -47,7 +47,7 @@ const Cells = () => {
 
   return (
     <>
-      <div className="px-8">
+      <div className="px-8 h-full">
         <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
           <div className="flex justify-between items-center w-full">
             <Info text='Cell information'/>
