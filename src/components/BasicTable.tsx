@@ -1,12 +1,14 @@
 import { Table, TableContainer, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import React, { FC } from 'react';
+import { ActionBtn } from './ExportBtn';
 
 interface ITbale {
   headcells: any;
-  tableData: any;
+  tableData: any[];
+  onNavigate?: any
 }
 
-const BasicTable:FC<ITbale> = ({headcells, tableData}) => {
+const BasicTable:FC<ITbale> = ({headcells, tableData, onNavigate}) => {
   return (
     <TableContainer sx={{ boxShadow: "none", border: '1px solid #fafafa', borderRadius: '20px 20px 0 0'}}>
       <Table>
@@ -25,9 +27,11 @@ const BasicTable:FC<ITbale> = ({headcells, tableData}) => {
 						<TableRow key={rowIndex}>
 							{headcells?.map((col: any, colIndex: any) => (
 								<TableCell align="left" key={colIndex} sx={{ fontWeight: 400, fontSize: 13 }}>
-									{
-										row[col.key]
-									}
+									{row[col.key]}
+                  {col.key === "action" && (
+                    <ActionBtn onClick={() => onNavigate(row.id)}/>
+                  )
+                  }
 								</TableCell>
 							))}
 

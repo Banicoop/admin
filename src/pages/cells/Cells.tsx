@@ -3,6 +3,7 @@ import Info from '../../components/Info';
 import Search from '../../components/Search';
 import ExportBtn from '../../components/ExportBtn';
 import BasicTable from '../../components/BasicTable';
+import { useNavigate } from 'react-router-dom';
 
 
 const headcells = [
@@ -32,19 +33,28 @@ const headcells = [
   },
 ]
 
-const tableData = Array(3)
-.fill("")
-.map((_, i) => ({
-  cellName: "Eze's Cell",
-  amount: "₦300,000.00",
-  day: "3rd Nov 2023",
-  num: '4 of 9',
-  date: "09-03-2023",
-  action: '',
-  id: `row_${i}`,
-}));
 
 const Cells = () => {
+
+  const navigate = useNavigate();
+
+  const handleNavigate = (id: string) => {
+    navigate(':id');
+  };
+
+  const tableData = Array(1)
+  .fill("")
+  .map((_, i) => ({
+    cellName: "Eze's Cell",
+    amount: "₦300,000.00",
+    day: "3rd Nov 2023",
+    num: '4 of 9',
+    date: "09-03-2023",
+    id: `row_${i}`,
+
+  }));
+
+
   return (
     <div className="px-8">
       <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
@@ -57,7 +67,7 @@ const Cells = () => {
             <ExportBtn text='Export' onClick={() => {}}/>
           </div>
         </div>
-        <BasicTable headcells={headcells} tableData={tableData}/>
+        <BasicTable headcells={headcells} tableData={tableData} onNavigate={handleNavigate}/>
       </div>
     </div>
   )
