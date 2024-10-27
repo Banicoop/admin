@@ -61,7 +61,7 @@ const Cells = () => {
           <BasicTable headcells={headcells} tableData={tableData} onNavigate={handleNavigate}/>
         </div>
       </div>
-      <CreateCell open={openModal} onClose={() => setOpenModal(false)}/>
+      <CreateCell open={openModal} onClick={() => setOpenModal(false)} onClose={() => setOpenModal(false)}/>
     </>
   )
 }

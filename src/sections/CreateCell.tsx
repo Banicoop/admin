@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, MouseEventHandler } from 'react'
 import BasicModal from '../components/modals/BasicModal';
 import Input from '../components/inputs/Input';
 import TextArea from '../components/inputs/TextArea';
@@ -6,12 +6,13 @@ import Button from '../components/buttons/Button';
 
 interface cType {
   open: boolean;
-  onClose: any
+  onClose: any;
+  onClick: MouseEventHandler<HTMLButtonElement>
 }
 
-const CreateCell:FC<cType> = ({open, onClose}) => {
+const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
   return (
-    <div className='min-h-full overflow-y-scroll'>
+    <div className='h-full overflow-y-auto'>
       <BasicModal h2='Create New Cell' p='Enter cell information to continue.' open={open} onClose={onClose}>
         <hr className="h-1" />
 
@@ -20,15 +21,14 @@ const CreateCell:FC<cType> = ({open, onClose}) => {
         <Input type='tel' placeholder='Minimum no of Participants'/>
         <Input type='tel' placeholder='Contribution Amount'/>
         <Input type='tel' placeholder='Duration'/>
-        <textarea placeholder='Cell Description' className='px-2 py-3 rounded-2xl border-[1px] w-full h-40 outline-none resize-none'/>
-        {/* <Input type='tel' placeholder='Duration'/>
-        <Input type='tel' placeholder='Duration'/>
-        <Input type='tel' placeholder='Duration'/> */}
-        {/* <TextArea/> */}
+
+        <Input type='tel' placeholder='Cell Description'/>
+
+        {/* <TextArea text='Cell Description'/> */}
 
         <div className="flex items-center gap-2 justify-between">
-          <Button text='Create New Cell'/>
-          <Button text='Cancel' cancel/>
+          <Button text='Create New Cell' onClick={() => {}}/>
+          <Button text='Cancel' cancel onClick={onClick}/>
         </div>
 
       </BasicModal>
