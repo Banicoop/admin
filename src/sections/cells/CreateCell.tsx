@@ -1,8 +1,8 @@
 import React, { FC, MouseEventHandler } from 'react'
-import BasicModal from '../components/modals/BasicModal';
-import Input from '../components/inputs/Input';
-import TextArea from '../components/inputs/TextArea';
-import Button from '../components/buttons/Button';
+import BasicModal from '../../components/modals/BasicModal';
+import Input from '../../components/inputs/Input';
+import TextArea from '../../components/inputs/TextArea';
+import Button from '../../components/buttons/Button';
 
 interface cType {
   open: boolean;
@@ -24,7 +24,7 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
         <Input type='tel' placeholder='Cell Description'/>
 
-        {/* <TextArea text='Cell Description'/> */}
+        <TextArea text='Cell Description'/>
 
         <div className="flex items-center gap-2 justify-between">
           <Button text='Create New Cell' onClick={() => {}}/>

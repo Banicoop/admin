@@ -3,7 +3,7 @@ import Info from '../../components/infos/Info';
 import Search from '../../components/Search';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import BasicTable from '../../components/tables/BasicTable';
-import EditCell from '../../sections/EditCell';
+import EditCell from '../../sections/cells/EditCell';
 
 
 const headcells = [

@@ -6,9 +6,10 @@ type Itext = {
 
 const TextArea:FC<Itext> = ({text}) => {
   return (
-    // <input type="text" className="px-2 py-3 rounded-2xl border-[1px] w-full h-[150px] outline-none"  placeholder='Cell Description'/>
+    <div className="rounded-2xl border-[1px] w-full px-2 py-3 h-[140px]">
+      <textarea placeholder={text} className='outline-none resize-none h-full w-full'/>
+    </div>
 
-    <textarea placeholder={text} className='px-2 py-3 rounded-2xl h-40 border-[1px] w-full outline-none resize-none'/>
   )
 }
 

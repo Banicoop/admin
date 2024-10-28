@@ -4,7 +4,7 @@ import Search from '../../components/Search';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import BasicTable from '../../components/tables/BasicTable';
 import { useNavigate } from 'react-router-dom';
-import CreateCell from '../../sections/CreateCell';
+import CreateCell from '../../sections/cells/CreateCell';
 
 
 const headcells = [
