@@ -11,8 +11,8 @@ import Customers from './pages/Customers';
 import Transaction from './pages/Transaction';
 import Splash from './pages/auth/Splash';
 import WelcomePage from './pages/auth/WelcomePage';
-
 import Login from './pages/auth/Signin';
+import Verification from './pages/auth/Verification';
 
 
 
@@ -44,6 +44,14 @@ function AuthLayout(){
         <img src="/welcome.svg" alt="" className="h-[75%]" />
           <Outlet/>
       </div>
+    </div>
+  )
+}
+
+function AuthVerificationLayout(){
+  return(
+    <div className="bg-bgR h-[100vh] w-full flex justify-center items-center">
+        <Outlet/>
     </div>
   )
 }
@@ -92,8 +100,21 @@ const router = createBrowserRouter([
         element: <Login/>
       },
     ]
-
-  }
+  },
+  {
+    path: '/auth',
+    element: <AuthVerificationLayout/>,
+    children: [
+      {
+        path: '/auth/verification',
+        element: <Verification/>
+      },
+      {
+        path: '/auth/login',
+        element: <Login/>
+      },
+    ]
+  },
 ])
 
 function Routes (){

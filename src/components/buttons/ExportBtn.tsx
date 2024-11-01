@@ -37,4 +37,14 @@ export const AuthBtn:FC<Itext> = ({text, onClick}) => {
     )
 }
 
+
+export const BackBtn:FC<Itext> = ({text, onClick}) => {
+    return(
+        <div onClick={onClick} className="flex gap-3 bg-bgWhite text-bgPurple rounded-3xl py-3 px-7 cursor-pointer">
+            <img src="/arrowleft.svg" alt="" className="" />
+            <span className="text-bgPurple text-sm">{text}</span>
+        </div>
+    )
+}
+
 export default ExportBtn;
