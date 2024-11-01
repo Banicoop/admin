@@ -13,6 +13,7 @@ import Splash from './pages/auth/Splash';
 import WelcomePage from './pages/auth/WelcomePage';
 import Login from './pages/auth/Signin';
 import Verification from './pages/auth/Verification';
+import Verified from './pages/auth/Verified';
 
 
 
@@ -110,8 +111,8 @@ const router = createBrowserRouter([
         element: <Verification/>
       },
       {
-        path: '/auth/login',
-        element: <Login/>
+        path: '/auth/verified',
+        element: <Verified/>
       },
     ]
   },
