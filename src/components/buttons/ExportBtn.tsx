@@ -1,9 +1,10 @@
 import React, { FC, MouseEventHandler } from 'react';
 
 
+
 type Itext = {
     text?: string;
-    onClick?: MouseEventHandler<HTMLDivElement>
+    onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 const ExportBtn:FC<Itext> = ({text, onClick}) => {
@@ -23,6 +24,16 @@ export const ActionBtn:FC<Itext> = ({text, onClick }) => {
             <img src="/arrow-next.svg" alt="" className="" />
         </div >
 
+    )
+}
+
+
+export const AuthBtn:FC<Itext> = ({text, onClick}) => {
+    return(
+        <div onClick={onClick} className="flex gap-3 bg-bgPurple text-bgWhite rounded-3xl py-3 px-7 cursor-pointer">
+            <span className="text-bgWhite text-sm">{text}</span>
+            <img src="/autharr.svg" alt="" className="" />
+        </div>
     )
 }
 

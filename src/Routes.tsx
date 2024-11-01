@@ -10,7 +10,9 @@ import CellDetails from './pages/cells/CellDetails';
 import Customers from './pages/Customers';
 import Transaction from './pages/Transaction';
 import Splash from './pages/auth/Splash';
-import Login from './pages/auth/Login';
+import WelcomePage from './pages/auth/WelcomePage';
+
+import Login from './pages/auth/Signin';
 
 
 
@@ -40,9 +42,7 @@ function AuthLayout(){
     <div className="bg-bgR h-full w-full p-[5rem]">
       <div className="rounded-3xl shadow-lg bg-bgWhite flex">
         <img src="/welcome.svg" alt="" className="h-[75%]" />
-        {/* <div className="flex flex-col"> */}
           <Outlet/>
-        {/* </div> */}
       </div>
     </div>
   )
@@ -85,8 +85,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/auth/welcome',
+        element: <WelcomePage/>
+      },
+      {
+        path: '/auth/login',
         element: <Login/>
-      }
+      },
     ]
 
   }
