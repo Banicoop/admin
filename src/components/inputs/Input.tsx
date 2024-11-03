@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ChangeEventHandler, FC, useState } from 'react';
 
 
 interface IInput {
@@ -6,6 +6,7 @@ interface IInput {
     placeholder?: string;
     img?: string;
     name?: string;
+    onChange?: ChangeEventHandler<HTMLInputElement>
 }
 
 const Input:FC<IInput> = ({type, placeholder}) => {
@@ -22,11 +23,17 @@ export const OtpInput:FC<IInput> = ({ placeholder}) => {
 }
 
 
-export const AuthInput:FC<IInput> = ({type, placeholder, img}) => {
+export const AuthInput:FC<IInput> = ({type, placeholder, img, onChange}) => {
+
+  const [showPasword, setShowPasswword] = useState(false);
+
   return(
-    <div className="flex rounded-2xl border-[1px] px-2 py-3 w-full gap-1">
+    <div className="flex rounded-2xl border-[1px] px-2 py-3 w-full gap-1 items-center">
       <img src={img} alt="" className="" />
-      <input type={type} className="outline-none w-full" placeholder={placeholder} required/>
+      <input type={showPasword ? 'text': type} className="outline-none w-full" placeholder={placeholder} onChange={onChange} required/>
+      { type === 'password' &&
+        <img src={!showPasword ? '/visibilityoff.svg' : "/visiblity.png"} alt="" className="cursor-pointer" onClick={() => setShowPasswword(!showPasword)}/>
+      }
     </div>
   )
 }

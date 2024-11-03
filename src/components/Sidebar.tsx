@@ -1,5 +1,5 @@
 import React from 'react'
-import { menuData } from '../utils/menuData';
+import { menuData } from './menuData';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {

@@ -14,6 +14,9 @@ import WelcomePage from './pages/auth/WelcomePage';
 import Login from './pages/auth/Signin';
 import Verification from './pages/auth/Verification';
 import Verified from './pages/auth/Verified';
+import ProtectedRoute from './ProtectedRoute';
+
+const user = false;
 
 
 
@@ -42,7 +45,7 @@ function AuthLayout(){
   return(
     <div className="bg-bgR h-full w-full p-[5rem]">
       <div className="rounded-3xl shadow-lg bg-bgWhite flex">
-        <img src="/welcome.svg" alt="" className="h-[75%]" />
+        <img src="/welcome.svg" alt="" className="h-[75%] hidden md:block md:w-1/2 " />
           <Outlet/>
       </div>
     </div>
@@ -60,7 +63,11 @@ function AuthVerificationLayout(){
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <CellLayout/>,
+    element:(
+      <ProtectedRoute user={user}>
+        <CellLayout/>
+      </ProtectedRoute>
+  ),
     children: [
       {
         path: '/',
