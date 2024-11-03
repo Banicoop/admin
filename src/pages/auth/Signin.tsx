@@ -11,11 +11,7 @@ const Signin = () => {
     const [password, setPassword] = useState('');
 
     const handleSubmit = async () => {
-      try {
-        
-      } catch (error) {
-        
-      }
+      console.log('Something')
     }
 
   return (
@@ -29,7 +25,10 @@ const Signin = () => {
 
         <div className="flex justify-between w-full">
             <BackBtn onClick={() => navigate('/auth/welcome')} text='Go Back'/>
-            <AuthBtn onClick={() => navigate('/auth/verification')} text='Continue'/>
+            <AuthBtn onClick={() =>{
+              handleSubmit()
+               navigate('/auth/verification')
+            }} text='Continue'/>
         </div>
     </div>
   )

@@ -16,9 +16,9 @@ const Input:FC<IInput> = ({type, placeholder}) => {
 }
 
 
-export const OtpInput:FC<IInput> = ({ placeholder}) => {
+export const OtpInput:FC<IInput> = ({ placeholder, onChange}) => {
   return (
-    <input type='tel' placeholder={placeholder} maxLength={1} minLength={0} className="px-2 py-3 h-[60px] w-[60px] rounded-2xl border-[1px] outline-none text-lg"  />
+    <input type='tel' placeholder={placeholder} onChange={onChange} maxLength={1} minLength={0} className="px-2 py-3 h-[60px] w-[60px] rounded-2xl border-[1px] outline-none text-lg"  />
   )
 }
 

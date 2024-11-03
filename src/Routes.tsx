@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
@@ -43,9 +43,9 @@ function CellLayout(){
 
 function AuthLayout(){
   return(
-    <div className="bg-bgR h-full w-full p-[5rem]">
+    <div className="bg-bgR h-full w-full p-4 md:p-[3rem] lg:p-[5rem] flex items-center justify-center">
       <div className="rounded-3xl shadow-lg bg-bgWhite flex">
-        <img src="/welcome.svg" alt="" className="h-[75%] hidden md:block md:w-1/2 " />
+        <img src="/welcome.svg" alt="" className="h-fit hidden md:block md:w-1/2 " />
           <Outlet/>
       </div>
     </div>
@@ -101,7 +101,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/auth/welcome',
-        element: <WelcomePage/>
+        element: (
+          <Suspense fallback={<Splash/>}>
+            <WelcomePage/>
+          </Suspense>
+      )
       },
       {
         path: '/auth/login',
