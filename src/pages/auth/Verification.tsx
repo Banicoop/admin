@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
-import { OtpInput } from '../../components/inputs/Input';
+import OtpInput from '../../components/inputs/OtpInput';
 
 const Verification = () => {
 
@@ -16,13 +16,8 @@ const Verification = () => {
 
         <p className='text-lg text-[#000] text-center'>Check your email inbox for a 6-digit OTP. Enter it below</p>
 
-        <div className="flex gap-2 w-full justify-between">
-            <OtpInput/>
-            <OtpInput/>
-            <OtpInput/>
-            <OtpInput/>
-            <OtpInput/>
-            <OtpInput/>
+        <div className="">
+            <OtpInput onChange={() => {}}/>
         </div>
 
         <div className="flex justify-between w-full">
