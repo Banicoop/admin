@@ -16,7 +16,7 @@ import Verification from './pages/auth/Verification';
 import Verified from './pages/auth/Verified';
 import ProtectedRoute from './ProtectedRoute';
 
-const user = true;
+const user = false;
 
 
 

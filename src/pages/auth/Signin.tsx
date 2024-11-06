@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
 import { useNavigate } from 'react-router-dom';
 import { AuthInput } from '../../components/inputs/Input';
+import SERVER from '../../utils/server';
 
 
 const Signin = () => {
@@ -11,8 +12,17 @@ const Signin = () => {
     const [password, setPassword] = useState('');
 
     const handleSubmit = async () => {
-      console.log('Something')
+      try {
+        const res = await SERVER.post('admin/auth/login', {
+          email, password
+        })
+        localStorage.setItem('loginData', JSON.stringify(res.data));
+        navigate('/auth/verification')
+      } catch (error) {
+        console.error(error)
+      }
     }
+
 
   return (
     <div className='flex flex-col items-center justify-center w-full p-[4rem] gap-[2rem]'>
@@ -25,10 +35,7 @@ const Signin = () => {
 
         <div className="flex justify-between w-full">
             <BackBtn onClick={() => navigate('/auth/welcome')} text='Go Back'/>
-            <AuthBtn onClick={() =>{
-              handleSubmit()
-               navigate('/auth/verification')
-            }} text='Continue'/>
+            <AuthBtn onClick={handleSubmit} text='Continue'/>
         </div>
     </div>
   )

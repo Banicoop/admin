@@ -8,7 +8,7 @@ interface OTPinputProps {
 
 let currentOtpIndex: number = 0;
 
-const OtpInput:FC<OTPinputProps> = ({  onChange,  digits = 6,}) => {
+const OtpInput:FC<OTPinputProps> = ({  onChange,  digits = 4,}) => {
 
     const [otp, setOtp] = useState<string[]>(new Array(digits).fill(""));
     const [activeOtpIndex, setActiveOtpIndex] = useState<number>(0);

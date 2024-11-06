@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const SERVER = axios.create({
-    baseURL: process.env.REACT_APP_API_URL
+    // baseURL: process.env.REACT_APP_API_URL
+    baseURL: 'https://banicoop-server-testing.onrender.com/api/v1/'
 })
 
 SERVER.interceptors.request.use(
