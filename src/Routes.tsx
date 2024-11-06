@@ -29,7 +29,12 @@ function CellLayout(){
         <Navbar/>
         <Welcome/>
 
-        <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap items-center gap-5 p-8">
+        <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap items-center gap-2 px-2 md:px-8 py-2">
+            <Widget type='transactions'/>
+            <Widget type='customers'/>
+            <Widget type='cells'/>
+        </div>
+        <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap items-center gap-2 px-2 md:px-8 py-2">
             <Widget type='transactions'/>
             <Widget type='customers'/>
             <Widget type='cells'/>

@@ -16,33 +16,33 @@ export const menuData = [
     },
     {
       name: 'Saving Cells',
-      icon: '/cells.svg',
+      icon: '/save.svg',
       url: '/cells'
     },
     {
       name: 'Merchants',
-      icon: '/cells.svg',
-      url: '/cells'
+      icon: '/people.svg',
+      url: '/merchants'
     },
     {
       name: 'POS/ATMs',
-      icon: '/cells.svg',
+      icon: '/card-pos.svg',
       url: '/cells'
     },
     {
       name: 'Help & Support',
       icon: '/help.svg',
-      url: 'account/help'
+      url: '/help'
     },
     {
       name: 'Account Settings',
       icon: '/setting.svg',
-      url: 'account/settings'
+      url: '/settings'
     },
     {
       name: 'Admins',
-      icon: '/setting.svg',
-      url: 'account/settings'
+      icon: '/verify.svg',
+      url: '/admins'
     },
 ]
 
