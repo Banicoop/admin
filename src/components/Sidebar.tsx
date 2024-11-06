@@ -1,5 +1,5 @@
 import React from 'react'
-import { menuData } from './menuData';
+import { menuData } from '../constant/menuData';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -11,19 +11,14 @@ const Sidebar = () => {
           <img src="/banicoop.svg" alt="" className="" />
         </div>
 
-      { menuData.map((i) => (
-        <div className="flex flex-col p-4 gap-2 mt-4">
-          <h2 className='text-[14px] m-4'>{i.title}</h2>
-
-         { i.items.map((item) => (
+         { menuData.map((item) => (
           <Link to={item.url} className="flex items-center gap-2 p-3 hover:bg-[#fafafa] hover:text-[#6922D1] rounded-full">
             <img src={item.icon} alt="" className="ml-[10px] text-bgPurple" />
             <span className='text-sm'>{item.name}</span>
           </Link>
          ))}
         </div>
-      ))}
-      </div>
+
 
 
     {/* BOTTOM */}
