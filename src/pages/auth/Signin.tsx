@@ -3,30 +3,34 @@ import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
 import { useNavigate } from 'react-router-dom';
 import { AuthInput } from '../../components/inputs/Input';
 import SERVER from '../../utils/server';
+import { useDispatch } from 'react-redux';
+import { setAuth } from '../../redux/slice/authSlice';
 
 
 const Signin = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [email, setEnail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async () => {
-      try {
-        const res = await SERVER.post('admin/auth/login', {
-          email, password
-        })
-        localStorage.setItem('loginData', JSON.stringify(res.data));
-        navigate('/auth/verification')
-      } catch (error) {
-        console.error(error)
-      }
+      dispatch(setAuth({email, password}))
+      // try {
+      //   const res = await SERVER.post('admin/auth/login', {
+      //     email, password
+      //   })
+      //   localStorage.setItem('loginData', JSON.stringify(res.data));
+      //   navigate('/auth/verification')
+      // } catch (error) {
+      //   console.error(error)
+      // }
     }
 
 
   return (
-    <div className='flex flex-col items-center justify-center w-full p-[4rem] gap-[2rem]'>
-        <h1 className='text-2xl md:text-3xl lg:text-5xl font-semibold'>Welcome to <span className='text-bgPurple'>Banicoop </span>Admin Dashboard!</h1>
+    <div className='flex flex-col items-center justify-center w-full h-full p-[4rem] gap-[2rem]'>
+        <h1 className='text-2xl md:text-3xl lg:text-5xl font-semibold flex justify-start items-start mr-auto flex-col gap-2'>Welcome to <br /><span className='text-bgPurple flex flex-row gap-2'>Banicoop <br /><span className='text-[#000]'>Admin</span> </span> Dashboard!</h1>
 
         <p className='text-sm'>Your role as an admin helps foster secure, collaborative savings. Get started with by logging in to your admin dashboard</p>
 
