@@ -50,7 +50,7 @@ function AuthLayout(){
   return(
     <div className="bg-bgR h-full w-full p-4 md:p-[3rem] lg:p-[5rem] flex items-center justify-center">
       <div className="rounded-3xl shadow-lg bg-bgWhite flex">
-        <div className="flex-1 w-full h-full">
+        <div className="flex-1 hidden md:block w-full h-full">
           <img src="/welcome.svg" alt="" className="w-full h-full" />
         </div>
         <div className="flex-1 w-full h-full">

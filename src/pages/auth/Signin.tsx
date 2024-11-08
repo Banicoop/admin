@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
 import { useNavigate } from 'react-router-dom';
 import { AuthInput } from '../../components/inputs/Input';
-import SERVER from '../../utils/server';
 import { useDispatch } from 'react-redux';
 import { setAuth } from '../../redux/slice/authSlice';
 
