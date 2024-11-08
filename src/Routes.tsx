@@ -15,13 +15,14 @@ import Login from './pages/auth/Signin';
 import Verification from './pages/auth/Verification';
 import Verified from './pages/auth/Verified';
 import ProtectedRoute from './ProtectedRoute';
+import { useSelector } from 'react-redux';
 
-const user = false;
 
 
 
 
 function CellLayout(){
+  
   return(
     <div className="flex min-h-screen min-w-full overflow-y-scroll">
         <Sidebar/>
@@ -68,6 +69,12 @@ function AuthVerificationLayout(){
     </div>
   )
 }
+
+
+
+function Routes (){
+
+  const user = useSelector((user: any) => user.auth);
 
 const router = createBrowserRouter([
   {
@@ -138,7 +145,7 @@ const router = createBrowserRouter([
   },
 ])
 
-function Routes (){
+
   return (
     <RouterProvider router={router} />
   )

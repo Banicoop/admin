@@ -7,7 +7,9 @@ const rootReducer = combineReducers({
 })
 
 
-export const store = configureStore({
+const store = configureStore({
     reducer: rootReducer
 })
 
+export type Dispatch = typeof store.dispatch;
+export default store;

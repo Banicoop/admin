@@ -3,6 +3,13 @@ import { menuData } from '../constant/menuData';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
+
+  const handleLogout = async () => {
+    localStorage.removeItem('loginData'); // or sessionStorage if that's where you saved it
+    localStorage.removeItem('user');
+    window.location.replace('/auth/login');
+  }
+
   return (
     <div className='w-[250px] min-h-full border-r-[1px] flex flex-col mb-4'>
       <div className="px-1 py-6">
@@ -22,18 +29,9 @@ const Sidebar = () => {
 
 
     {/* BOTTOM */}
-      <div className="mt-auto border-t-[1px] flex items-center px-3 py-6 gap-3">
+      <div className="mt-auto border-t-[1px] flex items-center px-3 py-6 gap-3 cursor-pointer" onClick={handleLogout}>
         <img src='/logout.svg' alt="" className="md:ml-[10px] text-bgPurple" />
         <span className='text-sm'>Log Out</span>
-        {/* <div className="relative">
-          <img src="/avater.png" alt="" className="" />
-          <div className='bg-[#49AC46] rounded-full h-2 w-2 absolute top-[30px] right-1'/>
-        </div>
-
-        <div className="flex flex-col ">
-            <span className="text-[#000000] font-[500]">Praise Dominic</span>
-            <span className="text-[#000000] text-xs">Admin ID: 00234563</span>
-        </div> */}
       </div>
     </div>
   )

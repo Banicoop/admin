@@ -2,14 +2,14 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
 import OtpInput from '../../components/inputs/OtpInput';
-import SERVER from '../../utils/server';
 import { useDispatch } from 'react-redux';
-import { setAuth } from '../../redux/slice/authSlice';
+import { sendOtp } from '../../redux/slice/authSlice';
+import { Dispatch } from '../../redux/store';
 
 const Verification = () => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<Dispatch>();
     
     const [otp, setOtp] = useState('');
     const [adminId, setAdminId] = useState<string | null>(null);
@@ -21,29 +21,17 @@ const Verification = () => {
     const isButtonEnabled = otp.length === 4;
 
     useEffect(() => {
-        // Retrieve saved login data from local storage
         const loginDataString = localStorage.getItem('loginData');
         if (loginDataString) {
             const loginData = JSON.parse(loginDataString);
-            setAdminId(loginData.id); // Set user ID from login data
+            setAdminId(loginData.id);
         }
     }, []);
 
 
 
     const verifyOtp = async () => {
-        dispatch(setAuth({otp, adminId}))
-        console.log('')
-        // try {
-        //     const res = await SERVER.post('admin/auth/verifyToken',{
-        //         otp,
-        //         adminId
-        //     });
-        //     console.log(res.data)
-        //     navigate('/auth/verified')
-        // } catch (error) {
-            
-        // }
+        dispatch(sendOtp({otp, adminId}))
     }
 
 

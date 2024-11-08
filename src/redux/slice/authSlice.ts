@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import SERVER from "../../utils/server";
+import { toast } from "react-toastify";
+import { toastOptions } from "../../utils/toastOptions";
 
 
 
@@ -15,7 +17,7 @@ const initialState = {
 } as UsersState
 
 
-const login = createAsyncThunk(
+export const login = createAsyncThunk(
     'auth/login',
     async (user: {}, { rejectWithValue }) => {
         try {
@@ -23,6 +25,7 @@ const login = createAsyncThunk(
             localStorage.setItem('loginData', JSON.stringify(response.data));
             window.location.replace('/auth/verification')
             console.log(response.data);
+            console.count('CLicked!!!')
             return response.data
         } catch (error:any) {
             return rejectWithValue(error.response.data)
@@ -31,15 +34,17 @@ const login = createAsyncThunk(
 )
 
 
-const otp = createAsyncThunk('auth/otp', 
+export const sendOtp = createAsyncThunk('auth/otp', 
     async (token: {}, { rejectWithValue }) => {
         try {
             const res = await SERVER.post('admin/auth/verifyToken', token);
             if(res.data.message === 'OTP verified'){
+                console.log(res.data);
                 localStorage.setItem('user', JSON.stringify(res.data));
                 window.location.replace('/auth/verified')
             }
         } catch (error:any) {
+            console.log(error)
             return rejectWithValue(error.response.data)
         }
     }
@@ -60,20 +65,24 @@ const authSlice = createSlice({
         })
         builder.addCase(login.fulfilled, (state, action) => {
             state.status = 'succeeded'
+            toast.success('OTP sent', { ...toastOptions })
         })
         builder.addCase(login.rejected, (state, action) => {
-            state.status = 'failed'
+            state.status = 'failed';
+            toast.error('Invalid credentials', { ...toastOptions })
         })
 
         //otp
-        builder.addCase(otp.pending, (state, action) => {
+        builder.addCase(sendOtp.pending, (state, action) => {
             state.status = 'pending'
         })
-        builder.addCase(otp.fulfilled, (state, action) => {
-            state.status = 'succeeded'
+        builder.addCase(sendOtp.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            toast.success('OTP verified successfully!', { ...toastOptions })
         })
-        builder.addCase(otp.rejected, (state, action) => {
-            state.status = 'failed'
+        builder.addCase(sendOtp.rejected, (state, action) => {
+            state.status = 'failed';
+            toast.error('OTP not valid or expired', { ...toastOptions })
         })
     },
 })

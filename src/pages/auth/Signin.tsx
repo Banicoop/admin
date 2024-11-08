@@ -3,27 +3,23 @@ import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
 import { useNavigate } from 'react-router-dom';
 import { AuthInput } from '../../components/inputs/Input';
 import { useDispatch } from 'react-redux';
-import { setAuth } from '../../redux/slice/authSlice';
+import { login } from '../../redux/slice/authSlice';
+import type { Dispatch } from '../../redux/store';
 
 
 const Signin = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<Dispatch>();
 
     const [email, setEnail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async () => {
-      dispatch(setAuth({email, password}))
-      // try {
-      //   const res = await SERVER.post('admin/auth/login', {
-      //     email, password
-      //   })
-      //   localStorage.setItem('loginData', JSON.stringify(res.data));
-      //   navigate('/auth/verification')
-      // } catch (error) {
-      //   console.error(error)
-      // }
+      try {
+        dispatch(login({email, password}))
+      } catch (error) {
+        console.error(error)
+      }
     }
 
 
