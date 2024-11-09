@@ -7,11 +7,7 @@ const Navbar = () => {
       <h1 className='text-[#000] text-[14px]'>Dashboard Overview</h1>
 
       <div className="flex items-center gap-5">
-        <Search onClick={() => {}}/>
-        {/* <div className="flex items-center border-[1px] rounded-full px-5 py-3 gap-3 bg-[#fafafa]">
-          <img src="/search.svg" alt="" className="" />
-          <input type="text" className="w-[260px] outline-none bg-inherit text-[13px]" placeholder='Search' />
-        </div> */}
+        <Search onClick={() => {}}  placeholder='Tap to Search'/>
 
         <div className="flex p-3 rounded-full bg-[#fafafa] relative cursor-pointer">
           <img src="/notification.svg" alt="" className="" />

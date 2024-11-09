@@ -46,7 +46,7 @@ const CellDetails = () => {
             <Info text="Eze's Cell" text2='In Progress' details/>
 
             <div className="flex items-center gap-4">
-              <Search onClick={() => {}}/>
+              <Search onClick={() => {}}  placeholder='Search for Cell'/>
               <ExportBtn text='Edit Cell Information' onClick={() => setOpen(true)}/>
               <ExportBtn text='Export' onClick={() => {}}/>
             </div>

@@ -5,6 +5,9 @@ import ExportBtn from '../../components/buttons/ExportBtn';
 import BasicTable from '../../components/tables/BasicTable';
 import { useNavigate } from 'react-router-dom';
 import CreateCell from '../../sections/cells/CreateCell';
+import Btn from '../../components/buttons/Btn';
+import CellCard from '../../sections/cells/CellCard';
+
 
 
 const headcells = [
@@ -35,6 +38,25 @@ const headcells = [
 ]
 
 
+const list = [
+  {
+      label: 'All'
+  },
+  {
+      label: 'Inactive'
+  },
+  {
+      label: 'Near Payout'
+  },
+  {
+      label: 'Completed'
+  },
+  {
+      label: 'Active'
+  },
+]
+
+
 const Cells = () => {
 
   const navigate = useNavigate();
@@ -43,6 +65,7 @@ const Cells = () => {
     navigate(':id');
   };
 
+  const [activeItem, setActiveItem] = useState('All');
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -51,14 +74,26 @@ const Cells = () => {
         <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
           <div className="flex justify-between items-center w-full">
             <Info text='Cell information'/>
-
-            <div className="flex items-center gap-4">
-              <Search onClick={() => {}}/>
-              <ExportBtn text='Create New Cell' onClick={() => setOpenModal(true)}/>
-              <ExportBtn text='Export' onClick={() => {}}/>
-            </div>
+            <ExportBtn text='Create New Cell' onClick={() => setOpenModal(true)}/>
           </div>
-          <BasicTable headcells={headcells} tableData={tableData} onNavigate={handleNavigate}/>
+          <div className="flex items-center justify-between">
+              <Search onClick={() => {}} placeholder='Search for Cell'/>
+              {list.map((i) => (
+                <Btn onClick={() => setActiveItem(i.label)} activeItem={activeItem} label={i.label} key={i.label}/>
+              ))
+              }
+          </div>
+
+          <div className="flex flex-col md:flex-row md:flex-wrap gap-4 w-full">
+            <CellCard/>
+            <CellCard/>
+            <CellCard/>
+            <CellCard/>
+            <CellCard/>
+            <CellCard/>
+          </div>
+
+          {/* <BasicTable headcells={headcells} tableData={tableData} onNavigate={handleNavigate}/> */}
         </div>
       </div>
       <CreateCell open={openModal} onClick={() => setOpenModal(false)} onClose={() => setOpenModal(false)}/>
