@@ -2,13 +2,13 @@ import React, { Suspense } from 'react'
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
-import Dashboard from './pages/Dashboard';
+// import Dashboard from './pages/Dashboard';
 import Welcome from './components/Welcome';
 import Widget from './components/Widget';
 import Cells from './pages/cells/Cells';
 import CellDetails from './pages/cells/CellDetails';
-import Customers from './pages/Customers';
-import Transaction from './pages/Transaction';
+// import Customers from './pages/Customers';
+// import Transaction from './pages/Transaction';
 import Splash from './pages/auth/Splash';
 import WelcomePage from './pages/auth/WelcomePage';
 import Login from './pages/auth/Signin';
@@ -16,17 +16,16 @@ import Verification from './pages/auth/Verification';
 import Verified from './pages/auth/Verified';
 import ProtectedRoute from './ProtectedRoute';
 import { useSelector } from 'react-redux';
+import Dashboard from './pages/Dashboard';
 
 
 
-
-
-function CellLayout(){
-  
+function DashboardLayout(){
   return(
-    <div className="flex min-h-screen min-w-full overflow-y-scroll">
-        <Sidebar/>
-      <div className="flex flex-col h-full w-full">
+    <main className="flex min-h-screen w-full">
+      <Sidebar/>
+
+      <section className="flex flex-col h-full w-full">
         <Navbar/>
         <Welcome/>
 
@@ -40,6 +39,32 @@ function CellLayout(){
             <Widget type='customers'/>
             <Widget type='cells'/>
         </div>
+        <Outlet/>
+      </section>
+    </main>
+  )
+}
+
+
+function CellLayout(){
+  
+  return(
+    <div className="flex min-h-screen w-full">
+        <Sidebar/>
+      <div className="flex flex-col h-full w-full">
+        <Navbar/>
+        <Welcome/>
+
+        {/* <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap items-center gap-2 px-2 md:px-8 py-2">
+            <Widget type='transactions'/>
+            <Widget type='customers'/>
+            <Widget type='cells'/>
+        </div>
+        <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap items-center gap-2 px-2 md:px-8 py-2">
+            <Widget type='transactions'/>
+            <Widget type='customers'/>
+            <Widget type='cells'/>
+        </div> */}
         <Outlet/>
       </div>
     </div>
@@ -81,14 +106,24 @@ const router = createBrowserRouter([
     path: '/',
     element:(
       <ProtectedRoute user={user}>
-        <CellLayout/>
+        < DashboardLayout />
       </ProtectedRoute>
-  ),
+    ),
     children: [
       {
         path: '/',
         element: <Dashboard/>
-      },
+      }
+    ]
+  },
+  {
+    path: '/',
+    element:(
+      <ProtectedRoute user={user}>
+        <CellLayout/>
+      </ProtectedRoute>
+  ),
+    children: [
       {
         path: '/cells',
         element: <Cells/>
@@ -96,14 +131,6 @@ const router = createBrowserRouter([
       {
         path: '/cells/:id',
         element: <CellDetails/>
-      },
-      {
-        path: '/transactions',
-        element: <Transaction/>
-      },
-      {
-        path: '/customers',
-        element: <Customers/>
       },
     ]
   },

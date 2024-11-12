@@ -70,7 +70,7 @@ const Cells = () => {
 
   return (
     <>
-      <div className="px-8 h-full">
+      <div className="px-8 h-full flex flex-col">
         <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
           <div className="flex justify-between items-center w-full">
             <Info text='Cell information'/>
@@ -84,7 +84,7 @@ const Cells = () => {
               }
           </div>
 
-          <div className="flex flex-col md:flex-row md:flex-wrap gap-4 w-full">
+          <div className="flex flex-col justify-center md:flex-row md:flex-wrap gap-4 w-full">
             <CellCard/>
             <CellCard/>
             <CellCard/>

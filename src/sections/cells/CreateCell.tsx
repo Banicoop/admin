@@ -17,26 +17,26 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
       <BasicModal h2='Create New Cell' p='Enter cell information to continue.' open={open} onClose={onClose}>
         <hr className="h-1" />
 
-        <div className="flex flex-col w-full gap-2">
+        <div className="flex flex-col w-full gap-3">
 
           <div className="flex flex-col md:flex-row w-full gap-2">
             <Input type='text' placeholder='Cell Name'/>
-            <Input type='tel' placeholder='No of Participants'/>
+            <Input type='tel' placeholder='Target Amount (Naira)'/>
           </div>
 
           <div className="flex flex-col md:flex-row w-full gap-2">
-            <Input type='tel' placeholder='Minimum no of Participants'/>
-            <Input type='tel' placeholder='Contribution Amount'/>
+            <Input type='tel' placeholder='Max. Number of Participant'/>
+            <Input type='tel' placeholder='Min. Number of Participant'/>
           </div>
 
           <div className="flex flex-col md:flex-row w-full gap-2">
             <Input type='tel' placeholder='Duration'/>
-            <Input type='text' placeholder='Cell Description'/>
+            <Input type='text' placeholder='Contribution Amount (Naira)'/>
           </div>
 
-          <div className="flex flex-col md:flex-row w-full gap-2">
-            <DateInput/>
-            <DateInput/>
+          <div className="flex flex-col md:flex-row w-full gap-2 mt-3">
+            <DateInput text='Start Date'/>
+            <DateInput text='End Date'/>
           </div>
         <TextArea text='Cell Description'/>
         </div>
