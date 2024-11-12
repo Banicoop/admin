@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import Progress from '../../components/Progress';
+
+
 
 const CellBanner = () => {
   return (
@@ -30,9 +33,10 @@ const CellBanner = () => {
             </div>
         </section>
 
-        <div className="flex gap-1 items-center">
-            <label htmlFor="progress">Progress</label>
-            <progress ></progress>
+        <div className="flex gap-2 items-center">
+            <label htmlFor="progress" className='text-[#000] text-xs font-[500]'>Progress</label>
+            <Progress/>
+            <p className='text-[#000] text-xs font-[500]'>50%</p>
 
         </div>
     </div>
