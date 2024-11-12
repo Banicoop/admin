@@ -4,6 +4,7 @@ import Input from '../../components/inputs/Input';
 import TextArea from '../../components/inputs/TextArea';
 import Button from '../../components/buttons/Button';
 import DateInput from '../../components/inputs/DateInput';
+import Select from '../../components/inputs/Select';
 
 interface cType {
   open: boolean;
@@ -11,7 +12,22 @@ interface cType {
   onClick: MouseEventHandler<HTMLButtonElement>
 }
 
+const options = [
+  { value: "", label: "Collection Frequency" },
+  { value: "weekly", label: "Weekly" },
+  { value: "monthly", label: "Monthly" },
+  { value: "daily", label: "Daily" }
+];
+
+
+
 const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
+
+  const handleSelectChange = (event: any) => {
+    console.log(event.target.value);
+  };
+
+
   return (
     <div className='h-full overflow-y-auto'>
       <BasicModal h2='Create New Cell' p='Enter cell information to continue.' open={open} onClose={onClose}>
@@ -30,7 +46,7 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
           </div>
 
           <div className="flex flex-col md:flex-row w-full gap-2">
-            <Input type='tel' placeholder='Duration'/>
+            <Select options={options} name='Collection Frequency' id='collection' onChange={handleSelectChange}/>
             <Input type='text' placeholder='Contribution Amount (Naira)'/>
           </div>
 
