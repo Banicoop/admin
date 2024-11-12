@@ -5,6 +5,7 @@ import React, { FC, MouseEventHandler } from 'react';
 type Itext = {
     text?: string;
     onClick?: MouseEventHandler<HTMLDivElement>;
+    disabled?: any
 }
 
 const ExportBtn:FC<Itext> = ({text, onClick}) => {
@@ -19,8 +20,8 @@ const ExportBtn:FC<Itext> = ({text, onClick}) => {
 
 export const ActionBtn:FC<Itext> = ({text, onClick }) => {
     return(
-        <div onClick={onClick}  className="bg-[#fefefe] text-bgPurple flex gap-3 w-max items-center cursor-pointer rounded-3xl p-3 self-start">
-            <span className="text-sm">View Details</span>
+        <div onClick={onClick}  className="bg-bgR text-bgPurple border-[1px] flex gap-3 w-max items-center cursor-pointer rounded-3xl p-3 self-start">
+            <span className="text-sm">{text}</span>
             <img src="/arrow-next.svg" alt="" className="" />
         </div >
 
@@ -28,9 +29,9 @@ export const ActionBtn:FC<Itext> = ({text, onClick }) => {
 }
 
 
-export const AuthBtn:FC<Itext> = ({text, onClick}) => {
+export const AuthBtn:FC<Itext> = ({text, onClick, disabled}) => {
     return(
-        <div onClick={onClick} className="flex gap-3 bg-bgPurple text-bgWhite rounded-3xl py-3 px-7 cursor-pointer">
+        <div onClick={onClick} className={`flex gap-3 ${disabled ? 'bg-[#3b353b38] cursor-not-allowed': ' bg-bgPurple'}  text-bgWhite rounded-3xl py-3 px-7 cursor-pointer`}>
             <span className="text-bgWhite text-sm">{text}</span>
             <img src="/autharr.svg" alt="" className="" />
         </div>
@@ -40,7 +41,7 @@ export const AuthBtn:FC<Itext> = ({text, onClick}) => {
 
 export const BackBtn:FC<Itext> = ({text, onClick}) => {
     return(
-        <div onClick={onClick} className="flex gap-3 bg-bgWhite text-bgPurple rounded-3xl py-3 px-7 cursor-pointer">
+        <div onClick={onClick} className="flex items-center gap-2 bg-bgWhite text-bgPurple rounded-3xl py-3 px-7 cursor-pointer">
             <img src="/arrowleft.svg" alt="" className="" />
             <span className="text-bgPurple text-sm">{text}</span>
         </div>
