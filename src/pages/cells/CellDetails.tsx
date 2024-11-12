@@ -4,6 +4,7 @@ import Search from '../../components/Search';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import BasicTable from '../../components/tables/BasicTable';
 import EditCell from '../../sections/cells/EditCell';
+import CellBanner from '../../sections/cells/CellBanner';
 
 
 const headcells = [
@@ -40,10 +41,11 @@ const CellDetails = () => {
 
   return (
     <>
-      <div className='px-8'>
+      <div className='h-full flex flex-col px-2 md:px-8 gap-3'>
+        <CellBanner/>
         <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
         <div className="flex justify-between items-center w-full">
-            <Info text="Eze's Cell" text2='In Progress' details/>
+            <Info text="Cell Members" text2='In Progress' details/>
 
             <div className="flex items-center gap-4">
               <Search onClick={() => {}}  placeholder='Search for Cell'/>

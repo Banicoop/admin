@@ -18,7 +18,11 @@ const CellCard = () => {
       </div>
 
       <div className="flex justify-between w-full">
-        <img src="/morepic.svg" alt="" className="" />
+        <div className="flex gap-2">
+          <img src="/morepic.svg" alt="" className="h-[50px] w-[75px]" />
+          {/* <span className="text-xs text-[#000]">Activve members</span> */}
+        </div>
+
         <ActionBtn text='View Details'/>
       </div>
     </div>
