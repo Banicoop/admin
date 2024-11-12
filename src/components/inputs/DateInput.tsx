@@ -14,5 +14,3 @@ const DateInput = () => {
 }
 
 export default DateInput;
-
-date 
