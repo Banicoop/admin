@@ -39,7 +39,7 @@ const Widget: FC<WidgetProps> = ({type}) => {
 
     const details = wigetDetails();
   return (
-    <div className='min-h-[108px] flex items-center border-[1px] rounded-3xl gap-4 p-4 w-full justify-between'>
+    <div className='min-h-[108px] flex items-center border-[1px] rounded-3xl gap-4 p-4 w-full md:w-[32%] justify-between'>
         <div className="flex items-center gap-4">
             <div className="bg-bgR p-3 rounded-2xl">
                 <img src={details.icon} alt="" className="" />

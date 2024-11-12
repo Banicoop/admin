@@ -29,12 +29,10 @@ function DashboardLayout(){
         <Navbar/>
         <Welcome/>
 
-        <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap items-center gap-2 px-2 md:px-8 py-2">
+        <div className="flex flex-wrap items-center gap-2 px-2 md:px-8 py-2">
             <Widget type='transactions'/>
             <Widget type='customers'/>
             <Widget type='cells'/>
-        </div>
-        <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap items-center gap-2 px-2 md:px-8 py-2">
             <Widget type='transactions'/>
             <Widget type='customers'/>
             <Widget type='cells'/>
@@ -51,9 +49,9 @@ function CellLayout(){
   return(
     <div className="flex min-h-screen w-full">
         <Sidebar/>
-      <div className="flex flex-col h-full w-full">
+      <div className="flex flex-col h-full w-full gap-3">
         <Navbar/>
-        <Welcome/>
+        {/* <Welcome/> */}
 
         {/* <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap items-center gap-2 px-2 md:px-8 py-2">
             <Widget type='transactions'/>
