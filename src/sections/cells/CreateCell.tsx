@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler } from 'react'
+import React, { FC, MouseEventHandler, useState } from 'react'
 import BasicModal from '../../components/modals/BasicModal';
 import Input from '../../components/inputs/Input';
 import TextArea from '../../components/inputs/TextArea';
@@ -27,6 +27,13 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
     console.log(event.target.value);
   };
 
+  const [inputs, setInputs] = useState({
+    cellName: '',
+    totalUsers: '',
+    contributionAmount: '',
+    description: ''
+  })
+
 
   return (
     <div className='h-full overflow-y-auto'>
@@ -36,18 +43,18 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
         <div className="flex flex-col w-full gap-3">
 
           <div className="flex flex-col md:flex-row w-full gap-2">
-            <Input type='text' placeholder='Cell Name'/>
-            <Input type='tel' placeholder='Target Amount (Naira)'/>
+            <Input type='text' placeholder='Cell Name' onChange={() => {}}/>
+            <Input type='tel' placeholder='Target Amount (Naira)' onChange={() => {}}/>
           </div>
 
           <div className="flex flex-col md:flex-row w-full gap-2">
-            <Input type='tel' placeholder='Max. Number of Participant'/>
-            <Input type='tel' placeholder='Min. Number of Participant'/>
+            <Input type='tel' placeholder='Max. Number of Participant' onChange={() => {}}/>
+            <Input type='tel' placeholder='Min. Number of Participant' onChange={() => {}}/>
           </div>
 
           <div className="flex flex-col md:flex-row w-full gap-2">
             <Select options={options} name='Collection Frequency' id='collection' onChange={handleSelectChange}/>
-            <Input type='text' placeholder='Contribution Amount (Naira)'/>
+            <Input type='text' placeholder='Contribution Amount (Naira)' onChange={() => {}}/>
           </div>
 
           <div className="flex flex-col md:flex-row w-full gap-2 mt-3">
@@ -58,7 +65,7 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
         </div>
 
 
-        <div className="flex items-center gap-2 justify-between">
+        <div className="flex items-center gap-2 justify-center">
           <Button text='Create New Cell' onClick={() => {}}/>
           <Button text='Cancel' cancel onClick={onClick}/>
         </div>

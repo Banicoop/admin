@@ -6,12 +6,12 @@ interface IInput {
     placeholder?: string;
     img?: string;
     name?: string;
-    onChange?: ChangeEventHandler<HTMLInputElement>
+    onChange: ChangeEventHandler<HTMLInputElement>
 }
 
-const Input:FC<IInput> = ({type, placeholder}) => {
+const Input:FC<IInput> = ({type, placeholder, onChange}) => {
   return (
-    <input type={type} placeholder={placeholder} className="px-2 py-3 rounded-2xl border-[1px] w-[342px] outline-none"  />
+    <input type={type} placeholder={placeholder} onChange={onChange} className="px-2 py-3 rounded-2xl border-[1px] w-[342px] outline-none"  />
   )
 }
 
