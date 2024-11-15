@@ -1,8 +1,11 @@
 import React from 'react';
 import { ActionBtn } from '../../components/buttons/ExportBtn';
+import { useNavigate } from 'react-router-dom';
 
 
 const CellCard = () => {
+
+  const navigate = useNavigate()
   return (
     <div className='flex flex-col gap-3 p-4 border-[1px] rounded-3xl w-full sm:w-[48%] md:w-[31%]'>
         <div className="flex justify-between">
@@ -23,7 +26,7 @@ const CellCard = () => {
           {/* <span className="text-xs text-[#000]">Activve members</span> */}
         </div>
 
-        <ActionBtn text='View Details'/>
+        <ActionBtn text='View Details' onClick={() => navigate('/cells/:id')}/>
       </div>
     </div>
   )
