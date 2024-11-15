@@ -2,13 +2,10 @@ import React, { Suspense } from 'react'
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
-// import Dashboard from './pages/Dashboard';
 import Welcome from './components/Welcome';
 import Widget from './components/Widget';
 import Cells from './pages/cells/Cells';
 import CellDetails from './pages/cells/CellDetails';
-// import Customers from './pages/Customers';
-// import Transaction from './pages/Transaction';
 import Splash from './pages/auth/Splash';
 import WelcomePage from './pages/auth/WelcomePage';
 import Login from './pages/auth/Signin';
@@ -51,18 +48,6 @@ function CellLayout(){
         <Sidebar/>
       <div className="flex flex-col h-full w-full gap-3">
         <Navbar/>
-        {/* <Welcome/> */}
-
-        {/* <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap items-center gap-2 px-2 md:px-8 py-2">
-            <Widget type='transactions'/>
-            <Widget type='customers'/>
-            <Widget type='cells'/>
-        </div>
-        <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap items-center gap-2 px-2 md:px-8 py-2">
-            <Widget type='transactions'/>
-            <Widget type='customers'/>
-            <Widget type='cells'/>
-        </div> */}
         <Outlet/>
       </div>
     </div>
@@ -97,7 +82,8 @@ function AuthVerificationLayout(){
 
 function Routes (){
 
-  const user = useSelector((user: any) => user.auth);
+  const user = useSelector((state: any) => state.auth.entities);
+  console.log(user);
 
 const router = createBrowserRouter([
   {

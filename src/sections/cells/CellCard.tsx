@@ -9,7 +9,7 @@ const CellCard = () => {
   return (
     <div className='flex flex-col gap-3 p-4 border-[1px] rounded-3xl w-full sm:w-[48%] md:w-[31%]'>
         <div className="flex justify-between">
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
                 <h1 className='font-semibold '>Banicoop Default Cell</h1>
                 <span className="px-2 py-1 rounded-lg bg-[#8000800f] text-xs text-bgPurple">Active</span>
             </div>
@@ -20,7 +20,7 @@ const CellCard = () => {
             <span className="text-xs">Monthly - N30,000 . Output - N300,000</span>
       </div>
 
-      <div className="flex justify-between w-full">
+      <div className="flex items-center justify-between w-full">
         <div className="flex gap-2 items-center">
           <img src="/morepic.svg" alt="" className="h-[50px] w-[75px]" />
           <span className="text-[8px] text-[#000]">Active members</span>

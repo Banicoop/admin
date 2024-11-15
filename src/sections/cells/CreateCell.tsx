@@ -5,6 +5,10 @@ import TextArea from '../../components/inputs/TextArea';
 import Button from '../../components/buttons/Button';
 import DateInput from '../../components/inputs/DateInput';
 import Select from '../../components/inputs/Select';
+import { useDispatch } from 'react-redux';
+import { createCell } from '../../redux/slice/cellSlice';
+import type { Dispatch } from '../../redux/store';
+
 
 interface cType {
   open: boolean;
@@ -34,11 +38,16 @@ const initialState = {
 
 const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
-  const handleSelectChange = (event: any) => {
-    console.log(event.target.value);
-  };
 
+  const dispatch = useDispatch<Dispatch>();
+
+  
   const [inputs, setInputs] = useState(initialState);
+  const [type, setType] = useState(null);
+  
+  const handleSelectChange = (event: any) => {
+   setType(event.target.value);
+  };
 
   const handleInputsChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -47,7 +56,11 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
 
   const handleSubmit = async () => {
-    console.log(inputs);
+    try {
+      dispatch(createCell({inputs, type}))
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 

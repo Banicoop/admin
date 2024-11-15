@@ -21,7 +21,7 @@ export const createCell = createAsyncThunk(
     async (cell: {}, { rejectWithValue }) => {
         try {
             const res = await SERVER.post('admin/contribution/cell/create', cell);
-            console.log(res.data)
+            console.log(res.data, 'Response!!')
         } catch (error: any) {
             return rejectWithValue(error.res.data)
         }
