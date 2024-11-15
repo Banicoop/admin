@@ -2,16 +2,17 @@ import React, { ChangeEventHandler, FC, useState } from 'react';
 
 
 interface IInput {
-    type?: string;
-    placeholder?: string;
+    type: string;
+    placeholder: string;
     img?: string;
     name?: string;
+    value?: any;
     onChange: ChangeEventHandler<HTMLInputElement>
 }
 
-const Input:FC<IInput> = ({type, placeholder, onChange}) => {
+const Input:FC<IInput> = ({ type, placeholder, onChange, name }) => {
   return (
-    <input type={type} placeholder={placeholder} onChange={onChange} className="px-2 py-3 rounded-2xl border-[1px] w-[342px] outline-none"  />
+    <input type={type} name={name} placeholder={placeholder} onChange={onChange} className="px-2 py-3 rounded-2xl border-[1px] w-[342px] max-w-full md:max-w-[48%] outline-none"  />
   )
 }
 

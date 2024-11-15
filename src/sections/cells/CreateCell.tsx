@@ -26,7 +26,9 @@ const initialState = {
   realUser: '',
   contributionAmount: '',
   description: '',
-  duration: ''
+  duration: '',
+  startDate: '',
+  endDate: ''
 }
 
 
@@ -44,6 +46,11 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
   }
 
 
+  const handleSubmit = async () => {
+    console.log(inputs);
+  }
+
+
   return (
     <div className='h-full overflow-y-auto'>
       <BasicModal h2='Create New Cell' p='Enter cell information to continue.' open={open} onClose={onClose}>
@@ -51,31 +58,25 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
         <div className="flex flex-col w-full gap-3">
 
-          <div className="flex flex-col md:flex-row w-full gap-2">
-            <Input type='text' placeholder='Cell Name' onChange={handleInputsChange}/>
-            <Input type='text' placeholder='Duration' onChange={handleInputsChange}/>
-          </div>
+          <div className="flex flex-col md:flex-row md:flex-wrap w-full gap-2">
+            <Input type='text' placeholder='Cell Name' name='cellName' value={inputs.cellName} onChange={handleInputsChange}/>
+            <Input type='tel' placeholder='Duration' name='duration' value={inputs.duration} onChange={handleInputsChange}/>
 
-          <div className="flex flex-col md:flex-row w-full gap-2">
-            <Input type='tel' placeholder='Max. Number of Participant' onChange={handleInputsChange}/>
-            <Input type='tel' placeholder='Min. Number of Participant' onChange={handleInputsChange}/>
-          </div>
+            <Input type='tel' placeholder='Max. Number of Participant' name='totalUsers' value={inputs.totalUsers} onChange={handleInputsChange}/>
+            <Input type='tel' placeholder='Min. Number of Participant' name='realUser' value={inputs.realUser} onChange={handleInputsChange}/>
 
-          <div className="flex flex-col md:flex-row w-full gap-2">
             <Select options={options} name='Collection Frequency' id='collection' onChange={handleSelectChange}/>
-            <Input type='text' placeholder='Contribution Amount (Naira)' onChange={handleInputsChange}/>
-          </div>
+            <Input type='text' placeholder='Contribution Amount (Naira)' value={inputs.contributionAmount} name='contributionAmount' onChange={handleInputsChange}/>
 
-          <div className="flex flex-col md:flex-row w-full gap-2 mt-3">
-            <DateInput text='Start Date'/>
-            <DateInput text='End Date'/>
+            <DateInput value={inputs.startDate} name='startDate' onChange={handleInputsChange} text='Start Date'/>
+            <DateInput value={inputs.endDate} name='endDate' onChange={handleInputsChange} text='End Date'/>
           </div>
-        <TextArea text='Cell Description' onChange={handleInputsChange}/>
+        <TextArea text='Cell Description' name='description' value={inputs.description} onChange={handleInputsChange}/>
         </div>
 
 
         <div className="flex items-center gap-2 justify-center">
-          <Button text='Create New Cell' onClick={() => {}}/>
+          <Button text='Create New Cell' onClick={handleSubmit}/>
           <Button text='Cancel' cancel onClick={onClick}/>
         </div>
 
