@@ -23,7 +23,7 @@ const CellCard = () => {
       <div className="flex items-center justify-between w-full">
         <div className="flex gap-2 items-center">
           <img src="/morepic.svg" alt="" className="h-[50px] w-[75px]" />
-          <span className="text-[8px] text-[#000]">Active members</span>
+          {/* <span className="text-[8px] text-[#000]">Active members</span> */}
         </div>
 
         <ActionBtn text='View Details' onClick={() => navigate('/cells/:id')}/>

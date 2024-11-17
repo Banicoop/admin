@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import SERVER from "../../utils/server";
-// import { toast } from "react-toastify";
-// import { toastOptions } from "../../utils/toastOptions";
+import { toast } from "react-toastify";
+import { toastOptions } from "../../utils/toastOptions";
 
 
 interface CellState {
-    entities: {}
+    entities: any;
     status: 'idle' | 'pending' | 'succeeded' | 'failed'
 }
 
@@ -21,7 +21,7 @@ export const createCell = createAsyncThunk(
     async (cell: {}, { rejectWithValue }) => {
         try {
             const res = await SERVER.post('admin/contribution/cell/create', cell);
-            console.log(res.data, 'Response!!')
+            return res.data;
         } catch (error: any) {
             return rejectWithValue(error.res.data)
         }
@@ -39,13 +39,16 @@ const cellSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(createCell.pending, (state, action) => {
-            state.status = 'pending'
+            state.status = 'pending';
         })
         builder.addCase(createCell.fulfilled, (state, action) => {
             state.status = 'succeeded'
+            state.entities = action.payload;
+            toast.success('Contribution cell successfully created', {...toastOptions})
         })
         builder.addCase(createCell.rejected, (state, action) => {
-            state.status = 'failed'
+            state.status = 'failed';
+            toast.error('Failed to create contribution crll', {...toastOptions})
         })
     }
 })

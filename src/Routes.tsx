@@ -24,7 +24,9 @@ function DashboardLayout(){
 
       <section className="flex flex-col h-full w-full">
         <Navbar/>
-        <Welcome/>
+        <div className="px-8">
+          <Welcome/>
+        </div>
 
         <div className="flex flex-wrap items-center gap-2 px-2 md:px-8 py-2">
             <Widget type='transactions'/>
@@ -82,7 +84,8 @@ function AuthVerificationLayout(){
 
 function Routes (){
 
-  const user = useSelector((state: any) => state.auth.entities);
+  // const user = localStorage.getItem('token') || null
+  const user = useSelector((state: any) => state.auth.user);
   console.log(user);
 
 const router = createBrowserRouter([

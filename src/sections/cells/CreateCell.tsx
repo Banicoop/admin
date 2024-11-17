@@ -16,6 +16,18 @@ interface cType {
   onClick: MouseEventHandler<HTMLButtonElement>
 }
 
+
+interface IInput {
+  cellName: string;
+  totalUsers: number
+  realUser: number;
+  contributionAmount: number
+  description: string;
+  duration: number
+  launchDate: string;
+  endDate: string;
+}
+
 const options = [
   { value: "", label: "Collection Frequency" },
   { value: "daily", label: "Daily" },
@@ -24,15 +36,15 @@ const options = [
 ];
 
 
-const initialState = {
+const initialState= {
   cellName: '',
-  totalUsers: '',
-  realUser: '',
-  contributionAmount: '',
+  totalUsers: 0, 
+  realUser: 0, 
+  contributionAmount: 0, 
   description: '',
-  duration: '',
-  startDate: '',
-  endDate: ''
+  duration: 0, 
+  launchDate: '',
+  endDate: '',
 }
 
 
@@ -42,22 +54,29 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
   const dispatch = useDispatch<Dispatch>();
 
   
-  const [inputs, setInputs] = useState(initialState);
-  const [type, setType] = useState(null);
+  const [inputs, setInputs] = useState<IInput>(initialState);
+  const [type, setType] = useState<string | null>(null);
   
-  const handleSelectChange = (event: any) => {
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
    setType(event.target.value);
   };
 
   const handleInputsChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInputs({...inputs, [name]: value})
+    setInputs({
+      ...inputs,
+      [name]: name === 'totalUsers' || name === 'realUser' || name === 'contributionAmount' || name === 'duration'
+        ? parseInt(value, 10) || 0
+        : value,
+    });
   }
 
 
   const handleSubmit = async () => {
+    const { cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate, endDate } = inputs
     try {
-      dispatch(createCell({inputs, type}))
+      dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate,  endDate, type}));
+      onClose();
     } catch (error) {
       console.log(error)
     }
@@ -81,7 +100,7 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
             <Select options={options} name='Collection Frequency' id='collection' onChange={handleSelectChange}/>
             <Input type='text' placeholder='Contribution Amount (Naira)' value={inputs.contributionAmount} name='contributionAmount' onChange={handleInputsChange}/>
 
-            <DateInput value={inputs.startDate} name='startDate' onChange={handleInputsChange} text='Start Date'/>
+            <DateInput value={inputs.launchDate} name='launchDate' onChange={handleInputsChange} text='Start Date'/>
             <DateInput value={inputs.endDate} name='endDate' onChange={handleInputsChange} text='End Date'/>
           </div>
         <TextArea text='Cell Description' name='description' value={inputs.description} onChange={handleInputsChange}/>
