@@ -29,6 +29,18 @@ export const createCell = createAsyncThunk(
 )
 
 
+export const getCells = createAsyncThunk(
+    'cell/getCells',
+    async (_, {rejectWithValue}) => {
+        try {
+            const res = await SERVER.get('');
+            return res.data
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
 const cellSlice = createSlice({
     name: 'cell',
     initialState,

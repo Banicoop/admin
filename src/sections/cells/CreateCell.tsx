@@ -5,7 +5,7 @@ import TextArea from '../../components/inputs/TextArea';
 import Button from '../../components/buttons/Button';
 import DateInput from '../../components/inputs/DateInput';
 import Select from '../../components/inputs/Select';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createCell } from '../../redux/slice/cellSlice';
 import type { Dispatch } from '../../redux/store';
 
@@ -52,7 +52,9 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
 
   const dispatch = useDispatch<Dispatch>();
-
+  const { status } = useSelector((state: any) => state.cell)
+  console.log(status)
+ 
   
   const [inputs, setInputs] = useState<IInput>(initialState);
   const [type, setType] = useState<string | null>(null);
@@ -76,7 +78,9 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
     const { cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate, endDate } = inputs
     try {
       dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate,  endDate, type}));
-      onClose();
+      if(status === 'succeeded'){
+        onClose();
+      }
     } catch (error) {
       console.log(error)
     }
