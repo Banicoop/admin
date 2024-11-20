@@ -6,13 +6,13 @@ import { toastOptions } from "../../utils/toastOptions";
 
 
 interface UsersState {
-    entities: {}
+    user: any;
     status: 'idle' | 'pending' | 'succeeded' | 'failed'
 }
 
 
 const initialState = {
-    entities: {},
+    user:  localStorage.getItem('token') || null,
     status: 'idle',
 } as UsersState
 
@@ -25,7 +25,6 @@ export const login = createAsyncThunk(
             localStorage.setItem('loginData', JSON.stringify(response.data));
             window.location.replace('/auth/verification')
             console.log(response.data);
-            console.count('CLicked!!!')
             return response.data
         } catch (error:any) {
             return rejectWithValue(error.response.data)
@@ -34,14 +33,20 @@ export const login = createAsyncThunk(
 )
 
 
-export const sendOtp = createAsyncThunk('auth/otp', 
-    async (token: {}, { rejectWithValue }) => {
+export const verifyLogin = createAsyncThunk('auth/otp', 
+    async (token: {}, { rejectWithValue,  dispatch  }) => {
         try {
             const res = await SERVER.post('admin/auth/verifyToken', token);
+
             if(res.data.message === 'OTP verified'){
-                console.log(res.data);
-                localStorage.setItem('user', JSON.stringify(res.data));
-                window.location.replace('/auth/verified')
+                const { accessToken, refreshToken, payload } = res.data;
+
+                localStorage.setItem('token', accessToken);
+                localStorage.setItem('refreshToken', refreshToken);
+
+                dispatch(setAuth(payload));
+                console.log(accessToken, refreshToken, payload);
+                window.location.replace('/auth/verified');
             }
         } catch (error:any) {
             console.log(error)
@@ -56,31 +61,36 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setAuth: (state, action) => {
-			state.entities = action.payload;
+			state.user = action.payload;
 		}
     },
     extraReducers: (builder) => {
         builder.addCase(login.pending, (state, action) => {
-            state.status = 'pending'
+            state.status = 'pending';
+
         })
         builder.addCase(login.fulfilled, (state, action) => {
-            state.status = 'succeeded'
+            state.status = 'succeeded';
+            state.user = action.payload;
             toast.success('OTP sent', { ...toastOptions })
         })
         builder.addCase(login.rejected, (state, action) => {
             state.status = 'failed';
+            state.user = action.payload;
             toast.error('Invalid credentials', { ...toastOptions })
         })
 
         //otp
-        builder.addCase(sendOtp.pending, (state, action) => {
-            state.status = 'pending'
+        builder.addCase(verifyLogin.pending, (state, action) => {
+            state.status = 'pending';
+            state.user = action.payload;
         })
-        builder.addCase(sendOtp.fulfilled, (state, action) => {
+        builder.addCase(verifyLogin.fulfilled, (state, action) => {
             state.status = 'succeeded';
+            state.user = action.payload;
             toast.success('OTP verified successfully!', { ...toastOptions })
         })
-        builder.addCase(sendOtp.rejected, (state, action) => {
+        builder.addCase(verifyLogin.rejected, (state, action) => {
             state.status = 'failed';
             toast.error('OTP not valid or expired', { ...toastOptions })
         })

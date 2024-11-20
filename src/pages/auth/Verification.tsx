@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
 import OtpInput from '../../components/inputs/OtpInput';
 import { useDispatch } from 'react-redux';
-import { sendOtp } from '../../redux/slice/authSlice';
+import { verifyLogin } from '../../redux/slice/authSlice';
 import { Dispatch } from '../../redux/store';
 
 const Verification = () => {
@@ -31,7 +31,7 @@ const Verification = () => {
 
 
     const verifyOtp = async () => {
-        dispatch(sendOtp({otp, adminId}))
+        dispatch(verifyLogin({otp, adminId}))
     }
 
 

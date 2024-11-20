@@ -1,10 +1,14 @@
-import React, { FC, MouseEventHandler } from 'react'
+import React, { ChangeEvent, FC, MouseEventHandler, useState, useEffect } from 'react'
 import BasicModal from '../../components/modals/BasicModal';
 import Input from '../../components/inputs/Input';
 import TextArea from '../../components/inputs/TextArea';
 import Button from '../../components/buttons/Button';
 import DateInput from '../../components/inputs/DateInput';
 import Select from '../../components/inputs/Select';
+import { useDispatch, useSelector } from 'react-redux';
+import { createCell } from '../../redux/slice/cellSlice';
+import type { Dispatch } from '../../redux/store';
+
 
 interface cType {
   open: boolean;
@@ -12,20 +16,128 @@ interface cType {
   onClick: MouseEventHandler<HTMLButtonElement>
 }
 
+
+interface IInput {
+  cellName: string;
+  totalUsers: number
+  realUser: number;
+  contributionAmount: number
+  description: string;
+  duration: number
+  launchDate: string;
+  endDate: string;
+}
+
 const options = [
   { value: "", label: "Collection Frequency" },
+  { value: "daily", label: "Daily" },
   { value: "weekly", label: "Weekly" },
   { value: "monthly", label: "Monthly" },
-  { value: "daily", label: "Daily" }
 ];
 
+
+const initialState= {
+  cellName: '',
+  totalUsers: 0, 
+  realUser: 0, 
+  contributionAmount: 0, 
+  description: '',
+  duration: 0, 
+  launchDate: '',
+  endDate: '',
+}
 
 
 const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
-  const handleSelectChange = (event: any) => {
-    console.log(event.target.value);
+
+  const dispatch = useDispatch<Dispatch>();
+  const { status } = useSelector((state: any) => state.cell)
+  console.log(status);
+ 
+  
+  const [inputs, setInputs] = useState<IInput>(initialState);
+  const [type, setType] = useState<string | null>(null);
+  const [showAll, setShowAll] = useState<boolean>(false);
+
+
+  const calculateDuration = (type: string | null, launchDate: string, endDate: string): number => {
+    if (!launchDate || !endDate) return 0;
+
+    const launchDateObj = new Date(launchDate);
+    const endDateObj = new Date(endDate);
+    const diffInMs = endDateObj.getTime() - launchDateObj.getTime();
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+    switch (type) {
+      case 'daily':
+        return diffInDays;
+      case 'weekly':
+        return diffInDays / 7;
+      case 'monthly':
+        return diffInDays / 28;
+      default:
+        return 0;
+    }
   };
+
+
+  const updateDuration = () => {
+    const newDuration = calculateDuration(type, inputs.launchDate, inputs.endDate);
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      duration: Math.max(0, Math.floor(newDuration)),
+    }));
+  };
+  
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+   setType(event.target.value);
+   setTimeout(updateDuration, 0); 
+  };
+
+  const handleInputsChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: name === 'totalUsers' || name === 'realUser' || name === 'contributionAmount' || name === 'duration'
+        ? parseInt(value, 10) || 0
+        : value,
+    });
+
+    if (name === 'launchDate' || name === 'endDate') {
+      setTimeout(updateDuration, 0);
+    }
+  }
+
+
+  const handleSubmit = async () => {
+    const { cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate, endDate } = inputs
+    try {
+      dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate,  endDate, type}));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (status === 'succeeded') {
+      setInputs(initialState); // Reset form
+      onClose(); 
+    }
+    return () => {
+      
+    }
+  }, [status, onClose]);
+
+
+
+  const showAllFields = () => {
+    const { cellName, launchDate, endDate } = inputs;
+    if (cellName.trim() && type && launchDate.trim() && endDate.trim()) {
+      setShowAll(true);
+      updateDuration();
+    } 
+  }
 
 
   return (
@@ -35,33 +147,41 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
         <div className="flex flex-col w-full gap-3">
 
-          <div className="flex flex-col md:flex-row w-full gap-2">
-            <Input type='text' placeholder='Cell Name'/>
-            <Input type='tel' placeholder='Target Amount (Naira)'/>
-          </div>
+          <div className="flex flex-col md:flex-row md:flex-wrap w-full gap-2">
 
-          <div className="flex flex-col md:flex-row w-full gap-2">
-            <Input type='tel' placeholder='Max. Number of Participant'/>
-            <Input type='tel' placeholder='Min. Number of Participant'/>
-          </div>
-
-          <div className="flex flex-col md:flex-row w-full gap-2">
+            <Input type='text' placeholder='Cell Name' name='cellName' value={inputs.cellName} onChange={handleInputsChange}/>
             <Select options={options} name='Collection Frequency' id='collection' onChange={handleSelectChange}/>
-            <Input type='text' placeholder='Contribution Amount (Naira)'/>
+            <DateInput value={inputs.launchDate} name='launchDate' onChange={handleInputsChange} text='Start Date'/>
+            <DateInput value={inputs.endDate} name='endDate' onChange={handleInputsChange} text='End Date'/>
           </div>
+            
+            {!showAll &&
+              <div className="flex justify-center mx-auto">
+                <Button text='Next' onClick={showAllFields}/>
+              </div>}
+          
+          { showAll &&
+          <>
+           <div className="flex flex-col md:flex-row md:flex-wrap w-full gap-2">
 
-          <div className="flex flex-col md:flex-row w-full gap-2 mt-3">
-            <DateInput text='Start Date'/>
-            <DateInput text='End Date'/>
+            <Input type='tel' placeholder={inputs.duration} name='duration'  value={inputs.duration || ''} onChange={handleInputsChange}  readOnly/>
+
+            <Input type='tel' placeholder='Max. Number of Participant' name='totalUsers' value={inputs.totalUsers} onChange={handleInputsChange}/>
+            <Input type='tel' placeholder='Must be 2 less than Max user' name='realUser' value={inputs.realUser} onChange={handleInputsChange}/>
+
+            <Input type='text' placeholder='Contribution Amount (Naira)' value={inputs.contributionAmount} name='contributionAmount' onChange={handleInputsChange}/>
+
           </div>
-        <TextArea text='Cell Description'/>
+          <TextArea text='Must be more than 10 words' name='description' value={inputs.description} onChange={handleInputsChange}/>
+          </>
+          }
         </div>
 
-
-        <div className="flex items-center gap-2 justify-between">
-          <Button text='Create New Cell' onClick={() => {}}/>
+      { showAll &&
+        <div className="flex items-center gap-2 justify-center">
+          <Button text='Create New Cell' onClick={handleSubmit}/>
           <Button text='Cancel' cancel onClick={onClick}/>
-        </div>
+        </div>}
 
       </BasicModal>
     </div>

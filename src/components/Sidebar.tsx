@@ -19,7 +19,7 @@ const Sidebar = () => {
         </div>
 
          { menuData.map((item) => (
-          <Link to={item.url} className="flex items-center gap-2 p-3 hover:bg-[#fafafa] hover:text-[#6922D1] rounded-full mt-2">
+          <Link to={item.url} key={item.name} className="flex items-center gap-2 p-3 hover:bg-[#fafafa] hover:text-[#6922D1] rounded-full mt-2">
             <img src={item.icon} alt="" className="md:ml-[10px] text-bgPurple" />
             <span className='text-sm'>{item.name}</span>
           </Link>
