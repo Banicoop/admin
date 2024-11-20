@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
@@ -14,6 +14,7 @@ import Verified from './pages/auth/Verified';
 import ProtectedRoute from './ProtectedRoute';
 import { useSelector } from 'react-redux';
 import Dashboard from './pages/Dashboard';
+import { getTokenExpirationTime } from './utils/jwtDecode';
 
 
 
@@ -84,9 +85,31 @@ function AuthVerificationLayout(){
 
 function Routes (){
 
-  // const user = localStorage.getItem('token') || null
   const user = useSelector((state: any) => state.auth.user);
-  console.log(user);
+
+  useEffect(() => {
+    if(user){
+      const expirationTime = getTokenExpirationTime(user);
+      const currentTime = Date.now();
+      let timeLeft;
+      if(expirationTime && expirationTime !== null){
+        timeLeft = expirationTime - currentTime;
+      }
+      if (timeLeft && timeLeft <= 0) {
+        localStorage.removeItem('loginData'); 
+        localStorage.removeItem('user');
+        window.location.replace('/auth/login');
+      } else {
+        const timer = setTimeout(() => {
+          localStorage.removeItem('loginData'); 
+          localStorage.removeItem('user');
+          window.location.replace('/auth/login');
+        }, timeLeft)
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [user])
+
 
 const router = createBrowserRouter([
   {
