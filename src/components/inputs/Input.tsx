@@ -3,7 +3,7 @@ import React, { ChangeEventHandler, FC, useState } from 'react';
 
 interface IInput {
     type: string;
-    placeholder: string;
+    placeholder: any;
     img?: string;
     name?: string;
     value?: any;

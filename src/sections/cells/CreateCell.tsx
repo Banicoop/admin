@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, MouseEventHandler, useState } from 'react'
+import React, { ChangeEvent, FC, MouseEventHandler, useState, useEffect } from 'react'
 import BasicModal from '../../components/modals/BasicModal';
 import Input from '../../components/inputs/Input';
 import TextArea from '../../components/inputs/TextArea';
@@ -53,6 +53,7 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
   const dispatch = useDispatch<Dispatch>();
   const { status } = useSelector((state: any) => state.cell)
+  console.log(status);
  
   
   const [inputs, setInputs] = useState<IInput>(initialState);
@@ -113,13 +114,21 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
     const { cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate, endDate } = inputs
     try {
       dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate,  endDate, type}));
-      if(status === 'succeeded'){
-        onClose();
-      }
     } catch (error) {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    if (status === 'succeeded') {
+      setInputs(initialState); // Reset form
+      onClose(); 
+    }
+    return () => {
+      
+    }
+  }, [status, onClose]);
+
 
 
   const showAllFields = () => {
@@ -155,15 +164,15 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
           <>
            <div className="flex flex-col md:flex-row md:flex-wrap w-full gap-2">
 
-            <Input type='tel' placeholder='Duration' name='duration' value={inputs.duration} onChange={handleInputsChange}  readOnly/>
+            <Input type='tel' placeholder={inputs.duration} name='duration'  value={inputs.duration || ''} onChange={handleInputsChange}  readOnly/>
 
             <Input type='tel' placeholder='Max. Number of Participant' name='totalUsers' value={inputs.totalUsers} onChange={handleInputsChange}/>
-            <Input type='tel' placeholder='Min. Number of Participant' name='realUser' value={inputs.realUser} onChange={handleInputsChange}/>
+            <Input type='tel' placeholder='Must be 2 less than Max user' name='realUser' value={inputs.realUser} onChange={handleInputsChange}/>
 
             <Input type='text' placeholder='Contribution Amount (Naira)' value={inputs.contributionAmount} name='contributionAmount' onChange={handleInputsChange}/>
 
           </div>
-          <TextArea text='Cell Description' name='description' value={inputs.description} onChange={handleInputsChange}/>
+          <TextArea text='Must be more than 10 words' name='description' value={inputs.description} onChange={handleInputsChange}/>
           </>
           }
         </div>
