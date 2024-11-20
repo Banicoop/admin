@@ -62,6 +62,18 @@ const cellSlice = createSlice({
             state.status = 'failed';
             toast.error('Failed to create contribution crll', {...toastOptions})
         })
+
+
+        builder.addCase(getCells.pending, (state) => {
+            state.status = 'pending';
+        })
+        builder.addCase(getCells.fulfilled, (state, action) => {
+            state.status = 'succeeded'
+            state.entities = action.payload;
+        })
+        builder.addCase(getCells.rejected, (state) => {
+            state.status = 'failed';
+        })
     }
 })
 
