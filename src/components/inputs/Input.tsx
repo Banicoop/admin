@@ -8,11 +8,12 @@ interface IInput {
     name?: string;
     value?: any;
     onChange: ChangeEventHandler<HTMLInputElement>
+    readOnly?: boolean;
 }
 
-const Input:FC<IInput> = ({ type, placeholder, onChange, name }) => {
+const Input:FC<IInput> = ({ type, placeholder, onChange, name,  readOnly }) => {
   return (
-    <input type={type} name={name} placeholder={placeholder} onChange={onChange} className="px-2 py-3 rounded-2xl border-[1px] w-[342px] max-w-full md:max-w-[48%] outline-none"  />
+    <input type={type} name={name} placeholder={placeholder}  readOnly={readOnly} onChange={onChange} className="px-2 py-3 rounded-2xl border-[1px] w-[342px] max-w-full md:max-w-[48%] outline-none"  />
   )
 }
 
