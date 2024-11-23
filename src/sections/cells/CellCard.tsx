@@ -6,7 +6,11 @@ import moment from 'moment';
 
 const CellCard = ({data}: any) => {
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+
+  var duration = data.contributionAmount * data.duration;
+
   return (
     <div className='flex flex-col gap-3 p-4 border-[1px] rounded-3xl w-full sm:w-[48%] md:w-[31%]'>
         <div className="flex justify-between">
@@ -18,7 +22,7 @@ const CellCard = ({data}: any) => {
         </div>
       <div className="flex flex-col w-full gap-3">
             <span className="text-xs">Start Date : {moment(data.launchDate).format("MMM Do YYYY")} . End Date : {moment(data.endDate).format("MMM Do YYYY")} </span>
-            <span className="text-xs">{data.type} - N{data.contributionAmount}. Output - N300,000</span>
+            <span className="text-xs">{data.type} - N{data.contributionAmount} . Output - N{duration}</span>
       </div>
 
       <div className="flex items-center justify-between w-full">
