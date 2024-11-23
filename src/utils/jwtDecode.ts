@@ -1,10 +1,16 @@
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
-export const getTokenExpirationTime = (token: string) => {
-  if (!token) return null;
+export const getTokenExpirationTime = (token: string | null): number | null => {
+    if (!token || typeof token !== 'string') {
+        console.warn('Invalid or missing token');
+        return null; 
+    }
 
-  const decodedToken = jwtDecode(token);
-  if (!decodedToken.exp) return null;
-
-  return decodedToken.exp * 1000; 
+    try {
+        const decoded: { exp: number } = jwtDecode(token);
+        return decoded.exp * 1000; 
+    } catch (error) {
+        console.error('Error decoding token:', error);
+        return null; 
+    }
 };
