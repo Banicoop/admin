@@ -36,10 +36,10 @@ export const login = createAsyncThunk(
 export const verifyLogin = createAsyncThunk('auth/otp', 
     async (token: {}, { rejectWithValue,  dispatch  }) => {
         try {
-            const res = await SERVER.post('admin/auth/verifyToken', token);
+            const response = await SERVER.post('admin/auth/verifyToken', token);
 
-            if(res.data.message === 'OTP verified'){
-                const { accessToken, refreshToken, payload } = res.data;
+            if(response.data.message === 'OTP verified'){
+                const { accessToken, refreshToken, payload } = response.data;
 
                 localStorage.setItem('token', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);

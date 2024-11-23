@@ -12,7 +12,7 @@ import type { Dispatch } from '../../redux/store';
 
 interface cType {
   open: boolean;
-  onClose: any;
+  onClose: () => void
   onClick: MouseEventHandler<HTMLButtonElement>
 }
 
