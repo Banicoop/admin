@@ -88,27 +88,30 @@ function Routes (){
   const user = useSelector((state: any) => state.auth.user);
 
   useEffect(() => {
-    if(user){
-      const expirationTime = getTokenExpirationTime(user);
-      const currentTime = Date.now();
-      let timeLeft;
-      if(expirationTime && expirationTime !== null){
-        timeLeft = expirationTime - currentTime;
-      }
-      if (timeLeft && timeLeft <= 0) {
-        localStorage.removeItem('loginData'); 
-        localStorage.removeItem('user');
-        window.location.replace('/auth/login');
-      } else {
-        const timer = setTimeout(() => {
-          localStorage.removeItem('loginData'); 
-          localStorage.removeItem('user');
-          window.location.replace('/auth/login');
-        }, timeLeft)
-        return () => clearTimeout(timer);
-      }
+    if (user) {
+        const expirationTime = getTokenExpirationTime(user);
+        const currentTime = Date.now();
+
+        if (!expirationTime) return; 
+
+        const timeLeft = expirationTime - currentTime;
+
+        if (timeLeft <= 0) {
+            logoutUser();
+        } else {
+            const timer = setTimeout(() => logoutUser(), timeLeft);
+            return () => clearTimeout(timer);
+        }
     }
-  }, [user])
+
+    function logoutUser() {
+        localStorage.removeItem('loginData');
+        localStorage.removeItem('user');
+        localStorage.removeItem('token'); 
+        window.location.replace('/auth/login');
+    }
+}, [user]);
+
 
 
 const router = createBrowserRouter([
