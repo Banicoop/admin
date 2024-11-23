@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Info from '../../components/infos/Info';
 import Search from '../../components/Search';
 import ExportBtn from '../../components/buttons/ExportBtn';
@@ -7,7 +7,10 @@ import Btn from '../../components/buttons/Btn';
 import CellCard from '../../sections/cells/CellCard';
 import Welcome from '../../components/Welcome';
 import Widget from '../../components/Widget';
-
+import { getCells } from '../../redux/slice/cellSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import type { Dispatch } from '.././../redux/store';
+import { CircularProgress } from '@mui/material';
 
 
 
@@ -37,11 +40,24 @@ const Cells = () => {
   const [activeItem, setActiveItem] = useState('All');
   const [openModal, setOpenModal] = useState(false);
 
+
+  const {  entities: cells, status } = useSelector((state: any) => state.cell)
+
+  const dispatch = useDispatch<Dispatch>();
+
+
+  useEffect(() => {
+    dispatch(getCells())
+  }, [dispatch])
+
+
+  console.log(cells?.cells);
+
   return (
     <>
       <div className="h-full flex flex-col px-2 md:px-8 gap-3">
         <Welcome/>
-        <section className="flex flex-wrap items-center gap-2 py-2">
+        <section className="flex flex-col md:flex-row md:flex-wrap items-center gap-2 py-2">
           <Widget type='cells'/>
           <Widget type='cells'/>
           <Widget type='cells'/>
@@ -55,7 +71,7 @@ const Cells = () => {
             <Info text='Cell information'/>
             <ExportBtn text='Create New Cell' onClick={() => setOpenModal(true)}/>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="hidden md:flex items-center justify-between">
               <Search onClick={() => {}} placeholder='Search for Cell'/>
               {list.map((i) => (
                 <Btn onClick={() => setActiveItem(i.label)} activeItem={activeItem} label={i.label} key={i.label}/>
@@ -64,12 +80,13 @@ const Cells = () => {
           </div>
 
           <div className="flex flex-col justify-between md:flex-row md:flex-wrap gap-4 w-full">
-            <CellCard/>
-            <CellCard/>
-            <CellCard/>
-            <CellCard/>
-            <CellCard/>
-            <CellCard/>
+            {status === 'pending' && <CircularProgress sx={{display: 'flex', margin: 'auto'}}/>  }
+
+            {status === 'succeeded' && 
+              cells?.cells?.map((cell: any) => (
+                <CellCard key={cell._id} data={cell}/>
+              ))
+            }
           </div>
 
         </div>

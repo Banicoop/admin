@@ -53,7 +53,6 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
   const dispatch = useDispatch<Dispatch>();
   const { status } = useSelector((state: any) => state.cell)
-  console.log(status);
  
   
   const [inputs, setInputs] = useState<IInput>(initialState);
