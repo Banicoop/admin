@@ -41,6 +41,20 @@ export const getCells = createAsyncThunk(
     }
 )
 
+
+export const fetchCellDetail = createAsyncThunk(
+    'cellDetail/fetchCellDetail',
+    async ({ cellId, userId }: { cellId: string; userId: string | null }, { rejectWithValue }) => {
+        try {
+            const response = await SERVER.get(`transverse/contribution/cell?cellId=${cellId}&userId=${userId}`);
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.response?.data || 'Failed to fetch cell details');
+        }
+    }
+);
+
+
 const cellSlice = createSlice({
     name: 'cell',
     initialState,
@@ -74,6 +88,20 @@ const cellSlice = createSlice({
         builder.addCase(getCells.rejected, (state) => {
             state.status = 'failed';
         })
+
+
+        builder
+        .addCase(fetchCellDetail.pending, (state) => {
+            state.status = 'pending';
+        })
+        .addCase(fetchCellDetail.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.entities = action.payload;
+        })
+        .addCase(fetchCellDetail.rejected, (state) => {
+            state.status = 'failed';
+            toast.error('Failed to fetch cell details', { ...toastOptions });
+        });
     }
 })
 

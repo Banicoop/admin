@@ -11,6 +11,8 @@ const CellCard = ({data}: any) => {
 
   var duration = data.contributionAmount * data.duration;
 
+  // console.log(data);
+
   return (
     <div className='flex flex-col gap-3 p-4 border-[1px] rounded-3xl w-full sm:w-[48%] md:w-[31%]'>
         <div className="flex justify-between">
@@ -31,7 +33,7 @@ const CellCard = ({data}: any) => {
           {/* <span className="text-[8px] text-[#000]">Active members</span> */}
         </div>
 
-        <ActionBtn text='View Details' onClick={() => navigate('/cells/:id')}/>
+        <ActionBtn text='View Details' onClick={() => navigate(`/cells/${data?._id}`)}/>
       </div>
     </div>
   )

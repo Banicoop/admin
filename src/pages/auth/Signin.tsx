@@ -32,7 +32,7 @@ const Signin = () => {
         <AuthInput img='/profile.svg' placeholder='Email address' type='email' onChange={(e:any) => setEnail(e.target.value)}/>
         <AuthInput img='/password-check.svg' placeholder='Password' type='password' onChange={(e:any) => setPassword(e.target.value)}/>
 
-        <div className="flex justify-between w-full">
+        <div className="flex flex-col md:flex-row md:justify-between w-full">
             <BackBtn onClick={() => navigate('/auth/welcome')} text='Go Back'/>
             <AuthBtn onClick={handleSubmit} text='Continue'/>
         </div>

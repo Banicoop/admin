@@ -51,8 +51,6 @@ const Cells = () => {
   }, [dispatch])
 
 
-  console.log(cells?.cells);
-
   return (
     <>
       <div className="h-full flex flex-col px-2 md:px-8 gap-3">

@@ -113,20 +113,24 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
     const { cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate, endDate } = inputs
     try {
       dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate,  endDate, type}));
+        if (status === 'succeeded') {
+          setInputs(initialState);
+          onClose(); 
+        }
     } catch (error) {
       console.log(error)
     }
   }
 
-  useEffect(() => {
-    if (status === 'succeeded') {
-      setInputs(initialState); // Reset form
-      onClose(); 
-    }
-    return () => {
+  // useEffect(() => {
+  //   if (status === 'succeeded') {
+  //     setInputs(initialState);
+  //     onClose(); 
+  //   }
+  //   return () => {
       
-    }
-  }, [status, onClose]);
+  //   }
+  // }, [status, onClose]);
 
 
 
