@@ -86,6 +86,7 @@ function AuthVerificationLayout(){
 function Routes (){
 
   const user = useSelector((state: any) => state.auth.user);
+  console.log(user);
 
   useEffect(() => {
     if (user) {

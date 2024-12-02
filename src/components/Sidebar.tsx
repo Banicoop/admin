@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Sidebar = () => {
 
   const handleLogout = async () => {
-    localStorage.removeItem('loginData'); // or sessionStorage if that's where you saved it
+    localStorage.removeItem('loginData'); 
     localStorage.removeItem('user');
     window.location.replace('/auth/login');
   }
@@ -21,7 +21,7 @@ const Sidebar = () => {
          { menuData.map((item) => (
           <Link to={item.url} key={item.name} className="flex items-center gap-2 p-3 hover:bg-[#fafafa] hover:text-[#6922D1] rounded-full mt-2">
             <img src={item.icon} alt="" className="md:ml-[10px] text-bgPurple" />
-            <span className='text-sm'>{item.name}</span>
+            <span className='hidden md:block text-sm'>{item.name}</span>
           </Link>
          ))}
         </div>

@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Info from '../../components/infos/Info';
 import Search from '../../components/Search';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import BasicTable from '../../components/tables/BasicTable';
 import EditCell from '../../sections/cells/EditCell';
 import CellBanner from '../../sections/cells/CellBanner';
+import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCellDetail } from '../../redux/slice/cellSlice';
+import type { Dispatch } from '../../redux/store';
 
 
 const headcells = [
@@ -38,6 +42,30 @@ const headcells = [
 const CellDetails = () => {
 
     const [open, setOpen] = useState(false);
+
+
+    const { entities: cell, status } = useSelector((state: any) => state.cellDetail);
+
+    const location = useLocation();
+    const dispatch = useDispatch<Dispatch>();
+
+
+    const path = location.pathname.split('/')[2];
+
+
+    const cellId = localStorage.getItem('loginData')
+        ? JSON.parse(localStorage.getItem('loginData')!).id
+        : null;
+
+
+    useEffect(() => {
+      if (cellId) {
+        dispatch(fetchCellDetail({ cellId: path, userId: cellId }));
+    }
+    }, [path, cellId, dispatch])
+
+
+    console.log(cell);
 
   return (
     <>

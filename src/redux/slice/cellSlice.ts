@@ -20,10 +20,10 @@ export const createCell = createAsyncThunk(
     'cell/createCell',
     async (cell: {}, { rejectWithValue }) => {
         try {
-            const res = await SERVER.post('admin/contribution/cell/create', cell);
-            return res.data;
+            const response = await SERVER.post('admin/contribution/cell/create', cell);
+            return response.data;
         } catch (error: any) {
-            return rejectWithValue(error.res.data)
+            return rejectWithValue(error.response.data)
         }
     }
 )
@@ -33,13 +33,27 @@ export const getCells = createAsyncThunk(
     'cell/getCells',
     async (_, {rejectWithValue}) => {
         try {
-            const res = await SERVER.get('');
-            return res.data
+            const response = await SERVER.get('admin/contribution/cell/all?type=&startDate&endDate&isActive=&available=true');
+            return response.data
         } catch (error) {
             return rejectWithValue(error)
         }
     }
 )
+
+
+export const fetchCellDetail = createAsyncThunk(
+    'cellDetail/fetchCellDetail',
+    async ({ cellId, userId }: { cellId: string; userId: string | null }, { rejectWithValue }) => {
+        try {
+            const response = await SERVER.get(`transverse/contribution/cell?cellId=${cellId}&userId=${userId}`);
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.response?.data || 'Failed to fetch cell details');
+        }
+    }
+);
+
 
 const cellSlice = createSlice({
     name: 'cell',
@@ -74,6 +88,20 @@ const cellSlice = createSlice({
         builder.addCase(getCells.rejected, (state) => {
             state.status = 'failed';
         })
+
+
+        builder
+        .addCase(fetchCellDetail.pending, (state) => {
+            state.status = 'pending';
+        })
+        .addCase(fetchCellDetail.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.entities = action.payload;
+        })
+        .addCase(fetchCellDetail.rejected, (state) => {
+            state.status = 'failed';
+            toast.error('Failed to fetch cell details', { ...toastOptions });
+        });
     }
 })
 

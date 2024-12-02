@@ -30,7 +30,7 @@ const Welcome = () => {
             <img src="/alert-circle.svg" alt="" className="" />
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-4">
             { list.map((l) => (
                 <span  
                 onClick={() => setActiveItem(l.label)} 
