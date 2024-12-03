@@ -9,9 +9,14 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCellDetail } from '../../redux/slice/cellSlice';
 import type { Dispatch } from '../../redux/store';
+import Updates from '../../sections/cells/Updates';
 
 
 const headcells = [
+  {
+    key: "no",
+    name: "No",
+  },
   {
     key: "cellName",
     name: "Customer Name",
@@ -22,15 +27,11 @@ const headcells = [
   },
   {
     key: "day",
-    name: "Remittance Day",
+    name: "Last Contribution ",
   },
   {
-    key: "num",
-    name: "Number",
-  },
-  {
-    key: "date",
-    name: "Collection Date",
+    key: "next",
+    name: "Next Contribution ",
   },
   {
     key: "status",
@@ -44,7 +45,7 @@ const CellDetails = () => {
     const [open, setOpen] = useState(false);
 
 
-    const { entities: cell, status } = useSelector((state: any) => state.cellDetail);
+    const { entities: cell, status } = useSelector((state: any) => state.cell);
 
     const location = useLocation();
     const dispatch = useDispatch<Dispatch>();
@@ -66,6 +67,8 @@ const CellDetails = () => {
 
 
     console.log(cell);
+    console.log(cellId);
+    console.log(status)
 
   return (
     <>
@@ -81,10 +84,17 @@ const CellDetails = () => {
               <ExportBtn text='Export' onClick={() => {}}/>
             </div>
           </div>
-        <BasicTable headcells={headcells} tableData={tableData}/>
+
+        <div className="flex gap-3 m-1">
+          <BasicTable headcells={headcells} tableData={tableData}/>
+          <Updates/>
+        </div>
         </div>
       </div>
+
       <EditCell open={open} onClose={() => setOpen(false)} onClick={() => setOpen(false)}/>
+
+
     </>
   )
 }
@@ -94,11 +104,11 @@ const CellDetails = () => {
 const tableData = Array(5)
 .fill("")
 .map((_, i) => ({
+  num: '4 of 9',
   cellName: "Obiabo Immanuel",
   amount: "₦300,000.00",
   day: "3rd Nov 2023",
-  num: '4 of 9',
-  date: "09-03-2023",
+  next: '3rd Nov 2023',
   id: `row_${i}`,
 
 }));
