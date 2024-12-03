@@ -73,7 +73,7 @@ const CellDetails = () => {
   return (
     <>
       <div className='h-full flex flex-col px-2 md:px-8 gap-3'>
-        <CellBanner/>
+        <CellBanner title='Banicoop Default Cell' status='Active' isCell/>
         <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
         <div className="flex justify-between items-center w-full">
             <Info text="Cell Members" text2='In Progress' details/>
@@ -104,7 +104,7 @@ const CellDetails = () => {
 const tableData = Array(5)
 .fill("")
 .map((_, i) => ({
-  num: '4 of 9',
+  no: '4 of 9',
   cellName: "Obiabo Immanuel",
   amount: "₦300,000.00",
   day: "3rd Nov 2023",
