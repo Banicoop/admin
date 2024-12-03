@@ -13,27 +13,27 @@ const BasicTable:FC<ITbale> = ({headcells, tableData, onNavigate}) => {
   return (
     <TableContainer sx={{ boxShadow: "none", border: '1px solid #fafafa', borderRadius: '20px 20px 0 0'}}>
       <Table>
-        <TableHead>
-          <TableRow sx={{ backgroundColor: '#6922D1', color: '#fff' }}>
+        <TableHead  sx={{ marginY: '10px' }}>
+          <TableRow sx={{ backgroundColor: '#fafafa', color: '#fff',  borderRadius: '10px' }}>
           {headcells?.map((data: any, i: any) => (
-							<TableCell key={i} sx={{ fontWeight: 500, fontSize: 14, color: '#fff' }}>
+							<TableCell key={i} sx={{ fontWeight: 500, fontSize: 12, color: '#000' }}>
 								{data?.name}
 							</TableCell>
 						))}
           </TableRow>
         </TableHead>
 
-        <TableBody sx={{ backgroundColor: '#fafafa', color: '#000' }}>
+        <TableBody sx={{ backgroundColor: '#fff', color: '#000',  fontSize: 10 }}>
         {tableData?.map((row: any, rowIndex: any) => (
 						<TableRow key={rowIndex}>
 							{headcells?.map((col: any, colIndex: any) => (
-								<TableCell align="left" key={colIndex} sx={{ fontWeight: 400, fontSize: 13 }}>
+								<TableCell align="left" key={colIndex} sx={{ fontWeight: 400, fontSize: 10 }}>
 									{row[col.key]}
                   {col.key === "action" && (
                     <ActionBtn onClick={() => onNavigate(row.id)}/>
                   )}
                   { col.key === 'status' &&
-                  <Status text='Pending'/>
+                  <Status text='withraw'/>
                   }
 								</TableCell>
 							))}

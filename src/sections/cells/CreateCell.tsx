@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, MouseEventHandler, useState, useEffect } from 'react'
+import React, { ChangeEvent, FC, MouseEventHandler, useState } from 'react'
 import BasicModal from '../../components/modals/BasicModal';
 import Input from '../../components/inputs/Input';
 import TextArea from '../../components/inputs/TextArea';
@@ -121,16 +121,6 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
       console.log(error)
     }
   }
-
-  // useEffect(() => {
-  //   if (status === 'succeeded') {
-  //     setInputs(initialState);
-  //     onClose(); 
-  //   }
-  //   return () => {
-      
-  //   }
-  // }, [status, onClose]);
 
 
 
