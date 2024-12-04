@@ -54,20 +54,20 @@ const CellDetails = () => {
     const path = location.pathname.split('/')[2];
 
 
-    const cellId = localStorage.getItem('loginData')
+    const adminId = localStorage.getItem('loginData')
         ? JSON.parse(localStorage.getItem('loginData')!).id
         : null;
 
 
     useEffect(() => {
-      if (cellId) {
-        dispatch(fetchCellDetail({ cellId: path, userId: cellId }));
+      if (adminId) {
+        dispatch(fetchCellDetail({ cellId: path, userId: adminId }));
     }
-    }, [path, cellId, dispatch])
+    }, [path, adminId, dispatch])
 
 
     console.log(cell);
-    console.log(cellId);
+    console.log(adminId);
     console.log(status)
 
   return (
