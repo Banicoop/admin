@@ -11,7 +11,6 @@ const CellCard = ({data}: any) => {
 
   var duration = data.contributionAmount * data.duration;
 
-  // console.log(data);
 
   return (
     <div className='flex flex-col gap-3 p-4 border-[1px] rounded-3xl w-full sm:w-[48%] md:w-[31%]'>

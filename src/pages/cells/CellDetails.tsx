@@ -67,8 +67,8 @@ const CellDetails = () => {
 
 
     console.log(cell);
-    console.log(adminId);
-    console.log(status)
+    // console.log(adminId);
+    // console.log(status)
 
   return (
     <>
