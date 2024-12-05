@@ -110,9 +110,9 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
 
   const handleSubmit = async () => {
-    const { cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate, endDate } = inputs
+    const { cellName, totalUsers, realUser, contributionAmount, description, launchDate, endDate } = inputs
     try {
-      dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, duration, launchDate,  endDate, type}));
+      dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, launchDate,  endDate, type}));
         if (status === 'succeeded') {
           setInputs(initialState);
           onClose(); 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// Create the Axios instance
+// Axios instance
 const SERVER = axios.create({
     baseURL: 'https://banicoop-server-testing.onrender.com/api/v1/', 
     timeout: 10000, 

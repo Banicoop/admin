@@ -46,7 +46,7 @@ export const fetchCellDetail = createAsyncThunk(
     'cellDetail/fetchCellDetail',
     async ({ cellId, userId }: { cellId: string; userId: string | null }, { rejectWithValue }) => {
         try {
-            const response = await SERVER.get(`transverse/contribution/cell?cellId=${cellId}&userId=${userId}`);
+            const response = await SERVER.get(`admin/contribution/cell/single?cellId=${cellId}&adminId=${userId}`);
             return response.data;
         } catch (error: any) {
             return rejectWithValue(error.response?.data || 'Failed to fetch cell details');

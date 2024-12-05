@@ -24,7 +24,7 @@ const Signin = () => {
 
 
   return (
-    <div className='flex flex-col items-center justify-center w-full h-full p-[4rem] gap-[2rem]'>
+    <div className='flex flex-col items-center justify-center w-full h-full p-[2rem] gap-[2rem]'>
         <h1 className='text-2xl md:text-3xl lg:text-5xl font-semibold flex justify-start items-start mr-auto flex-col gap-2'>Welcome to <br /><span className='text-bgPurple flex flex-row gap-2'>Banicoop <br /><span className='text-[#000]'>Admin</span> </span> Dashboard!</h1>
 
         <p className='text-sm'>Your role as an admin helps foster secure, collaborative savings. Get started with by logging in to your admin dashboard</p>
