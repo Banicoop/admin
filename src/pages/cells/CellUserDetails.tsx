@@ -30,7 +30,7 @@ const headcells = [
 const CellUserDetails = () => {
   return (
     <div className='h-full flex flex-col px-2 md:px-8 gap-3'>
-        <CellBanner title='Dada Oladimeji' status='Overdue' isCell={false} />
+        <CellBanner title='Dada Oladimeji' status='Overdue' isCell={false} cell/>
 
         <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
         <div className="flex justify-between items-center w-full">

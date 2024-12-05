@@ -1,16 +1,22 @@
 import React, { FC } from 'react';
 import Progress from '../../components/Progress';
 import ExportBtn from '../../components/buttons/ExportBtn';
+import moment from 'moment';
 
 
 interface banneerType {
     title: string;
     status: string;
     isCell: boolean;
+    cell: any;
 }
 
 
-const CellBanner: FC<banneerType> = ({title, status, isCell}) => {
+const CellBanner: FC<banneerType> = ({title, status, isCell, cell}) => {
+
+    let goalFund = (cell?.cell?.duration - 1) * cell?.cell?.contributionAmount
+ 
+
   return (
     <div className='flex items-center border-[1px] rounded-3xl gap-4 py-4 px-6 w-full'>
         { !isCell &&
@@ -36,7 +42,7 @@ const CellBanner: FC<banneerType> = ({title, status, isCell}) => {
             <section className="flex justify-between items-center">
                 <div className="flex flex-col gap-2">
                     <span className="text-xs font-[300]">Goal Amount</span>
-                    <span className="text-sm font-[500]">NGN 500,000.00</span>
+                    <span className="text-sm font-[500]">NGN {Number(goalFund).toLocaleString('en-NG')}</span>
                 </div>
 
                 { !isCell ?
@@ -71,12 +77,12 @@ const CellBanner: FC<banneerType> = ({title, status, isCell}) => {
 
                     <div className="flex flex-col gap-2">
                         <span className="text-xs font-[300]">Start Date</span>
-                        <span className="text-sm font-[500]">January 1, 2024</span>
+                        <span className="text-sm font-[500]">{moment(cell?.cell?.lauchDate).format("MMM Do YY")}</span>
                     </div>
 
                     <div className="flex flex-col gap-2">
                         <span className="text-xs font-[300]">End Date</span>
-                        <span className="text-sm font-[500]">December 31, 2024</span>
+                        <span className="text-sm font-[500]">{moment(cell?.cell?.endDate).format("MMM Do YY")}</span>
                     </div>
                 </>
                 }
