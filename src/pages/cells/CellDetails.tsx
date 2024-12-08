@@ -66,14 +66,11 @@ const CellDetails = () => {
     }, [path, adminId, dispatch])
 
 
-    console.log(cell);
-    // console.log(adminId);
-    // console.log(status)
 
   return (
     <>
       <div className='h-full flex flex-col px-2 md:px-8 gap-3'>
-        <CellBanner title='Banicoop Default Cell' status='Active' isCell/>
+        <CellBanner title={cell?.cell?.cellName} status='Active' isCell cell={cell}/>
         <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
         <div className="flex justify-between items-center w-full">
             <Info text="Cell Members" text2='In Progress' details/>
