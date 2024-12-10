@@ -75,14 +75,14 @@ const CellDetails = () => {
         <div className="flex justify-between items-center w-full">
             <Info text="Cell Members" text2='In Progress' details/>
 
-            <div className="flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-4">
               <Search onClick={() => {}}  placeholder='Search for Cell'/>
               <ExportBtn text='Edit Cell Information' onClick={() => setOpen(true)}/>
               <ExportBtn text='Export' onClick={() => {}}/>
             </div>
           </div>
 
-        <div className="flex gap-3 m-1">
+        <div className="flex flex-col md:flex-row gap-3 m-1">
           <BasicTable headcells={headcells} tableData={tableData}/>
           <Updates/>
         </div>

@@ -6,7 +6,7 @@ const Navbar = () => {
     <div className='flex justify-between items-center py-4 px-8 w-full border-b-[1px] '>
       <h1 className='text-[#000] text-[14px]'>Dashboard Overview</h1>
 
-      <div className="flex items-center gap-5">
+      <div className="hidden md:flex items-center gap-5">
         <Search onClick={() => {}}  placeholder='Tap to Search'/>
 
         <div className="flex p-3 rounded-full bg-[#fafafa] relative cursor-pointer">
