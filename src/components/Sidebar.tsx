@@ -32,8 +32,12 @@ const Sidebar = () => {
   }
 
 
-  const handleAdd = () => {
-    console.log(type)
+  const handleAdd = async () => {
+    try {
+      console.log(type)
+    } catch (error) {
+      
+    }
   }
   
 

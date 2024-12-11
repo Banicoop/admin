@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import authReducer from './slice/authSlice';
 import cellReducer from './slice/cellSlice';
+import adminReducer from './slice/adminSlice'
 
 
 const persistConfig = {
@@ -14,7 +15,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    cell: cellReducer
+    cell: cellReducer,
+    admin: adminReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
