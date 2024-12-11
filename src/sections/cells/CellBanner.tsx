@@ -42,10 +42,10 @@ const CellBanner: FC<banneerType> = ({title, status, isCell, cell}) => {
                 </div>}
             </div>
 
-            <section className="flex justify-between items-center">
+            <section className="flex w-full flex-col  md:flex-row md:justify-between items-center">
                 <div className="flex flex-col gap-2">
                     <span className="text-xs font-[300]">Goal Amount</span>
-                    <span className="text-sm font-[500]">NGN {Number(goalFund).toLocaleString('en-NG') || 0}</span>
+                    <span className="text-sm font-[500]">NGN {Number(goalFund).toLocaleString('en-NG')}</span>
                 </div>
 
                 { !isCell ?

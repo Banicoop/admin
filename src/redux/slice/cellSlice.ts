@@ -55,6 +55,20 @@ export const fetchCellDetail = createAsyncThunk(
 );
 
 
+export const deleteCell = createAsyncThunk(
+    'cell/deleteCell',
+    async ({cellId}: {cellId: string}, { rejectWithValue }) => {
+        try {
+            await SERVER.delete(`admin/contribution/cell?id=${cellId}`);
+
+        } catch (error: any) {
+            console.log(error)
+            return rejectWithValue(error.response?.data || 'Failed to delete cell');
+        }
+    }
+)
+
+
 const cellSlice = createSlice({
     name: 'cell',
     initialState,
@@ -74,7 +88,7 @@ const cellSlice = createSlice({
         })
         builder.addCase(createCell.rejected, (state, action) => {
             state.status = 'failed';
-            toast.error('Failed to create contribution crll', {...toastOptions})
+            toast.error('Failed to create contribution cell', {...toastOptions})
         })
 
 
@@ -101,6 +115,22 @@ const cellSlice = createSlice({
         .addCase(fetchCellDetail.rejected, (state) => {
             state.status = 'failed';
             toast.error('Failed to fetch cell details', { ...toastOptions });
+        });
+
+
+
+        builder
+        .addCase(deleteCell.pending, (state) => {
+            state.status = 'pending';
+        })
+        .addCase(deleteCell.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.entities = action.payload;
+            toast.success('Cell have been deleted successfully', { ...toastOptions });
+        })
+        .addCase(deleteCell.rejected, (state) => {
+            state.status = 'failed';
+            toast.error('Unable to delete cell, please try again', { ...toastOptions });
         });
     }
 })

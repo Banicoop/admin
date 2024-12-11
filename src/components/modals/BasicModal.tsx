@@ -11,6 +11,7 @@ const style = {
     overflowY: 'auto',
     bgcolor: 'background.paper',
     border: 'none',
+    outline: 'none',
     borderRadius: '20px',
     boxShadow: 24,
     display: 'flex',

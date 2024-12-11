@@ -2,7 +2,7 @@ import React from 'react'
 
 const Updates = () => {
   return (
-    <div className='flex flex-col m-2 h-full w-1/3 gap-3'>
+    <div className='flex flex-col m-2 h-full w-full md:w-1/3 gap-3'>
         <h2 className='bg-[#fafafa] px-2 py-3 text-xl rounded-lg w-full'>Updates</h2>
 
         <div className="flex flex-col gap-1 m-1 w-full">

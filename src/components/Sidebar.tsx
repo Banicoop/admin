@@ -31,7 +31,7 @@ const Sidebar = () => {
     {/* BOTTOM */}
       <div className="mt-auto border-t-[1px] flex items-center px-3 py-6 gap-3 cursor-pointer" onClick={handleLogout}>
         <img src='/logout.svg' alt="" className="md:ml-[10px] text-bgPurple" />
-        <span className='text-sm'>Log Out</span>
+        <span className='hidden md:block text-sm'>Log Out</span>
       </div>
     </div>
   )
