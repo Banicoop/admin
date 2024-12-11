@@ -65,7 +65,7 @@ const CellDetails = () => {
     }
     }, [path, adminId, dispatch])
 
-
+    console.log(cell);
 
   return (
     <>
