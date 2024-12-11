@@ -59,9 +59,10 @@ export const deleteCell = createAsyncThunk(
     'cell/deleteCell',
     async ({cellId}: {cellId: string}, { rejectWithValue }) => {
         try {
-            const response = await SERVER.delete(`admin/contribution/cell?id=${cellId}`);
-            return response.data
+            await SERVER.delete(`admin/contribution/cell?id=${cellId}`);
+
         } catch (error: any) {
+            console.log(error)
             return rejectWithValue(error.response?.data || 'Failed to delete cell');
         }
     }
@@ -125,6 +126,7 @@ const cellSlice = createSlice({
         .addCase(deleteCell.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.entities = action.payload;
+            toast.success('Cell have been deleted successfully', { ...toastOptions });
         })
         .addCase(deleteCell.rejected, (state) => {
             state.status = 'failed';

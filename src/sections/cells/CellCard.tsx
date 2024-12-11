@@ -4,27 +4,35 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import Button from '../../components/buttons/Button';
 import DeleteModal from '../../components/modals/DeleteModal';
+import { deleteCell } from '../../redux/slice/cellSlice';
+import { useDispatch } from 'react-redux';
+import type { Dispatch } from '../../redux/store';
+
 
 
 const CellCard = ({data}: any) => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch<Dispatch>();
 
 
   var duration = data.contributionAmount * data.duration;
 
   const [items, setItems] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [cellId, setCellId] = useState('');
 
 
   const openDeleteModal = () => {
     setOpenDelete(true);
+    setCellId(data._id)
     setItems(false);
   }
 
   const handleCellDelete = async () => {
-
+    dispatch(deleteCell({cellId}))
   }
+
 
   return (
     <>
