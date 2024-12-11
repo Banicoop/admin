@@ -143,14 +143,14 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
           <div className="flex flex-col md:flex-row md:flex-wrap w-full gap-2">
 
             <Input type='text' placeholder='Cell Name' name='cellName' value={inputs.cellName} onChange={handleInputsChange}/>
-            <Select options={options} name='Collection Frequency' id='collection' onChange={handleSelectChange}/>
+            <Select className='w-[342px] h-[50px] md:max-w-[47%]' options={options} name='Collection Frequency' id='collection' onChange={handleSelectChange}/>
             <DateInput value={inputs.launchDate} name='launchDate' onChange={handleInputsChange} text='Start Date'/>
             <DateInput value={inputs.endDate} name='endDate' onChange={handleInputsChange} text='End Date'/>
           </div>
             
             {!showAll &&
               <div className="flex justify-center mx-auto">
-                <Button text='Next' onClick={showAllFields}/>
+                <Button text='Continue' onClick={showAllFields}/>
               </div>}
           
           { showAll &&
