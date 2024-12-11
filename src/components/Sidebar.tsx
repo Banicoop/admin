@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import BasicModal from './modals/BasicModal';
 import Select from './inputs/Select';
 import Button from './buttons/Button';
+import { useDispatch } from 'react-redux';
+import type { Dispatch } from '../redux/store';
+import { sendInvite } from '../redux/slice/adminSlice';
 
 const Sidebar = () => {
 
@@ -19,6 +22,9 @@ const Sidebar = () => {
     { value: "admin", label: "Admin" },
   ];
 
+
+  const dispatch = useDispatch<Dispatch>();
+
   const [open, setOpen] = useState(false);
   const [type, setType] = useState<string | null>(null);
   const [email, setEmail] = useState('')
@@ -33,11 +39,7 @@ const Sidebar = () => {
 
 
   const handleAdd = async () => {
-    try {
-      console.log(type)
-    } catch (error) {
-      
-    }
+    dispatch(sendInvite({type, email}))
   }
   
 
