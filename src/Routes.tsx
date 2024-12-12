@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux';
 import Dashboard from './pages/Dashboard';
 import { getTokenExpirationTime } from './utils/jwtDecode';
 import CellUserDetails from './pages/cells/CellUserDetails';
+import Register from './pages/auth/Register';
 
 
 
@@ -189,6 +190,10 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+    path: '/register',
+    element: <Register/>
+  }
 ])
 
 
