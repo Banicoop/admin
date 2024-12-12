@@ -31,6 +31,19 @@ export const sendInvite = createAsyncThunk(
 )
 
 
+export const registerAdmin = createAsyncThunk(
+    'admin/registerAdmin',
+    async (admin: {}, { rejectWithValue }) => {
+        try {
+            const response = await SERVER.post('admin/auth/register', admin);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
+
 const adminSlice = createSlice({
     name: 'admin',
     initialState,
@@ -45,6 +58,20 @@ const adminSlice = createSlice({
             toast.success('Invite sent', { ...toastOptions })
         })
         builder.addCase(sendInvite.rejected, (state, action) => {
+            state.status = 'failed';
+            toast.error('Failed to add admin, please try again later', { ...toastOptions })
+        })
+
+
+        builder.addCase(registerAdmin.pending, (state, action) => {
+            state.status = 'pending'
+        })
+        builder.addCase(registerAdmin.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.admin = action.payload
+            toast.success('Invite sent', { ...toastOptions })
+        })
+        builder.addCase(registerAdmin.rejected, (state, action) => {
             state.status = 'failed';
             toast.error('Failed to add admin, please try again later', { ...toastOptions })
         })
