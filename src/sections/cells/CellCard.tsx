@@ -47,7 +47,7 @@ const CellCard = ({data}: any) => {
                 <div className="flex z-[9999] bg-white flex-col gap-3 p-4 absolute top-1 right-1 shadow-lg rounded-md">
                   <div className="flex gap-2 items-center cursor-pointer" onClick={openDeleteModal}>
                     <img src="/edit.svg" alt="" className="" />
-                    <span className="text-xs font-[500]">Delete Cell</span>
+                    <span className="text-xs font-[300]">Delete Cell</span>
                   </div>
 
                   <div className="flex gap-2 items-center cursor-pointer">
@@ -80,8 +80,8 @@ const CellCard = ({data}: any) => {
       </div>
       <DeleteModal open={openDelete} onClose={()=> setOpenDelete(false)}>
           <div className="flex flex-col gap-4">
-            <h1 className='text-2xl text-[#6922D1] font-semibold'>Are you sure you want to delete this cell?</h1>
-            <p className='text-lg  text-[#000] font-[500]'>Please note that this action is not reversible</p>
+            <h1 className='text-xl text-[#000] font-[300]'>Are you sure you want to delete this cell?</h1>
+            <p className='text-sm  text-[#c82c2c] font-[300]'>This action will remove all cell details, including users details</p>
 
               <div className="flex items-center justify-between">
                 <Button text='Cancel' onClick={() =>setOpenDelete(false)} cancel/>

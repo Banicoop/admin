@@ -39,11 +39,6 @@ export const menuData = [
       icon: '/setting.svg',
       url: '/settings'
     },
-    {
-      name: 'Admins',
-      icon: '/verify.svg',
-      url: '/admins'
-    },
 ]
 
 

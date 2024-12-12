@@ -65,7 +65,7 @@ const Cells = () => {
         </section>
 
         <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
-          <div className="flex justify-between items-center w-full">
+          <div className="flex flex-col-reverse gap-3 md:flex-row justify-between items-center w-full">
             <Info text='Cell information'/>
             <ExportBtn text='Create New Cell' onClick={() => setOpenModal(true)}/>
           </div>
