@@ -63,6 +63,9 @@ export const deleteCell = createAsyncThunk(
             return cellId;
         } catch (error: any) {
             console.log(error)
+
+            const err = error?.response?.data?.message;
+            toast.error(`${err}`, {...toastOptions})
             return rejectWithValue(error.response?.data || 'Failed to delete cell');
         }
     }
@@ -131,7 +134,7 @@ const cellSlice = createSlice({
         })
         .addCase(deleteCell.rejected, (state) => {
             state.status = 'failed';
-            toast.error('Unable to delete cell, please try again', { ...toastOptions });
+            // toast.error('Unable to delete cell, please try again', { ...toastOptions });
         });
     }
 })

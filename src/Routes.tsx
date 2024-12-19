@@ -16,7 +16,8 @@ import { useSelector } from 'react-redux';
 import Dashboard from './pages/Dashboard';
 import { getTokenExpirationTime } from './utils/jwtDecode';
 import CellUserDetails from './pages/cells/CellUserDetails';
-import Register from './pages/auth/Register';
+import Register from './pages/admins/Register';
+import Admins from './pages/admins/Admins';
 
 
 
@@ -151,6 +152,10 @@ const router = createBrowserRouter([
       {
         path: '/cells/:id/user',
         element: <CellUserDetails/>
+      },
+      {
+        path: '/admin',
+        element: <Admins/>
       },
     ]
   },

@@ -1,4 +1,4 @@
-import React, {  ChangeEvent, useState } from 'react'
+import React, {  ChangeEvent, useState, useEffect } from 'react'
 import { menuData } from '../constant/menuData';
 import { Link } from 'react-router-dom';
 import BasicModal from './modals/BasicModal';
@@ -27,7 +27,16 @@ const Sidebar = () => {
 
   const [open, setOpen] = useState(false);
   const [type, setType] = useState<string | null>(null);
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('');
+  const [adminId, setAdminId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loginDataString = localStorage.getItem('loginData');
+    if (loginDataString) {
+        const loginData = JSON.parse(loginDataString);
+        setAdminId(loginData.id);
+    }
+}, []);
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setType(e.target.value);
@@ -39,7 +48,11 @@ const Sidebar = () => {
 
 
   const handleAdd = async () => {
-    dispatch(sendInvite({type, email}))
+    dispatch(
+      sendInvite({
+        admin: { email, role: type },
+        adminId })
+    )
   }
   
 
