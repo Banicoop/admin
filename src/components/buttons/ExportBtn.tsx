@@ -5,13 +5,14 @@ import React, { FC, MouseEventHandler } from 'react';
 type Itext = {
     text?: string;
     onClick?: MouseEventHandler<HTMLDivElement>;
-    disabled?: any
+    disabled?: any;
+    img?: string;
 }
 
-const ExportBtn:FC<Itext> = ({text, onClick}) => {
+const ExportBtn:FC<Itext> = ({text, onClick, img}) => {
   return (
-    <div className='bg-bgR flex items-center gap-3 py-3 px-4 rounded-3xl text-bgPurple border-[1px] cursor-pointer' onClick={onClick}>
-        <img src="/export.svg" alt="" className="" />
+    <div className='bg-bgR flex items-center gap-3 py-2 px-4 rounded-3xl text-bgPurple border-[1px] cursor-pointer' onClick={onClick}>
+        <img src={img ? img : "/export.svg"} alt="" className="h-4 w-4" />
         <span className="">{text}</span>
     </div>
   )
