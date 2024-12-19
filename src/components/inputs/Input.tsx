@@ -23,8 +23,8 @@ export const AuthInput:FC<IInput> = ({type, placeholder, img, onChange}) => {
   const [showPasword, setShowPasswword] = useState(false);
 
   return(
-    <div className="flex rounded-2xl border-[1px] px-2 py-3 w-full gap-1 items-center">
-      <img src={img} alt="" className="" />
+    <div className="flex rounded-2xl border-[1px] px-2 py-3  w-[342px] max-w-full md:max-w-[48%] gap-1 items-center">
+      <img src={img} alt="" className="h-4 w-4" />
       <input type={showPasword ? 'text': type} className="outline-none w-full" placeholder={placeholder} onChange={onChange} required/>
       { type === 'password' &&
         <img src={!showPasword ? '/visibilityoff.svg' : "/visiblity.png"} alt="" className="cursor-pointer" onClick={() => setShowPasswword(!showPasword)}/>

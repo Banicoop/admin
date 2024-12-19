@@ -44,8 +44,12 @@ const Verification = () => {
 
         <p className='text-lg text-[#000] text-center'>Check your email inbox for a 4-digit OTP. Enter it below</p>
 
-        <div className="">
+        <div className="flex flex-col gap-1">
             <OtpInput onChange={handleOtpChange}/>
+            <div className="flex justify-between items-center">
+                <span className='text-red-400'>Incorrect OTP</span>
+                <span className="text-lg text-[#6922D1] font-semibold" onClick={verifyOtp}>Resend OTP</span>
+            </div>
         </div>
 
         <div className="flex justify-between w-full">
