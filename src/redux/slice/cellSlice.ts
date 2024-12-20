@@ -23,6 +23,8 @@ export const createCell = createAsyncThunk(
             const response = await SERVER.post('admin/contribution/cell/create', cell);
             return response.data;
         } catch (error: any) {
+            const err = error?.response?.data?.message
+            toast.error(`${err}`, {...toastOptions})
             return rejectWithValue(error.response.data)
         }
     }
@@ -91,7 +93,7 @@ const cellSlice = createSlice({
         })
         builder.addCase(createCell.rejected, (state, action) => {
             state.status = 'failed';
-            toast.error('Failed to create contribution cell', {...toastOptions})
+
         })
 
 
