@@ -18,9 +18,9 @@ const initialState = {
 
 export const sendInvite = createAsyncThunk(
     'admin/sendInvite',
-    async (admin: {}, { rejectWithValue }) => {
+    async ({admin, adminId}: {admin:any, adminId: string | null}, { rejectWithValue }) => {
         try {
-            const response = await SERVER.post('admin/auth/create', admin);
+            const response = await SERVER.post(`admin/auth/create?adminId=${adminId}`, admin);
             console.log(response)
             return response.data
         } catch (error) {

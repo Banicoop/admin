@@ -2,6 +2,11 @@ import React from 'react'
 import Search from './Search';
 
 const Navbar = () => {
+
+  const admindata = localStorage.getItem('loginData');
+  const adminId = admindata ? JSON.parse(admindata) : null
+
+
   return (
     <div className='flex justify-between items-center py-4 px-8 w-full border-b-[1px] '>
       <h1 className='text-[#000] text-[14px]'>Dashboard Overview</h1>
@@ -24,7 +29,7 @@ const Navbar = () => {
         </div>
         <div className="flex flex-col">
           <span className="text-[#000000] font-[500]">Praise Dominic</span>
-          <span className="text-[#000000] text-xs">Admin ID: 00234563</span>
+          <span className="text-[#000000] text-xs">Admin ID: {adminId.id}</span>
         </div>
 
         <img src="/arrow-down.svg" alt="" className="" />

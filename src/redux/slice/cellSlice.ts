@@ -23,6 +23,8 @@ export const createCell = createAsyncThunk(
             const response = await SERVER.post('admin/contribution/cell/create', cell);
             return response.data;
         } catch (error: any) {
+            const err = error?.response?.data?.message
+            toast.error(`${err}`, {...toastOptions})
             return rejectWithValue(error.response.data)
         }
     }
@@ -63,7 +65,10 @@ export const deleteCell = createAsyncThunk(
             return cellId;
         } catch (error: any) {
             console.log(error)
-            return rejectWithValue(error.response?.data || 'Failed to delete cell');
+
+            const err = error?.response?.data?.message;
+            toast.error(`${err}`, {...toastOptions})
+            return rejectWithValue('Failed to delete cell');
         }
     }
 )
@@ -88,7 +93,7 @@ const cellSlice = createSlice({
         })
         builder.addCase(createCell.rejected, (state, action) => {
             state.status = 'failed';
-            toast.error('Failed to create contribution cell', {...toastOptions})
+
         })
 
 
@@ -129,9 +134,8 @@ const cellSlice = createSlice({
             delete state.entities[cellId];
             toast.success('Cell have been deleted successfully', { ...toastOptions });
         })
-        .addCase(deleteCell.rejected, (state) => {
+        .addCase(deleteCell.rejected, (state, action) => {
             state.status = 'failed';
-            toast.error('Unable to delete cell, please try again', { ...toastOptions });
         });
     }
 })

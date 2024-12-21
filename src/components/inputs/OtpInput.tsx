@@ -4,11 +4,12 @@ import React, { useState, FC, useRef, useEffect } from "react";
 interface OTPinputProps {
     digits?: number;
     onChange: (val: string) => void;
+    className: string
 }
 
 let currentOtpIndex: number = 0;
 
-const OtpInput:FC<OTPinputProps> = ({  onChange,  digits = 4,}) => {
+const OtpInput:FC<OTPinputProps> = ({  onChange,  digits = 4, className}) => {
 
     const [otp, setOtp] = useState<string[]>(new Array(digits).fill(""));
     const [activeOtpIndex, setActiveOtpIndex] = useState<number>(0);
@@ -53,7 +54,7 @@ const OtpInput:FC<OTPinputProps> = ({  onChange,  digits = 4,}) => {
                     value={otp[index]}
                     onChange={handleChange}
                     onKeyDown={(e) => handleKeyDown(e, index)}
-                    className="px-2 py-3 h-[60px] w-[60px] rounded-2xl border-2 border-solid outline-none text-center text-3xl text-[#026E78] font-bold"  />
+                    className={`px-2 py-3 h-[60px] w-[60px] rounded-2xl border-2 border-solid outline-none text-center text-3xl font-bold ${className}`}  />
 
                 </React.Fragment>
             ))

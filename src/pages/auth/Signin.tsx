@@ -29,8 +29,8 @@ const Signin = () => {
 
         <p className='text-sm'>Your role as an admin helps foster secure, collaborative savings. Get started with by logging in to your admin dashboard</p>
 
-        <AuthInput img='/profile.svg' placeholder='Email address' type='email' onChange={(e:any) => setEnail(e.target.value)}/>
-        <AuthInput img='/password-check.svg' placeholder='Password' type='password' onChange={(e:any) => setPassword(e.target.value)}/>
+        <AuthInput className='w-full' img='/profile.svg' placeholder='Email address' type='email' onChange={(e:any) => setEnail(e.target.value)}/>
+        <AuthInput className='w-full' img='/password-check.svg' placeholder='Password' type='password' onChange={(e:any) => setPassword(e.target.value)}/>
 
         <div className="flex flex-col md:flex-row md:justify-between w-full">
             <BackBtn onClick={() => navigate('/auth/welcome')} text='Go Back'/>
