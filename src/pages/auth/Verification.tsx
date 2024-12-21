@@ -2,9 +2,12 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
 import OtpInput from '../../components/inputs/OtpInput';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { verifyLogin } from '../../redux/slice/authSlice';
 import { Dispatch } from '../../redux/store';
+
+
+
 
 const Verification = () => {
 
@@ -29,6 +32,8 @@ const Verification = () => {
     }, []);
 
 
+    const { status } = useSelector((state: any) => state.auth)
+
 
     const verifyOtp = async () => {
         dispatch(verifyLogin({otp, adminId}))
@@ -45,10 +50,12 @@ const Verification = () => {
         <p className='text-lg text-[#000] text-center'>Check your email inbox for a 4-digit OTP. Enter it below</p>
 
         <div className="flex flex-col gap-1">
-            <OtpInput onChange={handleOtpChange}/>
-            <div className="flex justify-between items-center">
-                <span className='text-red-400'>Incorrect OTP</span>
-                <span className="text-lg text-[#6922D1] font-semibold" onClick={verifyOtp}>Resend OTP</span>
+            <OtpInput className={`${status === 'failed' ? 'text-[crimson]' : 'text-[#026E78] '}`} onChange={handleOtpChange}/>
+            <div className="flex items-center">
+                { status === 'failed' &&
+                    <span className='text-red-400'>Incorrect OTP</span>
+                }
+                <span className="text-lg text-[#6922D1] cursor-pointer font-semibold flex ml-auto" onClick={verifyOtp}>Resend OTP</span>
             </div>
         </div>
 

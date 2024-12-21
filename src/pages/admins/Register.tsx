@@ -4,9 +4,11 @@ import { AuthBtn } from '../../components/buttons/ExportBtn';
 import { registerAdmin } from '../../redux/slice/adminSlice';
 import type { Dispatch } from '../../redux/store';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 
 const imitialSate = {
+  adminId: '',
   firstName: "",
   lastName: "",
   username: "",
@@ -16,6 +18,9 @@ const imitialSate = {
 const Register = () => {
 
   const dispatch = useDispatch<Dispatch>();
+  const location = useLocation();
+
+  const path = location.pathname.split('/')[2]
 
   const [newAdmin, setNewAdmin] = useState(imitialSate)
 
@@ -27,24 +32,24 @@ const Register = () => {
   }
  
   const handleSubmit = async () => {
-    dispatch(registerAdmin({...newAdmin}))
+    dispatch(registerAdmin({...newAdmin, adminId: path}))
   }
 
   
   return (
     <main className='bg-bgR flex h-[100vh] w-full justify-center items-center'>
-      <form className="flex flex-col bg-white rounded-lg shadow-lg p-2 md:p-6 w-3/4 md:w-1/2 gap-3">
+      <form className="flex flex-col bg-white rounded-lg shadow-lg p-4 md:p-6 w-3/4 md:w-1/2 gap-3">
         <h2 className='text-[#000000] text-xl font-semibold'>Setup your Account</h2>
         <p className='text-xs '>Your role as an admin helps foster secure, collaborative savings. Get started with by setting up your admin account.</p>
 
-        <div className="flex flex-col md:flex-row flex-wrap gap-4">
-          <AuthInput type='text' placeholder='First Name' img='/auth/username.svg' name='firstName' value={newAdmin.firstName} onChange={handleChange}/>
-          <AuthInput type='text' placeholder='Last Name' img='/auth/username.svg' name='lastName' value={newAdmin.lastName} onChange={handleChange}/>
-          <AuthInput type='text' placeholder='Username'  img='/auth/password.svg' name='username' value={newAdmin.username} onChange={handleChange}/>
-          <AuthInput type='password' placeholder='Password' img='/auth/password.svg' name='password' value={newAdmin.password} onChange={handleChange}/>
+        <div className="flex flex-col items-center justify-center md:flex-row flex-wrap gap-4">
+          <AuthInput className='w-full md:w-[47%]' type='text' placeholder='First Name' img='/auth/username.svg' name='firstName' value={newAdmin.firstName} onChange={handleChange}/>
+          <AuthInput className='w-full md:w-[47%]' type='text' placeholder='Last Name' img='/auth/username.svg' name='lastName' value={newAdmin.lastName} onChange={handleChange}/>
+          <AuthInput className='w-full md:w-[47%]' type='text' placeholder='Username'  img='/auth/password.svg' name='username' value={newAdmin.username} onChange={handleChange}/>
+          <AuthInput className='w-full md:w-[47%]' type='password' placeholder='Password' img='/auth/password.svg' name='password' value={newAdmin.password} onChange={handleChange}/>
         </div>
 
-        <div className="flex items-center justify-between mt-8 mb-2">
+        <div className="flex items-center justify-between mt-8 mb-2 px-2">
           <AuthBtn  text='Continue' onClick={handleSubmit}/>
         </div>
       </form>
