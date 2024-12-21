@@ -81,7 +81,7 @@ const Cells = () => {
             {status === 'pending' && <CircularProgress sx={{display: 'flex', margin: 'auto'}}/>  }
 
             {status === 'succeeded' && 
-              cells?.cells?.map((cell: any) => (
+              cells?.map((cell: any) => (
                 <CellCard key={cell._id} data={cell}/>
               ))
             }

@@ -19,6 +19,7 @@ const Register = () => {
 
   const dispatch = useDispatch<Dispatch>();
   const location = useLocation();
+  console.log(location)
 
   const path = location.pathname.split('/')[2]
 

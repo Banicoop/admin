@@ -11,7 +11,7 @@ interface CellState {
 
 
 const initialState = {
-    entities: {},
+    entities: [] as any[],
     status: 'idle',
 } as CellState
 
@@ -21,7 +21,7 @@ export const createCell = createAsyncThunk(
     async (cell: {}, { rejectWithValue }) => {
         try {
             const response = await SERVER.post('admin/contribution/cell/create', cell);
-            return response.data;
+            return response.data.cells;
         } catch (error: any) {
             const err = error?.response?.data?.message
             toast.error(`${err}`, {...toastOptions})
@@ -36,6 +36,7 @@ export const getCells = createAsyncThunk(
     async (_, {rejectWithValue}) => {
         try {
             const response = await SERVER.get('admin/contribution/cell/all?type=&startDate&endDate&isActive=&available=true');
+            console.log(response?.data?.cells)
             return response.data
         } catch (error) {
             return rejectWithValue(error)
@@ -61,8 +62,8 @@ export const deleteCell = createAsyncThunk(
     'cell/deleteCell',
     async ({cellId}: {cellId: string}, { rejectWithValue }) => {
         try {
-            await SERVER.delete(`admin/contribution/cell?id=${cellId}`);
-            return cellId;
+            const res = await SERVER.delete(`admin/contribution/cell?id=${cellId}`);
+            return res.data;
         } catch (error: any) {
             console.log(error)
 
@@ -88,7 +89,7 @@ const cellSlice = createSlice({
         })
         builder.addCase(createCell.fulfilled, (state, action) => {
             state.status = 'succeeded'
-            state.entities = action.payload;
+            state.entities.push(action.payload); 
             toast.success('Contribution cell successfully created', {...toastOptions})
         })
         builder.addCase(createCell.rejected, (state, action) => {
@@ -125,14 +126,14 @@ const cellSlice = createSlice({
 
 
         builder
-        .addCase(deleteCell.pending, (state) => {
+        .addCase(deleteCell.pending, (state, action) => {
             state.status = 'pending';
         })
         .addCase(deleteCell.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            const cellId = action.payload;
-            delete state.entities[cellId];
-            toast.success('Cell have been deleted successfully', { ...toastOptions });
+            const cellId = action.meta.arg.cellId;
+            state.entities = state.entities.filter((cell: any) => cell.id !== cellId);
+            toast.success('Cell has been deleted successfully', { ...toastOptions });
         })
         .addCase(deleteCell.rejected, (state, action) => {
             state.status = 'failed';
