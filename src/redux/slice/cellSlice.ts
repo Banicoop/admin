@@ -36,8 +36,7 @@ export const getCells = createAsyncThunk(
     async (_, {rejectWithValue}) => {
         try {
             const response = await SERVER.get('admin/contribution/cell/all?type=&startDate&endDate&isActive=&available=true');
-            console.log(response?.data?.cells)
-            return response.data
+            return response?.data?.cells
         } catch (error) {
             return rejectWithValue(error)
         }
@@ -63,9 +62,8 @@ export const deleteCell = createAsyncThunk(
     async ({cellId}: {cellId: string}, { rejectWithValue }) => {
         try {
             const res = await SERVER.delete(`admin/contribution/cell?id=${cellId}`);
-            return res.data;
+             return res.data;
         } catch (error: any) {
-            console.log(error)
 
             const err = error?.response?.data?.message;
             toast.error(`${err}`, {...toastOptions})
