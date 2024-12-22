@@ -53,9 +53,11 @@ const Verification = () => {
             <OtpInput className={`${status === 'failed' ? 'text-[crimson]' : 'text-[#026E78] '}`} onChange={handleOtpChange}/>
             <div className="flex items-center">
                 { status === 'failed' &&
-                    <span className='text-red-400'>Incorrect OTP</span>
+                <>
+                     <span className='text-red-400'>Incorrect OTP</span>
+                     <span className="text-lg text-[#6922D1] cursor-pointer font-semibold flex ml-auto" onClick={verifyOtp}>Resend OTP</span>
+                </>
                 }
-                <span className="text-lg text-[#6922D1] cursor-pointer font-semibold flex ml-auto" onClick={verifyOtp}>Resend OTP</span>
             </div>
         </div>
 

@@ -36,8 +36,12 @@ export const registerAdmin = createAsyncThunk(
     async (admin: {}, { rejectWithValue }) => {
         try {
             const response = await SERVER.post('admin/auth/register', admin);
+            if(response.data){
+                window.location.replace('/auth/welcome')
+            }
             return response.data;
-        } catch (error) {
+        } catch (error: any) {
+            console.log(error.response)
             return rejectWithValue(error)
         }
     }
@@ -69,7 +73,7 @@ const adminSlice = createSlice({
         builder.addCase(registerAdmin.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.admin = action.payload
-            toast.success('Invite sent', { ...toastOptions })
+            toast.success('Registration successful, please Login to access your dashboard', { ...toastOptions })
         })
         builder.addCase(registerAdmin.rejected, (state, action) => {
             state.status = 'failed';

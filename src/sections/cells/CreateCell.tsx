@@ -116,6 +116,7 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
         if (status === 'succeeded') {
           setInputs(initialState);
           onClose(); 
+          return;
         }
     } catch (error) {
       console.log(error)
