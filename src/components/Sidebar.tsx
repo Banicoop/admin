@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import { menuData } from '../constant/menuData';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 
 const Sidebar = () => {
 
-  const [active, setActive ] = useState('Dashboard');
+
+  const location = useLocation();
 
   const handleLogout = async () => {
     localStorage.removeItem('loginData'); 
@@ -24,15 +24,18 @@ const Sidebar = () => {
           <img src="/banicoop.svg" alt="" className="" />
         </div>
 
-         { menuData.map((item) => (
+        {menuData.map((item) => (
           <Link 
-            to={item.url} key={item.name} 
-            onClick={() => setActive(item.name)}
-            className={`flex items-center text-[#000] font-[500] gap-2 p-2 lg:p-3 rounded-full mt-2 ${active === item.name ? 'text-[#fff] bg-[#6922D1]': ''}`}>
+            to={item.url} 
+            key={item.name} 
+            className={`flex items-center text-[#000] font-[500] gap-2 p-2 lg:p-3 rounded-full mt-2 ${
+              location.pathname === item.url ? 'text-[#fff] bg-[#6922D1]' : ''
+            }`}
+          >
             <img src={item.icon} alt="" className="md:ml-[10px]" style={{ color: '#6922D1' }} />
-            <span className='hidden md:block md:text-xs lg:text-sm '>{item.name}</span>
+            <span className="hidden md:block md:text-xs lg:text-sm">{item.name}</span>
           </Link>
-         ))}
+        ))}
     </div>
 
     {/* BOTTOM */}

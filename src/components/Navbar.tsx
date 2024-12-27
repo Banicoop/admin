@@ -29,10 +29,10 @@ const Navbar = () => {
         </div>
         <div className="flex flex-col">
           <span className="text-[#000000] font-[500]">Praise Dominic</span>
-          <span className="text-[#000000] text-xs">Admin ID: {adminId.id}</span>
+          <span className="text-[#000000] text-xs">Admin ID: {adminId?.id}</span>
         </div>
 
-        <img src="/arrow-down.svg" alt="" className="" />
+        <img src="/arrow-down.svg" alt="" className="h-4 w-4" />
 
       </div>
     </div>

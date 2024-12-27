@@ -35,7 +35,7 @@ const columns = [
 const AdminTable = () => {
 
   const renderRow = (item: any) => (
-    <tr className='border-b border-gray-200 even:bg-slate-50 text-sm py-4'>
+    <tr className='border-b border-gray-100 even:bg-slate-50 text-sm py-4'>
       <td className="flex items-center gap-4 p-4">
         <div className="flex items-center gap-4">
           <img src={item.profile.img} alt="" className="h-5 w-5 rounded-full" />
@@ -47,11 +47,10 @@ const AdminTable = () => {
       <td className=''>{item.last_login}</td>
       <td className=''>
         <div className="flex items-center gap-4">
-          <ActionBtn text='View' onClick={() => {}} className=''/>
-          <ActionBtn text='Deactivate' onClick={() => {}} className=''/>
+          <ActionBtn text='View' onClick={() => {}} className='px-2 py-1 rounded-lg bg-[gray] text-[#000] border-[1px]'/>
+          <ActionBtn text='Deactivate' onClick={() => {}} className='px-2  py-1 rounded-lg bg-[gray] text-[#000] border-[1px]'/>
         </div>
       </td>
-      <td></td>
 
     </tr>
   )

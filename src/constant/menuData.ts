@@ -27,7 +27,7 @@ export const menuData = [
     {
       name: 'POS/ATMs',
       icon: '/card-pos.svg',
-      url: '/cells'
+      url: '/pos'
     },
     {
       name: 'Help & Support',

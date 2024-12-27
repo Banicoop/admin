@@ -66,10 +66,10 @@ function AuthLayout(){
   return(
     <div className="bg-bgR h-full w-full p-4 md:p-[3rem] lg:p-[5rem] flex items-center justify-center">
       <div className="rounded-3xl shadow-lg bg-bgWhite flex">
-        <div className="flex-1 hidden md:block w-full h-full">
-          <img src={WelcomeImage} alt="" className="w-full h-full" />
+        <div className="w-1/2 hidden md:block h-[600px] ">
+          <img src={WelcomeImage} alt="" className="w-fit h-full" />
         </div>
-        <div className="flex-1 w-full h-full">
+        <div className="w-1/2 h-full">
           <Outlet/>
         </div>
       </div>
