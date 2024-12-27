@@ -47,8 +47,8 @@ const AdminTable = () => {
       <td className=''>{item.last_login}</td>
       <td className=''>
         <div className="flex items-center gap-4">
-          <ActionBtn text='View' onClick={() => {}} className='px-2 py-1 rounded-lg bg-[gray] text-[#000] border-[1px]'/>
-          <ActionBtn text='Deactivate' onClick={() => {}} className='px-2  py-1 rounded-lg bg-[gray] text-[#000] border-[1px]'/>
+          <ActionBtn text='View' onClick={() => {}} className='px-2 py-1 text-sm rounded-lg bg-[gray] text-[#000] border-[1px] cursor-pointer'/>
+          <ActionBtn text='Deactivate' onClick={() => {}} className='px-2  py-1 rounded-lg bg-[gray] text-[#000] border-[1px] cursor-pointer'/>
         </div>
       </td>
 

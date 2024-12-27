@@ -18,7 +18,8 @@ import { getTokenExpirationTime } from './utils/jwtDecode';
 import CellUserDetails from './pages/cells/CellUserDetails';
 import Register from './pages/admins/Register';
 import Admins from './pages/admins/Admins';
-import { WelcomeImage } from './constant/images'
+import { WelcomeImage } from './constant/images';
+import { logout } from './redux/slice/authSlice';
 
 
 
@@ -89,12 +90,17 @@ function AuthVerificationLayout(){
 
 function Routes (){
 
+
+
+  const token = useSelector((state: any) => state.auth.accessToken);
   const user = useSelector((state: any) => state.auth.user);
-  console.log(user);
+
+  console.log({'user': user})
+  console.log(token);
 
   useEffect(() => {
-    if (user) {
-        const expirationTime = getTokenExpirationTime(user);
+    if (token) {
+        const expirationTime = getTokenExpirationTime(token);
         const currentTime = Date.now();
 
         if (!expirationTime) return; 
@@ -102,20 +108,20 @@ function Routes (){
         const timeLeft = expirationTime - currentTime;
 
         if (timeLeft <= 0) {
-            logoutUser();
+            logout();
         } else {
-            const timer = setTimeout(() => logoutUser(), timeLeft);
+            const timer = setTimeout(() => logout(), timeLeft);
             return () => clearTimeout(timer);
         }
     }
 
-    function logoutUser() {
-        localStorage.removeItem('loginData');
-        localStorage.removeItem('user');
-        localStorage.removeItem('token'); 
-        window.location.replace('/auth/login');
-    }
-}, [user]);
+    // function logoutUser() {
+    //     localStorage.removeItem('loginData');
+    //     localStorage.removeItem('user');
+    //     localStorage.removeItem('token'); 
+    //     window.location.replace('/auth/login');
+    // }
+}, [token]);
 
 
 
@@ -123,7 +129,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element:(
-      <ProtectedRoute user={user}>
+      <ProtectedRoute user={token}>
         < DashboardLayout />
       </ProtectedRoute>
     ),
@@ -137,7 +143,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element:(
-      <ProtectedRoute user={user}>
+      <ProtectedRoute user={token}>
         <CellLayout/>
       </ProtectedRoute>
   ),

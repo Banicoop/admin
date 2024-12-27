@@ -1,5 +1,7 @@
+import { useDispatch } from 'react-redux';
 import { menuData } from '../constant/menuData';
 import { Link, useLocation } from 'react-router-dom';
+import { logout } from '../redux/slice/authSlice';
 
 
 
@@ -7,10 +9,13 @@ const Sidebar = () => {
 
 
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
+    dispatch(logout())
     localStorage.removeItem('loginData'); 
     localStorage.removeItem('user');
+    localStorage.clear()
     window.location.replace('/auth/login');
   }
   

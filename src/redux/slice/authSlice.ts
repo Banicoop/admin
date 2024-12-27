@@ -7,15 +7,18 @@ import { toastOptions } from "../../utils/toastOptions";
 
 interface UsersState {
     user: any;
+    accessToken: string | null;
+    refreshToken: string | null;
     status: 'idle' | 'pending' | 'succeeded' | 'failed'
 }
 
 
-const initialState = {
-    user:  localStorage.getItem('token') || null,
-    status: 'idle',
-} as UsersState
-
+const initialState: UsersState = {
+    user: JSON.parse(localStorage.getItem("loginData") || "{}") || null,
+    accessToken: localStorage.getItem("token") || null,
+    refreshToken: localStorage.getItem("refreshToken") || null,
+    status: "idle",
+  };
 
 export const login = createAsyncThunk(
     'auth/login',
@@ -37,16 +40,21 @@ export const verifyLogin = createAsyncThunk('auth/otp',
         try {
             const response = await SERVER.post('admin/auth/verifyToken', token);
 
+            console.log(response.data)
+
             if(response.data.message === 'OTP verified'){
-                const { accessToken, refreshToken, payload } = response.data;
+                const { accessToken, refreshToken, ...payload } = response.data;
+
 
                 localStorage.setItem('token', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
 
-                dispatch(setAuth(payload));
+                dispatch(setAuth({ user: payload, accessToken, refreshToken }));
                 console.log(accessToken, refreshToken, payload);
                 window.location.replace('/auth/verified');
             }
+
+            return response.data
         } catch (error:any) {
             console.log(error)
             return rejectWithValue(error.response.data)
@@ -60,8 +68,16 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setAuth: (state, action) => {
-			state.user = action.payload;
-		}
+            state.user = action.payload.user;
+            state.accessToken = action.payload.accessToken;
+            state.refreshToken = action.payload.refreshToken;
+          },
+          logout: (state) => {
+            state.user = null;
+            state.accessToken = null;
+            state.refreshToken = null;
+            localStorage.clear();
+          },
     },
     extraReducers: (builder) => {
         builder.addCase(login.pending, (state, action) => {
@@ -96,5 +112,5 @@ const authSlice = createSlice({
     },
 })
 
-export const { setAuth } = authSlice.actions;
+export const { setAuth, logout } = authSlice.actions;
 export default authSlice.reducer;

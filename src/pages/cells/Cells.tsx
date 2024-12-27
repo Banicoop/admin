@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import Info from '../../components/infos/Info';
 import Search from '../../components/Search';
 import ExportBtn from '../../components/buttons/ExportBtn';
@@ -85,14 +85,17 @@ const Cells = () => {
               </div>
             } */}
              {
-              (!cells || cells.length === 0) && <div className="flex w-full justify-center items-center">
+              (!cells || cells.length === 0 ) && <div className="flex w-full justify-center items-center">
                 <h4 className='text-[purple] text-xl mt-5'>No Created cell</h4>
               </div>
             }
-            {status === 'succeeded' && 
-              cells?.map((cell: any) => (
-                <CellCard key={cell._id} data={cell}/>
-              ))
+            {
+                status === 'succeeded' &&
+                (Array.isArray(cells) ? (
+                  cells.map((cell: any) => <CellCard key={cell._id} data={cell} />)
+                ) : (
+                  <h4 className="text-[purple] text-xl mt-5">Something went wrong</h4>
+                ))
             }
           </div>
 

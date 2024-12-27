@@ -36,7 +36,8 @@ export const getCells = createAsyncThunk(
     async (_, {rejectWithValue}) => {
         try {
             const response = await SERVER.get('admin/contribution/cell/all?type=&startDate&endDate&isActive=&available=true');
-            return response?.data?.cells
+            const cells = Array.isArray(response?.data?.cells) ? response.data.cells : [];
+            return cells;
         } catch (error) {
             return rejectWithValue(error)
         }
