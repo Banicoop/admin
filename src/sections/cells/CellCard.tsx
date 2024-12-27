@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActionBtn } from '../../components/buttons/ExportBtn';
+import  ActionBtn  from '../../components/buttons/ActionBtn';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import Button from '../../components/buttons/Button';
@@ -75,7 +75,7 @@ const CellCard = ({data}: any) => {
             {/* <span className="text-[8px] text-[#000]">Active members</span> */}
           </div>
 
-          <ActionBtn text='View Details' onClick={() => navigate(`/cells/${data?._id}`)}/>
+          <ActionBtn text='View Details' className='bg-bgR text-bgPurple border-[1px] flex gap-3 w-max items-center cursor-pointer rounded-3xl p-3 self-start' onClick={() => navigate(`/cells/${data?._id}`)}/>
         </div>
       </div>
       <DeleteModal open={openDelete} onClose={()=> setOpenDelete(false)}>

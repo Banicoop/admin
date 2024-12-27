@@ -47,3 +47,51 @@ export const menuData = [
 ]
 
 
+export const adminData = [
+  {
+    profile: {
+      name: 'Dada Dimeji',
+      img: '/admin/profile.png'
+    },
+    role: 'Super Admin',
+    last_login: '3rd Nov 2023',
+    status: 'Active'
+  },
+  {
+    profile: {
+      name: 'Dada Dimeji',
+      img: '/admin/profile.png'
+    },
+    role: 'Super Admin',
+    last_login: '3rd Nov 2023',
+    status: 'Active'
+  },
+  {
+    profile: {
+      name: 'Dada Dimeji',
+      img: '/admin/profile.png'
+    },
+    role: 'Super Admin',
+    last_login: '3rd Nov 2023',
+    status: 'Active'
+  },
+  {
+    profile: {
+      name: 'Dada Dimeji',
+      img: '/admin/profile.png'
+    },
+    role: 'Super Admin',
+    last_login: '3rd Nov 2023',
+    status: 'Active'
+  },
+  {
+    profile: {
+      name: 'Dada Dimeji',
+      img: '/admin/profile.png'
+    },
+    role: 'Super Admin',
+    last_login: '3rd Nov 2023',
+    status: 'Active'
+  },
+]
+
