@@ -22,7 +22,7 @@ const ExportBtn:FC<Itext> = ({text, onClick, img}) => {
 
 export const AuthBtn:FC<Itext> = ({text, onClick, disabled}) => {
     return(
-        <div onClick={onClick} className={`flex gap-3 ${disabled ? 'bg-[#3b353b38] cursor-not-allowed': ' bg-bgPurple'}  text-bgWhite rounded-3xl py-3 px-7 cursor-pointer`}>
+        <div onClick={onClick} className={`flex gap-3 w-max ${disabled ? 'bg-[#3b353b38] cursor-not-allowed': ' bg-bgPurple'}  text-bgWhite rounded-3xl py-3 px-7 cursor-pointer`}>
             <span className="text-bgWhite text-sm">{text}</span>
             <img src="/autharr.svg" alt="" className="" />
         </div>

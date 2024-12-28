@@ -1,10 +1,13 @@
 import React from 'react'
 import Search from './Search';
+import { useSelector } from 'react-redux';
+
 
 const Navbar = () => {
 
-  const admindata = localStorage.getItem('loginData');
-  const adminId = admindata ? JSON.parse(admindata) : null
+
+  const user = useSelector((state: any) => state.auth.user);
+
 
 
   return (
@@ -28,8 +31,8 @@ const Navbar = () => {
           <div className='bg-[#49AC46] rounded-full h-2 w-2 absolute top-[30px] right-1'/>
         </div>
         <div className="flex flex-col">
-          <span className="text-[#000000] font-[500]">Praise Dominic</span>
-          <span className="text-[#000000] text-xs">Admin ID: {adminId?.id}</span>
+          <span className="text-[#000000] font-[500]">{user?.payload?.username}</span>
+          <span className="text-[#000000] text-xs">Admin ID: {user?.payload?._id}</span>
         </div>
 
         <img src="/arrow-down.svg" alt="" className="h-4 w-4" />

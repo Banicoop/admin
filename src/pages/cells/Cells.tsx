@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Info from '../../components/infos/Info';
 import Search from '../../components/Search';
 import ExportBtn from '../../components/buttons/ExportBtn';
@@ -46,7 +46,7 @@ const Cells = () => {
   const dispatch = useDispatch<Dispatch>();
 
 
-  useEffect(() => {
+  useMemo(() => {
     dispatch(getCells())
   }, [dispatch])
 

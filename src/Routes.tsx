@@ -30,11 +30,11 @@ function DashboardLayout(){
 
       <section className="flex flex-col h-full w-full">
         <Navbar/>
-        <div className="px-8">
+        <div className="px-8 py-3">
           <Welcome/>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 px-2 md:px-8 py-2">
+        <div className="flex flex-col md:flex-row md:flex-wrap items-center px-2 md:px-8 gap-6 py-2">
             <Widget type='transactions'/>
             <Widget type='customers'/>
             <Widget type='cells'/>
@@ -66,11 +66,11 @@ function CellLayout(){
 function AuthLayout(){
   return(
     <div className="bg-bgR h-full w-full p-4 md:p-[3rem] lg:p-[5rem] flex items-center justify-center">
-      <div className="rounded-3xl shadow-lg bg-bgWhite flex">
-        <div className="w-1/2 hidden md:block h-[600px] ">
+      <div className="rounded-3xl shadow-lg bg-bgWhite flex md:h-[420px] lg:h-[540px] xl:h-[690px]">
+        <div className="w-1/2 hidden md:block h-full ">
           <img src={WelcomeImage} alt="" className="w-fit h-full" />
         </div>
-        <div className="w-1/2 h-full">
+        <div className="w-full md:w-1/2 h-full">
           <Outlet/>
         </div>
       </div>
@@ -93,10 +93,7 @@ function Routes (){
 
 
   const token = useSelector((state: any) => state.auth.accessToken);
-  const user = useSelector((state: any) => state.auth.user);
 
-  console.log({'user': user})
-  console.log(token);
 
   useEffect(() => {
     if (token) {

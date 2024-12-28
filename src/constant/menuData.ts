@@ -20,6 +20,11 @@ export const menuData = [
       url: '/cells'
     },
     {
+      name: 'Loans',
+      icon: '/save.svg',
+      url: '/loans'
+    },
+    {
       name: 'Merchants',
       icon: '/people.svg',
       url: '/merchants'

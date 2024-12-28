@@ -6,7 +6,8 @@ import { toastOptions } from "../../utils/toastOptions";
 
 
 interface UsersState {
-    user: any;
+    user?: any;
+    credentials?: any;
     accessToken: string | null;
     refreshToken: string | null;
     status: 'idle' | 'pending' | 'succeeded' | 'failed'
@@ -14,7 +15,8 @@ interface UsersState {
 
 
 const initialState: UsersState = {
-    user: JSON.parse(localStorage.getItem("loginData") || "{}") || null,
+    user: JSON.parse(localStorage.getItem("user") || "null"),
+    credentials: {},
     accessToken: localStorage.getItem("token") || null,
     refreshToken: localStorage.getItem("refreshToken") || null,
     status: "idle",
@@ -22,9 +24,9 @@ const initialState: UsersState = {
 
 export const login = createAsyncThunk(
     'auth/login',
-    async (user: {}, { rejectWithValue }) => {
+    async (credentials: {}, { rejectWithValue }) => {
         try {
-            const response = await SERVER.post('admin/auth/login', user);
+            const response = await SERVER.post('admin/auth/login', credentials);
             localStorage.setItem('loginData', JSON.stringify(response.data));
             window.location.replace('/auth/verification')
             return response.data
@@ -36,9 +38,9 @@ export const login = createAsyncThunk(
 
 
 export const verifyLogin = createAsyncThunk('auth/otp', 
-    async (token: {}, { rejectWithValue,  dispatch  }) => {
+    async (user: {}, { rejectWithValue,  dispatch  }) => {
         try {
-            const response = await SERVER.post('admin/auth/verifyToken', token);
+            const response = await SERVER.post('admin/auth/verifyToken', user);
 
             console.log(response.data)
 
@@ -48,6 +50,8 @@ export const verifyLogin = createAsyncThunk('auth/otp',
 
                 localStorage.setItem('token', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
+
+                localStorage.setItem('user', JSON.stringify(payload));
 
                 dispatch(setAuth({ user: payload, accessToken, refreshToken }));
                 console.log(accessToken, refreshToken, payload);
@@ -86,12 +90,12 @@ const authSlice = createSlice({
         })
         builder.addCase(login.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            state.user = action.payload;
+            state.credentials = action.payload;
             toast.success('OTP sent', { ...toastOptions })
         })
         builder.addCase(login.rejected, (state, action) => {
             state.status = 'failed';
-            state.user = action.payload;
+            state.credentials = action.payload;
             toast.error('Invalid credentials', { ...toastOptions })
         })
 
