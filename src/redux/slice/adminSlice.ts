@@ -101,12 +101,11 @@ const adminSlice = createSlice({
              state.status = 'pending'
         })
         builder.addCase(getAllAdmin.fulfilled, (state, action) => {
-            state.status = 'failed';
+            state.status = 'succeeded';
             state.allAdmin = action.payload
         })
         builder.addCase(getAllAdmin.rejected, (state, action) => {
-            state.status = 'succeeded'
-            // state.allAdmin = 
+            state.status = 'failed'
         })
     }
 })
