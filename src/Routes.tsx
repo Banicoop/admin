@@ -18,7 +18,8 @@ import { getTokenExpirationTime } from './utils/jwtDecode';
 import CellUserDetails from './pages/cells/CellUserDetails';
 import Register from './pages/admins/Register';
 import Admins from './pages/admins/Admins';
-import { WelcomeImage } from './constant/images'
+import { WelcomeImage } from './constant/images';
+import { logout } from './redux/slice/authSlice';
 
 
 
@@ -29,11 +30,11 @@ function DashboardLayout(){
 
       <section className="flex flex-col h-full w-full">
         <Navbar/>
-        <div className="px-8">
+        <div className="px-8 py-3">
           <Welcome/>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 px-2 md:px-8 py-2">
+        <div className="flex flex-col md:flex-row md:flex-wrap items-center px-2 md:px-8 gap-6 py-2">
             <Widget type='transactions'/>
             <Widget type='customers'/>
             <Widget type='cells'/>
@@ -65,11 +66,11 @@ function CellLayout(){
 function AuthLayout(){
   return(
     <div className="bg-bgR h-full w-full p-4 md:p-[3rem] lg:p-[5rem] flex items-center justify-center">
-      <div className="rounded-3xl shadow-lg bg-bgWhite flex">
-        <div className="flex-1 hidden md:block w-full h-full">
-          <img src={WelcomeImage} alt="" className="w-full h-full" />
+      <div className="rounded-3xl shadow-lg bg-bgWhite flex md:h-[420px] lg:h-[540px] xl:h-[690px]">
+        <div className="w-1/2 hidden md:block h-full ">
+          <img src={WelcomeImage} alt="" className="w-fit h-full" />
         </div>
-        <div className="flex-1 w-full h-full">
+        <div className="w-full md:w-1/2 h-full">
           <Outlet/>
         </div>
       </div>
@@ -89,12 +90,14 @@ function AuthVerificationLayout(){
 
 function Routes (){
 
-  const user = useSelector((state: any) => state.auth.user);
-  console.log(user);
+
+
+  const token = useSelector((state: any) => state.auth.accessToken);
+
 
   useEffect(() => {
-    if (user) {
-        const expirationTime = getTokenExpirationTime(user);
+    if (token) {
+        const expirationTime = getTokenExpirationTime(token);
         const currentTime = Date.now();
 
         if (!expirationTime) return; 
@@ -102,20 +105,20 @@ function Routes (){
         const timeLeft = expirationTime - currentTime;
 
         if (timeLeft <= 0) {
-            logoutUser();
+            logout();
         } else {
-            const timer = setTimeout(() => logoutUser(), timeLeft);
+            const timer = setTimeout(() => logout(), timeLeft);
             return () => clearTimeout(timer);
         }
     }
 
-    function logoutUser() {
-        localStorage.removeItem('loginData');
-        localStorage.removeItem('user');
-        localStorage.removeItem('token'); 
-        window.location.replace('/auth/login');
-    }
-}, [user]);
+    // function logoutUser() {
+    //     localStorage.removeItem('loginData');
+    //     localStorage.removeItem('user');
+    //     localStorage.removeItem('token'); 
+    //     window.location.replace('/auth/login');
+    // }
+}, [token]);
 
 
 
@@ -123,7 +126,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element:(
-      <ProtectedRoute user={user}>
+      <ProtectedRoute user={token}>
         < DashboardLayout />
       </ProtectedRoute>
     ),
@@ -137,7 +140,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element:(
-      <ProtectedRoute user={user}>
+      <ProtectedRoute user={token}>
         <CellLayout/>
       </ProtectedRoute>
   ),

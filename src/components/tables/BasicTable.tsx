@@ -1,6 +1,6 @@
 import { Table, TableContainer, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import React, { FC } from 'react';
-import { ActionBtn } from '../buttons/ExportBtn';
+import ActionBtn  from '../buttons/ActionBtn';
 import Status from '../infos/Status';
 
 interface ITbale {
@@ -30,7 +30,7 @@ const BasicTable:FC<ITbale> = ({headcells, tableData, onNavigate}) => {
 								<TableCell align="left" key={colIndex} sx={{ fontWeight: 400, fontSize: 10 }}>
 									{row[col.key]}
                   {col.key === "action" && (
-                    <ActionBtn onClick={() => onNavigate(row.id)}/>
+                    <ActionBtn className='bg-bgR text-bgPurple border-[1px] flex gap-3 w-max items-center cursor-pointer rounded-3xl p-3 self-start' onClick={() => onNavigate(row.id)} img='/arrow-next.svg' text=''/>
                   )}
                   { col.key === 'status' &&
                   <Status text='withraw'/>

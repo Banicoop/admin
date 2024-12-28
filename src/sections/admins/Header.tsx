@@ -47,7 +47,6 @@ const Header = () => {
       if (loginDataString) {
           const loginData = JSON.parse(loginDataString);
           setAdminId(loginData.id);
-          console.log(loginData)
       }
   }, []);
   
@@ -76,7 +75,7 @@ const Header = () => {
             <Info text='Admin Management'/>
             {
                 list.map((l) => (
-                    <Btn onClick={() => setActiveItem(l.label)} label={l.label}  activeItem={activeItem}/>
+                    <Btn onClick={() => setActiveItem(l.label)} label={l.label} key={l.label} activeItem={activeItem}/>
                 ))
             }
         </div>

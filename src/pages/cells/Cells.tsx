@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Info from '../../components/infos/Info';
 import Search from '../../components/Search';
 import ExportBtn from '../../components/buttons/ExportBtn';
@@ -46,7 +46,7 @@ const Cells = () => {
   const dispatch = useDispatch<Dispatch>();
 
 
-  useEffect(() => {
+  useMemo(() => {
     dispatch(getCells())
   }, [dispatch])
 
@@ -79,11 +79,23 @@ const Cells = () => {
 
           <div className="flex flex-col justify-between md:flex-row md:flex-wrap gap-4 w-full">
             {status === 'pending' && <CircularProgress sx={{display: 'flex', margin: 'auto'}}/>  }
-
-            {status === 'succeeded' && 
-              cells?.map((cell: any) => (
-                <CellCard key={cell._id} data={cell}/>
-              ))
+            {/* {
+              status === 'failed' && <div className="flex w-full justify-center items-center">
+                <h4 className='text-[crimson] text-xl mt-5'>Something went wrong!</h4>
+              </div>
+            } */}
+             {
+              (!cells || cells.length === 0 ) && <div className="flex w-full justify-center items-center">
+                <h4 className='text-[purple] text-xl mt-5'>No Created cell</h4>
+              </div>
+            }
+            {
+                status === 'succeeded' &&
+                (Array.isArray(cells) ? (
+                  cells.map((cell: any) => <CellCard key={cell._id} data={cell} />)
+                ) : (
+                  <h4 className="text-[purple] text-xl mt-5">Something went wrong</h4>
+                ))
             }
           </div>
 

@@ -20,6 +20,11 @@ export const menuData = [
       url: '/cells'
     },
     {
+      name: 'Loans',
+      icon: '/save.svg',
+      url: '/loans'
+    },
+    {
       name: 'Merchants',
       icon: '/people.svg',
       url: '/merchants'
@@ -27,7 +32,7 @@ export const menuData = [
     {
       name: 'POS/ATMs',
       icon: '/card-pos.svg',
-      url: '/cells'
+      url: '/pos'
     },
     {
       name: 'Help & Support',
@@ -46,4 +51,52 @@ export const menuData = [
     },
 ]
 
+
+export const adminData = [
+  {
+    profile: {
+      name: 'Dada Dimeji',
+      img: '/admin/profile.png'
+    },
+    role: 'Super Admin',
+    last_login: '3rd Nov 2023',
+    status: 'Active'
+  },
+  {
+    profile: {
+      name: 'Dada Dimeji',
+      img: '/admin/profile.png'
+    },
+    role: 'Super Admin',
+    last_login: '3rd Nov 2023',
+    status: 'Active'
+  },
+  {
+    profile: {
+      name: 'Dada Dimeji',
+      img: '/admin/profile.png'
+    },
+    role: 'Super Admin',
+    last_login: '3rd Nov 2023',
+    status: 'Active'
+  },
+  {
+    profile: {
+      name: 'Dada Dimeji',
+      img: '/admin/profile.png'
+    },
+    role: 'Super Admin',
+    last_login: '3rd Nov 2023',
+    status: 'Active'
+  },
+  {
+    profile: {
+      name: 'Dada Dimeji',
+      img: '/admin/profile.png'
+    },
+    role: 'Super Admin',
+    last_login: '3rd Nov 2023',
+    status: 'Active'
+  },
+]
 

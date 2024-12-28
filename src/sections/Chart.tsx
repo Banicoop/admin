@@ -81,11 +81,11 @@ const Chart = () => {
   return (
     <div className='flex flex-col p-5 border-[1px] rounded-3xl'>
         <div className="flex justify-between items-center">
-            <h1 className="text-[16px] text-[#000] ">Transaction Overview</h1>
+            <h1 className="text-xs md:text-[16px] text-[#000] ">Transaction Overview</h1>
 
             <div className="flex items-center border-[1px] rounded-[20px] gap-3 py-5 px-6">
-                <span className="text-[14px] font-[500]">Money Transfer</span>
-                <img src="/arrow-down.svg" alt="" className="" />
+                <span className="text-xs md:text-[14px] font-[500]">Money Transfer</span>
+                <img src="/arrow-down.svg" alt="" className="h-4 w-4" />
             </div>
         </div>
         <div className="w-[300px] md:w-[600px] lg:w-[1000px] h-[400px] flex justify-center items-center mt-3">

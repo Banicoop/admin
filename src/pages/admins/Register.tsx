@@ -37,7 +37,6 @@ const Register = () => {
     dispatch(registerAdmin({...newAdmin, adminId}))
   }
 
-  console.log(newAdmin);
 
   
   return (

@@ -34,7 +34,7 @@ const Welcome = () => {
             { list.map((l) => (
                 <span  
                 onClick={() => setActiveItem(l.label)} 
-                className={`py-2 px-6 rounded-3xl text-[14px] cursor-pointer ${activeItem === l.label ? 'bg-bgR text-bgPurple' : 'hover:bg-bgR hover:text-bgPurple'}`} 
+                className={`py-2 px-6 rounded-3xl text-xs lg:text-[14px] cursor-pointer font-[500] ${activeItem === l.label ? 'bg-bgR text-bgPurple' : 'hover:bg-bgR hover:text-bgPurple'}`} 
                 key={l.label}>{l.label}</span>
             ))
             }

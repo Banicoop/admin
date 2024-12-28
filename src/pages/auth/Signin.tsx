@@ -24,15 +24,18 @@ const Signin = () => {
 
 
   return (
-    <div className='flex flex-col items-center justify-center w-full h-full p-[2rem] gap-[2rem]'>
-        <h1 className='text-2xl md:text-3xl lg:text-5xl font-semibold flex justify-start items-start mr-auto flex-col gap-2'>Welcome to <br /><span className='text-bgPurple flex flex-row gap-2'>Banicoop <br /><span className='text-[#000]'>Admin</span> </span> Dashboard!</h1>
+    <div className='flex flex-col items-center justify-center w-full h-[80vh] md:h-full p-3 lg:p-[2rem] gap-[1rem] lg:gap-[2rem]'>
+        <h1 className='hidden text-xl md:text-2xl lg:text-5xl font-semibold md:flex justify-start items-start mr-auto flex-col gap-2'>Welcome to <br /><span className='text-bgPurple flex flex-row gap-2'>Banicoop <br /><span className='text-[#000]'>Admin</span> </span> Dashboard!</h1>
 
-        <p className='text-sm'>Your role as an admin helps foster secure, collaborative savings. Get started with by logging in to your admin dashboard</p>
+        <h1 className='md:hidden text-2xl font-semibold text-left'>Welcome to <span className='text-bgPurple'>Banicoop</span> </h1>
+       <h1 className='md:hidden text-2xl font-semibold text-left'> Admin Dashboard!</h1>
+
+        <p className='text-xs lg:text-sm'>Your role as an admin helps foster secure, collaborative savings. Get started with by logging in to your admin dashboard</p>
 
         <AuthInput className='w-full' img='/profile.svg' placeholder='Email address' type='email' onChange={(e:any) => setEnail(e.target.value)}/>
         <AuthInput className='w-full' img='/password-check.svg' placeholder='Password' type='password' onChange={(e:any) => setPassword(e.target.value)}/>
 
-        <div className="flex flex-col md:flex-row md:justify-between w-full">
+        <div className="flex flex-row justify-between w-full">
             <BackBtn onClick={() => navigate('/auth/welcome')} text='Go Back'/>
             <AuthBtn onClick={handleSubmit} text='Continue'/>
         </div>
