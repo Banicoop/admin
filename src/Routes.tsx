@@ -12,7 +12,7 @@ import Login from './pages/auth/Signin';
 import Verification from './pages/auth/Verification';
 import Verified from './pages/auth/Verified';
 import ProtectedRoute from './ProtectedRoute';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Dashboard from './pages/Dashboard';
 import { getTokenExpirationTime } from './utils/jwtDecode';
 import CellUserDetails from './pages/cells/CellUserDetails';
@@ -20,6 +20,7 @@ import Register from './pages/admins/Register';
 import Admins from './pages/admins/Admins';
 import { WelcomeImage } from './constant/images';
 import { logout } from './redux/slice/authSlice';
+import { LoanApplicationDetails, LoanDetails, Loans, PendingLoan } from './pages/loan';
 
 
 
@@ -93,6 +94,7 @@ function Routes (){
 
 
   const token = useSelector((state: any) => state.auth.accessToken);
+  const dispatch = useDispatch();
 
 
   useEffect(() => {
@@ -105,20 +107,14 @@ function Routes (){
         const timeLeft = expirationTime - currentTime;
 
         if (timeLeft <= 0) {
-            logout();
+            dispatch(logout());
         } else {
-            const timer = setTimeout(() => logout(), timeLeft);
+            const timer = setTimeout(() => dispatch(logout()), timeLeft);
             return () => clearTimeout(timer);
         }
     }
 
-    // function logoutUser() {
-    //     localStorage.removeItem('loginData');
-    //     localStorage.removeItem('user');
-    //     localStorage.removeItem('token'); 
-    //     window.location.replace('/auth/login');
-    // }
-}, [token]);
+}, [token, dispatch]);
 
 
 
@@ -160,6 +156,22 @@ const router = createBrowserRouter([
       {
         path: '/admin',
         element: <Admins/>
+      },
+      {
+        path: '/loans',
+        element: <Loans/>
+      },
+      {
+        path: '/loans/application',
+        element: <PendingLoan/>
+      },
+      {
+        path: '/loans/:id',
+        element: <LoanDetails/>
+      },
+      {
+        path: '/loans/application/:id',
+        element: <LoanApplicationDetails/>
       },
     ]
   },

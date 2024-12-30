@@ -79,11 +79,6 @@ const Cells = () => {
 
           <div className="flex flex-col justify-between md:flex-row md:flex-wrap gap-4 w-full">
             {status === 'pending' && <CircularProgress sx={{display: 'flex', margin: 'auto'}}/>  }
-            {/* {
-              status === 'failed' && <div className="flex w-full justify-center items-center">
-                <h4 className='text-[crimson] text-xl mt-5'>Something went wrong!</h4>
-              </div>
-            } */}
              {
               (!cells || cells.length === 0 ) && <div className="flex w-full justify-center items-center">
                 <h4 className='text-[purple] text-xl mt-5'>No Created cell</h4>

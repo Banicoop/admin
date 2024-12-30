@@ -38,7 +38,7 @@ const columns = [
 const AdminTable = () => {
 
   const dispatch = useDispatch<Dispatch>();
-  const { allAdmin } = useSelector((state: any) => state.admin)
+  const { allAdmin, status } = useSelector((state: any) => state.admin)
 
   useMemo(() => {
     dispatch(getAllAdmin())
@@ -60,15 +60,15 @@ const AdminTable = () => {
           <span className="">{`${item.firstName} ${item.lastName}`}</span>
         </div>
       </td>
-      <td className='py-4'>{item.role}</td>
+      <td className='py-4'>{item?.role === 'super_admin' ? 'Super Admin': 'Admin'}</td>
       <td className='py-4'>
-      <ActionBtn text={item?.status || 'Active'} onClick={() => {}} className='px-2 py-1 text-sm rounded-2xl bg-[#EAF7EF] text-[#27AE60] border-[1px] cursor-pointer w-max'/>
+      <ActionBtn text={item?.disabled === false ? 'Active': 'Disabled'} onClick={() => {}} className='px-2 py-1 text-sm rounded-2xl bg-[#EAF7EF] text-[#27AE60] border-[1px] cursor-pointer w-max'/>
       </td>
       <td className='py-4'>{item?.last_login}</td>
       <td className='py-4'>
         <div className="flex items-center gap-4">
           <ActionBtn text='View' onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1] border-[1px] border-[#6922D1] cursor-pointer'/>
-          <ActionBtn text='Deactivate' onClick={() => {}} className='px-4  py-2 rounded-3xl bg-[#fff] text-[#6922D1] border-[1px] border-[#6922D1] cursor-pointer w-[95px]'/>
+          <ActionBtn text='Deactivate' onClick={changeAdminStatus} className='px-4  py-2 rounded-3xl bg-[#fff] text-[#6922D1] border-[1px] border-[#6922D1] cursor-pointer w-[95px]'/>
         </div>
       </td>
 
@@ -78,7 +78,7 @@ const AdminTable = () => {
 
   return (
     <div className=''>
-      <Table columns={columns} data={adminData} renderRow={renderRow}/>
+      <Table columns={columns} data={adminData} renderRow={renderRow} status={status}/>
     </div>
   )
 }

@@ -31,7 +31,7 @@ const Navbar = () => {
           <div className='bg-[#49AC46] rounded-full h-2 w-2 absolute top-[30px] right-1'/>
         </div>
         <div className="flex flex-col">
-          <span className="text-[#000000] font-[500]">{user?.payload?.username}</span>
+          <span className="text-[#000000] font-[500]">{`${user?.payload?.firstName} ${user?.payload?.lastName}`}</span>
           <span className="text-[#000000] text-xs">Admin ID: {user?.payload?._id}</span>
         </div>
 

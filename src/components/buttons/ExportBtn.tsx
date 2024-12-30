@@ -11,7 +11,7 @@ type Itext = {
 
 const ExportBtn:FC<Itext> = ({text, onClick, img}) => {
   return (
-    <div className='bg-bgR flex items-center gap-3 py-2 px-4 rounded-3xl text-bgPurple border-[1px] cursor-pointer' onClick={onClick}>
+    <div className='bg-bgR text-xs lg:text-sm flex items-center gap-3 py-2 px-4 rounded-3xl text-bgPurple border-[1px] cursor-pointer' onClick={onClick}>
         <img src={img ? img : "/export.svg"} alt="" className="h-4 w-4" />
         <span className="">{text}</span>
     </div>

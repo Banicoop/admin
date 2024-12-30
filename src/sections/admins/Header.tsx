@@ -9,6 +9,7 @@ import type { Dispatch } from '../../redux/store';
 import { sendInvite } from '../../redux/slice/adminSlice';
 import Select from '../../components/inputs/Select';
 import Button from '../../components/buttons/Button';
+import { motion } from 'framer-motion';
 
 
 
@@ -88,7 +89,13 @@ const Header = () => {
 
     {open &&
         <BasicModal onClose={() => setOpen(false)} open={open}>
-            <div className="flex flex-col gap-5 p-3">
+            <motion.div className="flex flex-col gap-5 p-3"  
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                  duration: 0.8,
+                  scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+              }}>
             <div className="flex items-end justify-end justify-self-end">
                 <img src="/admin/x.svg" alt="" className="h-4 w-4 cursor-pointer" onClick={() => setOpen(false)} />
             </div>
@@ -97,7 +104,7 @@ const Header = () => {
             <input type="email" required className="p-2 outline-none border-[1px]" onChange={(e:any) => setEmail(e.target.value)} placeholder='Enter admin Email address'/>
             <Select options={options} name='Select Admin Role' onChange={handleSelectChange} className='w-full h-[50px]'/>
             <Button text='Send an invite' onClick={handleAdd}/>
-            </div>
+            </motion.div>
         </BasicModal>
     }
     </>

@@ -41,3 +41,5 @@ const DeleteModal: FC<DeleteModalProps> = ({open, onClose, children}) => {
 }
 
 export default DeleteModal;
+
+
