@@ -159,19 +159,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/loans',
-        element: <Admins/>
+        element: <Loans/>
       },
       {
         path: '/loans/application',
-        element: <Admins/>
+        element: <PendingLoan/>
       },
       {
         path: '/loans/:id',
-        element: <Admins/>
+        element: <LoanDetails/>
       },
       {
         path: '/loans/application/:id',
-        element: <Admins/>
+        element: <LoanApplicationDetails/>
       },
     ]
   },

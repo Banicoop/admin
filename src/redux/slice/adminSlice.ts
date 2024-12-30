@@ -6,12 +6,14 @@ import { toastOptions } from "../../utils/toastOptions";
 
 
 interface AdminState {
+    adminId: string | null;
     allAdmin: any[];
     admin: {};
     status:  'idle' | 'pending' | 'succeeded' | 'failed'
 }
 
 const initialState = {
+    adminId: null,
     allAdmin: [],
     admin: {},
     status: 'idle'
@@ -64,6 +66,20 @@ export const getAllAdmin = createAsyncThunk(
 )
 
 
+export const changeStatus = createAsyncThunk(
+    'adminId/changeStatus', 
+    async (adminId: string, { rejectWithValue }) => {
+        try {
+            const res = await SERVER.put(`admin/update/status/${adminId}`);
+            return  { adminId, status: res.data }
+        } catch (error) {
+            console.log(error)
+            return rejectWithValue(error)
+        }
+    }
+)
+
+
 const adminSlice = createSlice({
     name: 'admin',
     initialState,
@@ -107,6 +123,22 @@ const adminSlice = createSlice({
         builder.addCase(getAllAdmin.rejected, (state, action) => {
             state.status = 'failed'
         })
+
+
+        builder.addCase(changeStatus.pending, (state, action) => {
+            state.status = 'pending'
+       })
+       builder.addCase(changeStatus.fulfilled, (state, action) => {
+           state.status = 'succeeded';
+           state.allAdmin = state.allAdmin.map(admin =>
+            admin.id === action.payload.adminId
+                ? { ...admin, status: action.payload.status }
+                : admin
+        );
+       })
+       builder.addCase(changeStatus.rejected, (state, action) => {
+           state.status = 'failed'
+       })
     }
 })
 

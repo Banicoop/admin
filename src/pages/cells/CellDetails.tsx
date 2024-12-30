@@ -45,7 +45,7 @@ const CellDetails = () => {
     const [open, setOpen] = useState(false);
 
 
-    const { entities: cell, status } = useSelector((state: any) => state.cell);
+    const { entities: cell,  } = useSelector((state: any) => state.cell);
 
     const location = useLocation();
     const dispatch = useDispatch<Dispatch>();
