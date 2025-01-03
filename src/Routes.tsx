@@ -162,7 +162,7 @@ const router = createBrowserRouter([
         element: <Loans/>
       },
       {
-        path: '/loans/application',
+        path: '/loan/pending',
         element: <PendingLoan/>
       },
       {

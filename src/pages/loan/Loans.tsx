@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import Info from '../../components/infos/Info';
 import Btn from '../../components/buttons/Btn';
 import Widget from '../../components/Widget';
+import PendingApp from '../../sections/loans/PendingApp';
+import ExportBtn from '../../components/buttons/ExportBtn';
+import Search from '../../components/Search';
+import LoanTable from '../../sections/loans/LaonTable';
 
 
 
@@ -24,13 +28,30 @@ const list = [
   },
 ]
 
+
+const tableList = [
+  {
+    label: 'All'
+  },
+  {
+    label: 'Active'
+  },
+  {
+    label: 'Overdue'
+  },
+  {
+    label: 'Completed'
+  },
+]
+
 const Loans = () => {
 
   const [activeItem, setActiveItem] = useState('Today');
+  const [activeTableItem, setActiveTableItem] = useState('All');
 
   return (
-    <div className='h-full flex flex-col w-full px-2 md:px-8 gap-3'>
-      <div className="flex flex-col lg:flex-row w-full">
+    <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px]'>
+      <div className="flex flex-col lg:flex-row w-full gap-5">
           <div className="flex-[2] flex gap-4 flex-col w-full justify-between">
             <div className="flex w-full justify-between my-2">
                 <Info text='Overview'/>
@@ -53,12 +74,28 @@ const Loans = () => {
           </div>
 
 
-          <div className="flex-1 flex w-full">1
-            
+          <div className="flex-1 flex w-full">
+            <PendingApp/>
           </div>
       </div>
 
-      <div className=""></div>
+      <div className="w-full flex flex-col my-2 gap-6 rounded-3xl border-[1px] p-4">
+          <div className="flex items-center justify-between">
+              <Info text='Loans'/>
+              <ExportBtn text='Export'/>
+          </div>
+
+          <div className="flex items-center justify-between">
+               <Search onClick={() => {}} placeholder='Search for loans, users, or reports...'/>
+              <div className="hidden md:flex items-center gap-4">
+                {tableList.map((i) => (
+                    <Btn onClick={() => setActiveTableItem(i.label)} activeItem={activeTableItem} label={i.label} key={i.label}/>
+                  ))
+                  }
+              </div>
+          </div>
+        <LoanTable/>
+      </div>
     </div>
   )
 }

@@ -100,3 +100,49 @@ export const adminData = [
   },
 ]
 
+
+
+export const loanData = [
+  {
+    id: '102020',
+    img: '/loan/profile.png',
+    name: 'Dada Dimeji',
+    amount: 'N230,000.00',
+    data: '3rd Nov 2023'
+  },
+  {
+    id: '102010',
+    img: '/loan/profile.png',
+    name: 'Dada Dimeji',
+    amount: 'N230,000.00',
+    data: '3rd Nov 2023'
+  },
+  {
+    id: '102021',
+    img: '/loan/profile.png',
+    name: 'Dada Dimeji',
+    amount: 'N230,000.00',
+    data: '3rd Nov 2023'
+  },
+  {
+    id: '102022',
+    img: '/loan/profile.png',
+    name: 'Dada Dimeji',
+    amount: 'N230,000.00',
+    data: '3rd Nov 2023'
+  },
+  {
+    id: '102023',
+    img: '/loan/profile.png',
+    name: 'Dada Dimeji',
+    amount: 'N230,000.00',
+    data: '3rd Nov 2023'
+  },
+  {
+    id: '102024',
+    img: '/loan/profile.png',
+    name: 'Dada Dimeji',
+    amount: 'N230,000.00',
+    data: '3rd Nov 2023'
+  },
+]
