@@ -84,7 +84,8 @@ const CellDetails = () => {
 
         <div className="flex flex-col md:flex-row gap-3 m-1">
           <BasicTable headcells={headcells} tableData={tableData}/>
-          <Updates/>
+          <div className="border-r-2 w-[1px]"></div>
+          <Updates title='Updates'/>
         </div>
         </div>
       </div>

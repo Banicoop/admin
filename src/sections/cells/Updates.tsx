@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react';
 
-const Updates = () => {
+type IUpdate = {
+    title: string;
+}
+
+const Updates:FC<IUpdate> = ({title}) => {
   return (
     <div className='flex flex-col m-2 h-full w-full md:w-1/3 gap-3'>
-        <h2 className='bg-[#fafafa] px-2 py-3 text-xl rounded-lg w-full'>Updates</h2>
+        <h2 className='bg-[#fafafa] px-2 py-3 text-xl rounded-lg w-full'>{title}</h2>
 
         <div className="flex flex-col gap-1 m-1 w-full">
             <span className="text-xs">Oct 15, 2024</span>

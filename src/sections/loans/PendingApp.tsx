@@ -13,7 +13,7 @@ const PendingApp = () => {
 
         {
           loans.map((loan) => (
-            <LoanCard className='' loan={loan}/>
+            <LoanCard className='h-[110px] ' loan={loan}/>
           ))
         }
 
