@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import LoanCard from './LoanCard';
+import { loans } from '../../constant/menuData';
 
 const PendingApp = () => {
   return (
@@ -10,13 +11,11 @@ const PendingApp = () => {
             <Link to='/loan/pending' className='text-[#6922D1] underline cursor-pointer'>View All</Link>
         </div>
 
-        <div className="flex flex-col">
-            <span className='text-[#B5B5B5] text-[10px]'>Oct 15, 2024</span>
-            <LoanCard />
-            <LoanCard />
-            <LoanCard />
-        </div>
-
+        {
+          loans.map((loan) => (
+            <LoanCard className='' loan={loan}/>
+          ))
+        }
 
     </div>
   )

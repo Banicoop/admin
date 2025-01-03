@@ -146,3 +146,65 @@ export const loanData = [
     data: '3rd Nov 2023'
   },
 ]
+
+
+export const loans = [
+  {
+    date: 'Oct 15, 2024',
+    loans: [
+      {
+        img: '/loan/profile.png',
+        name: 'Sarah Olueja',
+        amount: 'N310,000.00'
+      },
+      {
+        img: '/loan/profile.png',
+        name: 'Sarah Olueja',
+        amount: 'N310,000.00'
+      },
+      {
+        img: '/loan/profile.png',
+        name: 'Sarah Olueja',
+        amount: 'N310,000.00'
+      },
+    ]
+  }
+]
+
+export const loans1 = [
+  {
+    date: 'Oct 15, 2024',
+    loans: [
+      {
+        img: '/loan/profile.png',
+        name: 'Sarah Olueja',
+        amount: 'N310,000.00'
+      },
+      {
+        img: '/loan/profile.png',
+        name: 'Sarah Olueja',
+        amount: 'N310,000.00'
+      },
+      {
+        img: '/loan/profile.png',
+        name: 'Sarah Olueja',
+        amount: 'N310,000.00'
+      },
+      {
+        img: '/loan/profile.png',
+        name: 'Sarah Olueja',
+        amount: 'N310,000.00'
+      },
+      {
+        img: '/loan/profile.png',
+        name: 'Sarah Olueja',
+        amount: 'N310,000.00'
+      },
+      {
+        img: '/loan/profile.png',
+        name: 'Sarah Olueja',
+        amount: 'N310,000.00'
+      },
+    ]
+  }
+]
