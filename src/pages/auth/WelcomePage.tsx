@@ -8,7 +8,7 @@ const WelcomePage = () => {
 
   return (
     <div className='flex w-full flex-col items-center justify-center p-3 md:p-[4rem] gap-[2rem]'>
-        <h1 className='text-2xl md:text-3xl lg:text-5xl font-semibold flex self-start justify-start flex-col'>Empowering <br />Communities through <br /><span className="text-bgPurple">Financial Freedom</span></h1>
+        <h1 className='text-2xl md:text-3xl font-semibold flex self-start justify-start flex-col'>Empowering <br/>Communities through<br/><span className="text-bgPurple">Financial Freedom</span></h1>
 
         <h4 className="text-sm">Welcome to Banicoop’s Admin Panel, where you play a key role in helping individuals and communities manage their finances, save collaboratively, and achieve financial stability.</h4>
 

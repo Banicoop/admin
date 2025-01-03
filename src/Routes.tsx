@@ -36,12 +36,12 @@ function DashboardLayout(){
         </div>
 
         <div className="flex flex-col md:flex-row md:flex-wrap items-center px-2 md:px-8 gap-6 py-2">
-            <Widget type='transactions'/>
-            <Widget type='customers'/>
-            <Widget type='cells'/>
-            <Widget type='transactions'/>
-            <Widget type='customers'/>
-            <Widget type='cells'/>
+            <Widget className='w-full md:w-[30%]' type='transactions'/>
+            <Widget className='w-full md:w-[30%]' type='customers'/>
+            <Widget className='w-full md:w-[30%]' type='cells'/>
+            <Widget className='w-full md:w-[30%]' type='transactions'/>
+            <Widget className='w-full md:w-[30%]' type='customers'/>
+            <Widget className='w-full md:w-[30%]' type='cells'/>
         </div>
         <Outlet/>
       </section>
@@ -162,7 +162,7 @@ const router = createBrowserRouter([
         element: <Loans/>
       },
       {
-        path: '/loans/application',
+        path: '/loan/pending',
         element: <PendingLoan/>
       },
       {
