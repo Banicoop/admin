@@ -150,7 +150,7 @@ const router = createBrowserRouter([
         element: <CellDetails/>
       },
       {
-        path: '/cells/:id/user',
+        path: '/cells/:id/:user',
         element: <CellUserDetails/>
       },
       {
