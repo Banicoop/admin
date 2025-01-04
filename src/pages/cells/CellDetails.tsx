@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Info from '../../components/infos/Info';
-import Search from '../../components/Search';
+
 import ExportBtn from '../../components/buttons/ExportBtn';
 import BasicTable from '../../components/tables/BasicTable';
-import EditCell from '../../sections/cells/EditCell';
+import CellDetailsTable from '../../sections/cells/CellDetailsTable';
 import CellBanner from '../../sections/cells/CellBanner';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -42,7 +42,6 @@ const headcells = [
 
 const CellDetails = () => {
 
-    const [open, setOpen] = useState(false);
 
 
     const { entities: cell,  } = useSelector((state: any) => state.cell);
@@ -73,24 +72,21 @@ const CellDetails = () => {
         <CellBanner title={cell?.cell?.cellName} status='Active' isCell cell={cell}/>
         <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
         <div className="flex justify-between items-center w-full">
-            <Info text="Cell Members" text2='In Progress' details/>
+            <Info text="Cell Members" />
 
             <div className="hidden lg:flex items-center gap-4">
-              <Search onClick={() => {}}  placeholder='Search for Cell'/>
-              <ExportBtn text='Edit Cell Information' onClick={() => setOpen(true)}/>
               <ExportBtn text='Export' onClick={() => {}}/>
             </div>
           </div>
 
         <div className="flex flex-col md:flex-row gap-3 m-1">
-          <BasicTable headcells={headcells} tableData={tableData}/>
+          {/* <BasicTable headcells={headcells} tableData={tableData}/> */}
+          <CellDetailsTable/>
           <div className="border-r-2 w-[1px]"></div>
           <Updates title='Updates'/>
         </div>
         </div>
       </div>
-
-      <EditCell open={open} onClose={() => setOpen(false)} onClick={() => setOpen(false)}/>
 
 
     </>
