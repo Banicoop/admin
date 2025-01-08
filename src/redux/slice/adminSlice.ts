@@ -57,7 +57,7 @@ export const getAllAdmin = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await SERVER.get('admin/getAll');
-            return response.data;
+            return Array.isArray(response.data.admins) ? response.data : [];
         } catch (error) {
             console.log(error)
             return rejectWithValue(error)
@@ -67,17 +67,23 @@ export const getAllAdmin = createAsyncThunk(
 
 
 export const changeStatus = createAsyncThunk(
-    'adminId/changeStatus', 
-    async (adminId: string, { rejectWithValue }) => {
+    'admin/changeStatus',
+    async ({ id, disabled }: { id: string; disabled: boolean }, { rejectWithValue }) => {
         try {
-            const res = await SERVER.put(`admin/update/status/${adminId}`);
-            return  { adminId, status: res.data }
-        } catch (error) {
-            console.log(error)
-            return rejectWithValue(error)
+            const status = disabled ? "inactive" : "active"; 
+                await SERVER.put(`admin/update/status/${id}`, { status });
+            
+                toast.success('Admin status updated successfully', {...toastOptions})
+            return { id, disabled }; 
+        } catch (error: any) {
+            const err = error.response.data.messgae;
+
+            toast.error(`${err}`, {...toastOptions})
+            return rejectWithValue(error.response.data);
         }
     }
-)
+);
+
 
 
 const adminSlice = createSlice({
@@ -130,11 +136,13 @@ const adminSlice = createSlice({
        })
        builder.addCase(changeStatus.fulfilled, (state, action) => {
            state.status = 'succeeded';
-           state.allAdmin = state.allAdmin.map(admin =>
-            admin.id === action.payload.adminId
-                ? { ...admin, status: action.payload.status }
-                : admin
-        );
+           if (Array.isArray(state.allAdmin)) {
+            state.allAdmin = state.allAdmin.map(admin =>
+                admin.id === action.payload.id
+                    ? { ...admin, disabled: action.payload.disabled }
+                    : admin
+            );
+        }
        })
        builder.addCase(changeStatus.rejected, (state, action) => {
            state.status = 'failed'

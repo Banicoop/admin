@@ -51,13 +51,16 @@ const AdminTable = () => {
 
 
   let adminData = allAdmin?.admins;
+  console.log(adminData);
 
-  const changeAdminStatus = () => {
+  const changeAdminStatus = (admin: any) => {
     if (selectedAdminId) {
-      dispatch(changeStatus(selectedAdminId)); 
+      const newDisabledState = !admin.disabled; 
+      dispatch(changeStatus({ id: selectedAdminId, disabled: newDisabledState }));
       setOpen(false); 
     }
   }
+
 
   const renderRow = (item: any) => (
     <tr className='border-b border-gray-100 even:bg-slate-50 text-sm py-4'>
@@ -78,7 +81,10 @@ const AdminTable = () => {
 
           <ActionBtn 
             text={item?.disabled === false ? 'Deactivate': 'Activate'} 
-            onClick={() => setSelectedAdminId(item._id)} 
+            onClick={() => {
+              setSelectedAdminId(item.id)
+              setOpen(true)
+            }} 
             className='px-4  py-2 rounded-3xl bg-[#fff] text-[#6922D1] border-[1px] border-[#6922D1] cursor-pointer w-[95px]'/>
         </span>
       </td>
@@ -104,7 +110,10 @@ const AdminTable = () => {
                 <h2 className=''>Are you sure want to change admin status?</h2>
 
                 <div className="flex p-4 justify-between items-center">
-                  <ActionBtn text='Yes, Proceed' onClick={changeAdminStatus} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1] border-[1px] border-[#6922D1] cursor-pointer'/>
+                  <ActionBtn 
+                    text='Yes, Proceed' 
+                    onClick={changeAdminStatus} 
+                    className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1] border-[1px] border-[#6922D1] cursor-pointer'/>
 
                   <ActionBtn text='Cancel' onClick={() => setOpen(false)} className='px-4  py-2 rounded-3xl bg-[#fff] text-[#6922D1] border-[1px] border-[#6922D1] cursor-pointer w-[95px]'/>
                 </div>
