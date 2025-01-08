@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import ActionBtn from '../../components/buttons/ActionBtn';
+import { Link } from 'react-router-dom';
+
 
 type ILoan = {
     className: string;
@@ -19,7 +21,7 @@ const LoanCard:FC<ILoan> = ({className, loan, className1}) => {
                 <img src="/loan/profile.png" alt="" className="h-[48px] w-[48px] rounded-full object-cover mt-3" />
 
                 <div className="flex flex-col gap-3 justify-center my-auto">
-                    <span className=""><strong>{l.name}</strong> applied for a loan of <strong>{l.amount}</strong></span>
+                    <Link to='/loans/application/:id' className=""><strong>{l.name}</strong> applied for a loan of <strong>{l.amount}</strong></Link>
 
                     <div className="flex justify-between items-center">
                         <ActionBtn text='Accept' className='text-bgPurple bg-bgR px-4 py-2 rounded-3xl border-[1px] cursor-pointer' onClick={() => {}}/>

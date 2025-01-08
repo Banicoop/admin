@@ -24,7 +24,7 @@ const CellBanner: FC<banneerType> = ({title, status, isCell, cell}) => {
     <div className='flex items-center border-[1px] rounded-3xl gap-4 py-4 px-6 w-full'>
         { !isCell &&
             <div className="">
-                <img src="/avater.png" alt="" className="h-[120px] w-[120px]" />
+                <img src="/avater.png" alt="" className="h-[100px] w-[100px] object-cover rounded-full" />
             </div>
         }
 
