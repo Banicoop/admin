@@ -74,3 +74,50 @@ export const cellmembers = [
         status: 'Pending'
     },
 ]
+
+
+
+export const loanHistoryData = [
+    {
+        history: 'Remittance',
+        icon: '/loan/remitt.png',
+        date: '3rd Nov 2023',
+        amount: '₦30,000.00',
+        status: 'Pending'
+    },
+    {
+        history: 'Remittance',
+        icon: '/loan/remitt.png',
+        date: '3rd Nov 2023',
+        amount: '₦30,000.00',
+        status: 'Pending'
+    },
+    {
+        history: 'Remittance',
+        icon: '/loan/remitt.png',
+        date: '3rd Nov 2023',
+        amount: '₦30,000.00',
+        status: 'Pending'
+    },
+    {
+        history: 'Remittance',
+        icon: '/loan/remitt.png',
+        date: '3rd Nov 2023',
+        amount: '₦30,000.00',
+        status: 'Pending'
+    },
+    {
+        history: 'Remittance',
+        icon: '/loan/remitt.png',
+        date: '3rd Nov 2023',
+        amount: '₦30,000.00',
+        status: 'Pending'
+    },
+    {
+        history: 'Remittance',
+        icon: '/loan/remitt.png',
+        date: '3rd Nov 2023',
+        amount: '₦30,000.00',
+        status: 'Pending'
+    },
+]

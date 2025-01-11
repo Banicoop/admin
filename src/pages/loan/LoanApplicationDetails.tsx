@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ActionBtn from '../../components/buttons/ActionBtn';
 import ApplicationCard from '../../sections/loans/ApplicationCard';
 import LoadWidgetCard from '../../sections/loans/LoadWidgetCard';
 import Progress from '../../components/Progress';
+import ExportBtn from '../../components/buttons/ExportBtn';
+import Info from '../../components/infos/Info';
+import LoanHistoryTable from '../../sections/loans/LoanHistoryTable';
+import ReferalCard from '../../sections/loans/ReferalCard';
 
 
 
 const LoanApplicationDetails = () => {
+
+
+const [ approved, setApproved ] = useState(false)
+
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] my-6'>
       <div className="flex gap-7">
@@ -22,8 +30,13 @@ const LoanApplicationDetails = () => {
             </div>
 
             <div className="flex items-center gap-4">
-              <ActionBtn text='Approve Loan' onClick={() => {}} className='bg-[#6922D10A] text-bgPurple px-6 py-2 rounded-2xl text-[12px] font-[400] cursor-pointer' />
-              <ActionBtn text='Reject Loan' onClick={() => {}} className='px-6 py-2 rounded-2xl text-[12px] font-[400] border-[1px] text-[#6B6B6B] cursor-pointer'/>
+              {
+                approved ? <ExportBtn text='Export' onClick={() => {}}/>:
+                <>
+                  <ActionBtn text='Approve Loan' onClick={() => setApproved(true)} className='bg-[#6922D10A] text-bgPurple px-6 py-2 rounded-2xl text-[12px] font-[400] cursor-pointer' />
+                  <ActionBtn text='Reject Loan' onClick={() => {}} className='px-6 py-2 rounded-2xl text-[12px] font-[400] border-[1px] text-[#6B6B6B] cursor-pointer'/>
+                </>
+              }
             </div>
           </div>
 
@@ -38,6 +51,14 @@ const LoanApplicationDetails = () => {
         </div>
       </div>
 
+          { approved &&
+            <div className="flex gap-2 items-center">
+              <label htmlFor="progress" className='text-[#000] text-xs font-[500]'>Progress</label>
+                <Progress/>
+               <p className='text-[#000] text-xs font-[500]'>50%</p>
+
+          </div>
+          }
 
           <div className="flex items-center justify-between w-full gap-4">
             <LoadWidgetCard text='Credit Score'>
@@ -80,6 +101,33 @@ const LoanApplicationDetails = () => {
               </div>
             </LoadWidgetCard>
           </div>
+
+          <div className="flex flex-col">
+            <div className="flex items-center justify-between">
+              <Info text='Loan History & Repayment'/>
+              <ExportBtn text='Export' onClick={() => {}}/>
+            </div>
+
+            <LoanHistoryTable />
+          </div>
+
+          <div className="flex flex-col justify-start border-[1px] rounded-2xl p-4 gap-6">
+            <span className="text-[#000000] text-[14px] font-[500]">Referral List (09)</span>
+
+            <div className="flex flex-wrap gap-8 justify-between">
+              <ReferalCard/>
+              <ReferalCard/>
+              <ReferalCard/>
+              <ReferalCard/>
+              <ReferalCard/>
+              <ReferalCard/>
+              <ReferalCard/>
+              <ReferalCard/>
+              <ReferalCard/>
+            </div>
+          </div>
+
+
     </div>
   )
 }
