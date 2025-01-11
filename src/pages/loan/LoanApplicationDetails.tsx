@@ -37,18 +37,18 @@ const LoanApplicationDetails = () => {
         </div>
       </div>
 
-      
-          <div className="flex items-center justify-center w-full gap-4">
+
+          <div className="flex items-center justify-between w-full gap-4">
             <LoadWidgetCard text='Credit Score'>
               <div className=""></div>
             </LoadWidgetCard>
 
-            <LoadWidgetCard text='Credit Score'>
+            <LoadWidgetCard text='Contact Info'>
               <div className=""></div>
             </LoadWidgetCard>
 
 
-            <LoadWidgetCard text='Credit Score'>
+            <LoadWidgetCard text='Proof of Income'>
               <div className=""></div>
             </LoadWidgetCard>
           </div>

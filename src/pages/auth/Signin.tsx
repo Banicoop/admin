@@ -5,6 +5,8 @@ import { AuthInput } from '../../components/inputs/Input';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/slice/authSlice';
 import type { Dispatch } from '../../redux/store';
+import { toastOptions } from '../../utils/toastOptions';
+import { toast } from 'react-toastify'
 
 
 const Signin = () => {
@@ -15,6 +17,10 @@ const Signin = () => {
     const [password, setPassword] = useState('');
 
     const handleSubmit = async () => {
+      if(!email || !password){
+        toast.warn('Fiels cannot be empty', {...toastOptions});
+        return;
+      }
       try {
         dispatch(login({email, password}))
       } catch (error) {
