@@ -2,6 +2,7 @@ import React from 'react'
 import ActionBtn from '../../components/buttons/ActionBtn';
 import ApplicationCard from '../../sections/loans/ApplicationCard';
 import LoadWidgetCard from '../../sections/loans/LoadWidgetCard';
+import Progress from '../../components/Progress';
 
 
 
@@ -40,16 +41,43 @@ const LoanApplicationDetails = () => {
 
           <div className="flex items-center justify-between w-full gap-4">
             <LoadWidgetCard text='Credit Score'>
-              <div className=""></div>
+              <div className="flex items-center justify-between gap-2 p-3 h-full">
+                <div className="h-[40px] w-[40px] rounded-full bg-red-50 p-2 flex items-center justify-center">
+                  <img src="/loan/Icon.png" alt="" className="h-[16px] w-[16px] object-cover" />
+                </div>
+
+                <div className="flex flex-col gap-2 w-[80%]">
+                    <span className="text-xs text-[#000]">Credit Score: 720/850</span>
+                  <div className='flex items-center gap-4'>
+                    <Progress />
+                    <span className="text-[#000000] text-[10px]">Good</span>
+                  </div>
+                </div>
+              </div>
             </LoadWidgetCard>
 
             <LoadWidgetCard text='Contact Info'>
-              <div className=""></div>
+              <div className="flex flex-col p-4 gap-3">
+                <div className="flex justify-start items-center gap-2">
+                  <img src="/loan/call.png" alt="" className="h-[16px] w-[16px]" />
+                  <span className="text-[#545454] text-xs">+234 810 123 4567</span>
+                </div>
+
+                <div className="flex justify-start items-center gap-2">
+                  <img src="/loan/sms.png" alt="" className="h-[16px] w-[16px]" />
+                  <span className="text-[#545454] text-xs">dadasamuel208@gmail.com</span>
+                </div>
+              </div>
             </LoadWidgetCard>
 
 
             <LoadWidgetCard text='Proof of Income'>
-              <div className=""></div>
+              <div className="p-4 flex items-center h-full">
+                <div className="flex items-center gap-3">
+                  <img src="/loan/image.png" alt="" className="h-[16px] w-[16px]" />
+                  <span className="">012223.img</span>
+                </div>
+              </div>
             </LoadWidgetCard>
           </div>
     </div>
