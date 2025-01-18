@@ -24,11 +24,11 @@ const Table:FC<ITable> = ({columns, renderRow, data, status}) => {
 
         <tbody>
             {status === 'succeeded' && data?.map((item) => renderRow(item))}
-            <div className="flex w-full justify-center items-center m-auto">
+            <span className="flex w-full justify-center items-center m-auto">
                 {status === 'pending' && 
                     <CircularProgress  sx={{display: 'flex', margin: 'auto'}}/>
                 }
-            </div>
+            </span>
         </tbody>
     </table>
   )

@@ -13,7 +13,10 @@ import ReferalCard from '../../sections/loans/ReferalCard';
 const LoanApplicationDetails = () => {
 
 
-const [ approved, setApproved ] = useState(false)
+const [ approved, setApproved ] = useState(false);
+
+
+var refs = false;
 
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] my-6'>
@@ -107,13 +110,14 @@ const [ approved, setApproved ] = useState(false)
               <Info text='Loan History & Repayment'/>
               <ExportBtn text='Export' onClick={() => {}}/>
             </div>
-
-            <LoanHistoryTable />
+              <LoanHistoryTable />
           </div>
 
           <div className="flex flex-col justify-start border-[1px] rounded-2xl p-4 gap-6">
             <span className="text-[#000000] text-[14px] font-[500]">Referral List (09)</span>
 
+          {
+            refs ?
             <div className="flex flex-wrap gap-8 justify-between">
               <ReferalCard/>
               <ReferalCard/>
@@ -124,7 +128,13 @@ const [ approved, setApproved ] = useState(false)
               <ReferalCard/>
               <ReferalCard/>
               <ReferalCard/>
+            </div> :
+
+            <div className="flex flex-col items-center justify-center h-[200px]">
+              <img src="/loan/no-referal.png" alt="" className="h-[48px] w-[48px]" />
+              <span className="text-[#979797] text-[16px] font-[400]">No referrer yet</span>
             </div>
+          }
           </div>
 
 

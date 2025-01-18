@@ -48,9 +48,20 @@ const columns = [
 
 const LoanHistoryTable = () => {
   return (
-    <div>
-        <Table data={loanHistoryData} columns={columns} renderRow={renderRow} status='succeeded' />
+    <>
+      <div className='flex flex-col'>
+          {( 
+            !loanHistoryData || loanHistoryData.length <= 0) ?
+            <Table data={[]} columns={columns} renderRow={renderRow} status='succeeded' />:
+
+            <div className="flex flex-col items-center justify-center h-[200px]">
+                <img src="/loan/no-loan.png" alt="" className="h-[48px] w-[48px]" />
+                <span className="text-[#979797] text-[16px] font-[400]">No loan history</span>
+            </div>
+
+    }
     </div>
+    </>
   )
 }
 
