@@ -21,7 +21,7 @@ const LoanCard:FC<ILoan> = ({className, loan, className1}) => {
                 <img src="/loan/profile.png" alt="" className="h-[48px] w-[48px] rounded-full object-cover mt-3" />
 
                 <div className="flex flex-col gap-3 justify-center my-auto">
-                    <Link to='/loans/application/:id' className=""><strong>{l.name}</strong> applied for a loan of <strong>{l.amount}</strong></Link>
+                    <Link to='/loans/application/:id' className="font-[400]"><strong>{l.name}</strong> applied for a loan of <strong>{l.amount}</strong></Link>
 
                     <div className="flex gap-4 items-center justify-end">
                         <ActionBtn text='Accept' className='text-bgPurple bg-bgR px-4 lg:px-6 py-2 rounded-3xl border-[1px] cursor-pointer' onClick={() => {}}/>
