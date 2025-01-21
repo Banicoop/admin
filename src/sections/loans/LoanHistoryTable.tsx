@@ -2,6 +2,7 @@ import React from 'react';
 import ActionBtn from '../../components/buttons/ActionBtn';
 import { loanHistoryData } from '../../constant/data';
 import Table from '../../components/tables/Table';
+import EmptyState from '../../components/EmptyState';
 
 
 const columns = [
@@ -48,9 +49,17 @@ const columns = [
 
 const LoanHistoryTable = () => {
   return (
-    <div>
-        <Table data={loanHistoryData} columns={columns} renderRow={renderRow} status='succeeded' />
+    <>
+      <div className='flex flex-col'>
+          {( 
+            !loanHistoryData || loanHistoryData.length <= 0) ?
+            <Table data={[]} columns={columns} renderRow={renderRow} status='succeeded' />:
+
+            <EmptyState text='No loan history' />
+
+    }
     </div>
+    </>
   )
 }
 

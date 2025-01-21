@@ -31,6 +31,8 @@ export const login = createAsyncThunk(
             window.location.replace('/auth/verification')
             return response.data
         } catch (error:any) {
+            const err = error.response.data.message;
+            toast.error(`${err}`, { ...toastOptions })
             return rejectWithValue(error.response.data)
         }
     },
@@ -96,7 +98,6 @@ const authSlice = createSlice({
         builder.addCase(login.rejected, (state, action) => {
             state.status = 'failed';
             state.credentials = action.payload;
-            toast.error('Invalid credentials', { ...toastOptions })
         })
 
         //otp

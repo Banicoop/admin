@@ -63,7 +63,12 @@ const Verification = () => {
 
         <div className="flex justify-between w-full">
             <BackBtn onClick={() => navigate('/auth/login')} text='Go Back'/>
-            <AuthBtn onClick={verifyOtp} text='Continue'  disabled={!isButtonEnabled}/>
+
+            <AuthBtn 
+                loading={status}
+                onClick={verifyOtp} 
+                text={status === 'pending' ? 'Verifying...': 'Continue'}  
+                disabled={!isButtonEnabled}/>
         </div>
     </div>
   )

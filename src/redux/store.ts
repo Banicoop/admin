@@ -2,13 +2,14 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import authReducer from './slice/authSlice';
 import cellReducer from './slice/cellSlice';
 import adminReducer from './slice/adminSlice';
-
+import loanReducer from './slice/loanSlice'
 
 
  const rootReducer = combineReducers({
     auth: authReducer,
     cell: cellReducer,
-    admin: adminReducer
+    admin: adminReducer,
+    loan: loanReducer
 })
 
 

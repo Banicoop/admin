@@ -5,7 +5,7 @@ import { toastOptions } from "../../utils/toastOptions";
 
 
 interface CellState {
-    entities: any;
+    entities: any[];
     status: 'idle' | 'pending' | 'succeeded' | 'failed'
 }
 
@@ -46,7 +46,7 @@ export const getCells = createAsyncThunk(
 
 
 export const fetchCellDetail = createAsyncThunk(
-    'cellDetail/fetchCellDetail',
+    'cell/fetchCellDetail',
     async ({ cellId, userId }: { cellId: string; userId: string | null }, { rejectWithValue }) => {
         try {
             const response = await SERVER.get(`admin/contribution/cell/single?cellId=${cellId}&adminId=${userId}`);
@@ -93,7 +93,6 @@ const cellSlice = createSlice({
         })
         builder.addCase(createCell.rejected, (state, action) => {
             state.status = 'failed';
-
         })
 
 

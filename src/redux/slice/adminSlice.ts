@@ -70,7 +70,7 @@ export const changeStatus = createAsyncThunk(
     'admin/changeStatus',
     async ({ id, disabled }: { id: string; disabled: boolean }, { rejectWithValue }) => {
         try {
-            const status = disabled ? "inactive" : "active"; 
+            const status = disabled ? "active" : "inactive"; 
                 await SERVER.put(`admin/update/status/${id}`, { status });
             
                 toast.success('Admin status updated successfully', {...toastOptions})

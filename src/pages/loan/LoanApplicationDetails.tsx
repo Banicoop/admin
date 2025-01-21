@@ -7,13 +7,17 @@ import ExportBtn from '../../components/buttons/ExportBtn';
 import Info from '../../components/infos/Info';
 import LoanHistoryTable from '../../sections/loans/LoanHistoryTable';
 import ReferalCard from '../../sections/loans/ReferalCard';
+import EmptyState from '../../components/EmptyState';
 
 
 
 const LoanApplicationDetails = () => {
 
 
-const [ approved, setApproved ] = useState(false)
+const [ approved, setApproved ] = useState(false);
+
+
+var refs = false;
 
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] my-6'>
@@ -107,13 +111,14 @@ const [ approved, setApproved ] = useState(false)
               <Info text='Loan History & Repayment'/>
               <ExportBtn text='Export' onClick={() => {}}/>
             </div>
-
-            <LoanHistoryTable />
+              <LoanHistoryTable />
           </div>
 
           <div className="flex flex-col justify-start border-[1px] rounded-2xl p-4 gap-6">
-            <span className="text-[#000000] text-[14px] font-[500]">Referral List (09)</span>
+            <span className="text-[#000000] text-[14px] font-[500]">Referral List (0)</span>
 
+          {
+            refs ?
             <div className="flex flex-wrap gap-8 justify-between">
               <ReferalCard/>
               <ReferalCard/>
@@ -124,7 +129,11 @@ const [ approved, setApproved ] = useState(false)
               <ReferalCard/>
               <ReferalCard/>
               <ReferalCard/>
-            </div>
+            </div> :
+
+            <EmptyState text='No referrer yet' />
+
+          }
           </div>
 
 

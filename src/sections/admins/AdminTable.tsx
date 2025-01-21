@@ -17,12 +17,12 @@ const columns = [
   {
     header: "Role",
     accessor: "role",
-    className: "hidden md:table-cell",
+    // className: "hidden md:table-cell",
   },
   {
     header: "Status",
     accessor: "status",
-    className: "hidden md:table-cell",
+    // className: "hidden md:table-cell",
   },
   // {
     // header: "Last Login",
@@ -51,7 +51,7 @@ const AdminTable = () => {
 
 
   let adminData = allAdmin?.admins;
-  console.log(adminData);
+
 
   const changeAdminStatus = (admin: any) => {
     if (selectedAdminId) {
@@ -72,7 +72,7 @@ const AdminTable = () => {
       </td>
       <td className='py-4'>{item?.role === 'super_admin' ? 'Super Admin': 'Admin'}</td>
       <td className='py-4'>
-      <ActionBtn text={item?.disabled === false ? 'Active': 'Disabled'} onClick={() => {}} className='px-2 py-1 text-sm rounded-2xl bg-[#EAF7EF] text-[#27AE60] border-[1px] cursor-pointer w-max'/>
+      <ActionBtn text={item?.disabled === false ? 'Active': 'Disabled'} onClick={() => {}} className={`px-2 py-1 text-sm rounded-2xl ${item?.disabled === false ? ' bg-[#EAF7EF] text-[#27AE60]': ' bg-[#EAF7EF] text-[crimson]'} border-[1px] cursor-pointer w-max`}/>
       </td>
       {/* <td className='py-4'>{item?.last_login}</td> */}
       <td className='py-4'>
@@ -85,7 +85,7 @@ const AdminTable = () => {
               setSelectedAdminId(item.id)
               setOpen(true)
             }} 
-            className='px-4  py-2 rounded-3xl bg-[#fff] text-[#6922D1] border-[1px] border-[#6922D1] cursor-pointer w-[95px]'/>
+            className={`px-4  py-2 rounded-3xl ${item?.disabled === false ? 'text-[#6922D1]  border-[#6922D1]': 'text-[crimson]  border-[crimson]'} bg-[#fff]  border-[1px] cursor-pointer w-[95px]`}/>
         </span>
       </td>
 

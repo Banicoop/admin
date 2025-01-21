@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
 import { useNavigate } from 'react-router-dom';
 import { AuthInput } from '../../components/inputs/Input';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/slice/authSlice';
 import type { Dispatch } from '../../redux/store';
 import { toastOptions } from '../../utils/toastOptions';
@@ -13,12 +13,15 @@ const Signin = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch<Dispatch>();
 
+
+    const { status } = useSelector((state: any) => state.auth)
+
     const [email, setEnail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async () => {
       if(!email || !password){
-        toast.warn('Fiels cannot be empty', {...toastOptions});
+        toast.warn('Fields cannot be empty', {...toastOptions});
         return;
       }
       try {
@@ -45,7 +48,11 @@ const Signin = () => {
 
         <div className="flex flex-row justify-between w-full">
             <BackBtn onClick={() => navigate('/auth/welcome')} text='Go Back'/>
-            <AuthBtn onClick={handleSubmit} text='Continue'/>
+
+            <AuthBtn 
+              loading={status}
+              onClick={handleSubmit} 
+              text={`${status === 'pending' ? 'Processing...': 'Continue'}`}/>
         </div>
     </div>
   )
