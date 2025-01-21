@@ -11,6 +11,7 @@ import { getCells } from '../../redux/slice/cellSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import type { Dispatch } from '.././../redux/store';
 import { CircularProgress } from '@mui/material';
+import EmptyState from '../../components/EmptyState';
 
 
 
@@ -56,12 +57,12 @@ const Cells = () => {
       <div className="h-full flex flex-col px-2 md:px-8 gap-3">
         <Welcome/>
         <section className="flex flex-col md:flex-row md:flex-wrap items-center gap-2 py-2">
-          <Widget  className='w-full md:w-[30%]' type='cells'/>
-          <Widget  className='w-full md:w-[30%]' type='cells'/>
-          <Widget  className='w-full md:w-[30%]' type='cells'/>
-          <Widget  className='w-full md:w-[30%]' type='cells'/>
-          <Widget  className='w-full md:w-[30%]' type='cells'/>
-          <Widget  className='w-full md:w-[30%]' type='cells'/>
+          <Widget  className='w-full md:w-[32%]' type='cells'/>
+          <Widget  className='w-full md:w-[32%]' type='cells'/>
+          <Widget  className='w-full md:w-[32%]' type='cells'/>
+          <Widget  className='w-full md:w-[32%]' type='cells'/>
+          <Widget  className='w-full md:w-[32%]' type='cells'/>
+          <Widget  className='w-full md:w-[32%]' type='cells'/>
         </section>
 
         <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
@@ -87,9 +88,9 @@ const Cells = () => {
             {
                 status === 'succeeded' &&
                 (Array.isArray(cells) ? (
-                  cells.map((cell: any) => <CellCard key={cell._id} data={cell} />)
+                  cells.map((cell: any) => <CellCard key={cell?._id} data={cell} />)
                 ) : (
-                  <h4 className="text-[purple] text-xl mt-5">Something went wrong</h4>
+                  <EmptyState text='No Created Cell'/>
                 ))
             }
           </div>

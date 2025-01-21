@@ -7,6 +7,7 @@ import ExportBtn from '../../components/buttons/ExportBtn';
 import Info from '../../components/infos/Info';
 import LoanHistoryTable from '../../sections/loans/LoanHistoryTable';
 import ReferalCard from '../../sections/loans/ReferalCard';
+import EmptyState from '../../components/EmptyState';
 
 
 
@@ -114,7 +115,7 @@ var refs = false;
           </div>
 
           <div className="flex flex-col justify-start border-[1px] rounded-2xl p-4 gap-6">
-            <span className="text-[#000000] text-[14px] font-[500]">Referral List (09)</span>
+            <span className="text-[#000000] text-[14px] font-[500]">Referral List (0)</span>
 
           {
             refs ?
@@ -130,10 +131,8 @@ var refs = false;
               <ReferalCard/>
             </div> :
 
-            <div className="flex flex-col items-center justify-center h-[200px]">
-              <img src="/loan/no-referal.png" alt="" className="h-[48px] w-[48px]" />
-              <span className="text-[#979797] text-[16px] font-[400]">No referrer yet</span>
-            </div>
+            <EmptyState text='No referrer yet' />
+
           }
           </div>
 

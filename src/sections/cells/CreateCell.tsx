@@ -8,6 +8,8 @@ import Select from '../../components/inputs/Select';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCell } from '../../redux/slice/cellSlice';
 import type { Dispatch } from '../../redux/store';
+import { toast } from 'react-toastify';
+import { toastOptions } from '../../utils/toastOptions';
 
 
 interface cType {
@@ -111,6 +113,11 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
   const handleSubmit = async () => {
     const { cellName, totalUsers, realUser, contributionAmount, description, launchDate, endDate } = inputs
+    if( !cellName || !totalUsers || !realUser || !contributionAmount || !description || !launchDate || !endDate) {
+        toast.warn(`Please fill out the fields`, {...toastOptions});
+        return;
+    }
+
     try {
       dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, launchDate,  endDate, type}));
         if (status === 'succeeded') {
@@ -173,7 +180,11 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
       { showAll &&
         <div className="flex items-center gap-2 justify-center">
-          <Button text='Create New Cell' onClick={handleSubmit}/>
+          <Button 
+            loading={status}
+            text={`${status === 'pending' ? 'Processing...' : 'Create New Cell'}`} 
+            onClick={handleSubmit} />
+
           <Button text='Cancel' cancel onClick={onClick}/>
         </div>}
 

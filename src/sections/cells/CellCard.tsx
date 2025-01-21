@@ -16,7 +16,7 @@ const CellCard = ({data}: any) => {
   const dispatch = useDispatch<Dispatch>();
 
 
-  var duration = data.contributionAmount * data.duration;
+  var duration = data?.contributionAmount * data?.duration;
 
   const [items, setItems] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
@@ -39,7 +39,7 @@ const CellCard = ({data}: any) => {
       <div className='flex flex-col gap-3 p-4 border-[1px] rounded-3xl w-full sm:w-[48%] md:w-[31%]'>
           <div className="flex justify-between relative">
               <div className="flex gap-2 items-center">
-                  <h1 className='text-[12px] font-[300] md:font-semibold '>{data.cellName}</h1>
+                  <h1 className='text-[12px] font-[300] md:font-semibold '>{data?.cellName}</h1>
                   <span className="px-2 py-1 rounded-lg bg-[#8000800f] text-xs text-bgPurple">Active</span>
               </div>
 
@@ -65,8 +65,8 @@ const CellCard = ({data}: any) => {
 
           </div>
         <div className="flex flex-col w-full gap-3 z-0">
-              <span className="text-xs">Start Date : {moment(data.launchDate).format("MMM Do YYYY")} . End Date : {moment(data.endDate).format("MMM Do YYYY")} </span>
-              <span className="text-xs">{data.type} - N{data.contributionAmount} . Output - N{duration}</span>
+              <span className="text-xs">Start Date : {moment(data?.launchDate).format("MMM Do YYYY")} . End Date : {moment(data?.endDate).format("MMM Do YYYY")} </span>
+              <span className="text-xs">{data?.type} - N{data?.contributionAmount} . Output - N{duration}</span>
         </div>
 
         <div className="flex items-center justify-between w-full">
