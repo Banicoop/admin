@@ -37,7 +37,12 @@ export const getCells = createAsyncThunk(
         try {
             const response = await SERVER.get('admin/contribution/cell/all?type=&startDate&endDate&isActive=&available=true');
             const cells = Array.isArray(response?.data?.cells) ? response.data.cells : [];
-            return cells;
+
+            const sortedCells = cells.sort(
+                (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+
+            return sortedCells;
         } catch (error) {
             return rejectWithValue(error)
         }
@@ -62,8 +67,7 @@ export const deleteCell = createAsyncThunk(
     'cell/deleteCell',
     async ({cellId}: {cellId: string}, { rejectWithValue }) => {
         try {
-            const res = await SERVER.delete(`admin/contribution/cell?id=${cellId}`);
-             return res.data;
+            await SERVER.delete(`admin/contribution/cell?id=${cellId}`);
         } catch (error: any) {
 
             const err = error?.response?.data?.message;
@@ -130,7 +134,12 @@ const cellSlice = createSlice({
         .addCase(deleteCell.fulfilled, (state, action) => {
             state.status = 'succeeded';
             const cellId = action.meta.arg.cellId;
-            state.entities = state.entities.filter((cell: any) => cell.id !== cellId);
+
+            console.log('Cell ID to delete:', action.meta.arg.cellId);
+            console.log('Existing cells:', state.entities);
+            console.log('Remaining cells after deletion:', state.entities);
+
+            state.entities = state.entities.filter((cell: any) => cell._id !== cellId);
             toast.success('Cell has been deleted successfully', { ...toastOptions });
         })
         .addCase(deleteCell.rejected, (state, action) => {

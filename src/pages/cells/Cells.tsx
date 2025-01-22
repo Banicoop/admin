@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Info from '../../components/infos/Info';
 import Search from '../../components/Search';
 import ExportBtn from '../../components/buttons/ExportBtn';
@@ -47,7 +47,7 @@ const Cells = () => {
   const dispatch = useDispatch<Dispatch>();
 
 
-  useMemo(() => {
+  useEffect(() => {
     dispatch(getCells())
   }, [dispatch])
 
@@ -82,7 +82,8 @@ const Cells = () => {
             {status === 'pending' && <CircularProgress sx={{display: 'flex', margin: 'auto'}}/>  }
              {
               (!cells || cells.length === 0 ) && <div className="flex w-full justify-center items-center">
-                <h4 className='text-[purple] text-xl mt-5'>No Created cell</h4>
+                <EmptyState text='No Created Cell'/>
+                {/* <h4 className='text-[purple] text-xl mt-5'>No Created cell</h4> */}
               </div>
             }
             {

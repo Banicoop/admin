@@ -55,7 +55,7 @@ const Verification = () => {
                 { status === 'failed' &&
                 <>
                      <span className='text-red-400'>Incorrect OTP</span>
-                     <span className="text-lg text-[#6922D1] cursor-pointer font-semibold flex ml-auto" onClick={verifyOtp}>Resend OTP</span>
+                     {/* <span className="text-lg text-[#6922D1] cursor-pointer font-semibold flex ml-auto" onClick={verifyOtp}>Resend OTP</span> */}
                 </>
                 }
             </div>

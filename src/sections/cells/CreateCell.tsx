@@ -6,7 +6,7 @@ import Button from '../../components/buttons/Button';
 import DateInput from '../../components/inputs/DateInput';
 import Select from '../../components/inputs/Select';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCell } from '../../redux/slice/cellSlice';
+import { createCell, getCells } from '../../redux/slice/cellSlice';
 import type { Dispatch } from '../../redux/store';
 import { toast } from 'react-toastify';
 import { toastOptions } from '../../utils/toastOptions';
@@ -121,6 +121,7 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
     try {
       dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, launchDate,  endDate, type}));
         if (status === 'succeeded') {
+          dispatch(getCells());
           setInputs(initialState);
           onClose(); 
           return;
