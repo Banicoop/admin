@@ -28,7 +28,9 @@ export const login = createAsyncThunk(
         try {
             const response = await SERVER.post('admin/auth/login', credentials);
             localStorage.setItem('loginData', JSON.stringify(response.data));
-            window.location.replace('/auth/verification')
+            window.location.replace('/auth/verification');
+
+            console.log(response.data);
             return response.data
         } catch (error:any) {
             const err = error.response.data.message;

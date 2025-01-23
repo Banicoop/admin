@@ -81,7 +81,7 @@ const Cells = () => {
           <div className="flex flex-col justify-between md:flex-row md:flex-wrap gap-4 w-full">
             {status === 'pending' && <CircularProgress sx={{display: 'flex', margin: 'auto'}}/>  }
              {
-              (!cells || cells.length === 0 ) && <div className="flex w-full justify-center items-center">
+              (!cells || cells?.length === 0 ) && <div className="flex w-full justify-center items-center">
                 <EmptyState text='No Created Cell'/>
                 {/* <h4 className='text-[purple] text-xl mt-5'>No Created cell</h4> */}
               </div>
@@ -89,7 +89,7 @@ const Cells = () => {
             {
                 status === 'succeeded' &&
                 (Array.isArray(cells) ? (
-                  cells.map((cell: any) => <CellCard key={cell?._id} data={cell} />)
+                  cells?.map((cell: any) => <CellCard key={cell?._id} data={cell} />)
                 ) : (
                   <EmptyState text='No Created Cell'/>
                 ))

@@ -41,8 +41,8 @@ export const getCells = createAsyncThunk(
             const sortedCells = cells.sort(
                 (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
             );
-
-            return sortedCells;
+            console.log(cells);
+            return cells;
         } catch (error) {
             return rejectWithValue(error)
         }
