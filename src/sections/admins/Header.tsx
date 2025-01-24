@@ -66,6 +66,7 @@ const Header = () => {
           admin: { email, role: type },
           adminId })
       )
+      setOpen(false);
     }
 
 
@@ -114,7 +115,9 @@ const Header = () => {
 const options = [
     { value: "", label: "Select Admin Role" },
     { value: "super_admin", label: "Super Admin" },
-    { value: "admin", label: "Admin" },
+    { value: "loan_admin", label: "Loan Admin" },
+    { value: "cell_admin", label: "Cell Admin" },
+    { value: "merchant", label: "Merchant Admin" },
   ];
 
 export default Header;
