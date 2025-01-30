@@ -58,7 +58,7 @@ export const verifyLogin = createAsyncThunk('auth/otp',
                 localStorage.setItem('user', JSON.stringify(payload));
 
                 dispatch(setAuth({ user: payload, accessToken, refreshToken }));
-                console.log(accessToken, refreshToken, payload);
+                
                 window.location.replace('/auth/verified');
             }
 

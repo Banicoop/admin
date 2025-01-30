@@ -20,7 +20,9 @@ import Register from './pages/admins/Register';
 import Admins from './pages/admins/Admins';
 import { WelcomeImage } from './constant/images';
 import { logout } from './redux/slice/authSlice';
-import { LoanApplicationDetails, LoanDetails, Loans, PendingLoan } from './pages/loan';
+import { LoanApplicationDetails, Loans, PendingLoan } from './pages/loan';
+import { Wallet, InvestorWallet } from './pages/wallet';
+
 
 
 
@@ -166,12 +168,18 @@ const router = createBrowserRouter([
         element: <PendingLoan/>
       },
       {
-        path: '/loans/:id',
-        element: <LoanDetails/>
-      },
-      {
         path: '/loans/application/:id',
         element: <LoanApplicationDetails/>
+      },
+      
+      //wallet section
+      {
+        path: '/wallet',
+        element: <Wallet/>
+      },
+      {
+        path: '/investorwallet',
+        element: <InvestorWallet/>
       },
     ]
   },

@@ -18,6 +18,12 @@ export const menuData = [
       visible: ["super_admin"],
     },
     {
+      name: 'Wallet',
+      icon: '/card.svg',
+      url: '/wallet',
+      visible: ["super_admin"],
+    },
+    {
       name: 'Saving Cells',
       icon: '/save.svg',
       url: '/cells',

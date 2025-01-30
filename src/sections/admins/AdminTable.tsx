@@ -36,8 +36,26 @@ const columns = [
 ];
 
 
+
+
 const AdminTable = () => {
 
+  const getRoleName = (role: string) => {
+    switch (role) {
+      case 'super_admin':
+        return 'Super Admin';
+      case 'loan_admin':
+        return 'Loan Admin';
+      case 'cell_admin':
+        return 'Cell Admin';
+      case 'merchant':
+        return 'Cell Admin';
+      default:
+        return 'No Assigned Role';
+    }
+  };
+
+  
   const [ open, setOpen ] = useState(false);
   const [selectedAdminId, setSelectedAdminId] = useState<string | null>(null);
 
@@ -70,7 +88,7 @@ const AdminTable = () => {
           <span className="">{`${item.firstName} ${item.lastName}`}</span>
         </span>
       </td>
-      <td className='py-4'>{item?.role === 'super_admin' ? 'Super Admin': 'Admin'}</td>
+      <td className='py-4'>{getRoleName(item?.role)}</td>
       <td className='py-4'>
       <ActionBtn text={item?.disabled === false ? 'Active': 'Disabled'} onClick={() => {}} className={`px-2 py-1 text-sm rounded-2xl ${item?.disabled === false ? ' bg-[#EAF7EF] text-[#27AE60]': ' bg-[#EAF7EF] text-[crimson]'} border-[1px] cursor-pointer w-max`}/>
       </td>

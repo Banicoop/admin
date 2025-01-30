@@ -8,7 +8,8 @@ module.exports = {
       colors: {
          bgPurple: '#6922D1',
          bgWhite: '#fff',
-         bgR: '#fafafa'
+         bgR: '#fafafa',
+         bgBlack: '#000000'
       }
     },
   },
