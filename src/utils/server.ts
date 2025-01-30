@@ -1,4 +1,6 @@
 import axios from "axios";
+import isTokenExpired from "./isTokenExp";
+import { refreshAccessToken } from "../redux/slice/authSlice";
 
 // Axios instance
 const SERVER = axios.create({
@@ -11,9 +13,15 @@ const SERVER = axios.create({
 
 
 SERVER.interceptors.request.use(
-    (config) => {
+    async (config) => {
         try {
-            const token = localStorage.getItem('token'); 
+            let token = localStorage.getItem('token');
+            const refreshToken = localStorage.getItem('refreshToken');
+
+            if (token && isTokenExpired(token) && refreshToken) {
+                token = await refreshAccessToken(); // Get new token
+            }
+
             if (token) {
                 config.headers.Authorization = `Bearer ${token}`; 
             }
