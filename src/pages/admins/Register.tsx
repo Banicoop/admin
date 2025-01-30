@@ -5,6 +5,8 @@ import { registerAdmin } from '../../redux/slice/adminSlice';
 import type { Dispatch } from '../../redux/store';
 import { useDispatch } from 'react-redux';
 import { useSearchParams  } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { toastOptions } from '../../utils/toastOptions';
 
 
 const imitialSate = {
@@ -32,9 +34,13 @@ const Register = () => {
   }
  
   const handleSubmit = async () => {
-    const { firstName, lastName, username, password } = newAdmin
-    console.log({firstName, lastName, username, password , adminId})
-    dispatch(registerAdmin({...newAdmin, adminId}))
+    const { firstName, lastName, username, password } = newAdmin;
+
+    if(!firstName || !lastName || !username || !password){
+      toast.warn('No empty field', { ...toastOptions })
+      return;
+    }
+    dispatch(registerAdmin({...newAdmin, adminId}));
   }
 
 

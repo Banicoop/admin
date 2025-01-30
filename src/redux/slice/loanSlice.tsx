@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import SERVER from "../../utils/server";
-import { toast } from "react-toastify";
-import { toastOptions } from "../../utils/toastOptions";
+// import { toast } from "react-toastify";
+// import { toastOptions } from "../../utils/toastOptions";
 
 
 interface LoanState {
@@ -25,10 +25,24 @@ export const getAllLoans = createAsyncThunk(
             const res = await SERVER.get('admin/loans');
             return res.data;
         } catch (error) {
-            console.error(error)
+            return rejectWithValue(error)
         }
     }
 )
+
+
+
+// export const getLoanDetails = createAsyncThunk(
+//     'loan/getLoanDetails', 
+//     async (Id: string, {rejectWithValue}) => {
+//         try {
+            
+//         } catch (error) {
+//             return rejectWithValue(error)
+//         }
+//     }
+// )
+
 
 
 const loanSlice = createSlice({

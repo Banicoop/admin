@@ -41,8 +41,7 @@ export const getCells = createAsyncThunk(
             const sortedCells = cells.sort(
                 (a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
             );
-
-            return sortedCells;
+            return sortedCells ;
         } catch (error) {
             return rejectWithValue(error)
         }
@@ -134,10 +133,6 @@ const cellSlice = createSlice({
         .addCase(deleteCell.fulfilled, (state, action) => {
             state.status = 'succeeded';
             const cellId = action.meta.arg.cellId;
-
-            console.log('Cell ID to delete:', action.meta.arg.cellId);
-            console.log('Existing cells:', state.entities);
-            console.log('Remaining cells after deletion:', state.entities);
 
             state.entities = state.entities.filter((cell: any) => cell._id !== cellId);
             toast.success('Cell has been deleted successfully', { ...toastOptions });

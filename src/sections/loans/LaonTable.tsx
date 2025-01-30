@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ActionBtn from '../../components/buttons/ActionBtn';
 import Table from '../../components/tables/Table';
 import { loanData } from '../../constant/menuData';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllLoans } from '../../redux/slice/loanSlice';
+import { Dispatch } from '../../redux/store';
 
 
 const columns = [
@@ -58,6 +61,17 @@ const columns = [
   )
 
 const LoanTable = () => {
+
+  const { loans } = useSelector((state: any) => state.loan);
+
+  const dispatch = useDispatch<Dispatch>()
+
+  useEffect(() => {
+   dispatch(getAllLoans())
+  }, [dispatch])
+
+  console.log(loans)
+
   return (
     <div>
         <Table data={loanData} columns={columns} renderRow={renderRow} status='succeeded'/>

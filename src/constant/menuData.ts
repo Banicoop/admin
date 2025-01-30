@@ -2,52 +2,68 @@ export const menuData = [
       {
         name: 'Dashboard',
         icon: '/vector.svg',
-        url: '/'
+        url: '/',
+        visible: ["super_admin", "loan_admin", 'cell_admin', 'merchant'],
       },
       {
       name: 'Customers',
       icon: '/user.svg',
-      url: '/customers'
+      url: '/customers',
+      visible: ["super_admin"],
     },
     {
       name: 'Transactions',
       icon: '/card.svg',
-      url: '/transactions'
+      url: '/transactions',
+      visible: ["super_admin"],
+    },
+    {
+      name: 'Wallet',
+      icon: '/card.svg',
+      url: '/wallet',
+      visible: ["super_admin"],
     },
     {
       name: 'Saving Cells',
       icon: '/save.svg',
-      url: '/cells'
+      url: '/cells',
+      visible: ["super_admin"],
     },
     {
       name: 'Loans',
       icon: '/save.svg',
-      url: '/loans'
+      url: '/loans',
+      visible: ["super_admin"],
     },
     {
       name: 'Merchants',
       icon: '/people.svg',
-      url: '/merchants'
+      url: '/merchants',
+      visible: ['super_admin', 'merchant'],
     },
     {
       name: 'POS/ATMs',
       icon: '/card-pos.svg',
-      url: '/pos'
+      url: '/pos',
+      visible: ['super_admin'],
     },
     {
       name: 'Help & Support',
       icon: '/help.svg',
-      url: '/help'
+      url: '/help',
+      visible: ['super_admin', "loan_admin", 'cell_admin', 'merchant'],
     },
     {
       name: 'Account Settings',
       icon: '/setting.svg',
-      url: '/settings'
+      url: '/settings',
+      visible: ['super_admin', "loan_admin", 'cell_admin', 'merchant'],
     },
     {
       name: 'Admin',
       icon: '/verify.svg',
-      url: '/admin'
+      url: '/admin',
+      visible: ["super_admin"],
     },
 ]
 

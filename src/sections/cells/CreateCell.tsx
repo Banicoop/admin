@@ -121,13 +121,14 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
     try {
       dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, launchDate,  endDate, type}));
         if (status === 'succeeded') {
-          dispatch(getCells());
           setInputs(initialState);
           onClose(); 
           return;
         }
     } catch (error) {
       console.log(error)
+    } finally {
+      dispatch(getCells());
     }
   }
 
