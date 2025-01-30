@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { FC } from 'react';
 
-const SmallCard = () => {
+
+type CardType = {
+  title: string;
+  text: string;
+}
+
+const SmallCard: FC<CardType> = ({title, text}) => {
   return (
     <div className='flex flex-col'>
-        <span className="text-bgPurple text-sm">Acct. Number</span>
-        <span className="text-bgBlack text-xs">141****402</span>
+        <span className="text-bgPurple text-[10px]">{title}</span>
+        <span className="text-bgBlack text-xs">{text}</span>
     </div>
   )
 }

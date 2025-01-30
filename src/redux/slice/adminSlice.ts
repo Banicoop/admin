@@ -25,7 +25,7 @@ export const sendInvite = createAsyncThunk(
     async ({admin, adminId}: {admin:any, adminId: string | null}, { rejectWithValue }) => {
         try {
             const response = await SERVER.post(`admin/auth/create?adminId=${adminId}`, admin);
-            console.log(response)
+
             return response.data
         } catch (error) {
             console.log(error)

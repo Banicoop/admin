@@ -8,11 +8,11 @@ const Wallet = () => {
        <Info text='Wallet Management Hub' />
 
        <section className="flex flex-wrap gap-6">
-            <WalletCard/>
-            <WalletCard/>
-            <WalletCard/>
-            <WalletCard/>
-            <WalletCard/>
+            <WalletCard title='Investor Wallet'/>
+            <WalletCard title='Loan Disbursement Wallet'/>
+            <WalletCard title='Savings Contribution Wallet'/>
+            <WalletCard title='Operational Expenses Wallet'/>
+            <WalletCard title='Miscellaneous Wallet'/>
        </section>
     </div>
   )

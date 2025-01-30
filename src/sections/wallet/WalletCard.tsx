@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { FC } from 'react'
 import SmallCard from './SmallCard';
+import BtnCard from './Box'
 
-const WalletCard = () => {
+
+type WType = {
+    title: string;
+}
+
+
+const WalletCard:FC<WType> = ({title}) => {
 
   return (
-    <div className='bg-[#E6E6E626] rounded-[28px] p-[30px] h-[343px] w-[47%] flex'>
+    <div className='bg-[#E6E6E626] rounded-[28px] p-[30px] h-[343px] w-[47%] flex gap-5 justify-between'>
         <div className="flex flex-col gap-3 justify-between">
-            <h2 className="text-[#000000]">Investor Wallet</h2>
+            <h2 className="text-[#000000]">{title}</h2>
 
             <div className="flex flex-col gap-2">
                 <h4 className="text-[#6922D1] text-sm font-[400]">Available Balance</h4>
@@ -14,14 +21,16 @@ const WalletCard = () => {
             </div>
 
             <div className="flex items-center gap-4">
-                <SmallCard/>
-                <SmallCard/>
-                <SmallCard/>
+                <SmallCard title='Acct. Number' text='141****402'/>
+                <SmallCard title='Acct. Name' text='Pochi'/>
+                <SmallCard title='Bank Name' text='Bank of NG'/>
             </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-
+        <div className="flex flex-col gap-2 justify-between">
+            <BtnCard className='bg-bgWhite' img='/wallet/minus.png'/>
+            <BtnCard className='bg-bgWhite' img='/wallet/wallet-add.png'/>
+            <BtnCard className='bg-bgPurple' img='/wallet/send-2.png'/>
         </div>
     </div>
   )
