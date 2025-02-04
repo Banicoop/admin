@@ -8,7 +8,7 @@ const Wallet = () => {
        <Info text='Wallet Management Hub' />
 
        <section className="flex flex-wrap gap-6">
-            <WalletCard title='Investor Wallet'/>
+            <WalletCard title='Investor Wallet' url='/investorwallet'/>
             <WalletCard title='Loan Disbursement Wallet'/>
             <WalletCard title='Savings Contribution Wallet'/>
             <WalletCard title='Operational Expenses Wallet'/>

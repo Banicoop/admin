@@ -19,6 +19,7 @@ SERVER.interceptors.request.use(
             const refreshToken = localStorage.getItem('refreshToken');
 
             if (token && isTokenExpired(token) && refreshToken) {
+                //@ts-ignore
                 token = await refreshAccessToken(); // Get new token
             }
 

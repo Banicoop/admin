@@ -157,7 +157,7 @@ const authSlice = createSlice({
             state.accessToken = action.payload; 
         })
         builder.addCase(refreshAccessToken.rejected, (state, action) => {
-            state.accessToken = null; // Clear token on failure
+            state.accessToken = null;
             state.user = null;
             localStorage.clear();
         })
