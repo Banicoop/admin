@@ -83,7 +83,6 @@ const Cells = () => {
              {
               (!cells || cells?.length === 0 ) && <div className="flex w-full justify-center items-center">
                 <EmptyState text='No Created Cell'/>
-                {/* <h4 className='text-[purple] text-xl mt-5'>No Created cell</h4> */}
               </div>
             }
             {
