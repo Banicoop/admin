@@ -2,9 +2,9 @@ import React, { ChangeEventHandler, FC } from 'react';
 
 type Itext = {
     text: string;
-    onChange: ChangeEventHandler;
-    name: string;
-    value: string;
+    onChange?: ChangeEventHandler;
+    name?: string;
+    value?: string;
 }
 
 const TextArea:FC<Itext> = ({text, onChange, name, value}) => {
