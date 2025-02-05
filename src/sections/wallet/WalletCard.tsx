@@ -1,19 +1,21 @@
 import React, { FC } from 'react'
 import SmallCard from './SmallCard';
 import BtnCard from './Box'
+import { Link } from 'react-router-dom';
 
 
 type WType = {
     title: string;
+    url?: string;
 }
 
 
-const WalletCard:FC<WType> = ({title}) => {
+const WalletCard:FC<WType> = ({title, url}) => {
 
   return (
     <div className='bg-[#E6E6E626] rounded-[28px] p-[30px] h-[343px] w-[47%] flex gap-5 justify-between'>
         <div className="flex flex-col gap-3 justify-between">
-            <h2 className="text-[#000000]">{title}</h2>
+            <Link to={url ?? "#"} className="text-[#000000]">{title}</Link>
 
             <div className="flex flex-col gap-2">
                 <h4 className="text-[#6922D1] text-sm font-[400]">Available Balance</h4>

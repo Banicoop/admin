@@ -69,6 +69,41 @@ export const verifyLogin = createAsyncThunk('auth/otp',
         }
     }
 )
+
+
+
+export const refreshAccessToken = createAsyncThunk(
+    'auth/refreshToken',
+    async (_, { rejectWithValue, dispatch }) => {
+        try {
+            const refreshToken = localStorage.getItem("refreshToken");
+            if (!refreshToken) throw new Error("No refresh token found");
+
+
+            const userString =  localStorage.getItem('user');
+
+            const user = userString ? JSON.parse(userString) : null
+
+            const response = await SERVER.post("auth/refresh-access-token", { refreshToken, userId: user?.payload?._id });
+
+            const { accessToken } = response.data;
+
+            localStorage.setItem("token", accessToken);
+
+            dispatch(setAuth({
+                user: JSON.parse(localStorage.getItem("user") || "{}"),
+                accessToken,
+                refreshToken
+            }));
+
+            return accessToken;
+        } catch (error: any) {
+            dispatch(logout()); 
+            return rejectWithValue(error.response?.data || "Failed to refresh token");
+        }
+    }
+);
+
   
 
 const authSlice = createSlice({
@@ -115,6 +150,16 @@ const authSlice = createSlice({
         builder.addCase(verifyLogin.rejected, (state, action) => {
             state.status = 'failed';
             toast.error('OTP not valid or expired', { ...toastOptions })
+        })
+
+
+        builder.addCase(refreshAccessToken.fulfilled, (state, action) => {
+            state.accessToken = action.payload; 
+        })
+        builder.addCase(refreshAccessToken.rejected, (state, action) => {
+            state.accessToken = null;
+            state.user = null;
+            localStorage.clear();
         })
     },
 })
