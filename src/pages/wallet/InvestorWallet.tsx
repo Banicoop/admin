@@ -10,6 +10,7 @@ import LoanTable from '../../sections/loans/LaonTable';
 import DeleteModal from '../../components/modals/DeleteModal';
 import { AuthInput } from '../../components/inputs/Input';
 import TextArea from '../../components/inputs/TextArea';
+import OtpInput from '../../components/inputs/OtpInput';
 
 
 
@@ -21,6 +22,8 @@ const InvestorWallet = () => {
 
     const [activeItem, setActiveItem] = useState('Today');
     const [addFunds, setAddFunds] = useState(false);
+    const [otpsent, setOtpsent] = useState(false);
+    const [successful, setSuccessful]  = useState(false);
 
   return (
     <>
@@ -71,19 +74,51 @@ const InvestorWallet = () => {
         </div>
     </div>
     <DeleteModal open={addFunds} onClose={() => setAddFunds(false)}>
-        <div className="flex flex-col gap-4 p-6 w-[700px]">
+        <div className="flex flex-col gap-4 p-6 max-w-[700px]">
             <img src="/admin/x.svg" alt="" className="h-[16px] w-[16px] flex ml-auto cursor-pointer" onClick={() => setAddFunds(false)} />
-            <h4 className=''>Send Funds</h4>
+            <h4 className='text-[#000000] font-[500] text-[16px]'>{otpsent ? 'Enter Pin': 'Send Funds'}</h4>
+            
+            {!otpsent ?
+            <>
+              <AuthInput placeholder='Enter Account/Wallet Number' type='' onChange={() => {}}/>
+              <AuthInput placeholder='Enter Amount' type='' onChange={() => {}}/>
+              <AuthInput placeholder='Select Bank/Wallet' type='' onChange={() => {}}/>
 
-            <AuthInput placeholder='Enter Account/Wallet Number' type='' onChange={() => {}}/>
-            <AuthInput placeholder='Enter Amount' type='' onChange={() => {}}/>
-            <AuthInput placeholder='Select Bank/Wallet' type='' onChange={() => {}}/>
+              <div className="">
+                <TextArea text='Narration'/>
+              </div>
 
-            <div className="">
-              <TextArea text='Narration'/>
+              <ActionBtn className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-[16px] bg-bgPurple text-bgWhite font-[400] h-[48px] w-[160px]' text='Proceed' onClick={() => setOtpsent(true)}  img='/wallet/send.svg' className2='h-[16px] w-[16px]'/>
+            </>: 
+            <div className="flex flex-col gap-7">
+              <OtpInput onChange={() => {}} className=''/>
+
+                <div className="flex justify-center items-center gap-[20px]">
+                <ActionBtn className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-[#6922D10A] text-bgPurple font-[400] h-[48px] w-[160px]' text='Go Back' onClick={() => setOtpsent(false)}  />
+
+                <ActionBtn className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-bgPurple text-bgWhite font-[400] h-[48px] w-[160px]' text='Proceed' onClick={() => setOtpsent(true)} />
+                </div>
             </div>
+              }
 
-            <ActionBtn className='flex items-center self-center mx-auto w-max gap-3  shadow-lg px-6 py-4 border-[1px] rounded-[16px] bg-bgPurple text-bgWhite font-[400]' text='Proceed' onClick={() => {}}  img='/wallet/send.svg' className2='h-[16px] w-[16px]'/>
+              {successful &&
+                <div className="flex flex-col gap-4 p-6 max-w-[700px]">
+                  <img src="/admin/x.svg" alt="" className="h-[16px] w-[16px] flex ml-auto cursor-pointer" onClick={() => setAddFunds(false)} />
+
+                  <div className="flex flex-col justify-center items-center gap-5">
+                    <img src="/wallet/archive-tick.svg" alt="" className="h-[64px] w-[64px]" />
+
+                    <h4>Transaction Successful</h4>
+                    <span className="">Your transaction has been successfully completed.</span>
+
+                    <div className="flex justify-center items-center gap-[20px]">
+                      <ActionBtn className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-[#6922D10A] text-bgPurple font-[400] h-[48px] w-[160px]' text='Go Back' onClick={() => setOtpsent(false)}  />
+
+                      <ActionBtn className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-bgPurple text-bgWhite font-[400] h-[48px] w-[160px]' text='Proceed' onClick={() => setOtpsent(true)} />
+                      </div>
+                  </div>
+                </div>
+              }
         </div>
         
     </DeleteModal>
