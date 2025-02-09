@@ -2,7 +2,9 @@ import React, { FC } from 'react';
 import ActionBtn from '../../components/buttons/ActionBtn';
 import { Link } from 'react-router-dom';
 import moment from 'moment'
-import SERVER from '../../utils/server';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from '../../redux/store';
+import { approveLoan, rejectLoan } from '../../redux/slice/loanSlice';
 
 
 type ILoan = {
@@ -13,24 +15,16 @@ type ILoan = {
 
 const LoanCard:FC<ILoan> = ({className, loan, className1}) => {
 
+  const dispatch = useDispatch<Dispatch>()
 
-  const acceptLoan = async () => {
-    try {
-      const res = await SERVER.patch(`admin/loans/${loan._id}/approve`);
-      return res.data
-    } catch (error) {
-      
-    }
+
+  const AcceptLoan = async () => {
+    dispatch(approveLoan(loan._id))
   }
 
 
-  const rejectLoan = async () => {
-    try {
-      const res = await SERVER.patch(`admin/loans/${loan._id}/approve`);
-      return res.data
-    } catch (error) {
-      
-    }
+  const RejectLoan = async () => {
+    dispatch(rejectLoan(loan._id))
   }
 
 
@@ -38,7 +32,7 @@ const LoanCard:FC<ILoan> = ({className, loan, className1}) => {
   return (
     // <div className="flex flex-col">
 
-      <div className={`${className1}`}>
+      // <div className={`${className1}`}>
 
             <div className={`flex p-2 gap-2 md:gap-4 rounded-xl ${className}`}>
               <div className="flex flex-col gap-3">
@@ -52,16 +46,16 @@ const LoanCard:FC<ILoan> = ({className, loan, className1}) => {
                     <div className="flex gap-4 items-center justify-end">
                         <ActionBtn 
                           text='Accept' 
-                          className='text-bgPurple bg-bgR px-4 lg:px-6 py-2 rounded-3xl border-[1px] cursor-pointer' onClick={acceptLoan}/>
+                          className='text-bgPurple bg-bgR px-4 lg:px-6 py-2 rounded-3xl border-[1px] cursor-pointer' onClick={AcceptLoan}/>
 
                         <ActionBtn 
                           text='Reject' 
-                          className='px-4 lg:px-6 py-2 rounded-3xl border-[1px] cursor-pointer text-[#6B6B6B]' onClick={rejectLoan}/>
+                          className='px-4 lg:px-6 py-2 rounded-3xl border-[1px] cursor-pointer text-[#6B6B6B]' onClick={RejectLoan}/>
                     </div>
                 </div>
             </div>
 
-      </div>
+      // </div>
     // </div>
   )
 }

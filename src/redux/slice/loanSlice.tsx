@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import SERVER from "../../utils/server";
-// import { toast } from "react-toastify";
-// import { toastOptions } from "../../utils/toastOptions";
+import { toast } from "react-toastify";
+import { toastOptions } from "../../utils/toastOptions";
 
 
 interface LoanState {
@@ -32,16 +32,46 @@ export const getAllLoans = createAsyncThunk(
 
 
 
-// export const getLoanDetails = createAsyncThunk(
-//     'loan/getLoanDetails', 
-//     async (Id: string, {rejectWithValue}) => {
-//         try {
+export const getLoanDetails = createAsyncThunk(
+    'loan/getLoanDetails', 
+    async (Id: string, {rejectWithValue}) => {
+        try {
             
-//         } catch (error) {
-//             return rejectWithValue(error)
-//         }
-//     }
-// )
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
+
+export const approveLoan = createAsyncThunk(
+    'loan/approveLoan', 
+    async (loanId: string, { rejectWithValue }) => {
+        try {
+            const res = await SERVER.patch(`admin/loans/${loanId}/approve`);
+            return { loanId, updatedLoan: res.data };
+        } catch (error: any) {
+            const err = error?.response?.data?.message
+            toast.error(`${err}`, {...toastOptions})
+            return rejectWithValue(error);
+        }
+    }
+);
+
+
+export const rejectLoan = createAsyncThunk(
+    'loan/rejectLoan', 
+    async (loanId: string, { rejectWithValue }) => {
+        try {
+            const res = await SERVER.patch(`admin/loans/${loanId}/reject`);
+            return { loanId, updatedLoan: res.data };
+        } catch (error: any) {
+            const err = error?.response?.data?.message
+            toast.error(`${err}`, {...toastOptions})
+            return rejectWithValue(error);
+        }
+    }
+);
 
 
 
@@ -66,6 +96,25 @@ const loanSlice = createSlice({
         builder.addCase(getAllLoans.rejected, (state) => {
             state.status = 'failed';
         })
+
+        builder.addCase(approveLoan.pending, (state) => {
+            state.status = 'pending';
+            
+        })
+        builder.addCase(approveLoan.fulfilled, (state, action) => {
+            state.status = 'succeeded'
+            state.loans = state.loans.map(loan => 
+                loan._id === action.payload.loanId ? action.payload.updatedLoan : loan
+            );
+            toast.success('Loan accepted successfully', {...toastOptions})
+        });
+        builder.addCase(rejectLoan.fulfilled, (state, action) => {
+            state.status = 'succeeded'
+            state.loans = state.loans.map(loan => 
+                loan._id === action.payload.loanId ? action.payload.updatedLoan : loan
+            );
+            toast.success('Loan rejected successfully', {...toastOptions})
+        });
     }
 })
 
