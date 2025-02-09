@@ -11,6 +11,7 @@ import DeleteModal from '../../components/modals/DeleteModal';
 import { AuthInput } from '../../components/inputs/Input';
 import TextArea from '../../components/inputs/TextArea';
 import OtpInput from '../../components/inputs/OtpInput';
+import { loanData } from '../../constant/menuData';
 
 
 
@@ -70,7 +71,7 @@ const InvestorWallet = () => {
                 </div>
                 <ExportBtn text='Export'/>
             </div>
-        <LoanTable/>
+        <LoanTable loanData={loanData}/>
         </div>
     </div>
     <DeleteModal open={addFunds} onClose={() => setAddFunds(false)}>
@@ -78,7 +79,7 @@ const InvestorWallet = () => {
             <img src="/admin/x.svg" alt="" className="h-[16px] w-[16px] flex ml-auto cursor-pointer" onClick={() => setAddFunds(false)} />
             <h4 className='text-[#000000] font-[500] text-[16px]'>{otpsent ? 'Enter Pin': 'Send Funds'}</h4>
             
-            {!otpsent ?
+            {!successful && !otpsent ?
             <>
               <AuthInput placeholder='Enter Account/Wallet Number' type='' onChange={() => {}}/>
               <AuthInput placeholder='Enter Amount' type='' onChange={() => {}}/>
@@ -96,7 +97,7 @@ const InvestorWallet = () => {
                 <div className="flex justify-center items-center gap-[20px]">
                 <ActionBtn className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-[#6922D10A] text-bgPurple font-[400] h-[48px] w-[160px]' text='Go Back' onClick={() => setOtpsent(false)}  />
 
-                <ActionBtn className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-bgPurple text-bgWhite font-[400] h-[48px] w-[160px]' text='Proceed' onClick={() => setOtpsent(true)} />
+                <ActionBtn className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-bgPurple text-bgWhite font-[400] h-[48px] w-[160px]' text='Proceed' onClick={() => setSuccessful(true)} />
                 </div>
             </div>
               }
