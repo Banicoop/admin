@@ -19,7 +19,8 @@ const Signin = () => {
     const [email, setEnail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: any) => {
+      e.preventDefault()
       if(!email || !password){
         toast.warn('Fields cannot be empty', {...toastOptions});
         return;
@@ -33,7 +34,7 @@ const Signin = () => {
 
 
   return (
-    <div className='flex flex-col items-center justify-center w-full h-[80vh] md:h-full p-3 lg:p-[2rem] gap-[1rem] lg:gap-[2rem]'>
+    <form className='flex flex-col items-center justify-center w-full h-[80vh] md:h-full p-3 lg:p-[2rem] gap-[1rem] lg:gap-[2rem]'>
         <h1 className='hidden text-xl md:text-2xl lg:text-5xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Welcome to <span className='text-bgPurple'>Banicoop</span></h1>
         <h1 className='hidden text-xl md:text-2xl lg:text-5xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Admin Dashboard</h1>
 
@@ -54,7 +55,7 @@ const Signin = () => {
               onClick={handleSubmit} 
               text={`${status === 'pending' ? 'Processing...': 'Continue'}`}/>
         </div>
-    </div>
+    </form>
   )
 }
 

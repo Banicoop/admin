@@ -31,12 +31,26 @@ export const getAllLoans = createAsyncThunk(
 )
 
 
+export const getPendingLoans = createAsyncThunk(
+    'loan/getPendingLoan',
+    async (_, { rejectWithValue })  => {
+        try {
+            const res = await SERVER.get('admin/loans?status=pending');
+            return res.data;
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
+
 
 export const getLoanDetails = createAsyncThunk(
     'loan/getLoanDetails', 
     async (Id: string, {rejectWithValue}) => {
         try {
-            
+            const res = await SERVER.get(`admin/loans/${Id}`);
+            return res.data;
         } catch (error) {
             return rejectWithValue(error)
         }
@@ -97,9 +111,20 @@ const loanSlice = createSlice({
             state.status = 'failed';
         })
 
+
+        builder.addCase(getPendingLoans.pending, (state) => {
+            state.status = 'pending';
+        })
+        builder.addCase(getPendingLoans.fulfilled, (state, action) => {
+            state.status = 'succeeded'
+            state.loans = action.payload;
+        })
+        builder.addCase(getPendingLoans.rejected, (state) => {
+            state.status = 'failed';
+        })
+
         builder.addCase(approveLoan.pending, (state) => {
             state.status = 'pending';
-            
         })
         builder.addCase(approveLoan.fulfilled, (state, action) => {
             state.status = 'succeeded'

@@ -19,12 +19,12 @@ const LoanCard:FC<ILoan> = ({className, loan, className1}) => {
 
 
   const AcceptLoan = async () => {
-    dispatch(approveLoan(loan._id))
+    dispatch(approveLoan(loan?._id))
   }
 
 
   const RejectLoan = async () => {
-    dispatch(rejectLoan(loan._id))
+    dispatch(rejectLoan(loan?._id))
   }
 
 
@@ -41,7 +41,7 @@ const LoanCard:FC<ILoan> = ({className, loan, className1}) => {
               </div>
                 
                 <div className="flex flex-col gap-3 justify-center my-auto">
-                    <Link to='/loans/application/:id' className="font-[400]"><strong>{loan?.name || 'A Customr'}</strong> applied for a loan of <strong>{loan?.loanAmount}</strong></Link>
+                    <Link to='/loans/application/:id' className="font-[400]"><strong>{loan?.userId?.firstName} {loan?.userId?.lastName}</strong> applied for a loan of <strong>{loan?.loanAmount}</strong></Link>
 
                     <div className="flex gap-4 items-center justify-end">
                         <ActionBtn 

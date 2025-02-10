@@ -68,7 +68,6 @@ export const deleteCell = createAsyncThunk(
         try {
             await SERVER.delete(`admin/contribution/cell?id=${cellId}`);
         } catch (error: any) {
-
             const err = error?.response?.data?.message;
             toast.error(`${err}`, {...toastOptions})
             return rejectWithValue('Failed to delete cell');

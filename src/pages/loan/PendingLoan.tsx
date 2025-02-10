@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 // import { loans1 } from '../../constant/menuData';
 import LoanCard from '../../sections/loans/LoanCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllLoans } from '../../redux/slice/loanSlice';
+import {  getPendingLoans } from '../../redux/slice/loanSlice';
 import { Dispatch } from '../../redux/store';
 import EmptyState from '../../components/EmptyState';
 import { CircularProgress } from '@mui/material';
@@ -17,7 +17,7 @@ const PendingLoan = () => {
   const dispatch = useDispatch<Dispatch>();
 
   useEffect(() => {
-   dispatch(getAllLoans())
+   dispatch(getPendingLoans())
   }, [dispatch])
 
   let num = loans?.data?.length || 0
