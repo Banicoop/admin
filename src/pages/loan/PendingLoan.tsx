@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 // import { loans1 } from '../../constant/menuData';
 import LoanCard from '../../sections/loans/LoanCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllLoans } from '../../redux/slice/loanSlice';
+import {  getPendingLoans } from '../../redux/slice/loanSlice';
 import { Dispatch } from '../../redux/store';
 import EmptyState from '../../components/EmptyState';
 import { CircularProgress } from '@mui/material';
@@ -17,17 +17,17 @@ const PendingLoan = () => {
   const dispatch = useDispatch<Dispatch>();
 
   useEffect(() => {
-   dispatch(getAllLoans())
+   dispatch(getPendingLoans())
   }, [dispatch])
 
-  let num = loans?.data?.length;
+  let num = loans?.data?.length || 0
 
 
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] my-5'>
       <h1 className='text=sm font-[400] text-[#000]'>{`Pending Application (${num})`}</h1>
 
-      <div className="flex flex-col gap-10  ">
+      <div className="flex flex-col ">
         { status === 'pending' ? 
 
         <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:

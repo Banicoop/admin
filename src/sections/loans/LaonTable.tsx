@@ -43,7 +43,7 @@ const columns = [
         <td className=''>
             <div className="flex items-center gap-3">
                 <img src={item.img || '/loan/profile.png'} alt="" className="h-6 w-6 rounded-full" />
-                <span className="">{item.name}</span>
+                <span className="">{item?.userId?.firstName} {item?.userId?.lastName}</span>
             </div>
         </td>
         <td className=''>{`₦${item.loanAmount}`}</td>
