@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ActionBtn from '../../components/buttons/ActionBtn';
 import ApplicationCard from '../../sections/loans/ApplicationCard';
 import LoadWidgetCard from '../../sections/loans/LoadWidgetCard';
@@ -8,16 +8,36 @@ import Info from '../../components/infos/Info';
 import LoanHistoryTable from '../../sections/loans/LoanHistoryTable';
 import ReferalCard from '../../sections/loans/ReferalCard';
 import EmptyState from '../../components/EmptyState';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from '../../redux/store';
+import { getLoanDetails } from '../../redux/slice/loanSlice';
 
 
 
 const LoanApplicationDetails = () => {
 
 
-const [ approved, setApproved ] = useState(false);
+  const { id } = useParams();
+
+  const dispatch = useDispatch<Dispatch>();
+  const { status, loans } = useSelector((state: any) => state.loan);
+  const loan = loans.length ? loans[0] : null;
+
+  console.log(loan?.payload?.loan);
+
+  var refs = false;
+  const [ approved, setApproved ] = useState(false);
 
 
-var refs = false;
+  useEffect(() => {
+    if (id) {
+      dispatch(getLoanDetails(id));
+  }
+  }, [id, dispatch])
+
+
+
 
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] my-6'>
