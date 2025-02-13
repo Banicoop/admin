@@ -30,7 +30,7 @@ const LoanCard:FC<ILoan> = ({className, loan, className1}) => {
 
 
   return (
-    <div className={`flex p-2 gap-2 md:gap-4 rounded-xl ${className}`}>
+    <div className={`flex p-2 gap-2 md:gap-4 rounded-xl w-[400px] ${className}`}>
       <div className="flex flex-col gap-3">
         <img src="/loan/profile.png" alt="" className="h-[48px] w-[48px] rounded-full object-cover mt-3" />
         <span className='text-[#B5B5B5] text-[10px]'>{moment(loan?.createdAt).format("MMM Do YY")}</span>
