@@ -27,7 +27,7 @@ const PendingLoan = () => {
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] my-5'>
       <h1 className='text=sm font-[400] text-[#000]'>{`Pending Application (${num})`}</h1>
 
-      <div className="flex flex-col ">
+      <div className="flex flex-col md:flex-row w-full gap-[20px]">
         { status === 'pending' ? 
 
         <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:

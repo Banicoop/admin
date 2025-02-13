@@ -123,6 +123,18 @@ const loanSlice = createSlice({
             state.status = 'failed';
         })
 
+
+        builder.addCase(getLoanDetails.pending, (state) => {
+            state.status = 'pending';
+        });
+        builder.addCase(getLoanDetails.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.loans = [action.payload]; 
+        });
+        builder.addCase(getLoanDetails.rejected, (state) => {
+            state.status = 'failed';
+        });
+
         builder.addCase(approveLoan.pending, (state) => {
             state.status = 'pending';
         })
