@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import ActionBtn from '../../components/buttons/ActionBtn';
 import ApplicationCard from '../../sections/loans/ApplicationCard';
 import LoadWidgetCard from '../../sections/loans/LoadWidgetCard';
@@ -11,7 +11,7 @@ import EmptyState from '../../components/EmptyState';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from '../../redux/store';
-import { getLoanDetails } from '../../redux/slice/loanSlice';
+import { approveLoan, getLoanDetails, rejectLoan } from '../../redux/slice/loanSlice';
 import moment from 'moment';
 
 
@@ -22,20 +22,44 @@ const LoanApplicationDetails = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch<Dispatch>();
-  const { status, loans } = useSelector((state: any) => state.loan);
+  const { loans } = useSelector((state: any) => state.loan);
   const loan = loans.length ? loans[0] : null;
 
-  console.log(loan?.payload);
+
+  const startDate = new Date(loan?.payload?.loan.updatedAt).getTime()
+  const endDate = new Date(loan?.payload?.loan.dueDate).getTime()
+
+
+  let duration;
+
+  if (!isNaN(startDate) && !isNaN(endDate)){
+    const diffInMs = endDate - startDate
+    duration = Math.round(diffInMs / (1000 * 60 * 60 * 24));
+  } else {
+    duration = 0;
+  }
+
+
 
   var refs = false;
-  const [ approved, setApproved ] = useState(false);
+  // const [ approved, setApproved ] = useState(false);
 
 
   useEffect(() => {
     if (id) {
       dispatch(getLoanDetails(id));
   }
-  }, [id, dispatch])
+  }, [id, dispatch]);
+
+
+  const AcceptLoan = () => {
+    dispatch(approveLoan(loan?._id))
+  }
+
+
+  const RejecttLoan = () => {
+    dispatch(rejectLoan(loan?._id))
+  }
 
 
 
@@ -56,10 +80,10 @@ const LoanApplicationDetails = () => {
 
             <div className="flex items-center gap-4">
               {
-                approved ? <ExportBtn text='Export' onClick={() => {}}/>:
+                loan?.payload?.loan.status !== 'pending' ? <ExportBtn text='Export' onClick={() => {}}/>:
                 <>
-                  <ActionBtn text='Approve Loan' onClick={() => setApproved(true)} className='bg-[#6922D10A] text-bgPurple px-6 py-2 rounded-2xl text-[12px] font-[400] cursor-pointer' />
-                  <ActionBtn text='Reject Loan' onClick={() => {}} className='px-6 py-2 rounded-2xl text-[12px] font-[400] border-[1px] text-[#6B6B6B] cursor-pointer'/>
+                  <ActionBtn text='Approve Loan' onClick={AcceptLoan} className='bg-[#6922D10A] text-bgPurple px-6 py-2 rounded-2xl text-[12px] font-[400] cursor-pointer' />
+                  <ActionBtn text='Reject Loan' onClick={RejecttLoan} className='px-6 py-2 rounded-2xl text-[12px] font-[400] border-[1px] text-[#6B6B6B] cursor-pointer'/>
                 </>
               }
             </div>
@@ -70,13 +94,13 @@ const LoanApplicationDetails = () => {
               <ApplicationCard text={`NGN ${loan?.payload?.loan?.loanAmount}`} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount}`}/>
               <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}`} title='Submission Date' title1='Monthly Repayment' text1='N13,000'/>
               <ApplicationCard text={`NGN ${loan?.payload?.user?.salary}`} title='Monthly Income' title1='Referrer' text1='Dada Oladimeji' img='/loan/profile.png'/>
-              <ApplicationCard text='12 months' title='Repayment Tenure' title1='Referrer Code' text1='Banicoop12Dada'/>
+              <ApplicationCard text={`${duration} days`} title='Repayment Tenure' title1='Referrer Code' text1='Banicoop12Dada'/>
             </div>
 
         </div>
       </div>
 
-          { approved &&
+          { loan?.payload?.loan.status !== 'pending'  &&
             <div className="flex gap-2 items-center">
               <label htmlFor="progress" className='text-[#000] text-xs font-[500]'>Progress</label>
                 <Progress/>
@@ -120,8 +144,12 @@ const LoanApplicationDetails = () => {
             <LoadWidgetCard text='Proof of Income'>
               <div className="p-4 flex items-center h-full">
                 <div className="flex items-center gap-3">
+                <a href={loan?.payload?.user?.proofOfSalary} download target="_blank" rel="noopener noreferrer">
                   <img src="/loan/image.png" alt="" className="h-[16px] w-[16px]" />
-                  <span className="">012223.img</span>
+                </a>
+                <a href={loan?.payload?.user?.proofOfSalary} download target="_blank" rel="noopener noreferrer">
+                  <span className="">Download</span>
+                </a>
                 </div>
               </div>
             </LoadWidgetCard>
