@@ -70,6 +70,8 @@ const Cells = () => {
             <Info text='Cell information'/>
             <ExportBtn text='Create New Cell' onClick={() => setOpenModal(true)}/>
           </div>
+
+          { (cells?.length > 0) &&
           <div className="hidden md:flex items-center justify-between">
               <Search onClick={() => {}} placeholder='Search for Cell'/>
               {list.map((i) => (
@@ -77,6 +79,7 @@ const Cells = () => {
               ))
               }
           </div>
+          }
 
           <div className="flex flex-col justify-between md:flex-row md:flex-wrap gap-4 w-full">
             {status === 'pending' && <CircularProgress sx={{display: 'flex', margin: 'auto'}}/>  }

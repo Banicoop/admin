@@ -9,11 +9,10 @@ import { approveLoan, rejectLoan } from '../../redux/slice/loanSlice';
 
 type ILoan = {
     className: string;
-    className1?: string;
     loan: any;
 }
 
-const LoanCard:FC<ILoan> = ({className, loan, className1}) => {
+const LoanCard:FC<ILoan> = ({className, loan }) => {
 
   const dispatch = useDispatch<Dispatch>()
 
@@ -30,9 +29,9 @@ const LoanCard:FC<ILoan> = ({className, loan, className1}) => {
 
 
   return (
-    <div className={`flex p-2 gap-2 md:gap-4 rounded-xl w-[400px] ${className}`}>
-      <div className="flex flex-col gap-3">
-        <img src="/loan/profile.png" alt="" className="h-[48px] w-[48px] rounded-full object-cover mt-3" />
+    <div className={`flex p-2 gap-2 rounded-xl w-full ${className}`}>
+      <div className="flex flex-col gap-3 w-[70px]">
+        <img src="/loan/profile.png" alt="" className="h-[40px] w-[40px] rounded-full object-cover mt-3" />
         <span className='text-[#B5B5B5] text-[10px]'>{moment(loan?.createdAt).format("MMM Do YY")}</span>
       </div>
         

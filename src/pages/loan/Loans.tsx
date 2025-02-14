@@ -87,7 +87,7 @@ const Loans = () => {
           </div>
 
 
-          <div className="flex-1 flex w-full">
+          <div className="flex-1 flex w-[300px]">
             <PendingApp/>
           </div>
       </div>
