@@ -8,8 +8,9 @@ import Info from '../../components/infos/Info';
 import LoanHistoryTable from '../../sections/loans/LoanHistoryTable';
 import ReferalCard from '../../sections/loans/ReferalCard';
 import EmptyState from '../../components/EmptyState';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { ArrowBack } from '@mui/icons-material';
 import { Dispatch } from '../../redux/store';
 import { approveLoan, getLoanDetails, rejectLoan } from '../../redux/slice/loanSlice';
 import moment from 'moment';
@@ -17,6 +18,9 @@ import moment from 'moment';
 
 
 const LoanApplicationDetails = () => {
+
+
+  const navigate = useNavigate()
 
 
   const { id } = useParams();
@@ -42,7 +46,6 @@ const LoanApplicationDetails = () => {
 
 
   var refs = false;
-  // const [ approved, setApproved ] = useState(false);
 
 
   useEffect(() => {
@@ -157,7 +160,10 @@ const LoanApplicationDetails = () => {
 
           <div className="flex flex-col">
             <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+              <ArrowBack style={{ color: 'gray', cursor: 'ponter' }} onClick={() => navigate('/loan/pending')}/>
               <Info text='Loan History & Repayment'/>
+            </div>
               <ExportBtn text='Export' onClick={() => {}}/>
             </div>
               <LoanHistoryTable loanHistory={loan?.payload?.loanHistory} />

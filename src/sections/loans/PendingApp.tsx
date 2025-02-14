@@ -24,7 +24,7 @@ const PendingApp = () => {
   return (
     <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
         <div className="flex items-center justify-between">
-            <span className='text-sm font-[400]'>{`Pending Application ${num}`}</span>
+            <span className='text-sm font-[400]'>{`Pending Application (${num})`}</span>
             <Link to='/loan/pending' className='text-[#6922D1] underline cursor-pointer'>View All</Link>
         </div>
 
