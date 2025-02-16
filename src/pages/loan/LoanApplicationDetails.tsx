@@ -56,15 +56,13 @@ const LoanApplicationDetails = () => {
 
 
   const AcceptLoan = () => {
-    dispatch(approveLoan(loan?._id))
+    dispatch(approveLoan(loan?.payload?.loan?._id))
   }
 
 
   const RejecttLoan = () => {
-    dispatch(rejectLoan(loan?._id))
+    dispatch(rejectLoan(loan?.payload?.loan?._id))
   }
-
-
 
 
   return (
@@ -147,19 +145,12 @@ const LoanApplicationDetails = () => {
             <LoadWidgetCard text='Proof of Income'>
               <div className="p-4 flex items-center h-full">
                 <div className="flex items-center gap-3">
-                <a 
-                  href={loan?.payload?.user.proofOfSalary.replace("/upload/", "/upload/f_pdf/")} 
-                  download="proof-of-salary.pdf" 
-                  target="_blank" 
-                  rel="noopener noreferrer">
-                  <img src="/loan/image.png" alt="" className="h-[16px] w-[16px]" />
+                <a href={loan.payload.user.proofOfSalary} download="proof-of-salary.pdf">
+                  <img src="/loan/image.png" alt="Download Proof" className="h-[16px] w-[16px] cursor-pointer" />
                 </a>
-                <a 
-                  href={loan?.payload?.user.proofOfSalary.replace("/upload/", "/upload/f_pdf/")} 
-                  download="proof-of-salary.pdf" 
-                  target="_blank" 
-                  rel="noopener noreferrer">
-                  <span className="">Download</span>
+
+                <a href={loan.payload.user.proofOfSalary} download="proof-of-salary.pdf" className="text-blue-500 underline">
+                  Download
                 </a>
                 </div>
               </div>

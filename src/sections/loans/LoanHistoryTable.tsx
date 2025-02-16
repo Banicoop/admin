@@ -1,6 +1,6 @@
 import React from 'react';
 import ActionBtn from '../../components/buttons/ActionBtn';
-import { loanHistoryData } from '../../constant/data';
+// import { loanHistoryData } from '../../constant/data';
 import Table from '../../components/tables/Table';
 import EmptyState from '../../components/EmptyState';
 
@@ -49,7 +49,7 @@ const columns = [
 
 const LoanHistoryTable = ({loanHistory}: {loanHistory: any[]}) => {
 
-  console.log(loanHistory);
+  // console.log(loanHistory);
 
   return (
     <>
