@@ -42,7 +42,7 @@ const PendingLoan = () => {
         <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:
         Array.isArray(loans?.data) ?
           loans?.data?.map((loan: any) => (
-            <LoanCard className='border-[1px] rounded-lg w-[320px] md:w-max lg:w-[32%] h-[144px] flex justify-center my-3' key={loan?._id} loan={loan} /> 
+            <LoanCard className='border-[1px] rounded-lg w-[320px] md:w-max lg:w-[32%] h-[144px] flex justify-center my-3' key={loan?.payload?.loan?._id} loan={loan} /> 
           )): 
           <EmptyState text='No Pending Loan' />
         }

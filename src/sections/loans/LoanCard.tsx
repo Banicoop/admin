@@ -18,12 +18,12 @@ const LoanCard:FC<ILoan> = ({className, loan }) => {
 
 
   const AcceptLoan = async () => {
-    dispatch(approveLoan(loan?._id))
+    dispatch(approveLoan(loan?.payload?.loan?._id))
   }
 
 
   const RejectLoan = async () => {
-    dispatch(rejectLoan(loan?._id))
+    dispatch(rejectLoan(loan?.payload?.loan?._id))
   }
 
 

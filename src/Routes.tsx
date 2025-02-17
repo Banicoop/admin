@@ -178,7 +178,7 @@ const router = createBrowserRouter([
         element: <Wallet/>
       },
       {
-        path: '/investorwallet',
+        path: '/wallet/:id',
         element: <InvestorWallet/>
       },
     ]

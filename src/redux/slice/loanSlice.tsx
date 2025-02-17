@@ -140,16 +140,25 @@ const loanSlice = createSlice({
         })
         builder.addCase(approveLoan.fulfilled, (state, action) => {
             state.status = 'succeeded'
-            state.loans = state.loans.map(loan => 
-                loan._id === action.payload.loanId ? action.payload.updatedLoan : loan
+            state.loans = state.loans.map(loan =>
+              loan.payload.loan._id === action.meta.arg ? { ...loan, payload: { ...loan.payload, loan: { ...loan.payload.loan, approvalStatus: 'approved' } } } : loan
             );
             toast.success('Loan accepted successfully', {...toastOptions})
+
+            // state.loans = state.loans.map(loan => 
+            //     loan._id === action.payload.loanId ? action.payload.updatedLoan : loan
+            // );
+            // .addCase(approveLoan.fulfilled, (state, action) => {
+                //   })
         });
         builder.addCase(rejectLoan.fulfilled, (state, action) => {
             state.status = 'succeeded'
-            state.loans = state.loans.map(loan => 
-                loan._id === action.payload.loanId ? action.payload.updatedLoan : loan
-            );
+            state.loans = state.loans.map(loan =>
+                loan.payload.loan._id === action.meta.arg ? { ...loan, payload: { ...loan.payload, loan: { ...loan.payload.loan, approvalStatus: 'rejected' } } } : loan
+              )
+            // state.loans = state.loans.map(loan => 
+            //     loan._id === action.payload.loanId ? action.payload.updatedLoan : loan
+            // );
             toast.success('Loan rejected successfully', {...toastOptions})
         });
     }
