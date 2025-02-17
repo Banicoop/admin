@@ -12,6 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ArrowBack } from '@mui/icons-material';
 import { Dispatch } from '../../redux/store';
+import { CircularProgress } from '@mui/material';
 import { approveLoan, getLoanDetails, rejectLoan } from '../../redux/slice/loanSlice';
 import moment from 'moment';
 
@@ -26,11 +27,11 @@ const LoanApplicationDetails = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch<Dispatch>();
-  const { loans } = useSelector((state: any) => state.loan);
+  const { loans, status } = useSelector((state: any) => state.loan);
   const loan = loans.length ? loans[0] : null;
 
 
-  const startDate = new Date(loan?.payload?.loan.updatedAt).getTime()
+  const startDate = new Date(loan?.payload?.loan.createdAt).getTime()
   const endDate = new Date(loan?.payload?.loan.dueDate).getTime()
 
 
@@ -49,19 +50,27 @@ const LoanApplicationDetails = () => {
 
 
   useEffect(() => {
+    if (!id) return;
+
     if (id) {
       dispatch(getLoanDetails(id));
   }
   }, [id, dispatch]);
 
 
-  const AcceptLoan = () => {
-    dispatch(approveLoan(loan?.payload?.loan?._id))
+  const AcceptLoan = async () => {
+    if (!loan || !id) return;
+
+    await dispatch(approveLoan(loan?.payload?.loan?._id));
+    dispatch(getLoanDetails(id));
   }
 
 
-  const RejecttLoan = () => {
-    dispatch(rejectLoan(loan?.payload?.loan?._id))
+  const RejecttLoan = async () => {
+    if (!loan || !id) return;
+
+    await dispatch(rejectLoan(loan?.payload?.loan?._id))
+    dispatch(getLoanDetails(id));
   }
 
 
@@ -92,10 +101,18 @@ const LoanApplicationDetails = () => {
 
 
             <div className="flex flex-wrap justify-between mt-[30px] w-full">
-              <ApplicationCard text={`NGN ${loan?.payload?.loan?.loanAmount}`} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount}`}/>
-              <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}`} title='Submission Date' title1='Monthly Repayment' text1='N13,000'/>
-              <ApplicationCard text={`NGN ${loan?.payload?.user?.salary}`} title='Monthly Income' title1='Referrer' text1='Dada Oladimeji' img='/loan/profile.png'/>
-              <ApplicationCard text={`${duration} days`} title='Repayment Tenure' title1='Referrer Code' text1='Banicoop12Dada'/>
+              { status === 'pending' ? 
+
+              <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:
+
+              <>
+                <ApplicationCard text={`NGN ${loan?.payload?.loan?.loanAmount}`} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount}`}/>
+                <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}`} title='Submission Date' title1='Monthly Repayment' text1='N13,000'/>
+                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary}`} title='Monthly Income' title1='Referrer' text1='Dada Oladimeji' img='/loan/profile.png'/>
+                <ApplicationCard text={`${duration} days`} title='Repayment Tenure' title1='Referrer Code' text1='Banicoop12Dada'/>
+              </>
+
+              }
             </div>
 
         </div>
@@ -145,11 +162,11 @@ const LoanApplicationDetails = () => {
             <LoadWidgetCard text='Proof of Income'>
               <div className="p-4 flex items-center h-full">
                 <div className="flex items-center gap-3">
-                <a href={loan.payload.user.proofOfSalary} download="proof-of-salary.pdf">
+                <a href={loan?.payload?.user?.proofOfSalary} download="proof-of-salary.pdf">
                   <img src="/loan/image.png" alt="Download Proof" className="h-[16px] w-[16px] cursor-pointer" />
                 </a>
 
-                <a href={loan.payload.user.proofOfSalary} download="proof-of-salary.pdf" className="text-blue-500 underline">
+                <a href={loan?.payload?.user?.proofOfSalary} download="proof-of-salary.pdf" className="text-blue-500 underline">
                   Download
                 </a>
                 </div>
