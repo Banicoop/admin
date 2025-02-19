@@ -118,49 +118,48 @@ export const adminData = [
 
 
 
-export const loanData = [
+export const walletData = [
   {
-    id: '102020',
-    img: '/loan/profile.png',
-    name: 'Dada Dimeji',
-    amount: 'N230,000.00',
-    data: '3rd Nov 2023'
+    _id: '102020',
+    img: '/wallet/icon.svg',
+    type: 'Withdrawal',
+    amount: '₦300,000.00',
+    data: '3rd Nov 2023',
+    status: 'Successful'
   },
   {
-    id: '102010',
-    img: '/loan/profile.png',
-    name: 'Dada Dimeji',
-    amount: 'N230,000.00',
-    data: '3rd Nov 2023'
+    _id: '102020',
+    img: '/wallet/icon.svg',
+    type: 'Withdrawal',
+    amount: '₦300,000.00',
+    data: '3rd Nov 2023',
+    status: 'Successful'
   },
   {
-    id: '102021',
-    img: '/loan/profile.png',
-    name: 'Dada Dimeji',
-    amount: 'N230,000.00',
-    data: '3rd Nov 2023'
+    _id: '102020',
+    img: '/wallet/icon.svg',
+    type: 'Withdrawal',
+    amount: '₦300,000.00',
+    data: '3rd Nov 2023',
+    status: 'Successful'
   },
   {
-    id: '102022',
-    img: '/loan/profile.png',
-    name: 'Dada Dimeji',
-    amount: 'N230,000.00',
-    data: '3rd Nov 2023'
+    _id: '102020',
+    img: '/wallet/icon.svg',
+    type: 'Withdrawal',
+    amount: '₦300,000.00',
+    data: '3rd Nov 2023',
+    status: 'Successful'
   },
   {
-    id: '102023',
-    img: '/loan/profile.png',
-    name: 'Dada Dimeji',
-    amount: 'N230,000.00',
-    data: '3rd Nov 2023'
+    _id: '102020',
+    img: '/wallet/icon.svg',
+    type: 'Withdrawal',
+    amount: '₦300,000.00',
+    data: '3rd Nov 2023',
+    status: 'Successful'
   },
-  {
-    id: '102024',
-    img: '/loan/profile.png',
-    name: 'Dada Dimeji',
-    amount: 'N230,000.00',
-    data: '3rd Nov 2023'
-  },
+
 ]
 
 

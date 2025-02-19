@@ -118,13 +118,18 @@ const LoanApplicationDetails = () => {
         </div>
       </div>
 
-          { loan?.payload?.loan.status !== 'pending'  &&
-            <div className="flex gap-2 items-center">
-              <label htmlFor="progress" className='text-[#000] text-xs font-[500]'>Progress</label>
-                <Progress/>
-               <p className='text-[#000] text-xs font-[500]'>50%</p>
+          { status === 'pending' ?
+           <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:
 
-          </div>
+            <>
+             { loan?.payload?.loan.status !== 'pending'  &&
+                <div className="flex gap-2 items-center">
+                  <label htmlFor="progress" className='text-[#000] text-xs font-[500]'>Progress</label>
+                    <Progress/>
+                  <p className='text-[#000] text-xs font-[500]'>50%</p>
+
+              </div>}
+            </>
           }
 
           <div className="flex items-center justify-between w-full gap-4">
