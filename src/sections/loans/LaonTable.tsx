@@ -2,6 +2,7 @@ import React from 'react'
 import ActionBtn from '../../components/buttons/ActionBtn';
 import Table from '../../components/tables/Table';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 
 
@@ -39,12 +40,13 @@ const columns = [
 
   const renderRow = (item: any) => (
     <tr className='border-b border-gray-100 even:bg-slate-50 text-sm py-4 my-2'>
+      
         <td className='flex items-center gap-4 py-4 px-2 capitalize'>{item.type}</td>
         <td className=''>
-            <div className="flex items-center gap-3">
+            <Link to={`/loans/application/${item?._id}`} className="flex items-center gap-3">
                 <img src={item.img || '/loan/profile.png'} alt="" className="h-6 w-6 rounded-full" />
                 <span className="">{item?.userId?.firstName} {item?.userId?.lastName}</span>
-            </div>
+            </Link>
         </td>
         <td className=''>{`₦${item.loanAmount}`}</td>
         <td>
