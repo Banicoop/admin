@@ -124,7 +124,17 @@ export const walletData = [
     img: '/wallet/icon.svg',
     type: 'Withdrawal',
     amount: '₦300,000.00',
-    data: '3rd Nov 2023',
+    date: '3rd Nov 2023',
+    issued: '1st May 2023',
+    status: 'Successful'
+  },
+  {
+    _id: '102020',
+    img: '/wallet/icon.svg',
+    type: 'Deposit',
+    amount: '₦300,000.00',
+    date: '3rd Nov 2023',
+    issued: '1st May 2023',
     status: 'Successful'
   },
   {
@@ -132,31 +142,26 @@ export const walletData = [
     img: '/wallet/icon.svg',
     type: 'Withdrawal',
     amount: '₦300,000.00',
-    data: '3rd Nov 2023',
+    date: '3rd Nov 2023',
+    issued: '1st May 2023',
     status: 'Successful'
+  },
+  {
+    _id: '102020',
+    img: '/wallet/icon.svg',
+    type: 'Deposit',
+    amount: '₦300,000.00',
+    date: '3rd Nov 2023',
+    issued: '1st May 2023',
+    status: 'Pending'
   },
   {
     _id: '102020',
     img: '/wallet/icon.svg',
     type: 'Withdrawal',
     amount: '₦300,000.00',
-    data: '3rd Nov 2023',
-    status: 'Successful'
-  },
-  {
-    _id: '102020',
-    img: '/wallet/icon.svg',
-    type: 'Withdrawal',
-    amount: '₦300,000.00',
-    data: '3rd Nov 2023',
-    status: 'Successful'
-  },
-  {
-    _id: '102020',
-    img: '/wallet/icon.svg',
-    type: 'Withdrawal',
-    amount: '₦300,000.00',
-    data: '3rd Nov 2023',
+    date: '3rd Nov 2023',
+    issued: '1st May 2023',
     status: 'Successful'
   },
 

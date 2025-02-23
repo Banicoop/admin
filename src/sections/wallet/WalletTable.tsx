@@ -26,13 +26,8 @@ const columns = [
       className: "hidden md:table-cell",
     },
     {
-      header: "Date",
-      accessor: "createdAt",
-      className: "hidden lg:table-cell",
-    },
-    {
       header: "Date Issued",
-      accessor: "dueDate",
+      accessor: "issued",
       className: "hidden md:table-cell",
     },
     {
@@ -49,19 +44,24 @@ const columns = [
         <td className='flex items-center gap-4 py-4 px-2 capitalize'>{item._id}</td>
             <td>
                 <span className="flex items-center gap-3">
-                    <img src="" alt="" className="" />
-                    <span className=""></span>
+                  <span className="flex p-2 rounded-xl bg-[#FFECED80]">
+                    <img src={`${item.type === 'Withdrawal' ? '/wallet/Icon.svg' : '/wallet/arrow-down.svg'}`} alt="" className="h-[12px] w-[12px]" />
+                  </span>
+                  <span className="">{item.type}</span>
                 </span>
             </td>
 
         <td className='flex items-center gap-4 py-4 px-2 capitalize'>{item.amount}</td>
 
         <td>
-            <ActionBtn text={item?.status} onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1]  cursor-pointer w-max'/>
+            <ActionBtn text={item.status} onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1]  cursor-pointer w-[120px]'/>
         </td>
+        <td className='flex items-center gap-4 py-4 px-2 capitalize'>{item.issued}</td>
 
         <td>
+          <Link to='/wallet/:id/transaction'>
             <ActionBtn text='View Details' onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1]  cursor-pointer w-max'/>
+          </Link>
         </td>
     </tr>
 

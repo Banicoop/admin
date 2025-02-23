@@ -9,10 +9,10 @@ const Wallet = () => {
 
        <section className="flex flex-wrap gap-6">
             <WalletCard title='Investor Wallet' url='/wallet/:id'/>
-            <WalletCard title='Loan Disbursement Wallet'/>
-            <WalletCard title='Savings Contribution Wallet'/>
-            <WalletCard title='Operational Expenses Wallet'/>
-            <WalletCard title='Miscellaneous Wallet'/>
+            <WalletCard title='Loan Disbursement Wallet' url='/wallet/:id'/>
+            <WalletCard title='Savings Contribution Wallet' url='/wallet/:id'/>
+            <WalletCard title='Operational Expenses Wallet' url='/wallet/:id'/>
+            <WalletCard title='Miscellaneous Wallet' url='/wallet/:id'/>
        </section>
     </div>
   )
