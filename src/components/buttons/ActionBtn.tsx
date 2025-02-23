@@ -17,7 +17,7 @@ const ActionBtn:FC<Itext> = ({text, onClick, img, className, className1, classNa
     return(
         <button onClick={onClick}  className={`cursor-pointer ${className}`}>
             {img1 && <img src={img1} alt="" className={className2} />}
-            <span className="text-xs">{text}</span>
+            <span className="">{text}</span>
             {img && <img src={img} alt="" className={className1} />}
         </button >
 

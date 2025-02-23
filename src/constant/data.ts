@@ -121,3 +121,59 @@ export const loanHistoryData = [
         status: 'Pending'
     },
 ]
+
+
+
+export const dataWallet = [
+    {
+        header: 'Transaction Summary',
+        details: [
+            {
+                key: 'Transaction ID',
+                details: '#BAN123456789'
+            },
+            {
+                key: 'Transaction Date',
+                details: '4th Sept, 2024 | 00:00:00'
+            },
+            {
+                key: 'Wallet Type',
+                details: 'Loan Wallet'
+            },
+        ]
+    },
+    {
+        header: 'Receiver Details',
+        details: [
+            {
+                key: 'Name',
+                details: 'John Adebayo'
+            },
+            {
+                key: 'Phone Number',
+                details: '+234 802 345 6789'
+            },
+            {
+                key: 'Bank Account',
+                details: '0123456789 | Zenith Bank'
+            },
+        ]
+    },
+    {
+        header: 'Additional Information',
+        details: [
+            {
+                key: 'Transaction Reference',
+                details: 'BAN-TXN-5678XYZ'
+            },
+            {
+                key: 'Processing Fee',
+                details: '₦500.00'
+            },
+            {
+                key: 'Remark',
+                details: 'Loan Disbursed to John Adebayo'
+            },
+        ]
+    },
+]
