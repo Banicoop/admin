@@ -21,7 +21,7 @@ import Admins from './pages/admins/Admins';
 import { WelcomeImage } from './constant/images';
 import { logout } from './redux/slice/authSlice';
 import { LoanApplicationDetails, Loans, PendingLoan } from './pages/loan';
-import { Wallet, InvestorWallet } from './pages/wallet';
+import { Wallet, InvestorWallet, WalletTransaction } from './pages/wallet';
 
 
 
@@ -180,6 +180,10 @@ const router = createBrowserRouter([
       {
         path: '/wallet/:id',
         element: <InvestorWallet/>
+      },
+      {
+        path: '/wallet/:id/transaction',
+        element: <WalletTransaction/>
       },
     ]
   },

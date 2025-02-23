@@ -6,14 +6,14 @@ import Btn from '../../components/buttons/Btn';
 import Widget from '../../components/Widget';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import Search from '../../components/Search';
-import LoanTable from '../../sections/loans/LaonTable';
 import DeleteModal from '../../components/modals/DeleteModal';
 import { AuthInput } from '../../components/inputs/Input';
 import TextArea from '../../components/inputs/TextArea';
 import OtpInput from '../../components/inputs/OtpInput';
-import { loanData } from '../../constant/menuData';
+import {  walletData } from '../../constant/menuData';
 import { useNavigate } from 'react-router-dom';
 import reducer from './reducer';
+import WalletTable from '../../sections/wallet/WalletTable';
 
 
 
@@ -71,9 +71,9 @@ const InvestorWallet = () => {
       </div>
 
       <div className="flex flex-col md:flex-row items-center gap-3">
-          <Widget type='customers' className='' />
-          <Widget type='customers' className='' />
-          <Widget type='customers' className='' />
+          <Widget type='customers' className='w-[32%]' />
+          <Widget type='customers' className='w-[32%]' />
+          <Widget type='customers' className='w-[32%]' />
       </div>
 
       <div className="w-full flex flex-col my-2 gap-6 rounded-3xl border-[1px] p-4">
@@ -88,9 +88,15 @@ const InvestorWallet = () => {
                 </div>
                 <ExportBtn text='Export'/>
             </div>
-        <LoanTable loanData={loanData}/>
+
+            <div className="w-full">
+                <WalletTable data={walletData}/>
+            </div>
         </div>
     </div>
+
+
+    {/* Modal */}
     <DeleteModal open={state.modalState !== 'closed'} onClose={closeModal}>
         <div className="flex flex-col gap-4 p-6 max-w-[700px]">
           { state.modalState !== 'success' && 

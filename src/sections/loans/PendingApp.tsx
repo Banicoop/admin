@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import LoanCard from './LoanCard';
 import { CircularProgress } from '@mui/material';
 import { usePendingLoanQuery } from '../../utils/api';
+import EmptyState from '../../components/EmptyState';
 
 
 const PendingApp = () => {
@@ -26,6 +27,11 @@ const PendingApp = () => {
       {  isPending ? 
         
           <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:
+          num === 0 ?
+          <div className="w-full">
+            <EmptyState text='No Pending Loan' />
+          </div>:
+          
           data?.data?.slice(0, 3).map((loan: any) => (
             <LoanCard className='h-[110px] ' loan={loan}/>
           ))

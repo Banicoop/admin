@@ -10,7 +10,7 @@ interface ITable {
     }[];
     data: any[];
     renderRow: any;
-    status: 'pending' | 'failed' | 'succeeded'
+    status?: 'pending' | 'failed' | 'succeeded'
 }
 
 const Table:FC<ITable> = ({columns, renderRow, data, status}) => {
@@ -23,7 +23,7 @@ const Table:FC<ITable> = ({columns, renderRow, data, status}) => {
         </thead>
 
         <tbody>
-            {status === 'succeeded' && data?.map((item) => renderRow(item))}
+            { data?.map((item) => renderRow(item))}
             <span className="flex w-full justify-center items-center m-auto">
                 {status === 'pending' && 
                     <CircularProgress  sx={{display: 'flex', margin: 'auto'}}/>

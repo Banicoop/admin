@@ -9,6 +9,9 @@ import LoanTable from '../../sections/loans/LaonTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from '../../redux/store';
 import { getAllLoans } from '../../redux/slice/loanSlice';
+// import { useAllLoansQuery } from '../../utils/api';
+// import { CircularProgress } from '@mui/material';
+// import EmptyState from '../../components/EmptyState';
 
 
 
@@ -51,6 +54,10 @@ const Loans = () => {
 
   const [activeItem, setActiveItem] = useState('Today');
   const [activeTableItem, setActiveTableItem] = useState('All');
+
+  // const { data, isPending, error } = useAllLoansQuery();
+
+  // console.log(data?.data);
 
 
   const { loans } = useSelector((state: any) => state.loan);
@@ -107,7 +114,10 @@ const Loans = () => {
                   }
               </div>
           </div>
-        <LoanTable loanData={loans?.data ?? []}/>
+
+          <div className="w-full">
+              <LoanTable loanData={loans?.data ?? []}/>
+          </div>
       </div>
     </div>
   )

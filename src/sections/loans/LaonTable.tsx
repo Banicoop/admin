@@ -55,7 +55,6 @@ const columns = [
         <td>{moment(item.createdAt).format("MMM Do YY")}</td>
         <td>
           {moment(item.dueDate).format("MMM Do YY")}
-            {/* <ActionBtn text='Withdraw' onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1] border-[1px] border-[#6922D1] cursor-pointer w-max'/> */}
         </td>
     </tr>
 
@@ -64,10 +63,9 @@ const columns = [
 const LoanTable = ({loanData}: {loanData: any[]}) => {
 
 
-
   return (
     <div>
-        <Table data={loanData} columns={columns} renderRow={renderRow} status='succeeded'/>
+        <Table data={loanData} columns={columns} renderRow={renderRow} />
     </div>
   )
 }
