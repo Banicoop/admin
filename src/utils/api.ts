@@ -55,3 +55,42 @@ export const useLoanDetailsQuery = (Id: string) => {
     return { data, error, isPending }
 }
 
+
+export const useCellsQuery = () => {
+    const { data, error, isPending } = useQuery({
+        queryKey: ['cells'],
+        queryFn: async () => {
+            const res = await SERVER.get(`admin/contribution/cell/all`)
+            return res.data;
+        }
+    })
+
+    return { data, error, isPending }
+}
+
+
+export const useWalletQuery  = () => {
+    const { data, error, isPending } = useQuery({
+        queryKey: ['wallet'],
+        queryFn: async () => {
+            const res = await SERVER.get(`admin/wallets`)
+            return res.data;
+        }
+    })
+
+    return { data, error, isPending }
+}
+
+
+
+export const useWalletBankQuery  = () => {
+    const { data, error, isPending } = useQuery({
+        queryKey: ['official-banks'],
+        queryFn: async () => {
+            const res = await SERVER.get(`admin/banks/info`)
+            return res.data;
+        }
+    })
+
+    return { data, error, isPending }
+}
