@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from 'react'
+import React, { useCallback, useReducer, useState } from 'react'
 import Info from '../../components/infos/Info';
 import ActionBtn from '../../components/buttons/ActionBtn';
 import Balance from '../../sections/wallet/Balance';
@@ -21,6 +21,22 @@ const list = ['Today', 'Last 7 Days', 'Last 30 Days', 'Custom', 'All Time'];
 const list1 = ['All', 'Successful', 'Pending', 'Incomplete']
 
 
+const walletDetails = [
+  {
+    name: 'Wallet Number',
+    details: '00112233445588'
+  },
+  {
+    name: 'Acct. Name',
+    details: 'Pochi'
+  },
+  {
+    name: 'Bank Name',
+    details: 'Bank of NG'
+  },
+]
+
+
 const InvestorWallet = () => {
 
   const initialState = {
@@ -31,10 +47,11 @@ const InvestorWallet = () => {
   const navigate = useNavigate();
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [openAddFund, setOpenAddFund] = useState(false);
 
 
     const handleSetActiveItem = useCallback((item: any) => dispatch({ type: 'SET_ACTIVE_ITEM', payload: item }), []);
-    const openAddFundsModal = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'inputs' }), []);
+    const openSendFundsModal = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'inputs' }), []);
     const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
     const proceedToOtp = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'otp' }), []);
     const proceedToSuccess = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'success' }), []);
@@ -51,11 +68,11 @@ const InvestorWallet = () => {
          <div className="flex items-center gap-3">
           <ActionBtn 
             className='flex cursor-pointer items-center gap-3 bg-[#FFFFFF59] border-[1px] rounded-[16px] text-[#333333] shadow-lg px-6 py-4 text-[12px] font-[400]' text='Add Funds' 
-            onClick={openAddFundsModal} 
+            onClick={() => setOpenAddFund(true)} 
             img1='/wallet/wallet-add.png' 
             className2='h-[16px] w-[16px]'/>
 
-          <ActionBtn className='flex items-center gap-3  shadow-lg px-6 py-4 border-[1px] rounded-[16px] bg-bgPurple text-bgWhite font-[400]' text='Send Funds' onClick={() => {}}  img1='/wallet/send-2.png' className2='h-[16px] w-[16px]'/>
+          <ActionBtn className='flex items-center gap-3  shadow-lg px-6 py-4 border-[1px] rounded-[16px] bg-bgPurple text-bgWhite font-[400]' text='Send Funds' onClick={openSendFundsModal}  img1='/wallet/send-2.png' className2='h-[16px] w-[16px]'/>
          </div>
       </div>
 
@@ -165,6 +182,24 @@ const InvestorWallet = () => {
               }
         </div>
         
+    </DeleteModal>
+
+    <DeleteModal open={openAddFund} onClose={() => setOpenAddFund(false)}>
+        <div className="flex flex-col gap-4 p-6 max-w-[700px]">
+          <img src="/admin/x.svg" alt="" className="h-[16px] w-[16px] flex ml-auto cursor-pointer" onClick={() => setOpenAddFund(false)} />
+          <h4 className="'text-[#000000] font-[500] text-[16px]'">Add Funds</h4>
+
+          <div className="flex items-center gap-4 justify-between">
+            {
+              walletDetails.map((d) => (
+              <div className="flex flex-col gap-2">
+                  <h4 className="text-[#6922D1] text-sm font-[400]">{d.name}</h4>
+                  <p className="text-[#333333] text-[14px] font-[500]">{d.details}</p>
+              </div>
+              ))
+            }
+          </div>
+        </div>
     </DeleteModal>
     </>
   )
