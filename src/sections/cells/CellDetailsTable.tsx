@@ -41,12 +41,12 @@ const CellDetailsTable = () => {
 
 
     const renderRow = (item: any) => (
-        <tr className='border-b border-gray-100 even:bg-slate-50 text-sm py-4'>
-            <td className='py-6 text-xs'>{item.no}</td>
+        <tr className='border-b border-gray-100 even:bg-slate-50 py-4 text-xs'>
+            <td className='py-1 text-[8px]'>{item.no}</td>
             <td className='p-2'>
                 <Link to='/cells/:id/:user' className="flex items-center gap-2">
-                    <img src="/loan/profile.png" alt="" className="h-5 w-5 rounded-full object-cover" />
-                    <span className="">{item.name}</span>
+                    <img src="/loan/profile.png" alt="" className="h-4 w-4 rounded-full object-cover" />
+                    <span className="text-[10px]">{item.name}</span>
                 </Link>
             </td>
             <td className='px-4'>{item.amount}</td>

@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Info from '../../components/infos/Info';
-
 import ExportBtn from '../../components/buttons/ExportBtn';
-import BasicTable from '../../components/tables/BasicTable';
 import CellDetailsTable from '../../sections/cells/CellDetailsTable';
 import CellBanner from '../../sections/cells/CellBanner';
 import { useLocation } from 'react-router-dom';
@@ -12,32 +10,7 @@ import type { Dispatch } from '../../redux/store';
 import Updates from '../../sections/cells/Updates';
 
 
-const headcells = [
-  {
-    key: "no",
-    name: "No",
-  },
-  {
-    key: "cellName",
-    name: "Customer Name",
-  },
-  {
-    key: "amount",
-    name: "Contribution Amount",
-  },
-  {
-    key: "day",
-    name: "Last Contribution ",
-  },
-  {
-    key: "next",
-    name: "Next Contribution ",
-  },
-  {
-    key: "status",
-    name: "Status",
-  },
-]
+
 
 
 const CellDetails = () => {
@@ -80,7 +53,6 @@ const CellDetails = () => {
           </div>
 
         <div className="flex flex-col md:flex-row gap-3 m-1">
-          {/* <BasicTable headcells={headcells} tableData={tableData}/> */}
           <CellDetailsTable/>
           <div className="border-r-2 w-[1px]"></div>
           <Updates title='Updates'/>
@@ -92,20 +64,6 @@ const CellDetails = () => {
     </>
   )
 }
-
-
-
-const tableData = Array(5)
-.fill("")
-.map((_, i) => ({
-  no: '4 of 9',
-  cellName: "Obiabo Immanuel",
-  amount: "₦300,000.00",
-  day: "3rd Nov 2023",
-  next: '3rd Nov 2023',
-  id: `row_${i}`,
-
-}));
 
 
 export default CellDetails;

@@ -5,6 +5,7 @@ export interface WidgetDetails {
     bgColor: string;
     icon2: string;
     text2: string;
+    className?: string
   }
   
 export interface WidgetProps {

@@ -19,22 +19,22 @@ const columns = [
     {
       header: "Loan Amount",
       accessor: "loanAmount",
-      className: "hidden md:table-cell",
+      // className: "hidden md:table-cell",
     },
     {
       header: "Status",
       accessor: "status",
-      className: "hidden md:table-cell",
+      // className: "hidden md:table-cell",
     },
     {
       header: "Date",
       accessor: "createdAt",
-      className: "hidden lg:table-cell",
+      // className: "hidden lg:table-cell",
     },
     {
       header: "Due Date",
       accessor: "dueDate",
-      className: "hidden md:table-cell",
+      // className: "hidden md:table-cell",
     },
   ];
 
