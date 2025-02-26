@@ -94,3 +94,16 @@ export const useWalletBankQuery  = () => {
 
     return { data, error, isPending }
 }
+
+
+export const useLoanMetricsQuery  = () => {
+    const { data, error, isPending } = useQuery({
+        queryKey: ['loan-metrics'],
+        queryFn: async () => {
+            const res = await SERVER.get(`admin/loans/metrics`)
+            return res.data;
+        }
+    })
+
+    return { data, error, isPending }
+}

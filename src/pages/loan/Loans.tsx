@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Info from '../../components/infos/Info';
 import Btn from '../../components/buttons/Btn';
-import Widget from '../../components/Widget';
 import PendingApp from '../../sections/loans/PendingApp';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import Search from '../../components/Search';
@@ -9,9 +8,9 @@ import LoanTable from '../../sections/loans/LaonTable';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from '../../redux/store';
 import { getAllLoans } from '../../redux/slice/loanSlice';
-// import { useAllLoansQuery } from '../../utils/api';
-// import { CircularProgress } from '@mui/material';
-// import EmptyState from '../../components/EmptyState';
+import { useLoanMetricsQuery } from '../../utils/api';
+import AppWidgets from '../../components/AppWidgets';
+
 
 
 
@@ -55,10 +54,6 @@ const Loans = () => {
   const [activeItem, setActiveItem] = useState('Today');
   const [activeTableItem, setActiveTableItem] = useState('All');
 
-  // const { data, isPending, error } = useAllLoansQuery();
-
-  // console.log(data?.data);
-
 
   const { loans } = useSelector((state: any) => state.loan);
 
@@ -68,6 +63,8 @@ const Loans = () => {
    dispatch(getAllLoans())
   }, [dispatch])
 
+
+  const { data } = useLoanMetricsQuery();
 
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px]'>
@@ -84,17 +81,24 @@ const Loans = () => {
                 </div>
             </div>
             <div className="flex flex-col justify-center md:justify-between md:flex-row flex-wrap gap-5">
-                <Widget className='w-full md:w-[48%]' type='loan1'/>
-                <Widget className='w-full md:w-[48%]' type='loan2'/>
-                <Widget className='w-full md:w-[48%]' type='loan3'/>
-                <Widget className='w-full md:w-[48%]' type='loan4'/>
-                <Widget className='w-full md:w-[48%]' type='loan5'/>
-                <Widget className='w-full md:w-[48%]' type='loan6'/>
+
+              <AppWidgets className='w-full md:w-[48%]' title='Total Loan Disbursed' icon='/loan/wallet.png' icon2='/arrow-right.svg' num={data?.data?.totalAmountDisbursed} bgColor='#27AE60' text2='0'/> 
+
+              <AppWidgets className='w-full md:w-[48%]' title='Revenue Generated' icon='/loan/wallet.png' icon2='/arrow-right.svg' num={data?.data?.revenueGenerated} bgColor='#27AE60' text2='0'/>
+
+              <AppWidgets className='w-full md:w-[48%]' title='Active Loans' icon='/loan/save-add.png' icon2='/arrow-right.svg' num={data?.data?.activeLoans} bgColor='#27AE60' text2='0'/>
+
+              <AppWidgets className='w-full md:w-[48%]' title='Repaid Loans' icon='/loan/archive-tick.png' icon2='/arrow-right.svg' num={data?.data?.repaidLoans} bgColor='#27AE60' text2='0'/>
+
+              <AppWidgets className='w-full md:w-[48%]' title='Defaulted Loans' icon='/loan/information.png' icon2='/arrow-right.svg' num={data?.data?.defaultedLoans} bgColor='#27AE60' text2='0'/>
+
+              <AppWidgets className='w-full md:w-[48%]' title='Extended Loans' icon='/loan/information.png' icon2='/arrow-right.svg' num={data?.data?.extendedLoans} bgColor='#27AE60' text2='0'/>
+
             </div>
           </div>
+          
 
-
-          <div className="flex-1 flex w-[300px]">
+          <div className="flex-1 flex w-full md:w-[300px]">
             <PendingApp/>
           </div>
       </div>
