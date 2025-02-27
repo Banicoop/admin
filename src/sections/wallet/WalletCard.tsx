@@ -13,7 +13,7 @@ type WType = {
 const WalletCard:FC<WType> = ({title, url}) => {
 
   return (
-    <div className='bg-[#E6E6E626] rounded-[28px] p-3 lg:p-[30px] h-[343px] w-full lg:w-[47%] flex gap-5 justify-between '>
+    <div className='bg-[#E6E6E626] rounded-[28px] p-[30px] h-[343px] w-full lg:w-[47%] flex gap-5 justify-between '>
         <div className="flex flex-col gap-3 justify-between">
             <Link to={url ?? "#"} className="text-[#000000]">{title}</Link>
 
