@@ -7,10 +7,11 @@ import { Link } from 'react-router-dom';
 type WType = {
     title: string;
     url?: string;
+    item: any
 }
 
 
-const WalletCard:FC<WType> = ({title, url}) => {
+const WalletCard:FC<WType> = ({title, url, item}) => {
 
   return (
     <div className='bg-[#E6E6E626] rounded-[28px] p-[30px] h-[343px] w-full lg:w-[47%] flex gap-5 justify-between '>
@@ -19,13 +20,13 @@ const WalletCard:FC<WType> = ({title, url}) => {
 
             <div className="flex flex-col gap-2">
                 <h4 className="text-[#6922D1] text-sm font-[400]">Available Balance</h4>
-                <p className="text-[#333333] text-[20px] lg:text-[37px] font-[600]">₦2,300,000,000</p>
+                <p className="text-[#333333] text-[20px] lg:text-[37px] font-[600]">₦{item.availableBalance}</p>
             </div>
 
             <div className="flex items-center gap-4">
-                <SmallCard title='Acct. Number' text='141****402'/>
-                <SmallCard title='Acct. Name' text='Pochi'/>
-                <SmallCard title='Bank Name' text='Bank of NG'/>
+                <SmallCard title='Acct. Number' text={item.accountNumber}/>
+                <SmallCard title='Acct. Name' text={item.accountName} />
+                <SmallCard title='Bank Name' text={item.bank.name}/>
             </div>
         </div>
 
