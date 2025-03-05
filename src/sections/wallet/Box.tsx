@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 
 type BtnTye = {
     className: string;
-    img: string
+    img: string;
+    onClick: () => void;
 }
 
 const BtnCard: FC<BtnTye> = ({className, img}) => {

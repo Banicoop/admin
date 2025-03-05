@@ -40,7 +40,7 @@ const Sidebar = () => {
               }`}
             >
               <img src={item.icon} alt="" className="md:ml-[10px]" style={{ color: '#6922D1' }} />
-              <span className="hidden md:block md:text-xs lg:text-sm">{item.name}</span>
+              <span className="hidden lg:block text-sm">{item.name}</span>
             </Link>
           ))}
     </div>
@@ -48,7 +48,7 @@ const Sidebar = () => {
     {/* BOTTOM */}
       <div className="mt-auto border-t-[1px] flex items-center px-3 py-6 gap-3 cursor-pointer" onClick={handleLogout}>
         <img src='/logout.svg' alt="" className="md:ml-[10px] text-bgPurple" />
-        <span className='hidden md:block text-sm'>Log Out</span>
+        <span className='hidden lg:block text-sm'>Log Out</span>
       </div>
     </div>
   )
