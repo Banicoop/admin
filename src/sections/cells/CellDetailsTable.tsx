@@ -52,7 +52,7 @@ const CellDetailsTable = () => {
             <td className='px-4'>{item.amount}</td>
             <td>3rd Nov 2023</td>
             <td>3rd Nov 2023</td>
-            <td>
+            <td className='py-2'>
                 <ActionBtn text='Paid ahead' onClick={() => {}} className='bg-[#F0E9F9] text-[#6922D1] p-2 rounded-md w-max text-[8px]' />
             </td>
         </tr>

@@ -6,7 +6,7 @@ interface Option {
 }
   
 interface SelectProps {
-    name: string;
+    name?: string;
     id?: string;
     options: Option[];
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;

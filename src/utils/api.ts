@@ -107,3 +107,16 @@ export const useLoanMetricsQuery  = () => {
 
     return { data, error, isPending }
 }
+
+
+export const useBankQuery = () => {
+    const { data, error, isPending } = useQuery({
+        queryKey: ['official-banks'],
+        queryFn: async () => {
+            const res = await SERVER.get(`admin/banks/info`)
+            return res.data;
+        }
+    })
+
+    return { data, error, isPending }
+}
