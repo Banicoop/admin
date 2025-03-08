@@ -8,13 +8,13 @@ export const menuData = [
       {
       name: 'Customers',
       icon: '/user.svg',
-      url: '/customers',
+      url: '#',
       visible: ["super_admin"],
     },
     {
       name: 'Transactions',
       icon: '/card.svg',
-      url: '/transactions',
+      url: '#',
       visible: ["super_admin"],
     },
     {
@@ -27,36 +27,36 @@ export const menuData = [
       name: 'Saving Cells',
       icon: '/save.svg',
       url: '/cells',
-      visible: ["super_admin"],
+      visible: ["super_admin", 'cell_admin'],
     },
     {
       name: 'Loans',
       icon: '/save.svg',
       url: '/loans',
-      visible: ["super_admin"],
+      visible: ["super_admin", 'loan_admin'],
     },
     {
       name: 'Merchants',
       icon: '/people.svg',
-      url: '/merchants',
+      url: '#',
       visible: ['super_admin', 'merchant'],
     },
     {
       name: 'POS/ATMs',
       icon: '/card-pos.svg',
-      url: '/pos',
+      url: '#',
       visible: ['super_admin'],
     },
     {
       name: 'Help & Support',
       icon: '/help.svg',
-      url: '/help',
+      url: '#',
       visible: ['super_admin', "loan_admin", 'cell_admin', 'merchant'],
     },
     {
       name: 'Account Settings',
       icon: '/setting.svg',
-      url: '/settings',
+      url: '#',
       visible: ['super_admin', "loan_admin", 'cell_admin', 'merchant'],
     },
     {

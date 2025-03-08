@@ -9,6 +9,8 @@ import OtpInput from '../../components/inputs/OtpInput';
 import reducer from './reducer';
 import ActionBtn from '../../components/buttons/ActionBtn';
 import { useNavigate } from 'react-router-dom';
+import Select from '../../components/inputs/Select';
+import { useBankQuery } from '../../utils/api';
 
 
 
@@ -21,6 +23,18 @@ type WType = {
 
 
 const WalletCard:FC<WType> = ({title, url, item}) => {
+
+  const { data } = useBankQuery();
+
+  console.log(data);
+
+
+  const options = [
+    { value: "", label: "Select Bank/Wallet" },
+    { value: "daily", label: "Access Bank" },
+    { value: "weekly", label: "First Bank Ltd" },
+    { value: "monthly", label: "GTB" },
+  ];
 
 
     const walletDetails = [
@@ -53,7 +67,6 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
       const [openAddFund, setOpenAddFund] = useState(false);
 
 
-          const handleSetActiveItem = useCallback((item: any) => dispatch({ type: 'SET_ACTIVE_ITEM', payload: item }), []);
           const openSendFundsModal = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'inputs' }), []);
           const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
           const proceedToOtp = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'otp' }), []);
@@ -81,9 +94,17 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
             </div>
 
             <div className="flex flex-col gap-2 justify-between">
-                <BtnCard className='bg-bgWhite' img='/wallet/minus.png' onClick={() => {}}/>
-                <BtnCard className='bg-bgWhite' img='/wallet/wallet-add.png' onClick={() => {}}/>
-                <BtnCard className='bg-bgPurple' img='/wallet/send-2.png' onClick={() => {}}/>
+                <BtnCard className='bg-bgWhite cursor-pointer' img='/wallet/minus.png' onClick={() => {}}/>
+                <BtnCard 
+                  className='bg-bgWhite cursor-pointer' 
+                  img='/wallet/wallet-add.png' 
+                  onClick={() => {
+                  setOpenAddFund(true)}}/>
+
+                <BtnCard 
+                  className='bg-bgPurple cursor-pointer' 
+                  img='/wallet/send-2.png' 
+                  onClick={openSendFundsModal}/>
             </div>
         </div>
 
@@ -99,10 +120,11 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
           }
             
             {state.modalState === 'inputs' &&
-            <>
-              <AuthInput placeholder='Enter Account/Wallet Number' type='' onChange={() => {}}/>
-              <AuthInput placeholder='Enter Amount' type='' onChange={() => {}}/>
-              <AuthInput placeholder='Select Bank/Wallet' type='' onChange={() => {}}/>
+            <div>
+              {/* <AuthInput placeholder='Enter Account/Wallet Number' type='' onChange={() => {}}/> */}
+              <AuthInput placeholder='Enter Amount' type='tel' onChange={() => {}}/>
+              <Select className='py-3 h-[70px]' options={options} onChange={() => {}} name='Select Bank/Wallet' />
+              {/* <AuthInput placeholder='Select Bank/Wallet' type='' onChange={() => {}}/> */}
 
               <div className="">
                 <TextArea text='Narration'/>
@@ -112,7 +134,8 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
               text='Proceed' 
               onClick={proceedToOtp}  
               img='/wallet/send.svg' className2='h-[16px] w-[16px]'/>
-            </>}
+            </div>
+            }
 
             {state.modalState === 'otp' &&
             <div className="flex flex-col gap-7">
