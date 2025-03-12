@@ -39,8 +39,8 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
     const walletDetails = [
         {
-          name: 'Wallet Number',
-          details: '00112233445588'
+          name: 'Wallet Acct Number',
+          details: '0123456789'
         },
         {
           name: 'Acct. Name',
@@ -188,16 +188,31 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
           <img src="/admin/x.svg" alt="" className="h-[16px] w-[16px] flex ml-auto cursor-pointer" onClick={() => setOpenAddFund(false)} />
           <h4 className="'text-[#000000] font-[500] text-[16px]'">Add Funds</h4>
 
-          <div className="flex items-center gap-4 justify-between">
-            {
-              walletDetails.map((d) => (
-              <div className="flex flex-col gap-2" key={d.name}>
-                  <h4 className="text-[#6922D1] text-sm font-[400]">{d.name}</h4>
-                  <p className="text-[#333333] text-[14px] font-[500]">{d.details}</p>
-              </div>
-              ))
-            }
+
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-4 justify-between">
+              {
+                walletDetails.map((d) => (
+                <div className="flex flex-col gap-2" key={d.name}>
+                    <h4 className="text-[#6922D1] text-sm font-[400]">{d.name}</h4>
+                    <p className="text-[#333333] text-[14px] font-[500]">{d.details}</p>
+                </div>
+                ))
+              }
+            </div>
+
+            <div className="flex items-center gap-4 justify-between">
+              {
+                walletDetails.map((d) => (
+                <div className="flex flex-col gap-2" key={d.name}>
+                    <h4 className="text-[#6922D1] text-sm font-[400]">{d.name}</h4>
+                    <p className="text-[#333333] text-[14px] font-[500]">{d.details}</p>
+                </div>
+                ))
+              }
+            </div>
           </div>
+
         </div>
     </DeleteModal>
     </>

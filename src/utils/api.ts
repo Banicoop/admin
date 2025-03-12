@@ -70,7 +70,7 @@ export const useCellsQuery = () => {
 
 
 export const useWalletQuery  = () => {
-    const { data, error, isPending } = useQuery({
+    const { data, error, isPending, refetch } = useQuery({
         queryKey: ['wallet'],
         queryFn: async () => {
             const res = await SERVER.get(`admin/wallets`)
@@ -78,13 +78,13 @@ export const useWalletQuery  = () => {
         }
     })
 
-    return { data, error, isPending }
+    return { data, error, isPending, refetch }
 }
 
 
 
 export const useWalletBankQuery  = () => {
-    const { data, error, isPending } = useQuery({
+    const { data, error, isPending, refetch } = useQuery({
         queryKey: ['official-banks'],
         queryFn: async () => {
             const res = await SERVER.get(`admin/banks/info`)
@@ -92,7 +92,7 @@ export const useWalletBankQuery  = () => {
         }
     })
 
-    return { data, error, isPending }
+    return { data, error, isPending, refetch }
 }
 
 

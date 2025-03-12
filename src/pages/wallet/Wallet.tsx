@@ -3,10 +3,16 @@ import Info from '../../components/infos/Info';
 import WalletCard from '../../sections/wallet/WalletCard';
 import { CircularProgress } from '@mui/material';
 import { useWalletQuery } from '../../utils/api';
+import ErrorPage from '../../components/ErrorPage';
 
 const Wallet = () => {
 
-  const { data, isPending, error } = useWalletQuery();
+  const { data, isPending, error, refetch } = useWalletQuery();
+
+
+  const handleRetry = () => {
+    refetch();
+  }
 
 
   return (
@@ -19,7 +25,9 @@ const Wallet = () => {
           <CircularProgress sx={{display: 'flex', margin: 'auto'}} />
         </div>
           :
-        error ? '' : 
+        error ? 
+
+           <ErrorPage onClick={handleRetry}/> : 
 
             data.payload?.walletInfos?.map((item: any) => (
               <WalletCard title={item?.walletName} item={item} url='/wallet/:id'/>

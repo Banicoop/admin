@@ -99,6 +99,9 @@ function Routes (){
   const dispatch = useDispatch();
 
 
+  console.log(token);
+
+
   useEffect(() => {
     if (token) {
         const expirationTime = getTokenExpirationTime(token);
