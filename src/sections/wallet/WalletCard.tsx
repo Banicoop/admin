@@ -11,6 +11,7 @@ import ActionBtn from '../../components/buttons/ActionBtn';
 import { useNavigate } from 'react-router-dom';
 import Select from '../../components/inputs/Select';
 import { useBankQuery } from '../../utils/api';
+import AddFundsCard from './AddFundsCard';
 
 
 
@@ -31,29 +32,12 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
   const options = [
     { value: "", label: "Select Bank/Wallet" },
-    { value: "daily", label: "Access Bank" },
+    { value: "bank1", label: "Access Bank" },
     { value: "weekly", label: "First Bank Ltd" },
     { value: "monthly", label: "GTB" },
   ];
 
-
-    const walletDetails = [
-        {
-          name: 'Wallet Acct Number',
-          details: '0123456789'
-        },
-        {
-          name: 'Acct. Name',
-          details: 'Pochi'
-        },
-        {
-          name: 'Bank Name',
-          details: 'Bank of NG'
-        },
-      ]
       
-      
-
 
     const initialState = {
         activeItem: 'Today',
@@ -189,28 +173,9 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
           <h4 className="'text-[#000000] font-[500] text-[16px]'">Add Funds</h4>
 
 
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-4 justify-between">
-              {
-                walletDetails.map((d) => (
-                <div className="flex flex-col gap-2" key={d.name}>
-                    <h4 className="text-[#6922D1] text-sm font-[400]">{d.name}</h4>
-                    <p className="text-[#333333] text-[14px] font-[500]">{d.details}</p>
-                </div>
-                ))
-              }
-            </div>
-
-            <div className="flex items-center gap-4 justify-between">
-              {
-                walletDetails.map((d) => (
-                <div className="flex flex-col gap-2" key={d.name}>
-                    <h4 className="text-[#6922D1] text-sm font-[400]">{d.name}</h4>
-                    <p className="text-[#333333] text-[14px] font-[500]">{d.details}</p>
-                </div>
-                ))
-              }
-            </div>
+          <div className="flex flex-col gap-7">
+            <AddFundsCard />
+            <AddFundsCard />
           </div>
 
         </div>
