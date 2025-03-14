@@ -104,20 +104,20 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
           }
             
             {state.modalState === 'inputs' &&
-            <div>
+            <div className="flex flex-col gap-4">
               {/* <AuthInput placeholder='Enter Account/Wallet Number' type='' onChange={() => {}}/> */}
               <AuthInput placeholder='Enter Amount' type='tel' onChange={() => {}}/>
               <Select className='py-3 h-[70px]' options={options} onChange={() => {}} name='Select Bank/Wallet' />
-              {/* <AuthInput placeholder='Select Bank/Wallet' type='' onChange={() => {}}/> */}
 
               <div className="">
                 <TextArea text='Narration'/>
               </div>
 
-              <ActionBtn className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-[16px] bg-bgPurple text-bgWhite font-[400] h-[48px] w-[160px]' 
-              text='Proceed' 
-              onClick={proceedToOtp}  
-              img='/wallet/send.svg' className2='h-[16px] w-[16px]'/>
+                <ActionBtn 
+                  className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-[16px] bg-bgPurple text-bgWhite font-[400] h-[48px] w-[160px]' 
+                  text='Proceed' 
+                  onClick={proceedToOtp}  
+                  img='/wallet/send.svg' className2='h-[16px] w-[16px]'/>
             </div>
             }
 
@@ -145,17 +145,17 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
                   <div className="flex flex-col justify-center items-center gap-5">
                     <img src="/wallet/archive-tick.svg" alt="" className="h-[64px] w-[64px]" />
 
-                    <h4>Transaction Successful</h4>
-                    <span className="">Your transaction has been successfully completed.</span>
+                    <h4 className='font-[500] text-[18px] text-bgBlack leading-[100%]'>Transaction Successful</h4>
+                    <span className="font-[300] text-[12px] text-bgBlack leading-[100%]">Your transaction has been successfully completed.</span>
 
                     <div className="flex justify-center items-center gap-[20px]">
                       <ActionBtn 
-                        className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-[#6922D10A] text-bgPurple font-[400] h-[48px] w-[160px]' 
+                        className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-[#6922D10A] text-bgPurple font-[400] h-[48px]' 
                         text='Go to Dashboard' 
                         onClick={goToDashboard}  />
 
                       <ActionBtn 
-                        className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-bgPurple text-bgWhite font-[400] h-[48px] w-[160px]' 
+                        className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-bgPurple text-bgWhite font-[400] h-[48px]' 
                         text=' View Details' 
                         onClick={closeModal} />
                       </div>

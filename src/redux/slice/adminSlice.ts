@@ -27,8 +27,9 @@ export const sendInvite = createAsyncThunk(
             const response = await SERVER.post(`admin/auth/create?adminId=${adminId}`, admin);
 
             return response.data
-        } catch (error) {
-            console.log(error)
+        } catch (error: any) {
+            const err = error?.response?.data?.message;
+            toast.error(`${err}`, {...toastOptions})
             return rejectWithValue(error)
         }
     }
@@ -45,7 +46,8 @@ export const registerAdmin = createAsyncThunk(
             }
             return response.data;
         } catch (error: any) {
-            console.log(error.response)
+            const err = error?.response?.data?.message;
+            toast.error(`${err}`, {...toastOptions})
             return rejectWithValue(error)
         }
     }
