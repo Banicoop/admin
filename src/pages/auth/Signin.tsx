@@ -47,6 +47,15 @@ const Signin = () => {
         <AuthInput className='w-full' img='/profile.svg' placeholder='Email address' type='email' onChange={(e:any) => setEnail(e.target.value)}/>
         <AuthInput className='w-full' img='/password-check.svg' placeholder='Password' type='password' onChange={(e:any) => setPassword(e.target.value)}/>
 
+        <div className="flex justify-between items-center w-full px-1">
+          <div className="flex items-center gap-1 ">
+            <input type="checkbox" className="text-bgPurple cursor-pointer bg-bgPurple" />
+            <span className="text-bgBlack cursor-pointer font-[500] text-[14px]">Remember Me</span>
+          </div>
+
+          <span className="text-bgPurple cursor-pointer font-[500] text-[14px]">Forgot Password?</span>
+        </div>
+
         <div className="flex flex-row justify-between w-full">
             <BackBtn onClick={() => navigate('/auth/welcome')} text='Go Back'/>
 

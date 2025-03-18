@@ -27,7 +27,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
   const { data } = useBankQuery();
 
-  console.log(data);
+  console.log(data.banks);
 
 
   const options = [
@@ -105,7 +105,6 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
             
             {state.modalState === 'inputs' &&
             <div className="flex flex-col gap-4">
-              {/* <AuthInput placeholder='Enter Account/Wallet Number' type='' onChange={() => {}}/> */}
               <AuthInput placeholder='Enter Amount' type='tel' onChange={() => {}}/>
               <Select className='py-3 h-[70px]' options={options} onChange={() => {}} name='Select Bank/Wallet' />
 
@@ -156,7 +155,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
                       <ActionBtn 
                         className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-bgPurple text-bgWhite font-[400] h-[48px]' 
-                        text=' View Details' 
+                        text='View Details' 
                         onClick={closeModal} />
                       </div>
                   </div>

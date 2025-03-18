@@ -103,7 +103,7 @@ const adminSlice = createSlice({
         })
         builder.addCase(sendInvite.rejected, (state, action) => {
             state.status = 'failed';
-            toast.error('Failed to add admin, please try again later', { ...toastOptions })
+            // toast.error('Failed to add admin, please try again later', { ...toastOptions })
         })
 
 
@@ -117,7 +117,7 @@ const adminSlice = createSlice({
         })
         builder.addCase(registerAdmin.rejected, (state, action) => {
             state.status = 'failed';
-            toast.error('Failed to add admin, please try again later', { ...toastOptions })
+            // toast.error('Failed to add admin, please try again later', { ...toastOptions })
         })
 
 
