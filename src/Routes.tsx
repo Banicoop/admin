@@ -1,25 +1,16 @@
 import React, { Suspense, useEffect } from 'react'
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Navbar from './components/Navbar';
-import Welcome from './components/Welcome';
-import Widget from './components/Widget';
-import Cells from './pages/cells/Cells';
-import CellDetails from './pages/cells/CellDetails';
-import Splash from './pages/auth/Splash';
-import WelcomePage from './pages/auth/WelcomePage';
-import Login from './pages/auth/Signin';
-import Verification from './pages/auth/Verification';
-import Verified from './pages/auth/Verified';
 import ProtectedRoute from './ProtectedRoute';
 import { useDispatch, useSelector } from 'react-redux';
 import Dashboard from './pages/Dashboard';
 import { getTokenExpirationTime } from './utils/jwtDecode';
-import CellUserDetails from './pages/cells/CellUserDetails';
 import Register from './pages/admins/Register';
 import Admins from './pages/admins/Admins';
 import { WelcomeImage } from './constant/images';
 import { logout } from './redux/slice/authSlice';
+import { Widget, Welcome, Navbar, Sidebar } from './components';
+import { Cells, CellDetails, CellUserDetails} from './pages/cells';
+import { Signin, ForgetPassword, Verification, Verified, WelcomePage, Splash } from './pages/auth'
 import { LoanApplicationDetails, Loans, PendingLoan } from './pages/loan';
 import { Wallet, InvestorWallet, WalletTransaction } from './pages/wallet';
 
@@ -68,12 +59,12 @@ function CellLayout(){
 
 function AuthLayout(){
   return(
-    <div className="bg-bgR h-full w-full p-4 md:p-[3rem] lg:p-[5rem] flex items-center justify-center">
-      <div className="rounded-3xl shadow-lg bg-bgWhite flex md:h-[420px] lg:h-[540px] xl:h-[690px]">
+    <div className="bg-bgR h-[100vh] w-full p-4 md:p-[3rem] lg:p-[5rem] flex items-center justify-center">
+      <div className="rounded-3xl shadow-lg bg-bgWhite flex md:h-[420px] xl:h-[560px]">
         <div className="w-1/2 hidden md:block h-full ">
-          <img src={WelcomeImage} alt="" className="w-fit h-full" />
+          <img src={WelcomeImage} alt="" className="w-fit xl:w-[656px] md:h-[420px]  xl:h-[560px]" />
         </div>
-        <div className="w-full md:w-1/2 h-full">
+        <div className="w-2/3 flex mx-auto md:w-1/2 h-full">
           <Outlet/>
         </div>
       </div>
@@ -99,7 +90,7 @@ function Routes (){
   const dispatch = useDispatch();
 
 
-  console.log(token);
+  // console.log(token);
 
 
   useEffect(() => {
@@ -208,7 +199,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/auth/login',
-        element: <Login/>
+        element: <Signin/>
+      },
+      {
+        path: '/auth/forgot-password',
+        element: <ForgetPassword/>
       },
     ]
   },

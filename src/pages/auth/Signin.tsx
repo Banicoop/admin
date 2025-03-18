@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthInput } from '../../components/inputs/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/slice/authSlice';
@@ -34,9 +34,9 @@ const Signin = () => {
 
 
   return (
-    <form className='flex flex-col items-center justify-center w-full h-[80vh] md:h-full p-3 lg:p-[2rem] gap-[1rem] lg:gap-[2rem]'>
-        <h1 className='hidden text-xl md:text-2xl lg:text-5xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Welcome to <span className='text-bgPurple'>Banicoop</span></h1>
-        <h1 className='hidden text-xl md:text-2xl lg:text-5xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Admin Dashboard</h1>
+    <form className='flex flex-col items-center justify-center w-full md:h-full p-3 lg:p-[2rem] gap-[1rem]'>
+        <h1 className='hidden text-xl md:text-2xl xl:text-5xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Welcome to <span className='text-bgPurple'>Banicoop</span></h1>
+        <h1 className='hidden text-xl md:text-2xl xl:text-5xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Admin Dashboard</h1>
 
 
         <h1 className='md:hidden text-2xl font-semibold text-left'>Welcome to <span className='text-bgPurple'>Banicoop</span> </h1>
@@ -46,6 +46,15 @@ const Signin = () => {
 
         <AuthInput className='w-full' img='/profile.svg' placeholder='Email address' type='email' onChange={(e:any) => setEnail(e.target.value)}/>
         <AuthInput className='w-full' img='/password-check.svg' placeholder='Password' type='password' onChange={(e:any) => setPassword(e.target.value)}/>
+
+        <div className="flex justify-between items-center w-full px-1">
+          <div className="flex items-center gap-1 ">
+            <input type="checkbox" className="text-bgPurple cursor-pointer bg-bgPurple" />
+            <span className="text-bgBlack cursor-pointer font-[500] text-[14px]">Remember Me</span>
+          </div>
+
+          <Link to='/auth/forgot-password' className="text-bgPurple cursor-pointer font-[500] text-[14px]">Forgot Password?</Link>
+        </div>
 
         <div className="flex flex-row justify-between w-full">
             <BackBtn onClick={() => navigate('/auth/welcome')} text='Go Back'/>

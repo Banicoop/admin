@@ -4,7 +4,8 @@ import { refreshAccessToken } from "../redux/slice/authSlice";
 
 // Axios instance
 const SERVER = axios.create({
-    baseURL: 'https://banicoop-server-7cas.onrender.com/api/v1/', 
+    baseURL: process.env.REACT_APP_API_URL, 
+    // baseURL: 'https://banicoop-server-testing.onrender.com/api/v1/',
     timeout: 10000, 
     headers: {
         'Content-Type': 'application/json', 
@@ -20,7 +21,7 @@ SERVER.interceptors.request.use(
 
             if (token && isTokenExpired(token) && refreshToken) {
                 //@ts-ignore
-                token = await refreshAccessToken(); // Get new token
+                token = refreshAccessToken(); 
             }
 
             if (token) {

@@ -24,13 +24,10 @@ const Wallet = () => {
         <div className="flex w-full h-40">
           <CircularProgress sx={{display: 'flex', margin: 'auto'}} />
         </div>
-          :
-        error ? 
-
+          : error ? 
            <ErrorPage onClick={handleRetry}/> : 
-
             data.payload?.walletInfos?.map((item: any) => (
-              <WalletCard title={item?.walletName} item={item} url='/wallet/:id'/>
+              <WalletCard title={item?.walletName} item={item} url='#' key={item.title}/>
             ))
            }
        </section>
