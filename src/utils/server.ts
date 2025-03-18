@@ -5,7 +5,6 @@ import { refreshAccessToken } from "../redux/slice/authSlice";
 // Axios instance
 const SERVER = axios.create({
     baseURL: process.env.REACT_APP_API_URL, 
-    // baseURL: 'https://banicoop-server-testing.onrender.com/api/v1/',
     timeout: 10000, 
     headers: {
         'Content-Type': 'application/json', 

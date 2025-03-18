@@ -10,7 +10,7 @@ import { WelcomeImage } from './constant/images';
 import { logout } from './redux/slice/authSlice';
 import { Widget, Welcome, Navbar, Sidebar } from './components';
 import { Cells, CellDetails, CellUserDetails} from './pages/cells';
-import { Signin, ForgetPassword, Verification, Verified, WelcomePage, Splash } from './pages/auth'
+import { Signin, ForgetPassword, Verification, Verified, WelcomePage, Splash, ResetPassword } from './pages/auth'
 import { LoanApplicationDetails, Loans, PendingLoan } from './pages/loan';
 import { Wallet, InvestorWallet, WalletTransaction } from './pages/wallet';
 
@@ -62,7 +62,7 @@ function AuthLayout(){
     <div className="bg-bgR h-[100vh] w-full p-4 md:p-[3rem] lg:p-[5rem] flex items-center justify-center">
       <div className="rounded-3xl shadow-lg bg-bgWhite flex md:h-[420px] xl:h-[560px]">
         <div className="w-1/2 hidden md:block h-full ">
-          <img src={WelcomeImage} alt="" className="w-fit xl:w-[656px] md:h-[420px]  xl:h-[560px]" />
+          <img src={WelcomeImage} alt="" className="w-fit md:h-[420px]  xl:h-[560px]" />
         </div>
         <div className="w-2/3 flex mx-auto md:w-1/2 h-full">
           <Outlet/>
@@ -204,6 +204,10 @@ const router = createBrowserRouter([
       {
         path: '/auth/forgot-password',
         element: <ForgetPassword/>
+      },
+      {
+        path: '/auth/reset-password',
+        element: <ResetPassword/>
       },
     ]
   },
