@@ -27,7 +27,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
   const { data } = useBankQuery();
 
-  console.log(data.banks);
+  console.log(data?.banks);
 
 
   const options = [
