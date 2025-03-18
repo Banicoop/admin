@@ -1,16 +1,21 @@
 import React, { useState } from 'react'
 import { AuthInput } from '../../components/inputs/Input';
 import { AuthBtn } from '../../components/buttons/ExportBtn';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from '../../redux/store';
+import { reset } from '../../redux/slice/authSlice';
+
+
 
 
 const ForgetPassword = () => {
 
-    const navigate = useNavigate()
+    const dispatch = useDispatch<Dispatch>()
     const [email, setEmail] = useState('');
 
-    const handleClick = async () => {
-        navigate('/auth/verification')
+    const handleClick = () => {
+        dispatch(reset({email}))
     }
 
   return (
@@ -23,9 +28,9 @@ const ForgetPassword = () => {
             type='email' onChange={(e:any) => setEmail(e.target.value)}/>
 
         <div className="flex justify-between items-center w-full px-1">
-        <AuthBtn text='Continue' onClick={handleClick}/>
+            <AuthBtn text='Continue' onClick={handleClick}/>
 
-        <Link to='/auth/login' className="text-bgPurple cursor-pointer font-[500] text-[14px]">Back to Login?</Link>
+            <Link to='/auth/login' className="text-bgPurple cursor-pointer font-[500] text-[14px]">Back to Login?</Link>
         </div>
     </div>
   )

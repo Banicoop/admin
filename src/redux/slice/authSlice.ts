@@ -46,8 +46,6 @@ export const verifyLogin = createAsyncThunk('auth/otp',
         try {
             const response = await SERVER.post('admin/auth/verifyToken', user);
 
-            console.log(response.data)
-
             if(response.data.message === 'OTP verified'){
                 const { accessToken, refreshToken, ...payload } = response.data;
 
@@ -84,7 +82,7 @@ export const refreshAccessToken = createAsyncThunk(
 
             const user = userString ? JSON.parse(userString) : null
 
-            const response = await SERVER.post("auth/refresh-access-token", { refreshToken, userId: user?.payload?._id });
+            const response = await SERVER.post('admin/auth/refresh-access-token', { refreshToken, userId: user?.payload?._id });
 
             const { accessToken } = response.data;
 
@@ -103,6 +101,36 @@ export const refreshAccessToken = createAsyncThunk(
         }
     }
 );
+
+
+
+export const reset = createAsyncThunk(
+    'auth/reset',
+    async (credentials: {}, { rejectWithValue }) => {
+        try {
+            const res = await SERVER.post('admin/auth/forgot-password', credentials);
+            window.location.replace('/auth/verification');
+            return res.data;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+)
+
+
+
+export const verifyOtp = createAsyncThunk(
+    'auth/verifyOtp',
+    async (credentials: {}, { rejectWithValue }) => {
+        try {
+            const res = await SERVER.post('admin/auth/reset-password', credentials);
+            // window.location.replace('/auth/verification');
+            return res.data;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+)
 
   
 
@@ -152,7 +180,7 @@ const authSlice = createSlice({
             toast.error('OTP not valid or expired', { ...toastOptions })
         })
 
-
+        //refreah access token
         builder.addCase(refreshAccessToken.fulfilled, (state, action) => {
             state.accessToken = action.payload; 
         })
@@ -160,6 +188,32 @@ const authSlice = createSlice({
             state.accessToken = null;
             state.user = null;
             localStorage.clear();
+        })
+
+        
+        //reset password
+        builder.addCase(reset.pending, (state, action) => {
+            state.status = 'pending';
+        })
+        builder.addCase(reset.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.credentials = action.payload; 
+        })
+        builder.addCase(reset.rejected, (state, action) => {
+            state.status = 'failed';
+        })
+
+
+        //verify otp 
+        builder.addCase(verifyOtp.pending, (state, action) => {
+            state.status = 'pending';
+        })
+        builder.addCase(verifyOtp.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            state.credentials = action.payload; 
+        })
+        builder.addCase(verifyOtp.rejected, (state, action) => {
+            state.status = 'failed';
         })
     },
 })
