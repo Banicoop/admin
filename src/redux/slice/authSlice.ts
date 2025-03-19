@@ -109,9 +109,11 @@ export const reset = createAsyncThunk(
     async (credentials: {}, { rejectWithValue }) => {
         try {
             const res = await SERVER.post('admin/auth/forgot-password', credentials);
-            window.location.replace('/auth/verification');
+            window.location.replace('/auth/reset-password');
             return res.data;
-        } catch (error) {
+        } catch (error: any) {
+            const err = error.response.data.message;
+            toast.error(`${err}`, { ...toastOptions })
             return rejectWithValue(error);
         }
     }
@@ -124,9 +126,10 @@ export const verifyOtp = createAsyncThunk(
     async (credentials: {}, { rejectWithValue }) => {
         try {
             const res = await SERVER.post('admin/auth/reset-password', credentials);
-            // window.location.replace('/auth/verification');
             return res.data;
-        } catch (error) {
+        } catch (error: any) {
+            const err = error.response.data.message;
+            toast.error(`${err}`, { ...toastOptions })
             return rejectWithValue(error);
         }
     }
@@ -198,6 +201,7 @@ const authSlice = createSlice({
         builder.addCase(reset.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.credentials = action.payload; 
+            toast.success('OTP sent', { ...toastOptions })
         })
         builder.addCase(reset.rejected, (state, action) => {
             state.status = 'failed';
@@ -211,6 +215,7 @@ const authSlice = createSlice({
         builder.addCase(verifyOtp.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.credentials = action.payload; 
+            toast.success('Password reset successful', { ...toastOptions })
         })
         builder.addCase(verifyOtp.rejected, (state, action) => {
             state.status = 'failed';

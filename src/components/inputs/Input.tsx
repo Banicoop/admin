@@ -10,6 +10,7 @@ interface IInput {
     onChange: ChangeEventHandler<HTMLInputElement>
     readOnly?: boolean;
     className?: string;
+    min?: number
 }
 
 const Input:FC<IInput> = ({ type, placeholder, onChange, name,  readOnly }) => {
@@ -19,14 +20,14 @@ const Input:FC<IInput> = ({ type, placeholder, onChange, name,  readOnly }) => {
 }
 
 
-export const AuthInput:FC<IInput> = ({type, placeholder, img, onChange, className, name, value}) => {
+export const AuthInput:FC<IInput> = ({type, placeholder, img, onChange, className, name, value, min}) => {
 
   const [showPasword, setShowPasswword] = useState(false);
 
   return(
     <div className={`flex rounded-2xl border-[1px] px-2 py-3 gap-1 items-center ${className}`}>
      {img && <img src={img} alt="" className="h-4 w-4" />}
-      <input type={showPasword ? 'text': type} className="outline-none w-full" placeholder={placeholder} onChange={onChange} name={name} value={value} required/>
+      <input type={showPasword ? 'text': type} className="outline-none w-full" placeholder={placeholder} onChange={onChange} name={name} value={value} min={min} required/>
       { type === 'password' &&
         <img src={!showPasword ? '/visibilityoff.svg' : "/visiblity.png"} alt="" className="cursor-pointer" onClick={() => setShowPasswword(!showPasword)}/>
       }
