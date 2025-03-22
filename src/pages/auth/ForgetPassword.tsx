@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from '../../redux/store';
 import { reset } from '../../redux/slice/authSlice';
+import { toastOptions } from '../../utils/toastOptions';
+import { toast } from 'react-toastify'
 
 
 
@@ -18,8 +20,12 @@ const ForgetPassword = () => {
     const { status } = useSelector((state: any) => state.auth)
 
     const handleSubmit = () => {
-        // window.location.replace('/auth/reset-password')
+        if(!email){
+            toast.warn('Email Field cannot be empty', {...toastOptions});
+            return;
+        }
         dispatch(reset({email}))
+        // window.location.replace('/auth/reset-password')
     }
 
   return (

@@ -173,8 +173,8 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
 
           <div className="flex flex-col gap-7">
-            <AddFundsCard />
-            <AddFundsCard />
+            <AddFundsCard bankType='Wallet Acct Number' acctName={item.accountName} bankName={item.bank.name} acctNum={item.accountNumber}/>
+            <AddFundsCard bankType='NUBAN Acct Number'acctName={item.accountName} bankName={item.bank.name} acctNum={item.accountNumber}/>
           </div>
 
         </div>

@@ -109,7 +109,11 @@ export const reset = createAsyncThunk(
     async (credentials: {}, { rejectWithValue }) => {
         try {
             const res = await SERVER.post('admin/auth/forgot-password', credentials);
-            window.location.replace('/auth/reset-password');
+            // if(res.data){
+                // window.location.replace('/auth/reset-password');
+
+            // }
+            console.log(res.data);
             return res.data;
         } catch (error: any) {
             const err = error.response.data.message;

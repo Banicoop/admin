@@ -27,7 +27,7 @@ const Wallet = () => {
           : error ? 
            <ErrorPage onClick={handleRetry}/> : 
             data.payload?.walletInfos?.map((item: any) => (
-              <WalletCard title={item?.walletName} item={item} url='#' key={item.title}/>
+              <WalletCard title={item?.walletName} item={item} url='#' key={item.title} />
             ))
            }
        </section>
