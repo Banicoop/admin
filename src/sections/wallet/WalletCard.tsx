@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useReducer, useState } from 'react'
+import React, { ChangeEvent, FC, useCallback, useReducer, useState } from 'react'
 import SmallCard from './SmallCard';
 import BtnCard from './Box'
 import { Link } from 'react-router-dom';
@@ -25,37 +25,51 @@ type WType = {
 
 const WalletCard:FC<WType> = ({title, url, item}) => {
 
-  const { data } = useBankQuery();
+      const { data } = useBankQuery();
 
-  console.log(data?.banks);
+      const options =  data?.banks?.map((bank: any) => ({
+        value: bank.id, 
+        label: bank.name,
+        key: bank.id
+      })) || [{ value: "", label: "Select Bank/Wallet" }];
+  
 
-
-  const options = [
-    { value: "", label: "Select Bank/Wallet" },
-    { value: "bank1", label: "Access Bank" },
-    { value: "weekly", label: "First Bank Ltd" },
-    { value: "monthly", label: "GTB" },
-  ];
-
-      
-
-    const initialState = {
+      const initialState = {
         activeItem: 'Today',
         modalState: 'closed', 
       };
 
-        const navigate = useNavigate();
+      const navigate = useNavigate();
+
+      const [details, setDetails] = useState({
+        amount: 0,
+        narration: '',
+        sourceAccountNumber: ''
+      })
+      const [pin, setPin] = useState('');
+
+
+      const handlePinChange = (val: string) => {
+        setPin(val)
+      }
+
+
+      const handleDeatailsChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        
+        setDetails({...details, [name]: value})
+      }
 
 
       const [state, dispatch] = useReducer(reducer, initialState);
       const [openAddFund, setOpenAddFund] = useState(false);
 
 
-          const openSendFundsModal = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'inputs' }), []);
-          const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
-          const proceedToOtp = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'otp' }), []);
-          const proceedToSuccess = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'success' }), []);
-          const goToDashboard = useCallback(() => navigate('/wallet'), [navigate]);
+      const openSendFundsModal = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'inputs' }), []);
+      const closeModal = useCallback(() => dispatch({ type: 'CLOSE_MODAL' }), []);
+      const proceedToOtp = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'otp' }), []);
+      const proceedToSuccess = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'success' }), []);
+      const goToDashboard = useCallback(() => navigate('/wallet'), [navigate]);
       
     
 
@@ -105,7 +119,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
             
             {state.modalState === 'inputs' &&
             <div className="flex flex-col gap-4">
-              <AuthInput placeholder='Enter Amount' type='tel' onChange={() => {}}/>
+              <AuthInput placeholder='Enter Amount' type='tel' onChange={handleDeatailsChange}/>
               <Select className='py-3 h-[70px]' options={options} onChange={() => {}} name='Select Bank/Wallet' />
 
               <div className="">
@@ -122,7 +136,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
             {state.modalState === 'otp' &&
             <div className="flex flex-col gap-7">
-              <OtpInput onChange={() => {}} className=''/>
+              <OtpInput onChange={handlePinChange} className=''/>
 
                 <div className="flex justify-center items-center gap-[20px]">
                 <ActionBtn 
@@ -147,14 +161,14 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
                     <h4 className='font-[500] text-[18px] text-bgBlack leading-[100%]'>Transaction Successful</h4>
                     <span className="font-[300] text-[12px] text-bgBlack leading-[100%]">Your transaction has been successfully completed.</span>
 
-                    <div className="flex justify-center items-center gap-[20px]">
+                    <div className="flex justify-center items-center gap-[10px] w-full">
                       <ActionBtn 
-                        className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-[#6922D10A] text-bgPurple font-[400] h-[48px]' 
+                        className='flex items-center text-center justify-center shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-[#6922D10A] text-bgPurple font-[400]' 
                         text='Go to Dashboard' 
                         onClick={goToDashboard}  />
 
                       <ActionBtn 
-                        className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-bgPurple text-bgWhite font-[400] h-[48px]' 
+                        className='flex items-center text-center justify-center shadow-lg px-[20px] py-[12px]  border-[1px] rounded-full bg-bgPurple text-bgWhite font-[400]' 
                         text='View Details' 
                         onClick={closeModal} />
                       </div>
@@ -174,7 +188,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
           <div className="flex flex-col gap-7">
             <AddFundsCard bankType='Wallet Acct Number' acctName={item.accountName} bankName={item.bank.name} acctNum={item.accountNumber}/>
-            <AddFundsCard bankType='NUBAN Acct Number'acctName={item.accountName} bankName={item.bank.name} acctNum={item.accountNumber}/>
+            <AddFundsCard bankType='NUBAN Acct Number' acctName={item.accountName} bankName={item.bank.name} acctNum={item.accountNumber}/>
           </div>
 
         </div>
