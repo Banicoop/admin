@@ -33,7 +33,7 @@ const PendingApp = () => {
           </div>:
           
           data?.data?.slice(0, 3).map((loan: any) => (
-            <LoanCard className='h-[110px] ' loan={loan}/>
+            <LoanCard className='h-[110px] ' loan={loan} key={loan}/>
           ))
         }
 

@@ -55,7 +55,7 @@ const columns = [
             </Link>
         </td>
         <td className=''>{`₦${item.loanAmount}`}</td>
-        <td>
+        <td className='px-1 py-2'>
             <ActionBtn text={item?.status} onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1]  cursor-pointer w-max'/>
         </td>
         <td>{moment(item.createdAt).format("MMM Do YY")}</td>

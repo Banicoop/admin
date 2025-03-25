@@ -79,6 +79,8 @@ const LoanApplicationDetails = () => {
 
   const totalAmount = loanAmount + interest;
 
+  const creditScore = Math.round((loan?.payload?.user?.iScoreListing / 100) * 850)
+
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] my-6'>
       <div className="flex gap-7">
@@ -145,7 +147,7 @@ const LoanApplicationDetails = () => {
                 </div>
 
                 <div className="flex flex-col gap-2 w-[80%]">
-                    <span className="text-xs text-[#000]">Credit Score: {loan?.payload?.user?.iScoreListing}</span>
+                    <span className="text-xs text-[#000]">Credit Score: {creditScore || 0}</span>
                   <div className='flex items-center gap-4'>
                     <Progress />
                     <span className="text-[#000000] text-[10px]">Good</span>
@@ -192,7 +194,7 @@ const LoanApplicationDetails = () => {
             </div>
               <ExportBtn text='Export' onClick={() => {}}/>
             </div>
-              <LoanHistoryTable loanHistory={loan?.payload?.loanHistory} />
+              <LoanHistoryTable loanHistory={loan?.payload?.loanHistory} key={loan?.payload?.loanHistory._id} />
           </div>
 
           <div className="flex flex-col justify-start border-[1px] rounded-2xl p-4 gap-6">
@@ -211,9 +213,7 @@ const LoanApplicationDetails = () => {
               <ReferalCard/>
               <ReferalCard/>
             </div> :
-
             <EmptyState text='No referrer yet' />
-
           }
           </div>
 

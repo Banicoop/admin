@@ -34,7 +34,7 @@ const columns = [
   const renderRow = (item: any) => (
     <tr className='border-b border-gray-100 even:bg-slate-50 text-sm py-4 my-2'>
         <td className='p-1'>N {item.amount}</td>
-        <td className='p-1'>{moment(item.createdAt).format('MMM Do YY')}</td>
+        <td className='p-1'>{moment(item.date).format('MMM Do YY')}</td>
         <td className="p-1">
           <ActionBtn text={item.status} onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl capitalize bg-[#E6E6E680] text-bgPurple w-max'/>
         </td>
