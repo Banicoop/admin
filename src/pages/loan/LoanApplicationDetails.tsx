@@ -74,6 +74,13 @@ const LoanApplicationDetails = () => {
   }
 
 
+  const loanAmount = loan?.payload?.loan?.loanAmount;
+  const interest = loan?.payload?.loan?.interestAmount;
+
+  const totalAmount = loanAmount + interest;
+
+  const creditScore = Math.round((loan?.payload?.user?.iScoreListing / 100) * 850)
+
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] my-6'>
       <div className="flex gap-7">
@@ -107,9 +114,9 @@ const LoanApplicationDetails = () => {
 
               <>
                 <ApplicationCard text={`NGN ${loan?.payload?.loan?.loanAmount}`} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount}`}/>
-                <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}`} title='Submission Date' title1='Monthly Repayment' text1='N13,000'/>
-                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary}`} title='Monthly Income' title1='Referrer' text1='Dada Oladimeji' img='/loan/profile.png'/>
-                <ApplicationCard text={`${duration} days`} title='Repayment Tenure' title1='Referrer Code' text1='Banicoop12Dada'/>
+                <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}`} title='Submission Date' title1='Total Repayment' text1={totalAmount || 0} />
+                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary}`} title='Monthly Income' title1='Referrer' text1='--//--' img='/loan/profile.png'/>
+                <ApplicationCard text={`${duration} days`} title='Repayment Tenure' title1='Referrer Code' text1='--//--'/>
               </>
 
               }
@@ -118,7 +125,7 @@ const LoanApplicationDetails = () => {
         </div>
       </div>
 
-          { status === 'pending' ?
+          {/* { status === 'pending' ?
            <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:
 
             <>
@@ -130,7 +137,7 @@ const LoanApplicationDetails = () => {
 
               </div>}
             </>
-          }
+          } */}
 
           <div className="flex items-center justify-between w-full gap-4">
             <LoadWidgetCard text='Credit Score'>
@@ -140,7 +147,7 @@ const LoanApplicationDetails = () => {
                 </div>
 
                 <div className="flex flex-col gap-2 w-[80%]">
-                    <span className="text-xs text-[#000]">Credit Score: 720/850</span>
+                    <span className="text-xs text-[#000]">Credit Score: {creditScore || 0}</span>
                   <div className='flex items-center gap-4'>
                     <Progress />
                     <span className="text-[#000000] text-[10px]">Good</span>
@@ -187,7 +194,7 @@ const LoanApplicationDetails = () => {
             </div>
               <ExportBtn text='Export' onClick={() => {}}/>
             </div>
-              <LoanHistoryTable loanHistory={loan?.payload?.loanHistory} />
+              <LoanHistoryTable loanHistory={loan?.payload?.loanHistory} key={loan?.payload?.loanHistory._id} />
           </div>
 
           <div className="flex flex-col justify-start border-[1px] rounded-2xl p-4 gap-6">
@@ -206,9 +213,7 @@ const LoanApplicationDetails = () => {
               <ReferalCard/>
               <ReferalCard/>
             </div> :
-
             <EmptyState text='No referrer yet' />
-
           }
           </div>
 
