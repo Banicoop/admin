@@ -1,14 +1,38 @@
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { AuthInput } from '../../components/inputs/Input';
 import { AuthBtn } from '../../components/buttons/ExportBtn';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { toastOptions } from '../../utils/toastOptions';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from '../../redux/store';
+import { resetPassword } from '../../redux/slice/authSlice';
 
 
 
 const ResetPassoword = () => {
 
+  const dispatch = useDispatch<Dispatch>();
+
+  const [payload, setPayload] = useState({
+    password: '',
+    otp: ''
+  })
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setPayload({...payload, [name]: value})
+  }
+
+
   const handleSubmit = () => {
-    window.location.replace('/auth/verified')
+    const { password, otp } = payload;
+
+    if(!otp || !password){
+      toast.warn('No Empty field', {...toastOptions})
+    }
+    dispatch(resetPassword({password, otp}));
   }
 
 
@@ -22,11 +46,18 @@ const ResetPassoword = () => {
             // img='/password-check.svg' 
             placeholder='Enter OTP' 
             min={0}
-            type='number' onChange={() => {}}/>
+            type='number'
+            name='otp'
+            value={payload.otp}
+            onChange={handleChange}/>
 
           <AuthInput className='w-full' 
-          img='/password-check.svg' placeholder='Enter New Password' 
-          type='password' onChange={() => {}}/>
+            img='/password-check.svg' 
+            placeholder='Enter New Password' 
+            value={payload.password}
+            type='password' 
+            name='password'
+            onChange={handleChange}/>
       </div>
 
       <div className="flex justify-between items-center w-full px-1">
