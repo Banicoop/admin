@@ -120,7 +120,7 @@ const Loans = () => {
           </div>
 
           <div className="w-full">
-              <LoanTable loanData={loans?.data ?? []} key={loans?.data._id}/>
+              <LoanTable loanData={loans?.data ?? []} key={loans?.data?._id}/>
           </div>
       </div>
     </div>

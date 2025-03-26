@@ -29,8 +29,6 @@ export const login = createAsyncThunk(
             const response = await SERVER.post('admin/auth/login', credentials);
             localStorage.setItem('loginData', JSON.stringify(response.data));
             window.location.replace('/auth/verification');
-
-            console.log(response.data);
             return response.data
         } catch (error:any) {
             const err = error.response.data.message;
@@ -104,16 +102,14 @@ export const refreshAccessToken = createAsyncThunk(
 
 
 
-export const reset = createAsyncThunk(
-    'auth/reset',
+export const forgetPassword = createAsyncThunk(
+    'auth/forgetPassword',
     async (credentials: {}, { rejectWithValue }) => {
         try {
             const res = await SERVER.post('admin/auth/forgot-password', credentials);
-            // if(res.data){
-                // window.location.replace('/auth/reset-password');
-
-            // }
-            console.log(res.data);
+            if(res.data){
+                window.location.replace('/auth/reset-password');
+            }
             return res.data;
         } catch (error: any) {
             const err = error.response.data.message;
@@ -125,11 +121,15 @@ export const reset = createAsyncThunk(
 
 
 
-export const verifyOtp = createAsyncThunk(
+export const resetPassword = createAsyncThunk(
     'auth/verifyOtp',
     async (credentials: {}, { rejectWithValue }) => {
         try {
             const res = await SERVER.post('admin/auth/reset-password', credentials);
+            if(res.data){
+                 window.location.replace('/auth/verified')
+
+            }
             return res.data;
         } catch (error: any) {
             const err = error.response.data.message;
@@ -198,30 +198,30 @@ const authSlice = createSlice({
         })
 
         
-        //reset password
-        builder.addCase(reset.pending, (state, action) => {
+        //forget password
+        builder.addCase(forgetPassword.pending, (state, action) => {
             state.status = 'pending';
         })
-        builder.addCase(reset.fulfilled, (state, action) => {
+        builder.addCase(forgetPassword.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.credentials = action.payload; 
             toast.success('OTP sent', { ...toastOptions })
         })
-        builder.addCase(reset.rejected, (state, action) => {
+        builder.addCase(forgetPassword.rejected, (state, action) => {
             state.status = 'failed';
         })
 
 
-        //verify otp 
-        builder.addCase(verifyOtp.pending, (state, action) => {
+        //reset password
+        builder.addCase(resetPassword.pending, (state, action) => {
             state.status = 'pending';
         })
-        builder.addCase(verifyOtp.fulfilled, (state, action) => {
+        builder.addCase(resetPassword.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.credentials = action.payload; 
             toast.success('Password reset successful', { ...toastOptions })
         })
-        builder.addCase(verifyOtp.rejected, (state, action) => {
+        builder.addCase(resetPassword.rejected, (state, action) => {
             state.status = 'failed';
         })
     },
