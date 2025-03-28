@@ -30,6 +30,9 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
       const options =  data?.banks?.map((bank: any) => ({
         value: bank.id, 
         label: bank.name,
+        bankName: bank.name,
+        bankCode: bank.bankCode,
+        bankAccountName: bank.bankAccountName,
         key: bank.id
       })) || [{ value: "", label: "Select Bank/Wallet" }];
   
@@ -47,7 +50,24 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
         sourceAccountNumber: ''
       })
       const [pin, setPin] = useState('');
+      const [selected, setSelected] = useState({
+        bankName:'',
+        bankCode:'',
+        bankAccountName: ''
+      });
 
+
+      const handleSelectChange = (selectedOption: any) => {
+        if(selectedOption){
+          setSelected({
+            bankName: selectedOption.bankName,
+            bankCode: selectedOption.bankCode,
+            bankAccountName: selectedOption.bankAccountName,
+          })
+        }
+      }
+
+      console.log(selected);
 
       const handlePinChange = (val: string) => {
         setPin(val)
@@ -70,6 +90,16 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
       const proceedToOtp = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'otp' }), []);
       const proceedToSuccess = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'success' }), []);
       const goToDashboard = useCallback(() => navigate('/wallet'), [navigate]);
+
+
+
+      const handleSubmit = async () => {
+        try {
+          
+        } catch (error) {
+          
+        }
+      }
       
     
 
@@ -119,11 +149,16 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
             
             {state.modalState === 'inputs' &&
             <div className="flex flex-col gap-4">
+              <AuthInput placeholder='Enter Account/Wallet Number' type='tel' onChange={handleDeatailsChange}/>
               <AuthInput placeholder='Enter Amount' type='tel' onChange={handleDeatailsChange}/>
-              <Select className='py-3 h-[70px]' options={options} onChange={() => {}} name='Select Bank/Wallet' />
+              <Select className='py-3 h-[70px]' 
+                options={options} 
+                onChange={handleSelectChange} 
+                // value={selected}
+                name='Select Bank/Wallet' />
 
               <div className="">
-                <TextArea text='Narration'/>
+                <TextArea text='Narration' onChange={handleDeatailsChange} value={details.narration} name='narration'/>
               </div>
 
                 <ActionBtn 

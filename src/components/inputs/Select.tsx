@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from '@mui/material';
 import React, { FC } from 'react';
 
 interface Option {
@@ -11,6 +12,7 @@ interface SelectProps {
     options: Option[];
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
     className: string;
+    // onSelect?: (e: SelectChangeEvent<HTMLSelectElement>) => void;
 }
 
 const Select:FC<SelectProps> = ({ name = "select", id = "select", options, onChange, className }) => {
