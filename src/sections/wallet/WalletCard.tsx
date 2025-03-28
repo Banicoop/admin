@@ -90,6 +90,16 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
       const proceedToOtp = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'otp' }), []);
       const proceedToSuccess = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'success' }), []);
       const goToDashboard = useCallback(() => navigate('/wallet'), [navigate]);
+
+
+
+      const handleSubmit = async () => {
+        try {
+          
+        } catch (error) {
+          
+        }
+      }
       
     
 
