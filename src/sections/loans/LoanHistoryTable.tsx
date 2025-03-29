@@ -7,10 +7,6 @@ import moment from 'moment';
 
 
 const columns = [
-    // {
-    //   header: "History",
-    //   accessor: "history",
-    // },
     {
       header: "Amount Applied",
       accessor: "amount",
@@ -19,12 +15,12 @@ const columns = [
     {
       header: "Date",
       accessor: "date",
-      // className: "hidden md:table-cell",
+      className: "table-cell",
     },
     {
       header: "Status",
       accessor: "status",
-      // className: "",
+      className: "table-cell",
     },
   ];
 
@@ -44,7 +40,6 @@ const columns = [
 
 const LoanHistoryTable = ({loanHistory}: {loanHistory: any[]}) => {
 
-  console.log(loanHistory);
 
   return (
     <>

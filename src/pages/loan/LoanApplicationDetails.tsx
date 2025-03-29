@@ -189,7 +189,7 @@ const LoanApplicationDetails = () => {
           <div className="flex flex-col">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-              <ArrowBack style={{ color: 'gray', cursor: 'ponter' }} onClick={() => navigate('/loan/pending')}/>
+              <ArrowBack style={{ color: 'gray', cursor: 'ponter' }} onClick={() => navigate('/loans')}/>
               <Info text='Loan History & Repayment'/>
             </div>
               <ExportBtn text='Export' onClick={() => {}}/>
