@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import LoanCard from '../../sections/loans/LoanCard';
-import { useDispatch, useSelector } from 'react-redux';
-import {  getPendingLoans } from '../../redux/slice/loanSlice';
-import { Dispatch } from '../../redux/store';
 import EmptyState from '../../components/EmptyState';
 import { CircularProgress } from '@mui/material';
 import { ArrowBack } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { useAllLoansQuery } from '../../utils/api';
 
 
 
@@ -14,19 +12,11 @@ import { useNavigate } from 'react-router-dom';
 const PendingLoan = () => {
 
 
-  const navigate = useNavigate()
-
-
-  const { loans, status } = useSelector((state: any) => state.loan);
-
-
-  const dispatch = useDispatch<Dispatch>();
-
-  useEffect(() => {
-   dispatch(getPendingLoans())
-  }, [dispatch])
-
-  let num = loans?.data?.length || 0
+  const navigate = useNavigate();
+  
+  const { data, isPending } = useAllLoansQuery({ status: 'pending' });
+  
+  let num = data?.data?.length || 0;
 
 
   return (
@@ -37,12 +27,12 @@ const PendingLoan = () => {
       </div>
 
       <div className="flex flex-col md:flex-row w-full gap-[20px]">
-        { status === 'pending' ? 
+        { isPending ? 
 
         <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:
-        Array.isArray(loans?.data) ?
-          loans?.data?.map((loan: any) => (
-            <LoanCard className='border-[1px] rounded-lg w-[320px] md:w-max lg:w-[32%] h-[144px] flex justify-center my-3' key={loan?.payload?.loan?._id} loan={loan} /> 
+        Array.isArray(data?.data) ?
+          data?.data?.map((loan: any) => (
+            <LoanCard className='border-[1px] rounded-lg w-[320px] md:w-max lg:w-[32%] h-[144px] flex justify-center my-3' key={data?.payload?.loan?._id} loan={loan} /> 
           )): 
           <EmptyState text='No Pending Loan' />
         }

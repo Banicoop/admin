@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Info from '../../components/infos/Info';
 import Btn from '../../components/buttons/Btn';
 import PendingApp from '../../sections/loans/PendingApp';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import Search from '../../components/Search';
 import LoanTable from '../../sections/loans/LaonTable';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from '../../redux/store';
-import { getAllLoans } from '../../redux/slice/loanSlice';
-import { useLoanMetricsQuery } from '../../utils/api';
+import { useAllLoansQuery, useLoanMetricsQuery } from '../../utils/api';
 import AppWidgets from '../../components/AppWidgets';
 
 
@@ -55,16 +52,10 @@ const Loans = () => {
   const [activeTableItem, setActiveTableItem] = useState('All');
 
 
-  const { loans } = useSelector((state: any) => state.loan);
-
-  const dispatch = useDispatch<Dispatch>()
-
-  useEffect(() => {
-   dispatch(getAllLoans())
-  }, [dispatch])
-
-
   const { data } = useLoanMetricsQuery();
+
+  const { data: loanData } = useAllLoansQuery({status: ''});
+
 
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px]'>
@@ -120,7 +111,7 @@ const Loans = () => {
           </div>
 
           <div className="w-full">
-              <LoanTable loanData={loans?.data ?? []} key={loans?.data?._id}/>
+              <LoanTable loanData={loanData?.data ?? []} key={loanData?.data?._id}/>
           </div>
       </div>
     </div>

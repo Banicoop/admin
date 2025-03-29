@@ -2,14 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import LoanCard from './LoanCard';
 import { CircularProgress } from '@mui/material';
-import { usePendingLoanQuery } from '../../utils/api';
+import { useAllLoansQuery } from '../../utils/api';
 import EmptyState from '../../components/EmptyState';
 
 
 const PendingApp = () => {
 
 
-  const { data, isPending } = usePendingLoanQuery();
+  const { data, isPending } = useAllLoansQuery({status: 'pending'})
 
   let num = data?.data?.length || 0
 
