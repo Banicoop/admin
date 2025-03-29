@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import SERVER from './server';
+import { AllLoanType } from './type';
 
 
 export const useAdminsQuery = () => {
@@ -15,25 +16,20 @@ export const useAdminsQuery = () => {
 }
 
 
-export const usePendingLoanQuery = () => {
+
+export const useAllLoansQuery = ({status, startDate, endDate, search}: AllLoanType) => {
     const { data, error, isPending } = useQuery({
-        queryKey: ['pending-loans'],
+        queryKey: ['loans', status, startDate, endDate, search],
         queryFn: async () => {
-            const res = await SERVER.get(`admin/loans?status=pending`)
-            return res.data;
-        }
-    })
 
-    return { data, error, isPending }
-}
+            const params = new URLSearchParams();
 
+            if (status) params.append('status', status);
+            if (startDate) params.append('startDate', startDate);
+            if (endDate) params.append('endDate', endDate);
+            if (search) params.append('search', search);
 
-
-export const useAllLoansQuery = () => {
-    const { data, error, isPending } = useQuery({
-        queryKey: ['all-loans'],
-        queryFn: async () => {
-            const res = await SERVER.get(`admin/loans`)
+            const res = await SERVER.get(`admin/loans?${params.toString()}`)
             return res.data;
         }
     })
@@ -49,7 +45,8 @@ export const useLoanDetailsQuery = (Id: string) => {
         queryFn: async () => {
             const res = await SERVER.get(`admin/loans/${Id}`)
             return res.data;
-        }
+        },
+        enabled: !!Id
     })
 
     return { data, error, isPending }
