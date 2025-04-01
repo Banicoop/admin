@@ -3,12 +3,13 @@ import isTokenExpired from "./isTokenExp";
 import { refreshAccessToken } from "../redux/slice/authSlice";
 
 
-const LIVE = 'https://banicoop-server-testing.onrender.com/api/v1/';
-// const DEMO = 'https://banicoop-server-7cas.onrender.com/api/v1/'
+// const DEMO = 'https://banicoop-server-testing.onrender.com/api/v1/';
+const LIVE = 'https://banicoop-server-7cas.onrender.com/api/v1/'
 
 // Axios instance
 const SERVER = axios.create({
     // baseURL: process.env.REACT_APP_API_URL, 
+    // baseURL: DEMO,
     baseURL: LIVE,
     timeout: 10000, 
     headers: {
