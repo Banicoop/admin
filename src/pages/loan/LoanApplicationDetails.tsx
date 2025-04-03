@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ActionBtn from '../../components/buttons/ActionBtn';
 import ApplicationCard from '../../sections/loans/ApplicationCard';
 import LoadWidgetCard from '../../sections/loans/LoadWidgetCard';
@@ -6,8 +6,8 @@ import Progress from '../../components/Progress';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import Info from '../../components/infos/Info';
 import LoanHistoryTable from '../../sections/loans/LoanHistoryTable';
-import ReferalCard from '../../sections/loans/ReferalCard';
-import EmptyState from '../../components/EmptyState';
+// import ReferalCard from '../../sections/loans/ReferalCard';
+// import EmptyState from '../../components/EmptyState';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ArrowBack } from '@mui/icons-material';
@@ -15,6 +15,8 @@ import { Dispatch } from '../../redux/store';
 import { CircularProgress } from '@mui/material';
 import { approveLoan, getLoanDetails, rejectLoan } from '../../redux/slice/loanSlice';
 import moment from 'moment';
+import BasicModal from '../../components/modals/DeleteModal';
+import { motion } from 'framer-motion';
 
 
 
@@ -25,6 +27,11 @@ const LoanApplicationDetails = () => {
 
 
   const { id } = useParams();
+
+
+  const [openAccept, setOpenAccept] = useState(false);
+  const [openRejectModal, setOpenRejectModal] = useState(false);
+
 
   const dispatch = useDispatch<Dispatch>();
   const { loans, status } = useSelector((state: any) => state.loan);
@@ -61,16 +68,16 @@ const LoanApplicationDetails = () => {
   const AcceptLoan = async () => {
     if (!loan || !id) return;
 
-    await dispatch(approveLoan(loan?.payload?.loan?._id));
-    dispatch(getLoanDetails(id));
+    // await dispatch(approveLoan(loan?.payload?.loan?._id));
+    // dispatch(getLoanDetails(id));
   }
 
 
   const RejecttLoan = async () => {
     if (!loan || !id) return;
 
-    await dispatch(rejectLoan(loan?.payload?.loan?._id))
-    dispatch(getLoanDetails(id));
+    // await dispatch(rejectLoan(loan?.payload?.loan?._id))
+    // dispatch(getLoanDetails(id));
   }
 
 
@@ -82,6 +89,7 @@ const LoanApplicationDetails = () => {
   const creditScore = Math.round((loan?.payload?.user?.iScoreListing / 100) * 850)
 
   return (
+    <>
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] my-6'>
       <div className="flex gap-7">
         <div className="">
@@ -127,7 +135,7 @@ const LoanApplicationDetails = () => {
 
           {/* { status === 'pending' ?
            <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:
-
+           
             <>
              { loan?.payload?.loan.status !== 'pending'  &&
                 <div className="flex gap-2 items-center">
@@ -197,11 +205,11 @@ const LoanApplicationDetails = () => {
               <LoanHistoryTable loanHistory={loan?.payload?.loanHistory} key={loan?.payload?.loanHistory._id} />
           </div>
 
-          <div className="flex flex-col justify-start border-[1px] rounded-2xl p-4 gap-6">
+          {/* <div className="flex flex-col justify-start border-[1px] rounded-2xl p-4 gap-6">
             <span className="text-[#000000] text-[14px] font-[500]">Referral List (0)</span>
 
-          {
-            refs ?
+            {
+              refs ?
             <div className="flex flex-wrap gap-8 justify-between">
               <ReferalCard/>
               <ReferalCard/>
@@ -214,11 +222,72 @@ const LoanApplicationDetails = () => {
               <ReferalCard/>
             </div> :
             <EmptyState text='No referrer yet' />
-          }
-          </div>
-
+            }
+            </div> */}
 
     </div>
+
+
+        <BasicModal onClose={() => setOpenAccept(false)} open={openAccept}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+                duration: 0.4,
+                scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+            }}
+            className="flex flex-col p-2 gap-3 justify-center items-center w-[320px]">
+    
+               <img src="/wallet/archive-tick.svg" alt="" className="h-[64px] w-[64px]" />
+    
+              <span className="text-center font-[500] text-[16px]">Confirm Loan Approval</span>
+    
+              <span className='text-center font-[300] text-[12px]'>Are you sure you want to approve this loan request?</span>
+    
+              <div className="flex p-4 justify-between items-center w-full">
+                <ActionBtn text='Cancel' 
+                  onClick={() => setOpenAccept(false)} 
+                  className='px-[24px] py-[12px] rounded-3xl bg-[#fff] text-[#6922D1] border-[1px] border-[#6922D1] text-[12px] cursor-pointer leading-[100%]'/>
+    
+                <ActionBtn 
+                  text='Approve' 
+                  onClick={AcceptLoan} 
+                  className='px-[24px] py-[12px] rounded-3xl bg-bgPurple text-bgWhite border-[1px] border-[#6922D1] text-[12px] cursor-pointer leading-[100%]'/>
+              </div>
+            </motion.div>
+        </BasicModal>
+
+          <BasicModal onClose={() => setOpenRejectModal(false)} open={openRejectModal}>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                    duration: 0.4,
+                    scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+                }}
+                className="flex flex-col  p-2 gap-3 justify-center items-center w-[320px]">
+        
+                    <img src="/wallet/archive-tick.svg" alt="" className="h-[64px] w-[64px]" />
+        
+                    <span className="text-center font-[500] text-[16px]">Confirm Loan Rejection</span>
+        
+                    <span className='text-center font-[300] text-[12px]'>Are you sure you want to reject this loan request? 
+                    Please provide a reason for rejection.</span>
+        
+                  <div className="flex p-4 justify-between items-center w-full">
+                    <ActionBtn text='Cancel' 
+                      onClick={() => setOpenRejectModal(false)} 
+                      className='px-[24px] py-[12px] text-[12px] rounded-3xl bg-[#fff] text-[#6922D1] border-[1px] border-[#6922D1] cursor-pointer'/>
+        
+                    <ActionBtn 
+                      text='Reject' 
+                      onClick={RejecttLoan} 
+                      className='px-[24px] py-[12px] text-[12px] rounded-3xl bg-bgPurple text-bgWhite cursor-pointer'/>
+                  </div>
+                </motion.div>
+          </BasicModal>
+
+    </>
   )
 }
 
