@@ -97,7 +97,7 @@ const LoanCard:FC<ILoan> = ({className, loan }) => {
         }}
         className="flex flex-col  p-2 gap-3 justify-center items-center w-[320px]">
 
-            <img src="/wallet/archive-tick.svg" alt="" className="h-[64px] w-[64px]" />
+            <img src="/wallet/remove.svg" alt="" className="h-[64px] w-[64px]" />
 
             <span className="text-center font-[500] text-[16px]">Confirm Loan Rejection</span>
 

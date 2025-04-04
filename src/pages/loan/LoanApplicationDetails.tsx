@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, ChangeEvent } from 'react'
 import ActionBtn from '../../components/buttons/ActionBtn';
 import ApplicationCard from '../../sections/loans/ApplicationCard';
 import LoadWidgetCard from '../../sections/loans/LoadWidgetCard';
@@ -17,6 +17,9 @@ import { approveLoan, getLoanDetails, rejectLoan } from '../../redux/slice/loanS
 import moment from 'moment';
 import BasicModal from '../../components/modals/DeleteModal';
 import { motion } from 'framer-motion';
+import  {CheckboxInput} from '../../components/inputs/Input';
+import TextArea from '../../components/inputs/TextArea';
+import { AnyNsRecord } from 'node:dns';
 
 
 
@@ -31,6 +34,23 @@ const LoanApplicationDetails = () => {
 
   const [openAccept, setOpenAccept] = useState(false);
   const [openRejectModal, setOpenRejectModal] = useState(false);
+  const [narrationState, setNarrationState] = useState(false);
+
+  const [narration, setNarration] = useState('');
+  const [check, setChecked] = useState({
+    'Low credit score': false,
+    'Incomplete documentation': false,
+    'Outstanding loan balance': false,
+    'Other reasons (please specify)': false
+  });
+
+
+
+  const handleChange = (label: any)  => {
+
+  
+  }
+
 
 
   const dispatch = useDispatch<Dispatch>();
@@ -107,8 +127,8 @@ const LoanApplicationDetails = () => {
               {
                 loan?.payload?.loan.status !== 'pending' ? <ExportBtn text='Export' onClick={() => {}}/>:
                 <>
-                  <ActionBtn text='Approve Loan' onClick={AcceptLoan} className='bg-[#6922D10A] text-bgPurple px-6 py-2 rounded-2xl text-[12px] font-[400] cursor-pointer' />
-                  <ActionBtn text='Reject Loan' onClick={RejecttLoan} className='px-6 py-2 rounded-2xl text-[12px] font-[400] border-[1px] text-[#6B6B6B] cursor-pointer'/>
+                  <ActionBtn text='Approve Loan' onClick={() => setOpenAccept(true)} className='bg-[#6922D10A] text-bgPurple px-6 py-2 rounded-2xl text-[12px] font-[400] cursor-pointer' />
+                  <ActionBtn text='Reject Loan' onClick={() => setOpenRejectModal(true)} className='px-6 py-2 rounded-2xl text-[12px] font-[400] border-[1px] text-[#6B6B6B] cursor-pointer'/>
                 </>
               }
             </div>
@@ -258,7 +278,10 @@ const LoanApplicationDetails = () => {
         </BasicModal>
 
           <BasicModal onClose={() => setOpenRejectModal(false)} open={openRejectModal}>
-              <motion.div 
+
+              { 
+              !narrationState &&
+                <motion.div 
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{
@@ -267,7 +290,7 @@ const LoanApplicationDetails = () => {
                 }}
                 className="flex flex-col  p-2 gap-3 justify-center items-center w-[320px]">
         
-                    <img src="/wallet/archive-tick.svg" alt="" className="h-[64px] w-[64px]" />
+                    <img src="/wallet/remove.svg" alt="" className="h-[64px] w-[64px]" />
         
                     <span className="text-center font-[500] text-[16px]">Confirm Loan Rejection</span>
         
@@ -281,10 +304,41 @@ const LoanApplicationDetails = () => {
         
                     <ActionBtn 
                       text='Reject' 
-                      onClick={RejecttLoan} 
+                      onClick={() => setNarrationState(true)} 
                       className='px-[24px] py-[12px] text-[12px] rounded-3xl bg-bgPurple text-bgWhite cursor-pointer'/>
                   </div>
                 </motion.div>
+                }
+
+
+              {  
+                narrationState &&
+                <motion.div 
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                    duration: 0.4,
+                    scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 }
+                }}
+                className="flex flex-col  p-2 gap-3 w-[420px]">
+                    <div className="w-full flex flex-col gap-3">
+
+                      <img src="/admin/x.svg" alt="" className="h-[24px] w-[24px] flex ml-auto" />
+
+                      <CheckboxInput label='Low credit score' onChange={() => {}}/>
+                      <CheckboxInput label='Incomplete documentation' onChange={() => {}}/>
+                      <CheckboxInput label='Outstanding loan balance' onChange={() => {}}/>
+                      <CheckboxInput label='Other reasons (please specify)' onChange={() => {}}/>
+
+                      <TextArea text='Specify here...' onChange={(e: any) => setNarration(e.target.value)}/>
+
+                      <ActionBtn 
+                      text='Reject' 
+                      onClick={() => setNarrationState(true)} 
+                      className='px-[24px] py-[12px] text-[14px] font-[500] rounded-3xl bg-bgPurple text-bgWhite cursor-pointer flex items-center justify-center mx-auto w-[188px]'/>
+                    </div>
+                </motion.div>
+                }
           </BasicModal>
 
     </>
