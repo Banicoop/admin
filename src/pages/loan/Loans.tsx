@@ -52,7 +52,7 @@ const Loans = () => {
   const [activeTableItem, setActiveTableItem] = useState('All');
 
 
-  const { data } = useLoanMetricsQuery();
+  const { data } = useLoanMetricsQuery({duration: 'custom', startDate: '2025-01-01', endDate: '2025-04-06'});
 
   const { data: loanData } = useAllLoansQuery({status: ''});
 

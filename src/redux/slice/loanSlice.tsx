@@ -75,9 +75,9 @@ export const approveLoan = createAsyncThunk(
 
 export const rejectLoan = createAsyncThunk(
     'loan/rejectLoan', 
-    async (loanId: string, { rejectWithValue }) => {
+    async ({loanId, reason}: {loanId: string, reason: string}, { rejectWithValue }) => {
         try {
-            const res = await SERVER.patch(`admin/loans/${loanId}/reject`);
+            const res = await SERVER.patch(`admin/loans/${loanId}/reject`, reason);
             return { loanId, updatedLoan: res.data };
         } catch (error: any) {
             const err = error?.response?.data?.message
