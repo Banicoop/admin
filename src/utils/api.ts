@@ -38,6 +38,20 @@ export const useAllLoansQuery = ({status, startDate, endDate, search}: AllLoanTy
 }
 
 
+export const useLoanHistory = (Id: string) => {
+    const { data, error, isPending } = useQuery({
+        queryKey: ['loan-history'],
+        queryFn: async () => {
+            const res = await SERVER.get(`admin/${Id}/loans/history`);
+            return res.data;
+        },
+        enabled: !!Id
+    })
+
+    return { data, error, isPending }
+}
+
+
 
 export const useLoanDetailsQuery = (Id: string) => {
     const { data, error, isPending } = useQuery({
@@ -93,13 +107,17 @@ export const useWalletBankQuery  = () => {
 }
 
 
-export const useLoanMetricsQuery  = () => {
+export const useLoanMetricsQuery  = ({ duration, startDate, endDate }:  { duration?: string; startDate?: string; endDate?: string;
+}) => {
     const { data, error, isPending } = useQuery({
-        queryKey: ['loan-metrics'],
+        queryKey: ['loan-metrics', duration, startDate, endDate],
         queryFn: async () => {
-            const res = await SERVER.get(`admin/loans/metrics`)
+            const res = await SERVER.get(`admin/loans/metrics`, {
+                params: { duration, startDate, endDate }
+            });
             return res.data;
-        }
+        },
+        enabled: !!duration || (!!startDate && !!endDate),
     })
 
     return { data, error, isPending }
