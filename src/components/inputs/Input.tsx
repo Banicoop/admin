@@ -12,6 +12,7 @@ interface IInput {
     className?: string;
     min?: number;
     label?: string;
+    checked?: boolean
 }
 
 const Input:FC<IInput> = ({ type, placeholder, onChange, name,  readOnly }) => {
@@ -23,10 +24,10 @@ const Input:FC<IInput> = ({ type, placeholder, onChange, name,  readOnly }) => {
 
 
 
-export const CheckboxInput:FC<IInput> = ({label, onChange, name, value}) => {
+export const CheckboxInput:FC<IInput> = ({label, onChange, name, value, checked}) => {
   return(
     <div className="flex items-center gap-2">
-      <input type="checkbox" className="" onChange={onChange} name={name} value={value}/>
+      <input type="checkbox" className="" onChange={onChange} name={name} value={value} checked={checked}/>
       <span className="text-[#545454] text-[14px] font-[400] leading-[24px]">{label}</span>
     </div>
   )

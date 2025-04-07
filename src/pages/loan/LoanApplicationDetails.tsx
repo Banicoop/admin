@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ActionBtn from '../../components/buttons/ActionBtn';
 import ApplicationCard from '../../sections/loans/ApplicationCard';
 import LoadWidgetCard from '../../sections/loans/LoadWidgetCard';
@@ -26,6 +26,9 @@ import TextArea from '../../components/inputs/TextArea';
 const LoanApplicationDetails = () => {
 
 
+  const reasons = [ 'Low credit score', 'Incomplete documentation', 'Outstanding loan balance', 'Other reasons (please specify)']
+
+
   const navigate = useNavigate()
 
 
@@ -37,21 +40,8 @@ const LoanApplicationDetails = () => {
   const [narrationState, setNarrationState] = useState(false);
 
   const [narration, setNarration] = useState('');
-  const [reasons, setReasons] = useState({
-    'Low credit score': false,
-    'Incomplete documentation': false,
-    'Outstanding loan balance': false,
-    'Other reasons (please specify)': false
-  });
+  const [selectedReason, setSelectedReason] = useState('');
 
-
-
-  const handleCheckboxChange = (label: string) => {
-    // setReasons(prev => ({
-    //   ...prev,
-    //   [label]: !prev[label] 
-    // }));
-  }
 
 
 
@@ -90,18 +80,26 @@ const LoanApplicationDetails = () => {
   const AcceptLoan = async () => {
     if (!loan || !id) return;
 
-    // await dispatch(approveLoan(loan?.payload?.loan?._id));
-    // dispatch(getLoanDetails(id));
+    await dispatch(approveLoan(loan?.payload?.loan?._id));
+    dispatch(getLoanDetails(id));
   }
 
 
   const RejecttLoan = async () => {
 
-    if (!loan || !id) return;
+    if (!loan || !id || !selectedReason) return;
 
-    // await dispatch(rejectLoan(loan?.payload?.loan?._id))
-    // dispatch(getLoanDetails(id));
+    const payload = {
+      loanId: loan?.payload?.loan?._id,
+      reason: selectedReason === 'Other reasons (please specify)' ? narration: selectedReason
+    }
+
+    await dispatch(rejectLoan(payload))
+    dispatch(getLoanDetails(id));
   }
+
+
+  console.log(loan?.payload?.user?.proofOfSalary);
 
 
   const loanAmount = loan?.payload?.loan?.loanAmount;
@@ -128,7 +126,7 @@ const LoanApplicationDetails = () => {
 
             <div className="flex items-center gap-4">
               {
-                loan?.payload?.loan.status !== 'pending' ? <ExportBtn text='Export' onClick={() => {}}/>:
+                loan?.payload?.loan.status === 'pending' ? <ExportBtn text='Export' onClick={() => {}}/>:
                 <>
                   <ActionBtn text='Approve Loan' onClick={() => setOpenAccept(true)} className='bg-[#6922D10A] text-bgPurple px-6 py-2 rounded-2xl text-[12px] font-[400] cursor-pointer' />
                   <ActionBtn text='Reject Loan' onClick={() => setOpenRejectModal(true)} className='px-6 py-2 rounded-2xl text-[12px] font-[400] border-[1px] text-[#6B6B6B] cursor-pointer'/>
@@ -205,13 +203,11 @@ const LoanApplicationDetails = () => {
             <LoadWidgetCard text='Proof of Income'>
               <div className="p-4 flex items-center h-full">
                 <div className="flex items-center gap-3">
-                <a href={loan?.payload?.user?.proofOfSalary} download="proof-of-salary.pdf">
-                  <img src="/loan/image.png" alt="Download Proof" className="h-[16px] w-[16px] cursor-pointer" />
-                </a>
+                  <a href={loan?.payload?.user?.proofOfSalary} target="_blank" rel="noopener noreferrer" download="proof-of-salary.pdf" className='flex items-start gap-2'>
+                    <img src="/loan/image.png" alt="Download Proof" className="h-[16px] w-[16px] cursor-pointer" />
+                    <span className="text-blue-500 underline">Download</span>
+                  </a>
 
-                <a href={loan?.payload?.user?.proofOfSalary} download="proof-of-salary.pdf" className="text-blue-500 underline">
-                  Download
-                </a>
                 </div>
               </div>
             </LoadWidgetCard>
@@ -329,22 +325,19 @@ const LoanApplicationDetails = () => {
                       <img src="/admin/x.svg" alt="" className="h-[24px] w-[24px] flex ml-auto cursor-pointer" onClick={() => setOpenRejectModal(false)} />
 
                       <span className="text-[14px] font-[400] text-[#1E0D37]">Please Provide a reason for rejection</span>
-                    {/* 
-                      {Object.keys(checked).map(label => (
+
+                      {reasons.map((reason) => (
                         <CheckboxInput 
-                          key={label} 
-                          label={label} 
-                          checked={checked[label]} 
-                          onChange={() => handleCheckboxChange(label)}
-                        />
-                      ))} */}
-
-                      <CheckboxInput label='Low credit score' onChange={() => {}} name='reason'/>
-                      <CheckboxInput label='Incomplete documentation' onChange={() => {}} name='reason'/>
-                      <CheckboxInput label='Outstanding loan balance' onChange={() => {}} name='reason'/>
-                      <CheckboxInput label='Other reasons (please specify)' onChange={() => {}} name='reason'/>
-
-                      <TextArea text='Specify here...' onChange={(e: any) => setNarration(e.target.value)}/>
+                          label={reason} 
+                          name='reason' key={reason} 
+                          onChange={() => setSelectedReason(reason)}
+                          checked={selectedReason === reason}/>
+                      ))
+                      }
+                    
+                    {selectedReason === 'Other reasons (please specify)' && (
+                      <TextArea text='Specify here...' onChange={(e: any) => setNarration(e.target.value)} />
+                    )}
 
                       <ActionBtn 
                         text='Reject' 

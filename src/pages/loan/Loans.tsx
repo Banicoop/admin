@@ -7,7 +7,7 @@ import Search from '../../components/Search';
 import LoanTable from '../../sections/loans/LaonTable';
 import { useAllLoansQuery, useLoanMetricsQuery } from '../../utils/api';
 import AppWidgets from '../../components/AppWidgets';
-
+import dayjs from 'dayjs';
 
 
 
@@ -52,7 +52,7 @@ const Loans = () => {
   const [activeTableItem, setActiveTableItem] = useState('All');
 
 
-  const { data } = useLoanMetricsQuery({duration: 'custom', startDate: '2025-01-01', endDate: '2025-04-06'});
+  const { data } = useLoanMetricsQuery({duration: 'custom', startDate: dayjs().subtract(30, 'day').format('YYYY-MM-DD'), endDate: dayjs().format('YYYY-MM-DD')});
 
   const { data: loanData } = useAllLoansQuery({status: ''});
 
