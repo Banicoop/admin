@@ -126,7 +126,7 @@ const LoanApplicationDetails = () => {
 
             <div className="flex items-center gap-4">
               {
-                loan?.payload?.loan.status === 'pending' ? <ExportBtn text='Export' onClick={() => {}}/>:
+                loan?.payload?.loan.status !== 'pending' ? <ExportBtn text='Export' onClick={() => {}}/>:
                 <>
                   <ActionBtn text='Approve Loan' onClick={() => setOpenAccept(true)} className='bg-[#6922D10A] text-bgPurple px-6 py-2 rounded-2xl text-[12px] font-[400] cursor-pointer' />
                   <ActionBtn text='Reject Loan' onClick={() => setOpenRejectModal(true)} className='px-6 py-2 rounded-2xl text-[12px] font-[400] border-[1px] text-[#6B6B6B] cursor-pointer'/>
