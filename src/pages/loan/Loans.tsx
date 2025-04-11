@@ -14,17 +14,17 @@ import dayjs from 'dayjs';
 
 const list = [
   {
-    label: 'Today'
+    label: 'All'
   },
-  {
-    label: 'Last 7 days'
-  },
-  {
-    label: 'Last 30 Days'
-  },
-  {
-    label: 'All Time'
-  },
+  // {
+  //   label: 'Last 7 days'
+  // },
+  // {
+  //   label: 'Last 30 Days'
+  // },
+  // {
+  //   label: 'All Time'
+  // },
   {
     label: 'Custom'
   },
