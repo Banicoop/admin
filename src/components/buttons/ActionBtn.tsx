@@ -16,7 +16,7 @@ type Itext = {
 
 const ActionBtn:FC<Itext> = ({text, onClick, img, className, className1, className2, img1, disabled }) => {
     return(
-        <button onClick={onClick}  className={` ${className} ${disabled ? 'bg-[#29012938] cursor-not-allowed': 'cursor-pointer'}`}>
+        <button onClick={onClick}  className={` ${className} ${disabled ? 'bg-[#02020238] cursor-not-allowed': 'cursor-pointer'}`}>
             {img1 && <img src={img1} alt="" className={className2} />}
             <span className="">{text}</span>
             {img && <img src={img} alt="" className={className1} />}
