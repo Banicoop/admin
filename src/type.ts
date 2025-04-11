@@ -12,3 +12,11 @@ export interface WidgetProps {
     type: 'transactions' | 'customers' | 'cells' | 'loan1' | 'loan2' | 'loan3' | 'loan4' | 'loan5' | 'loan6';
     className: string;
 }
+
+
+export type WType = {
+  title: string;
+  url?: string;
+  item: any
+}
+

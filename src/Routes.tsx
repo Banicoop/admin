@@ -13,6 +13,7 @@ import { Cells, CellDetails, CellUserDetails} from './pages/cells';
 import { Signin, ForgetPassword, Verification, Verified, WelcomePage, Splash, ResetPassword } from './pages/auth'
 import { LoanApplicationDetails, Loans, PendingLoan } from './pages/loan';
 import { Wallet, InvestorWallet, WalletTransaction } from './pages/wallet';
+import Customers from './pages/customer/Customers';
 
 
 
@@ -179,6 +180,12 @@ const router = createBrowserRouter([
         path: '/wallet/:id/transaction',
         element: <WalletTransaction/>
       },
+
+      //customer mgt
+      {
+        path: 'customers',
+        element: <Customers/>
+      }
     ]
   },
   {

@@ -9,36 +9,32 @@ import OtpInput from '../../components/inputs/OtpInput';
 import reducer from './reducer';
 import ActionBtn from '../../components/buttons/ActionBtn';
 import { useNavigate } from 'react-router-dom';
-import Select from '../../components/inputs/Select';
 import { useBankQuery } from '../../utils/api';
 import AddFundsCard from './AddFundsCard';
 import { Option } from '../../components/inputs/Select';
 import SERVER from '../../utils/server';
 import { toast } from 'react-toastify';
 import { toastOptions } from '../../utils/toastOptions';
+import { WType } from '../../type';
 
-
-
-
-type WType = {
-    title: string;
-    url?: string;
-    item: any
-}
 
 
 const WalletCard:FC<WType> = ({title, url, item}) => {
 
       const { data } = useBankQuery();
 
-      const options =  data?.banks?.map((bank: any) => ({
-        value: String(bank.id),
-        label: bank.name,
-        bankName: bank.name,
-        bankCode: bank.bankCode,
-        bankAccountName: bank.bankAccountName,
-        key: bank.id
-      })) || [{ value: "", label: "Select Bank/Wallet" }];
+
+      const options = data?.payload?.map((bank: any) => {
+      
+        return {
+          value: String(bank?.id),
+          label: bank?.name,
+          bankName: bank?.name,
+          bankCode: bank?.code,
+          bankAccountName: bank?.accountName,
+          key: bank?.id
+        };
+      }) || [];
   
 
       const initialState = {
@@ -56,22 +52,20 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
       const [pin, setPin] = useState('');
       const [selectedBank, setSelectedBank] = useState<Option | null>(null);
 
-
       const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedValue = event.target.value;
-        const selected = options.find((option: any) => option.value.toString() === selectedValue);
+        const selected = options.find((option: Option) => option.value === selectedValue);
         if (selected) {
           setSelectedBank(selected);
         }
       };
-
 
       const handlePinChange = (val: string) => {
         setPin(val)
       }
 
 
-      const handleDeatailsChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const handleDetailsChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         
         setDetails({...details, [name]: value})
@@ -108,13 +102,22 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
           return res.data
         } catch (error: any) {
           if(error){
-            const err = error?.response?.data?.message
+            const err = error?.response?.data?.message || "Something went wrong. Please try again.";
             toast.error(`${err}`, {...toastOptions})
           }
           setSuccess(false)
         }
       }
+
+
+      const isButtonEnabled = pin.length === 4;
       
+      const isFormComplete =
+          details.sourceAccountNumber.trim() !== '' &&
+          details.amount > 0 &&
+          details.narration.trim() !== '' &&
+          selectedBank !== null;
+
     
 
   return (
@@ -163,20 +166,26 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
             
             {state.modalState === 'inputs' &&
             <div className="flex flex-col gap-4">
-              <AuthInput placeholder='Enter Account/Wallet Number' type='tel' onChange={handleDeatailsChange}/>
-              <AuthInput placeholder='Enter Amount' type='tel' onChange={handleDeatailsChange}/>
-              <Select className='py-3 h-[70px]' 
-                options={options} 
-                onChange={handleSelectChange} 
-                name='Select Bank/Wallet' />
+              <AuthInput placeholder='Enter Account/Wallet Number' name='sourceAccountNumber' type='tel' onChange={handleDetailsChange}/>
+              <AuthInput placeholder='Enter Amount' name='amount' type='tel' onChange={handleDetailsChange}/>
+
+              <div className="'py-3 h-[70px]">
+                <select onChange={handleSelectChange} className='w-full h-full border-[1px] outline-none rounded-lg px-2 bg-white'>
+                <option value="">Select Bank/Wallet</option>
+                {options.map((option: any) => (
+                    <option key={option.id} value={option.value}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
 
               <div className="">
-                <TextArea text='Narration' onChange={handleDeatailsChange} value={details.narration} name='narration'/>
+                <TextArea text='Narration' onChange={handleDetailsChange} value={details.narration} name='narration'/>
               </div>
 
                 <ActionBtn 
                   className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-[16px] bg-bgPurple text-bgWhite font-[400] h-[48px] w-[160px]' 
                   text='Proceed' 
+                  disabled={!isFormComplete}
                   onClick={proceedToOtp}  
                   img='/wallet/send.svg' className2='h-[16px] w-[16px]'/>
             </div>
@@ -192,12 +201,14 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
                   text='Go Back' 
                   onClick={() => dispatch({ type: 'SET_MODAL_STATE', payload: 'inputs' })}  />
 
+   
                 <ActionBtn className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-bgPurple text-bgWhite font-[400] h-[48px] w-[160px]' 
                 text='Proceed' 
+                disabled={!isButtonEnabled}
                 onClick={() => {
                   handleSubmit()
                   proceedToSuccess()
-                }} />
+                }} /> 
                 </div>
             </div>
               }
@@ -240,7 +251,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
     <DeleteModal open={openAddFund} onClose={() => setOpenAddFund(false)}>
         <div className="flex flex-col gap-4 p-6 max-w-[700px]">
           <img src="/admin/x.svg" alt="" className="h-[16px] w-[16px] flex ml-auto cursor-pointer" onClick={() => setOpenAddFund(false)} />
-          <h4 className="'text-[#000000] font-[500] text-[16px]'">Add Funds</h4>
+          <h4 className="text-[#000000] font-[500] text-[16px]'">Add Funds</h4>
 
 
           <div className="flex flex-col gap-7">

@@ -8,7 +8,7 @@ export const menuData = [
       {
       name: 'Customers',
       icon: '/user.svg',
-      url: '#',
+      url: 'customers',
       visible: ["super_admin"],
     },
     {
