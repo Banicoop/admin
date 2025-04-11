@@ -12,6 +12,10 @@ import { useNavigate } from 'react-router-dom';
 import Select from '../../components/inputs/Select';
 import { useBankQuery } from '../../utils/api';
 import AddFundsCard from './AddFundsCard';
+import { Option } from '../../components/inputs/Select';
+import SERVER from '../../utils/server';
+import { toast } from 'react-toastify';
+import { toastOptions } from '../../utils/toastOptions';
 
 
 
@@ -28,7 +32,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
       const { data } = useBankQuery();
 
       const options =  data?.banks?.map((bank: any) => ({
-        value: bank.id, 
+        value: String(bank.id),
         label: bank.name,
         bankName: bank.name,
         bankCode: bank.bankCode,
@@ -50,24 +54,17 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
         sourceAccountNumber: ''
       })
       const [pin, setPin] = useState('');
-      const [selected, setSelected] = useState({
-        bankName:'',
-        bankCode:'',
-        bankAccountName: ''
-      });
+      const [selectedBank, setSelectedBank] = useState<Option | null>(null);
 
 
-      const handleSelectChange = (selectedOption: any) => {
-        if(selectedOption){
-          setSelected({
-            bankName: selectedOption.bankName,
-            bankCode: selectedOption.bankCode,
-            bankAccountName: selectedOption.bankAccountName,
-          })
+      const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedValue = event.target.value;
+        const selected = options.find((option: any) => option.value.toString() === selectedValue);
+        if (selected) {
+          setSelectedBank(selected);
         }
-      }
+      };
 
-      console.log(selected);
 
       const handlePinChange = (val: string) => {
         setPin(val)
@@ -83,6 +80,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
       const [state, dispatch] = useReducer(reducer, initialState);
       const [openAddFund, setOpenAddFund] = useState(false);
+      const [success, setSuccess] = useState(false);
 
 
       const openSendFundsModal = useCallback(() => dispatch({ type: 'SET_MODAL_STATE', payload: 'inputs' }), []);
@@ -94,10 +92,26 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
 
       const handleSubmit = async () => {
+        const payload = {
+          bankName: selectedBank?.bankName,
+          bankCode: selectedBank?.bankCode,
+          bankAccountName: selectedBank?.bankAccountName,
+          amount: details.amount,
+          narration: details.narration,
+          sourceAccountNumber: details.sourceAccountNumber,
+          pin
+        }
+       
         try {
-          
-        } catch (error) {
-          
+          const res = await SERVER.post('/admin/transfer/wallet/bank', payload);
+          setSuccess(true)
+          return res.data
+        } catch (error: any) {
+          if(error){
+            const err = error?.response?.data?.message
+            toast.error(`${err}`, {...toastOptions})
+          }
+          setSuccess(false)
         }
       }
       
@@ -154,7 +168,6 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
               <Select className='py-3 h-[70px]' 
                 options={options} 
                 onChange={handleSelectChange} 
-                // value={selected}
                 name='Select Bank/Wallet' />
 
               <div className="">
@@ -181,7 +194,10 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
                 <ActionBtn className='flex items-center text-center justify-center mx-auto gap-3  shadow-lg px-[20px] py-[12px] border-[1px] rounded-full bg-bgPurple text-bgWhite font-[400] h-[48px] w-[160px]' 
                 text='Proceed' 
-                onClick={proceedToSuccess} />
+                onClick={() => {
+                  handleSubmit()
+                  proceedToSuccess()
+                }} />
                 </div>
             </div>
               }
@@ -191,10 +207,16 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
                   <img src="/admin/x.svg" alt="" className="h-[16px] w-[16px] flex ml-auto cursor-pointer" onClick={closeModal} />
 
                   <div className="flex flex-col justify-center items-center gap-5">
-                    <img src="/wallet/archive-tick.svg" alt="" className="h-[64px] w-[64px]" />
+                    <img src={success ? "/wallet/archive-tick.svg": '/wallet/remove.svg'} alt="" className="h-[64px] w-[64px]" />
 
-                    <h4 className='font-[500] text-[18px] text-bgBlack leading-[100%]'>Transaction Successful</h4>
-                    <span className="font-[300] text-[12px] text-bgBlack leading-[100%]">Your transaction has been successfully completed.</span>
+                    <h4 className='font-[500] text-[18px] text-bgBlack leading-[100%]'>
+                      {success ? 'Transaction Successful': 'Transaction Unsuccessful' }
+                      </h4>
+                    <span className="font-[300] text-[12px] text-bgBlack leading-[100%]">
+                      {success ? 
+                      'Your transaction has been successfully completed.': 
+                      'Your transaction was not successful'}
+                      </span>
 
                     <div className="flex justify-center items-center gap-[10px] w-full">
                       <ActionBtn 
