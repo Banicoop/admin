@@ -96,10 +96,9 @@ const LoanApplicationDetails = () => {
 
     await dispatch(rejectLoan(payload))
     dispatch(getLoanDetails(id));
+    setOpenRejectModal(false);
   }
 
-
-  console.log(loan?.payload?.user?.proofOfSalary);
 
 
   const loanAmount = loan?.payload?.loan?.loanAmount;

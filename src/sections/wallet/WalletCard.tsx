@@ -21,6 +21,13 @@ import { WType } from '../../type';
 
 const WalletCard:FC<WType> = ({title, url, item}) => {
 
+
+  const initailDetailState = {
+    amount: 0,
+    narration: '',
+    sourceAccountNumber: ''
+  }
+
       const { data } = useBankQuery();
 
 
@@ -44,11 +51,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
       const navigate = useNavigate();
 
-      const [details, setDetails] = useState({
-        amount: 0,
-        narration: '',
-        sourceAccountNumber: ''
-      })
+      const [details, setDetails] = useState(initailDetailState)
       const [pin, setPin] = useState('');
       const [selectedBank, setSelectedBank] = useState<Option | null>(null);
 
@@ -92,13 +95,15 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
           bankAccountName: selectedBank?.bankAccountName,
           amount: details.amount,
           narration: details.narration,
-          sourceAccountNumber: details.sourceAccountNumber,
+          walletNumber: details.sourceAccountNumber,
           pin
         }
        
         try {
           const res = await SERVER.post('/admin/transfer/wallet/bank', payload);
-          setSuccess(true)
+          toast.success('Transaction completed successfully!', {...toastOptions})
+          setSuccess(true);
+          setDetails(initailDetailState);
           return res.data
         } catch (error: any) {
           if(error){
@@ -166,8 +171,8 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
             
             {state.modalState === 'inputs' &&
             <div className="flex flex-col gap-4">
-              <AuthInput placeholder='Enter Account/Wallet Number' name='sourceAccountNumber' type='tel' onChange={handleDetailsChange}/>
-              <AuthInput placeholder='Enter Amount' name='amount' type='tel' onChange={handleDetailsChange}/>
+              <AuthInput placeholder='Enter Account/Wallet Number' value={details.sourceAccountNumber} name='sourceAccountNumber' type='tel' onChange={handleDetailsChange}/>
+              <AuthInput placeholder='Enter Amount' name='amount' value={details.amount} type='tel' onChange={handleDetailsChange}/>
 
               <div className="'py-3 h-[70px]">
                 <select onChange={handleSelectChange} className='w-full h-full border-[1px] outline-none rounded-lg px-2 bg-white'>
