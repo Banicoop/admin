@@ -7,7 +7,7 @@ type Itext = {
     onClick?: MouseEventHandler<HTMLDivElement>;
     disabled?: any;
     img?: string;
-    loading?: 'pending' | 'succeeded' | 'failed' | 'idle'
+    loading?: 'pending' | 'succeeded' | 'failed' | 'idle';
 }
 
 const ExportBtn:FC<Itext> = ({text, onClick, img}) => {
