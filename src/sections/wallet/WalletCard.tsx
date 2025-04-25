@@ -25,7 +25,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
   const initailDetailState = {
     amount: 0,
     narration: '',
-    sourceAccountNumber: ''
+    // sourceAccountNumber: ''
   }
 
       const { data } = useBankQuery();
@@ -95,7 +95,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
           bankAccountName: selectedBank?.bankAccountName,
           amount: details.amount,
           narration: details.narration,
-          walletNumber: details.sourceAccountNumber,
+          walletNumber: item?.walletNumber,
           pin
         }
        
@@ -118,7 +118,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
       const isButtonEnabled = pin.length === 4;
       
       const isFormComplete =
-          details.sourceAccountNumber.trim() !== '' &&
+          // details.sourceAccountNumber.trim() !== '' &&
           details.amount > 0 &&
           details.narration.trim() !== '' &&
           selectedBank !== null;
@@ -171,7 +171,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
             
             {state.modalState === 'inputs' &&
             <div className="flex flex-col gap-4">
-              <AuthInput placeholder='Enter Account/Wallet Number' value={details.sourceAccountNumber} name='sourceAccountNumber' type='tel' onChange={handleDetailsChange}/>
+              {/* <AuthInput placeholder='Enter Account/Wallet Number' value={details.sourceAccountNumber} name='sourceAccountNumber' type='tel' onChange={handleDetailsChange}/> */}
               <AuthInput placeholder='Enter Amount' name='amount' value={details.amount} type='tel' onChange={handleDetailsChange}/>
 
               <div className="'py-3 h-[70px]">
