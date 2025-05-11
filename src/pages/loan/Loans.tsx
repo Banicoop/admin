@@ -7,7 +7,7 @@ import Search from '../../components/Search';
 import LoanTable from '../../sections/loans/LaonTable';
 import { useAllLoansQuery, useLoanMetricsQuery } from '../../utils/api';
 import AppWidgets from '../../components/AppWidgets';
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 
 
 
@@ -16,17 +16,14 @@ const list = [
   {
     label: 'All'
   },
-  // {
-  //   label: 'Last 7 days'
-  // },
-  // {
-  //   label: 'Last 30 Days'
-  // },
-  // {
-  //   label: 'All Time'
-  // },
   {
-    label: 'Custom'
+    label: 'Today'
+  },
+  {
+    label: 'Last 7 days'
+  },
+  {
+    label: 'Last 30 Days'
   },
 ]
 
@@ -52,7 +49,28 @@ const Loans = () => {
   const [activeTableItem, setActiveTableItem] = useState('All');
 
 
-  const { data } = useLoanMetricsQuery({duration: 'custom', startDate: dayjs().subtract(30, 'day').format('YYYY-MM-DD'), endDate: dayjs().format('YYYY-MM-DD')});
+  const getQueryParams = (label: string) => {
+    const now = new Date();
+    const endDate = now.toISOString();
+    let startDate;
+  
+    switch (label) {
+      case 'Last 7 days':
+        startDate = new Date(now.setDate(now.getDate() - 7)).toISOString();
+        return { duration: 'custom', startDate, endDate };
+      case 'Last 30 Days':
+        startDate = new Date(now.setDate(now.getDate() - 30)).toISOString();
+        return { duration: 'custom', startDate, endDate };
+      case 'All':
+      case 'All Time':
+      default:
+        return { duration: 'allTime' };
+    }
+  };
+  
+
+
+  const { data } = useLoanMetricsQuery(getQueryParams(activeItem))
 
   const { data: loanData } = useAllLoansQuery({status: ''});
 
@@ -66,7 +84,11 @@ const Loans = () => {
 
                 <div className="hidden md:flex items-center gap-4">
                 {list.map((i) => (
-                    <Btn onClick={() => setActiveItem(i.label)} activeItem={activeItem} label={i.label} key={i.label}/>
+                    <Btn 
+                      onClick={() => setActiveItem(i.label)}
+                      activeItem={activeItem} 
+                      label={i.label} 
+                      key={i.label}/>
                   ))
                   }
                 </div>
