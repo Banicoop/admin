@@ -6,7 +6,7 @@ type AType = {
     title: string;
     text: string;
     title1: string;
-    text1: string;
+    text1: string | number;
 }
 
 const ApplicationCard: FC<AType> = ({img, title, text, title1, text1}) => {

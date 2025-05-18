@@ -18,7 +18,7 @@ const columns = [
     },
     {
       header: "Loan Amount",
-      accessor: "loanAmount",
+      accessor: "amount",
       className: "hidden md:table-cell",
     },
     {
@@ -54,7 +54,7 @@ const columns = [
                 <span className="">{item?.userId?.firstName} {item?.userId?.lastName}</span>
             </Link>
         </td>
-        <td className=''>{`₦${item.loanAmount}`}</td>
+        <td className=''>{`₦${item.amount}`}</td>
         <td className='px-1 py-2'>
             <ActionBtn text={item?.status} onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1]  cursor-pointer w-max'/>
         </td>

@@ -74,6 +74,8 @@ const Loans = () => {
 
   const { data: loanData } = useAllLoansQuery({status: ''});
 
+  console.log(loanData)
+
 
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px]'>
