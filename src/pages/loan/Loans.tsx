@@ -74,7 +74,7 @@ const Loans = () => {
 
   const { data: loanData } = useAllLoansQuery({status: ''});
 
-  console.log(loanData)
+  console.log(data)
 
 
   return (
@@ -97,17 +97,17 @@ const Loans = () => {
             </div>
             <div className="flex flex-col justify-center md:justify-between md:flex-row flex-wrap gap-5">
 
-              <AppWidgets className='w-full md:w-[48%]' title='Total Loan Disbursed' icon='/loan/wallet.png' icon2='/arrow-right.svg' num={data?.data?.totalAmountDisbursed} bgColor='#27AE60' text2='0'/> 
 
-              <AppWidgets className='w-full md:w-[48%]' title='Revenue Generated' icon='/loan/wallet.png' icon2='/arrow-right.svg' num={data?.data?.revenueGenerated} bgColor='#27AE60' text2='0'/>
+              <AppWidgets className='w-full md:w-[48%]' title='Revenue Generated' icon='/loan/wallet.png' icon2='/arrow-right.svg' num={data?.data?.revenueGenerated.toLocaleString()} bgColor='#27AE60' text2='0'/>
 
-              <AppWidgets className='w-full md:w-[48%]' title='Active Loans' icon='/loan/save-add.png' icon2='/arrow-right.svg' num={data?.data?.activeLoans} bgColor='#27AE60' text2='0'/>
+              <AppWidgets className='w-full md:w-[48%]' title='Active Loans' icon='/loan/save-add.png' icon2='/arrow-right.svg' num={data?.data?.activeLoans.toLocaleString()} bgColor='#27AE60' text2='0'/>
 
-              <AppWidgets className='w-full md:w-[48%]' title='Repaid Loans' icon='/loan/archive-tick.png' icon2='/arrow-right.svg' num={data?.data?.repaidLoans} bgColor='#27AE60' text2='0'/>
+              <AppWidgets className='w-full md:w-[48%]' title='Repaid Loans' icon='/loan/archive-tick.png' icon2='/arrow-right.svg' num={data?.data?.repaidLoans.toLocaleString()} bgColor='#27AE60' text2='0'/>
 
-              <AppWidgets className='w-full md:w-[48%]' title='Defaulted Loans' icon='/loan/information.png' icon2='/arrow-right.svg' num={data?.data?.defaultedLoans} bgColor='#27AE60' text2='0'/>
+              <AppWidgets className='w-full md:w-[48%]' title='Disbursed Loans' icon='/loan/information.png' icon2='/arrow-right.svg' num={data?.data?.disbursedLoans.toLocaleString()} bgColor='#27AE60' text2='0'/>
 
-              <AppWidgets className='w-full md:w-[48%]' title='Extended Loans' icon='/loan/information.png' icon2='/arrow-right.svg' num={data?.data?.extendedLoans} bgColor='#27AE60' text2='0'/>
+              <AppWidgets className='w-full md:w-[48%]' title='Total Loan Disbursed' icon='/loan/wallet.png' icon2='/arrow-right.svg' num={data?.data?.totalAmountDisbursed.toLocaleString()} bgColor='#27AE60' text2='0'/> 
+              {/* <AppWidgets className='w-full md:w-[48%]' title='Extended Loans' icon='/loan/information.png' icon2='/arrow-right.svg' num={data?.data?.extendedLoans} bgColor='#27AE60' text2='0'/> */}
 
             </div>
           </div>

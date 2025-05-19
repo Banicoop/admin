@@ -113,7 +113,7 @@ const LoanApplicationDetails = () => {
   const { data: loanHistoryData } =  useLoanHistory(id ?? '');
 
 
-  // console.log(loan);
+  console.log(loan);
 
 
   return (
@@ -128,7 +128,7 @@ const LoanApplicationDetails = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
               <h2 className='text-[#1E0D37] font-semibold text-[24px]'>{loan?.payload?.user?.firstName} {loan?.payload?.user?.lastName}</h2>
-              <span className="bg-[#E6E6E680] px-[12px] py-[6px] rounded-2xl text-[#B9B4C1] text-[12px] font-[400] capitalize">{loan?.payload?.loan?.approvalStatus}</span>
+              <span className="bg-[#E6E6E680] px-[12px] py-[6px] rounded-2xl text-[#B9B4C1] text-[12px] font-[400] capitalize">{loan?.payload?.loan?.status}</span>
             </div>
 
             <div className="flex items-center gap-4">
@@ -149,9 +149,9 @@ const LoanApplicationDetails = () => {
               <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:
 
               <>
-                <ApplicationCard text={`NGN ${loan?.payload?.loan?.amount}`} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount}`}/>
-                <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}`} title='Submission Date' title1='Total Repayment' text1={totalAmount} />
-                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary}`} title='Monthly Income' title1='Referrer' text1='--//--' img='/loan/profile.png'/>
+                <ApplicationCard text={`NGN ${loan?.payload?.loan?.amount.toLocaleString()}`} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount.toLocaleString()}`}/>
+                <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}`} title='Submission Date' title1='Total Repayment' text1={`N ${totalAmount.toLocaleString()}`} />
+                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary.toLocaleString()}`} title='Monthly Income' title1='Referrer' text1='--//--' img='/loan/profile.png'/>
                 <ApplicationCard text={`${duration} days`} title='Repayment Tenure' title1='Referrer Code' text1='--//--'/>
               </>
 
