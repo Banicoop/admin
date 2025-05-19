@@ -91,7 +91,7 @@ function Routes (){
   const dispatch = useDispatch();
 
 
-  // console.log(token);
+  console.log(token);
 
 
   useEffect(() => {
