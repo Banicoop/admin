@@ -16,9 +16,9 @@ const list = [
   {
     label: 'All'
   },
-  {
-    label: 'Today'
-  },
+  // {
+  //   label: 'Today'
+  // },
   {
     label: 'Last 7 days'
   },
