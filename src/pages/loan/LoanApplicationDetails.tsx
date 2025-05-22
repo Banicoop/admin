@@ -19,6 +19,7 @@ import BasicModal from '../../components/modals/DeleteModal';
 import { motion } from 'framer-motion';
 import  {CheckboxInput} from '../../components/inputs/Input';
 import TextArea from '../../components/inputs/TextArea';
+import { useLoanHistory } from '../../utils/api';
 
 
 
@@ -32,7 +33,7 @@ const LoanApplicationDetails = () => {
   const navigate = useNavigate()
 
 
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
 
   const [openAccept, setOpenAccept] = useState(false);
@@ -101,12 +102,19 @@ const LoanApplicationDetails = () => {
 
 
 
-  const loanAmount = loan?.payload?.loan?.loanAmount;
-  const interest = loan?.payload?.loan?.interestAmount;
+  const loanAmount = Number(loan?.payload.loan.amount) || 0;
+  const interest = Number(loan?.payload.loan.interestAmount) || 0;
 
   const totalAmount = loanAmount + interest;
 
-  const creditScore = Math.round((loan?.payload?.user?.iScoreListing / 100) * 850)
+
+  const creditScore = Math.round((loan?.payload?.user?.iScoreListing / 100) * 850);
+
+  const { data: loanHistoryData } =  useLoanHistory(id ?? '');
+
+
+  console.log(loan);
+
 
   return (
     <>
@@ -120,7 +128,7 @@ const LoanApplicationDetails = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
               <h2 className='text-[#1E0D37] font-semibold text-[24px]'>{loan?.payload?.user?.firstName} {loan?.payload?.user?.lastName}</h2>
-              <span className="bg-[#E6E6E680] px-[12px] py-[6px] rounded-2xl text-[#B9B4C1] text-[12px] font-[400] capitalize">{loan?.payload?.loan?.approvalStatus}</span>
+              <span className="bg-[#E6E6E680] px-[12px] py-[6px] rounded-2xl text-[#B9B4C1] text-[12px] font-[400] capitalize">{loan?.payload?.loan?.status}</span>
             </div>
 
             <div className="flex items-center gap-4">
@@ -141,9 +149,9 @@ const LoanApplicationDetails = () => {
               <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:
 
               <>
-                <ApplicationCard text={`NGN ${loan?.payload?.loan?.loanAmount}`} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount}`}/>
-                <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}`} title='Submission Date' title1='Total Repayment' text1={totalAmount || 0} />
-                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary}`} title='Monthly Income' title1='Referrer' text1='--//--' img='/loan/profile.png'/>
+                <ApplicationCard text={`NGN ${loan?.payload?.loan?.amount.toLocaleString()}`} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount.toLocaleString()}`}/>
+                <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}`} title='Submission Date' title1='Total Repayment' text1={`N ${totalAmount.toLocaleString()}`} />
+                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary.toLocaleString()}`} title='Monthly Income' title1='Referrer' text1='--//--' img='/loan/profile.png'/>
                 <ApplicationCard text={`${duration} days`} title='Repayment Tenure' title1='Referrer Code' text1='--//--'/>
               </>
 
@@ -220,7 +228,7 @@ const LoanApplicationDetails = () => {
             </div>
               <ExportBtn text='Export' onClick={() => {}}/>
             </div>
-              <LoanHistoryTable loanHistory={loan?.payload?.loanHistory} key={loan?.payload?.loanHistory._id} />
+              <LoanHistoryTable loanHistory={loanHistoryData?.payload?.history ?? []} key={loanHistoryData?.payload?.history?._id} />
           </div>
 
           {/* <div className="flex flex-col justify-start border-[1px] rounded-2xl p-4 gap-6">
