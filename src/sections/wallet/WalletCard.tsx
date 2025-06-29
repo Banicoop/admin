@@ -133,7 +133,7 @@ const WalletCard:FC<WType> = ({title, url, item}) => {
 
                 <div className="flex flex-col gap-2">
                     <h4 className="text-[#6922D1] text-sm font-[400]">Available Balance</h4>
-                    <p className="text-[#333333] text-[20px] lg:text-[37px] font-[600]">₦{item.availableBalance}</p>
+                    <p className="text-[#333333] text-[20px] lg:text-[37px] font-[600]">₦{item.availableBalance.toLocaleString() || 0}</p>
                 </div>
 
                 <div className="flex items-center gap-4">

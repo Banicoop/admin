@@ -74,7 +74,6 @@ const Loans = () => {
 
   const { data: loanData } = useAllLoansQuery({status: ''});
 
-  console.log(data)
 
 
   return (
@@ -107,7 +106,8 @@ const Loans = () => {
               <AppWidgets className='w-full md:w-[48%]' title='Disbursed Loans' icon='/loan/information.png' icon2='/arrow-right.svg' num={data?.data?.disbursedLoans.toLocaleString()} bgColor='#27AE60' text2='0'/>
 
               <AppWidgets className='w-full md:w-[48%]' title='Total Loan Disbursed' icon='/loan/wallet.png' icon2='/arrow-right.svg' num={data?.data?.totalAmountDisbursed.toLocaleString()} bgColor='#27AE60' text2='0'/> 
-              {/* <AppWidgets className='w-full md:w-[48%]' title='Extended Loans' icon='/loan/information.png' icon2='/arrow-right.svg' num={data?.data?.extendedLoans} bgColor='#27AE60' text2='0'/> */}
+
+              <AppWidgets className='w-full md:w-[48%]' title='Defaulted Loans' icon='/loan/information.png' icon2='/arrow-right.svg' num={data?.data?.defaultedLoans.toLocaleString()} bgColor='#27AE60' text2='0'/>
 
             </div>
           </div>

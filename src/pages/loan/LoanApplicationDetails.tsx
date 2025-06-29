@@ -108,12 +108,12 @@ const LoanApplicationDetails = () => {
   const totalAmount = loanAmount + interest;
 
 
-  const creditScore = Math.round((loan?.payload?.user?.iScoreListing / 100) * 850);
+  const creditScore = Math.round((loan?.payload?.user?.identityScore / 100) * 850);
 
   const { data: loanHistoryData } =  useLoanHistory(id ?? '');
 
 
-  console.log(loan);
+  console.log(loanHistoryData);
 
 
   return (
