@@ -37,7 +37,7 @@ const ResetPassoword = () => {
 
 
   return (
-    <div className='flex flex-col items-center justify-center w-full h-full p-3 lg:p-[2rem] gap-[1rem] lg:gap-[2rem]'>
+    <div className='flex flex-col items-center justify-center w-full h-full p-3 lg:p-[1rem] gap-[1rem]'>
       <h1 className='hidden text-xl xl:text-3xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Create New Password</h1>
       <p className='text-xs lg:text-sm text-left flex self-start'>Enter your the 4-digits pin sent to your email and create new password</p>
 

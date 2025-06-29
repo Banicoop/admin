@@ -28,7 +28,7 @@ const ForgetPassword = () => {
     }
 
   return (
-    <div className='flex flex-col items-center justify-center w-full h-full p-3 lg:p-[2rem] gap-[1rem] lg:gap-[2rem]'>
+    <div className='flex flex-col items-center justify-center w-full h-full p-3 lg:p-[2rem] gap-[1rem]'>
         <h1 className='hidden text-xl xl:text-3xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Forget Password?</h1>
         <p className='text-xs lg:text-sm text-left flex self-start'>Enter your email addrsss to continue</p>
 

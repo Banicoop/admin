@@ -41,7 +41,7 @@ const Verification = () => {
 
 
   return (
-    <div className='rounded-3xl shadow-lg bg-bgWhite p-[3rem] flex flex-col justify-center items-center gap-[2rem]'>
+    <div className='rounded-3xl shadow-lg bg-bgWhite p-[3rem] flex flex-col justify-center items-center gap-[1rem]'>
         <div className="flex gap-3 items-center">
             <img src="/frame.svg" alt="" className="" />
             <h1 className="text-5xl font-semibold">Two-Factor <br /> Authentication</h1>

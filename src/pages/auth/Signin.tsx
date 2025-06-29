@@ -34,13 +34,13 @@ const Signin = () => {
 
 
   return (
-    <form className='flex flex-col items-center justify-center w-full md:h-full p-3 lg:p-[2rem] gap-[1rem]'>
-        <h1 className='hidden text-xl md:text-2xl xl:text-5xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Welcome to <span className='text-bgPurple'>Banicoop</span></h1>
-        <h1 className='hidden text-xl md:text-2xl xl:text-5xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Admin Dashboard</h1>
+    <form className='flex flex-col items-center justify-center w-full md:h-full p-2 lg:p-[1rem] gap-[1rem]'>
+        <h1 className='hidden text-xl md:text-2xl xl:text-3xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Welcome to <span className='text-bgPurple'>Banicoop</span></h1>
+        <h1 className='hidden text-xl md:text-2xl xl:text-3xl font-semibold md:flex justify-start items-start mr-auto gap-2'>Admin Dashboard</h1>
 
 
-        <h1 className='md:hidden text-2xl font-semibold text-left'>Welcome to <span className='text-bgPurple'>Banicoop</span> </h1>
-       <h1 className='md:hidden text-2xl font-semibold text-left'> Admin Dashboard!</h1>
+        <h1 className='md:hidden text-xl font-semibold text-left'>Welcome to <span className='text-bgPurple'>Banicoop</span> </h1>
+       <h1 className='md:hidden text-xl font-semibold text-left'> Admin Dashboard!</h1>
 
         <p className='text-xs lg:text-sm'>Your role as an admin helps foster secure, collaborative savings. Get started with by logging in to your admin dashboard</p>
 
