@@ -30,7 +30,8 @@ const ResetPassoword = () => {
     const { password, otp } = payload;
 
     if(!otp || !password){
-      toast.warn('No Empty field', {...toastOptions})
+      toast.warn('No Empty field', {...toastOptions});
+      return;
     }
     dispatch(resetPassword({password, otp}));
   }

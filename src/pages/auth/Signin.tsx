@@ -56,7 +56,7 @@ const Signin = () => {
           <Link to='/auth/forgot-password' className="text-bgPurple cursor-pointer font-[500] text-[14px]">Forgot Password?</Link>
         </div>
 
-        <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-row justify-between w-full items-center">
             <BackBtn onClick={() => navigate('/auth/welcome')} text='Go Back'/>
 
             <AuthBtn 
