@@ -7,7 +7,7 @@ const Verified = () => {
     const navigate = useNavigate();
 
   return (
-    <div className='rounded-3xl shadow-lg bg-bgWhite p-[2rem] flex flex-col justify-center items-center gap-[2rem]'>
+    <div className='rounded-3xl shadow-lg bg-bgWhite p-[2rem] flex flex-col justify-center items-center gap-[1rem]'>
         <img src='/success.svg' alt='' className=''/>
 
         <h1 className='text-4xl font-semibold text-[#000]'>Verification Successful!</h1>
