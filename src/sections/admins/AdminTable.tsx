@@ -70,6 +70,8 @@ const AdminTable = () => {
 
   let adminData = allAdmin?.admins;
 
+  console.log(adminData);
+
 
   const changeAdminStatus = (admin: any) => {
     if (selectedAdminId) {

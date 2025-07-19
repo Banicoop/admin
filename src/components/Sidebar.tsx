@@ -10,6 +10,10 @@ const Sidebar = () => {
 
   const role = useSelector((state: any) => state.auth.user.payload.role);
 
+  if(!role) {
+      window.location.replace('/auth/login');
+  }
+
   const location = useLocation();
   const dispatch = useDispatch();
 

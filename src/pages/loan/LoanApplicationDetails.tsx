@@ -30,6 +30,7 @@ const LoanApplicationDetails = () => {
   const reasons = [ 'Low credit score', 'Incomplete documentation', 'Outstanding loan balance', 'Other reasons (please specify)']
 
 
+
   const navigate = useNavigate()
 
 
@@ -110,10 +111,7 @@ const LoanApplicationDetails = () => {
 
   const creditScore = Math.round((loan?.payload?.user?.identityScore / 100) * 850);
 
-  const { data: loanHistoryData } =  useLoanHistory(id ?? '');
-
-
-  console.log(loanHistoryData);
+  const { data: loanHistoryData } =  useLoanHistory(loan?.payload?.user?._id ?? '');
 
 
   return (
