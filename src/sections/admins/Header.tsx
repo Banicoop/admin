@@ -16,15 +16,15 @@ import { motion } from 'framer-motion';
 const list = [
     {
         id: 0,
-        label: 'All Admin'
+        label: 'Active Admin'
     },
     {
         id: 1,
-        label: 'Super Admin'
+        label: 'Deactivated Admin'
     },
     {
         id: 2,
-        label: 'Standard Admin'
+        label: 'Invited Admin'
     },
 ]
 

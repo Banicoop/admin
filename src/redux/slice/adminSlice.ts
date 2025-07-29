@@ -59,7 +59,8 @@ export const getAllAdmin = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await SERVER.get('admin/getAll');
-            return Array.isArray(response.data.admins) ? response.data : [];
+            // return response.data;
+            return Array.isArray(response.data) ? response.data : [];
         } catch (error) {
             console.log(error)
             return rejectWithValue(error)
