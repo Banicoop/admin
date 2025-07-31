@@ -7,6 +7,7 @@ import { Dispatch } from '../../redux/store';
 import { changeStatus, getAllAdmin } from '../../redux/slice/adminSlice';
 import BasicModal from '../../components/modals/DeleteModal';
 import { motion } from 'framer-motion';
+import { useAdminsQuery } from '../../utils/api';
 
 
 const columns = [
@@ -59,6 +60,10 @@ const AdminTable = () => {
   const [ open, setOpen ] = useState(false);
   const [selectedAdminId, setSelectedAdminId] = useState<string | null>(null);
 
+  const {data, error, isPending} = useAdminsQuery();
+
+  console.log(data?.admins);
+
   const dispatch = useDispatch<Dispatch>();
   const { allAdmin, status } = useSelector((state: any) => state.admin)
 
@@ -68,9 +73,9 @@ const AdminTable = () => {
 
 
 
-  let adminData = allAdmin?.admins;
+  let adminData = allAdmin;
 
-  console.log(adminData);
+  // console.log(adminData);
 
 
   const changeAdminStatus = (admin: any) => {

@@ -3,9 +3,9 @@ import React, { FC } from 'react';
 
 type AType = {
     img?: any;
-    title: string;
-    text: string;
-    title1: string;
+    title: string | number;
+    text: string | number;
+    title1: string | number;
     text1: string | number;
 }
 

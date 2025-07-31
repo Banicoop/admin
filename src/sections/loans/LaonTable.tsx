@@ -33,7 +33,7 @@ const columns = [
     },
     {
       header: "Disbursed Date",
-      accessor: "updatedAt",
+      accessor: "disbursedAt",
       className: "table-cell",
       // className: "hidden lg:table-cell",
     },
@@ -54,12 +54,12 @@ const columns = [
                 <span className="">{item?.userId?.firstName} {item?.userId?.lastName}</span>
             </Link>
         </td>
-        <td className=''>{`₦${item.amount}`}</td>
+        <td className=''>{`₦${item.amount.toLocaleString()}`}</td>
         <td className='px-1 py-2'>
-            <ActionBtn text={item?.status} onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1]  cursor-pointer w-max'/>
+            <ActionBtn text={item?.status} onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1] capitalize cursor-pointer w-[160px]'/>
         </td>
         <td>{moment(item.createdAt).format("MMM Do YY")}</td>
-        <td>{moment(item.disbursementDate).format("MMM Do YY")}</td>
+        <td>{moment(item.disbursedAt).format("MMM Do YY")}</td>
         <td>
           {moment(item.dueDate).format("MMM Do YY")}
         </td>
