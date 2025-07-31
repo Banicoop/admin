@@ -15,22 +15,19 @@ import { motion } from 'framer-motion';
 
 const list = [
     {
-        id: 0,
         label: 'Active Admin'
     },
     {
-        id: 1,
         label: 'Deactivated Admin'
     },
     {
-        id: 2,
         label: 'Invited Admin'
     },
 ]
 
 const Header = () => {
 
-    const [activeItem, setActiveItem] = useState('All Admin');
+    const [activeItem, setActiveItem] = useState(list[0].label);
     const [open, setOpen] = useState(false);
 
 
@@ -69,16 +66,21 @@ const Header = () => {
       setOpen(false);
     }
 
+    const handleAdminType = (label: string) => {
+      setActiveItem(label)
+    }
+
 
   return (
     <>
     <div className='flex flex-col lg:flex-row items-center  w-full gap-2'>
         <div className="flex items-center justify-between gap-2 w-full">
             <Info text='Admin Management'/>
+  
             {
                 list.map((l) => (
-                    <Btn onClick={() => setActiveItem(l.label)} label={l.label} key={l.label} activeItem={activeItem}/>
-                ))
+                    <Btn onClick={() => handleAdminType(l.label)} label={l.label} key={l.label} activeItem={activeItem === l.label}/>
+                )) 
             }
         </div>
 

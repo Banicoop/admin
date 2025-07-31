@@ -45,8 +45,8 @@ const tableList = [
 
 const Loans = () => {
 
-  const [activeItem, setActiveItem] = useState('Today');
-  const [activeTableItem, setActiveTableItem] = useState('All');
+  const [activeItem, setActiveItem] = useState(list[0].label);
+  const [activeTableItem, setActiveTableItem] = useState(tableList[0].label);
 
 
   const getQueryParams = (label: string) => {
@@ -87,7 +87,7 @@ const Loans = () => {
                 {list.map((i) => (
                     <Btn 
                       onClick={() => setActiveItem(i.label)}
-                      activeItem={activeItem} 
+                      activeItem={activeItem === i.label} 
                       label={i.label} 
                       key={i.label}/>
                   ))
@@ -128,7 +128,7 @@ const Loans = () => {
                <Search onClick={() => {}} placeholder='Search for loans, users, or reports...'/>
               <div className="hidden md:flex items-center gap-4">
                 {tableList.map((i) => (
-                    <Btn onClick={() => setActiveTableItem(i.label)} activeItem={activeTableItem} label={i.label} key={i.label}/>
+                    <Btn onClick={() => setActiveTableItem(i.label)} activeItem={activeTableItem === i.label} label={i.label} key={i.label}/>
                   ))
                   }
               </div>

@@ -89,7 +89,6 @@ function Routes (){
   const token = useSelector((state: any) => state.auth.accessToken);
   const dispatch = useDispatch();
 
-  console.log(token);
 
 
   useEffect(() => {

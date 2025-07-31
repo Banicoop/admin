@@ -147,15 +147,13 @@ const LoanApplicationDetails = () => {
               <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:
 
               <>
-                <ApplicationCard text={`NGN ${loan?.payload?.loan?.amount.toLocaleString()}`} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount.toLocaleString()}`}/>
-                <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}`} title='Submission Date' title1='Total Repayment' text1={`N ${totalAmount.toLocaleString()}`} />
-                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary.toLocaleString()}`} title='Monthly Income' title1='Referrer' text1='--//--' img='/loan/profile.png'/>
+                <ApplicationCard text={`NGN ${loan?.payload?.loan?.amount.toLocaleString()}` || 0} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount.toLocaleString()}` || 0}/>
+                <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}` || Date.now()} title='Submission Date' title1='Total Repayment' text1={`N ${totalAmount.toLocaleString()}`} />
+                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary.toLocaleString()}` || 0} title='Monthly Income' title1='Referrer' text1='--//--' img='/loan/profile.png'/>
                 <ApplicationCard text={`${duration} days`} title='Repayment Tenure' title1='Referrer Code' text1='--//--'/>
               </>
-
               }
             </div>
-
         </div>
       </div>
 
@@ -184,7 +182,7 @@ const LoanApplicationDetails = () => {
                     <span className="text-xs text-[#000]">Credit Score: {creditScore || 0}</span>
                   <div className='flex items-center gap-4'>
                     <Progress />
-                    <span className="text-[#000000] text-[10px]">Good</span>
+                    <span className="text-[#000000] text-[10px] capitalize">{loan?.payload?.user?.identityDescription || 'Status'}</span>
                   </div>
                 </div>
               </div>
