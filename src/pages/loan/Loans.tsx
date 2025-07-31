@@ -7,7 +7,7 @@ import Search from '../../components/Search';
 import LoanTable from '../../sections/loans/LaonTable';
 import { useAllLoansQuery, useLoanMetricsQuery } from '../../utils/api';
 import AppWidgets from '../../components/AppWidgets';
-// import dayjs from 'dayjs';
+import { Spinner } from '../../helpers/spinner';
 
 
 
@@ -16,9 +16,9 @@ const list = [
   {
     label: 'All'
   },
-  // {
-  //   label: 'Today'
-  // },
+  {
+    label: 'Today'
+  },
   {
     label: 'Last 7 days'
   },
@@ -49,28 +49,40 @@ const Loans = () => {
   const [activeTableItem, setActiveTableItem] = useState(tableList[0].label);
 
 
-  const getQueryParams = (label: string) => {
-    const now = new Date();
-    const endDate = now.toISOString();
-    let startDate;
-  
-    switch (label) {
-      case 'Last 7 days':
-        startDate = new Date(now.setDate(now.getDate() - 7)).toISOString();
-        return { duration: 'custom', startDate, endDate };
-      case 'Last 30 Days':
-        startDate = new Date(now.setDate(now.getDate() - 30)).toISOString();
-        return { duration: 'custom', startDate, endDate };
-      case 'All':
-      case 'All Time':
-      default:
-        return { duration: 'allTime' };
-    }
-  };
+  const formatDate = (date: Date): string => {
+  const year = date.getFullYear();
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  return `${year}-${month}-${day}`; 
+};
+
+
+const getQueryParams = (label: string) => {
+  const now = new Date();
+  const endDate = formatDate(now);
+  let startDate: string;
+
+  switch (label) {
+    case 'Last 7 days':
+      startDate = formatDate(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000));
+      return { duration: 'custom', startDate, endDate };
+
+    case 'Last 30 Days':
+      startDate = formatDate(new Date(Date.now() - 30 * 24 * 60 * 60 * 1000));
+      return { duration: 'custom', startDate, endDate };
+
+    case 'Today':
+      return {duration: 'Today' }
+    case 'All Time':
+    default:
+      return { duration: 'allTime' }; 
+  }
+};
+
   
 
 
-  const { data } = useLoanMetricsQuery(getQueryParams(activeItem))
+  const { data, isPending } = useLoanMetricsQuery(getQueryParams(activeItem))
 
   const { data: loanData } = useAllLoansQuery({status: ''});
 
@@ -97,17 +109,50 @@ const Loans = () => {
             <div className="flex flex-col justify-center md:justify-between md:flex-row flex-wrap gap-5">
 
 
-              <AppWidgets className='w-full md:w-[48%]' title='Revenue Generated' icon='/loan/wallet.png' icon2='/arrow-right.svg' num={data?.data?.revenueGenerated.toLocaleString()} bgColor='#27AE60' text2='0'/>
+              <AppWidgets 
+                className='w-full md:w-[48%]' 
+                title='Revenue Generated' 
+                icon='/loan/wallet.png' 
+                icon2='/arrow-right.svg' 
+                num={isPending ? <Spinner/> : data?.data?.revenueGenerated.toLocaleString() || 0} 
+                bgColor='#27AE60' text2='0'/>
 
-              <AppWidgets className='w-full md:w-[48%]' title='Active Loans' icon='/loan/save-add.png' icon2='/arrow-right.svg' num={data?.data?.activeLoans.toLocaleString()} bgColor='#27AE60' text2='0'/>
+              <AppWidgets 
+                className='w-full md:w-[48%]' 
+                title='Active Loans' icon='/loan/save-add.png' 
+                icon2='/arrow-right.svg' 
+                num={isPending ? <Spinner/> : data?.data?.activeLoans.toLocaleString() || 0} 
+                bgColor='#27AE60' text2='0'/>
 
-              <AppWidgets className='w-full md:w-[48%]' title='Repaid Loans' icon='/loan/archive-tick.png' icon2='/arrow-right.svg' num={data?.data?.repaidLoans.toLocaleString()} bgColor='#27AE60' text2='0'/>
+              <AppWidgets 
+                className='w-full md:w-[48%]' 
+                title='Repaid Loans' icon='/loan/archive-tick.png' 
+                icon2='/arrow-right.svg' 
+                num={isPending ? <Spinner/> : data?.data?.repaidLoans.toLocaleString() || 0} 
+                bgColor='#27AE60' text2='0'/>
 
-              <AppWidgets className='w-full md:w-[48%]' title='Disbursed Loans' icon='/loan/information.png' icon2='/arrow-right.svg' num={data?.data?.disbursedLoans.toLocaleString()} bgColor='#27AE60' text2='0'/>
+              <AppWidgets className='w-full md:w-[48%]' 
+                title='Disbursed Loans' 
+                icon='/loan/information.png' 
+                icon2='/arrow-right.svg' 
+                num={isPending ? <Spinner/> : data?.data?.disbursedLoans.toLocaleString() || 0} 
+                bgColor='#27AE60' text2='0'/>
 
-              <AppWidgets className='w-full md:w-[48%]' title='Total Loan Disbursed' icon='/loan/wallet.png' icon2='/arrow-right.svg' num={data?.data?.totalAmountDisbursed.toLocaleString()} bgColor='#27AE60' text2='0'/> 
+              <AppWidgets 
+                className='w-full md:w-[48%]' 
+                title='Total Loan Disbursed' 
+                icon='/loan/wallet.png' 
+                icon2='/arrow-right.svg' 
+                num={isPending ? <Spinner/> : data?.data?.totalAmountDisbursed.toLocaleString() || 0} 
+                bgColor='#27AE60' text2='0'/> 
 
-              <AppWidgets className='w-full md:w-[48%]' title='Defaulted Loans' icon='/loan/information.png' icon2='/arrow-right.svg' num={data?.data?.defaultedLoans.toLocaleString()} bgColor='#27AE60' text2='0'/>
+              <AppWidgets 
+                className='w-full md:w-[48%]' 
+                title='Defaulted Loans' 
+                icon='/loan/information.png' 
+                icon2='/arrow-right.svg' 
+                num={isPending ? <Spinner/> : data?.data?.defaultedLoans.toLocaleString() || 0} 
+                bgColor='#27AE60' text2='0'/>
 
             </div>
           </div>
