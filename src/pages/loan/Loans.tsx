@@ -8,6 +8,9 @@ import LoanTable from '../../sections/loans/LaonTable';
 import { useAllLoansQuery, useLoanMetricsQuery } from '../../utils/api';
 import AppWidgets from '../../components/AppWidgets';
 import { Spinner } from '../../helpers/spinner';
+import { CircularProgress } from '@mui/material';
+
+
 
 
 
@@ -84,7 +87,7 @@ const getQueryParams = (label: string) => {
 
   const { data, isPending } = useLoanMetricsQuery(getQueryParams(activeItem))
 
-  const { data: loanData } = useAllLoansQuery({status: ''});
+  const { data: loanData, isPending: loanPending } = useAllLoansQuery({status: ''});
 
 
 
@@ -170,6 +173,9 @@ const getQueryParams = (label: string) => {
           </div>
 
           <div className="flex items-center justify-between">
+            { loanData?.data?.length > 0 &&
+
+            <>
                <Search onClick={() => {}} placeholder='Search for loans, users, or reports...'/>
               <div className="hidden md:flex items-center gap-4">
                 {tableList.map((i) => (
@@ -177,11 +183,19 @@ const getQueryParams = (label: string) => {
                   ))
                   }
               </div>
+            </>
+            }
           </div>
 
           <div className="w-full">
-              <LoanTable loanData={loanData?.data ?? []} key={loanData?.data?._id}/>
-          </div>
+            {
+              loanPending ?
+
+              <CircularProgress sx={{display: 'flex', margin: 'auto'}} />  :
+              
+               <LoanTable loanData={loanData?.data ?? []} key={loanData?.data?._id}/> 
+            } 
+            </div>
       </div>
     </div>
   )

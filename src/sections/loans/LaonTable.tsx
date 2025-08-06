@@ -3,6 +3,7 @@ import ActionBtn from '../../components/buttons/ActionBtn';
 import Table from '../../components/tables/Table';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { EmptyState } from '../../components';
 
 
 
@@ -72,7 +73,12 @@ const LoanTable = ({loanData}: {loanData: any[]}) => {
 
   return (
     <div>
+      {(loanData.length === 0)  ?
+
+        <EmptyState text='No Available Loan' /> :
+
         <Table data={loanData} columns={columns} renderRow={renderRow} />
+      }
     </div>
   )
 }

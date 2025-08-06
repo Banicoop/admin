@@ -5,7 +5,8 @@ import { refreshAccessToken } from "../redux/slice/authSlice";
 
 
 // const DEMO = 'https://banicoop-server-testing.onrender.com/api/v1/';
-const LIVE = 'https://architecture-bound.onrender.com/api/v1'
+
+const LIVE = 'https://architecture-bound.onrender.com/api/v1/'
 
 
 // Axios instance
