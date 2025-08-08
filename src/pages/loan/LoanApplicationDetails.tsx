@@ -149,7 +149,7 @@ const LoanApplicationDetails = () => {
               <>
                 <ApplicationCard text={`NGN ${loan?.payload?.loan?.amount.toLocaleString()}` || 0} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount.toLocaleString()}` || 0}/>
                 <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}` || Date.now()} title='Submission Date' title1='Total Repayment' text1={`N ${totalAmount.toLocaleString()}`} />
-                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary.toLocaleString()}`} title='Monthly Income' title1='Referrer' text1='--//--' img='/loan/profile.png'/>
+                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary.toLocaleString()}`} title='Monthly Income' title1='Due Date' text1={`${moment(loan?.payload?.loan?.dueDate).format('MMM Do YY')}`} />
                 <ApplicationCard text={`${duration} days`} title='Repayment Tenure' title1='Referrer Code' text1='--//--'/>
               </>
               }
@@ -224,7 +224,7 @@ const LoanApplicationDetails = () => {
             </div>
               <ExportBtn text='Export' onClick={() => {}}/>
             </div>
-              <LoanHistoryTable loanHistory={loanHistoryData?.payload?.history ?? []} key={loanHistoryData?.payload?.history?._id} />
+              <LoanHistoryTable loanHistory={loanHistoryData?.history ?? []} key={loanHistoryData?.history?._id} />
           </div>
 
           {/* <div className="flex flex-col justify-start border-[1px] rounded-2xl p-4 gap-6">

@@ -87,8 +87,7 @@ const getQueryParams = (label: string) => {
 
   const { data, isPending } = useLoanMetricsQuery(getQueryParams(activeItem))
 
-  const { data: loanData, isPending: loanPending } = useAllLoansQuery({status: ''});
-
+  const { data: loanData, isPending: loanPending, error } = useAllLoansQuery({status: ''});
 
 
   return (
@@ -193,7 +192,7 @@ const getQueryParams = (label: string) => {
 
               <CircularProgress sx={{display: 'flex', margin: 'auto'}} />  :
               
-               <LoanTable loanData={loanData?.data ?? []} key={loanData?.data?._id}/> 
+               <LoanTable loanData={loanData?.data ?? []} key={loanData?.data?._id} error={error}/> 
             } 
             </div>
       </div>
