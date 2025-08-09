@@ -7,6 +7,8 @@ import { changeStatus } from '../../redux/slice/adminSlice';
 import BasicModal from '../../components/modals/DeleteModal';
 import { motion } from 'framer-motion';
 import { useAdminsQuery } from '../../utils/api';
+import { CircularProgress } from '@mui/material';
+import { EmptyState } from '../../components';
 
 
 const columns = [
@@ -38,7 +40,7 @@ const columns = [
 
 
 
-const AdminTable = () => {
+const AdminTable = ({activeItem}: {activeItem: string}) => {
 
   const getRoleName = (role: string) => {
     switch (role) {
@@ -60,6 +62,8 @@ const AdminTable = () => {
   const [selectedAdminId, setSelectedAdminId] = useState<string | null>(null);
 
   const {data, error, isPending} = useAdminsQuery();
+
+  const adminData = (activeItem === 'Active Admin') ? data?.admins?.activeAdmins : data?.admins?.deactivatedAdmins
 
 
   const dispatch = useDispatch<Dispatch>();
@@ -97,7 +101,7 @@ const AdminTable = () => {
               setSelectedAdminId(item.id)
               setOpen(true)
             }} 
-            className={`px-4  py-2 rounded-3xl ${item?.disabled === false ? 'text-[#6922D1]  border-[#6922D1]': 'text-[crimson]  border-[crimson]'} bg-[#fff]  border-[1px] cursor-pointer w-[95px]`}/>
+            className={`px-4  py-2 rounded-3xl ${item?.disabled === false ? 'text-[#6922D1]  border-[#6922D1]': 'text-[crimson]  border-[crimson]'} bg-[#fff]  border-[1px] cursor-pointer`}/>
         </span>
       </td>
 
@@ -108,7 +112,18 @@ const AdminTable = () => {
   return (
     <div className='relative'>
       <div className="w-full">
-        <Table columns={columns} data={data?.admins?.activeAdmins} renderRow={renderRow}  />
+        {
+          isPending ? 
+            <CircularProgress  sx={{display: 'flex', margin: 'auto'}}/> : 
+
+           ( error || adminData.length === 0 )? 
+            <EmptyState text='No Data' /> :
+
+            <Table 
+              columns={columns} 
+              data={adminData} 
+              renderRow={renderRow}  />
+        }
       </div>
 
       { open &&
