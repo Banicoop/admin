@@ -36,14 +36,23 @@ const tableList = [
     label: 'All'
   },
   {
-    label: 'Active'
+    label: 'pending'
   },
   {
-    label: 'Overdue'
+    label: 'overdue'
   },
   {
-    label: 'Completed'
+    label: 'paid'
   },
+  {
+    label: 'approved'
+  },
+  {
+    label: 'disbursed'
+  },
+  // {
+  //   label: 'Last 7 days'
+  // },
 ]
 
 const Loans = () => {
@@ -82,12 +91,32 @@ const getQueryParams = (label: string) => {
   }
 };
 
+
+
+  const getAllLoanQuery = (status: string) => {
+    switch(status){
+      case 'pending':
+        return { status: 'pending' };
+      case 'overdue':
+        return { status: 'overdue' };
+      case 'paid':
+        return { status: 'paid' };
+      case 'approved':
+        return { status: 'approved' };
+      case 'disbursed':
+        return {status: 'disbursed'};
+      default:
+        return {status: ''}
+    }
+  }
+
   
 
 
   const { data, isPending } = useLoanMetricsQuery(getQueryParams(activeItem))
 
-  const { data: loanData, isPending: loanPending, error } = useAllLoansQuery({status: ''});
+  const { data: loanData, isPending: loanPending, error } = useAllLoansQuery(getAllLoanQuery(activeTableItem));
+
 
 
   return (
@@ -176,7 +205,7 @@ const getQueryParams = (label: string) => {
 
             <>
                <Search onClick={() => {}} placeholder='Search for loans, users, or reports...'/>
-              <div className="hidden md:flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-4 capitalize">
                 {tableList.map((i) => (
                     <Btn onClick={() => setActiveTableItem(i.label)} activeItem={activeTableItem === i.label} label={i.label} key={i.label}/>
                   ))
