@@ -48,6 +48,11 @@ const columns = [
       accessor: "outstandingAmount",
       className: "hidden md:table-cell",
     },
+    {
+       header: "Due Date",
+       accessor: "dueDate",
+       className: "hidden md:table-cell",
+    }
   ];
 
   const renderRow = (item: any) => (
@@ -70,6 +75,7 @@ const columns = [
           {item.totalRepayment.toLocaleString()}
         </td>
         <td>{item.outstandingAmount.toLocaleString()}</td>
+        <td></td>
     </tr>
 
   )

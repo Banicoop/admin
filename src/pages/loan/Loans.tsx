@@ -117,7 +117,7 @@ const getQueryParams = (label: string) => {
 
   const { data: loanData, isPending: loanPending, error } = useAllLoansQuery(getAllLoanQuery(activeTableItem));
 
-
+  console.log(loanData);
 
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px]'>
@@ -201,9 +201,6 @@ const getQueryParams = (label: string) => {
           </div>
 
           <div className="flex items-center justify-between">
-            { loanData?.data?.length > 0 &&
-
-            <>
                <Search onClick={() => {}} placeholder='Search for loans, users, or reports...'/>
               <div className="hidden md:flex items-center gap-4 capitalize">
                 {tableList.map((i) => (
@@ -211,15 +208,15 @@ const getQueryParams = (label: string) => {
                   ))
                   }
               </div>
-            </>
-            }
           </div>
 
           <div className="w-full">
             {
               loanPending ?
 
-              <CircularProgress sx={{display: 'flex', margin: 'auto'}} />  :
+              <div className='h-[300px]'>
+                <CircularProgress sx={{display: 'flex', margin: 'auto'}} />  
+              </div>:
               
                <LoanTable loanData={loanData?.data ?? []} key={loanData?.data?._id} error={error}/> 
             } 

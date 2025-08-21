@@ -33,6 +33,7 @@ const LoanCard:FC<ILoan> = ({className, loan }) => {
   }
 
 
+  console.log(loan)
 
   return (
     <>
@@ -43,7 +44,7 @@ const LoanCard:FC<ILoan> = ({className, loan }) => {
       </div>
         
         <div className="flex flex-col gap-3 justify-center my-auto">
-            <Link to={`/loans/application/${loan?._id}`} className="font-[400]"><strong>{loan?.userId?.firstName} {loan?.userId?.lastName}</strong> applied for a loan of <strong>{loan?.loanAmount}</strong></Link>
+            <Link to={`/loans/application/${loan?._id}`} className="font-[400]"><strong>{loan?.user?.firstName} {loan?.user?.lastName}</strong> applied for a loan of <strong>{loan?.amount}</strong></Link>
 
             <div className="flex gap-4 items-center justify-end">
                 <ActionBtn 
