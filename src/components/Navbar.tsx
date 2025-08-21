@@ -9,7 +9,6 @@ const Navbar = () => {
   const user = useSelector((state: any) => state.auth.user);
 
 
-
   return (
     <div className='flex justify-between items-center py-4 px-8 w-full border-b-[1px] '>
       <h1 className='text-[#000] text-[14px]'>Dashboard Overview</h1>
@@ -32,7 +31,7 @@ const Navbar = () => {
         </div>
         <div className="flex flex-col">
           <span className="text-[#000000] font-[500]">{`${user?.payload?.firstName} ${user?.payload?.lastName}`}</span>
-          <span className="text-[#000000] text-xs">Admin ID: {user?.payload?._id}</span>
+          <span className="text-[#000000] text-xs">Username: {user?.payload?.username}</span>
         </div>
 
         <img src="/arrow-down.svg" alt="" className="h-4 w-4" />

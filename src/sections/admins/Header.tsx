@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ChangeEvent } from 'react'
 import Info from '../../components/infos/Info';
 import Btn from '../../components/buttons/Btn';
-import Search from '../../components/Search';
+// import Search from '../../components/Search';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import BasicModal from '../../components/modals/DeleteModal';
 import { useDispatch } from 'react-redux';
@@ -13,21 +13,18 @@ import { motion } from 'framer-motion';
 
 
 
-const list = [
-    {
-        label: 'Active Admin'
-    },
-    {
-        label: 'Deactivated Admin'
-    },
-    {
-        label: 'Invited Admin'
-    },
-]
 
-const Header = () => {
 
-    const [activeItem, setActiveItem] = useState(list[0].label);
+
+interface headerType {
+  list: any[];
+  activeItem: string;
+  setActiveItem: any
+}
+
+const Header = ({list, activeItem, setActiveItem}: headerType) => {
+
+
     const [open, setOpen] = useState(false);
 
 
@@ -83,11 +80,11 @@ const Header = () => {
                 )) 
             }
         </div>
+          <div className="flex items-center justify-end gap-2 w-full">
+              {/* <Search onClick={() => {}} placeholder='Seacrh Admin'/> */}
+              <ExportBtn text='Add an Admin' img='/admin/admin-add.svg' onClick={handleOpen}/>
+          </div>
 
-        <div className="flex items-center justify-between gap-2 w-full">
-            <Search onClick={() => {}} placeholder='Seacrh Admin'/>
-            <ExportBtn text='Add an Admin' img='/admin/admin-add.svg' onClick={handleOpen}/>
-        </div>
     </div>
 
     {open &&

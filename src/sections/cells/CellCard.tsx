@@ -16,7 +16,7 @@ const CellCard = ({data}: any) => {
   const dispatch = useDispatch<Dispatch>();
 
 
-  var duration = (data?.contributionAmount * data?.duration) || 0;
+  var duration = (data?.amount * data?.duration) || 0;
 
   const [items, setItems] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
@@ -66,7 +66,7 @@ const CellCard = ({data}: any) => {
           </div>
         <div className="flex flex-col w-full gap-3 z-0">
               <span className="text-xs">Start Date : {moment(data?.launchDate).format("MMM Do YYYY")} . End Date : {moment(data?.endDate).format("MMM Do YYYY")} </span>
-              <span className="text-xs">{data?.type} - N{data?.contributionAmount || 0} . Output - N{duration}</span>
+              <span className="text-xs">{data?.type} - N{data?.amount.toLocaleString('en-NG') || 0} . Output - N{duration.toLocaleString('en-NG')}</span>
         </div>
 
         <div className="flex items-center justify-between w-full">

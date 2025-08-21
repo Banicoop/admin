@@ -8,6 +8,9 @@ import LoanTable from '../../sections/loans/LaonTable';
 import { useAllLoansQuery, useLoanMetricsQuery } from '../../utils/api';
 import AppWidgets from '../../components/AppWidgets';
 import { Spinner } from '../../helpers/spinner';
+import { CircularProgress } from '@mui/material';
+
+
 
 
 
@@ -33,14 +36,23 @@ const tableList = [
     label: 'All'
   },
   {
-    label: 'Active'
+    label: 'pending'
   },
   {
-    label: 'Overdue'
+    label: 'overdue'
   },
   {
-    label: 'Completed'
+    label: 'paid'
   },
+  {
+    label: 'approved'
+  },
+  {
+    label: 'disbursed'
+  },
+  // {
+  //   label: 'Last 7 days'
+  // },
 ]
 
 const Loans = () => {
@@ -79,14 +91,33 @@ const getQueryParams = (label: string) => {
   }
 };
 
+
+
+  const getAllLoanQuery = (status: string) => {
+    switch(status){
+      case 'pending':
+        return { status: 'pending' };
+      case 'overdue':
+        return { status: 'overdue' };
+      case 'paid':
+        return { status: 'paid' };
+      case 'approved':
+        return { status: 'approved' };
+      case 'disbursed':
+        return {status: 'disbursed'};
+      default:
+        return {status: ''}
+    }
+  }
+
   
 
 
   const { data, isPending } = useLoanMetricsQuery(getQueryParams(activeItem))
 
-  const { data: loanData } = useAllLoansQuery({status: ''});
+  const { data: loanData, isPending: loanPending, error } = useAllLoansQuery(getAllLoanQuery(activeTableItem));
 
-
+  console.log(loanData);
 
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px]'>
@@ -171,7 +202,7 @@ const getQueryParams = (label: string) => {
 
           <div className="flex items-center justify-between">
                <Search onClick={() => {}} placeholder='Search for loans, users, or reports...'/>
-              <div className="hidden md:flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-4 capitalize">
                 {tableList.map((i) => (
                     <Btn onClick={() => setActiveTableItem(i.label)} activeItem={activeTableItem === i.label} label={i.label} key={i.label}/>
                   ))
@@ -180,8 +211,16 @@ const getQueryParams = (label: string) => {
           </div>
 
           <div className="w-full">
-              <LoanTable loanData={loanData?.data ?? []} key={loanData?.data?._id}/>
-          </div>
+            {
+              loanPending ?
+
+              <div className='h-[300px]'>
+                <CircularProgress sx={{display: 'flex', margin: 'auto'}} />  
+              </div>:
+              
+               <LoanTable loanData={loanData?.data ?? []} key={loanData?.data?._id} error={error}/> 
+            } 
+            </div>
       </div>
     </div>
   )

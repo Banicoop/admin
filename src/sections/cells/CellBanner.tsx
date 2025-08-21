@@ -14,7 +14,7 @@ interface banneerType {
 
 const CellBanner: FC<banneerType> = ({title, status, isCell, cell}) => {
 
-    let goalFund = (cell?.cell?.duration - 1) * cell?.cell?.contributionAmount
+    let goalFund = (cell?.cell?.duration - 1) * cell?.cell?.amount
  
    if(!goalFund){
     goalFund = 0;
@@ -73,10 +73,10 @@ const CellBanner: FC<banneerType> = ({title, status, isCell, cell}) => {
                 </>:
 
                 <>
-                    <div className="flex flex-col gap-2">
+                    {/* <div className="flex flex-col gap-2">
                         <span className="text-xs font-[300]">Funds Collected</span>
                         <span className="text-sm font-[500]">NGN 350,000.00</span>
-                    </div>
+                    </div> */}
 
                     <div className="flex flex-col gap-2">
                         <span className="text-xs font-[300]">Start Date</span>

@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-// import { adminData } from '../../constant/menuData';
+import React, { useState } from 'react';
 import  ActionBtn  from '../../components/buttons/ActionBtn';
 import Table from '../../components/tables/Table';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Dispatch } from '../../redux/store';
-import { changeStatus, getAllAdmin } from '../../redux/slice/adminSlice';
+import { changeStatus } from '../../redux/slice/adminSlice';
 import BasicModal from '../../components/modals/DeleteModal';
 import { motion } from 'framer-motion';
 import { useAdminsQuery } from '../../utils/api';
+import { CircularProgress } from '@mui/material';
+import { EmptyState } from '../../components';
 
 
 const columns = [
@@ -25,11 +26,11 @@ const columns = [
     accessor: "status",
     // className: "hidden md:table-cell",
   },
-  // {
-    // header: "Last Login",
-    // accessor: "last_login",
+  {
+    header: "Username",
+    accessor: "username",
     // className: "hidden lg:table-cell",
-  // },
+  },
   {
     header: "Actions",
     accessor: "actions",
@@ -39,7 +40,7 @@ const columns = [
 
 
 
-const AdminTable = () => {
+const AdminTable = ({activeItem}: {activeItem: string}) => {
 
   const getRoleName = (role: string) => {
     switch (role) {
@@ -62,20 +63,10 @@ const AdminTable = () => {
 
   const {data, error, isPending} = useAdminsQuery();
 
-  console.log(data?.admins);
+  const adminData = (activeItem === 'Active Admin') ? data?.admins?.activeAdmins : data?.admins?.deactivatedAdmins
+
 
   const dispatch = useDispatch<Dispatch>();
-  const { allAdmin, status } = useSelector((state: any) => state.admin)
-
-  useEffect(() => {
-    dispatch(getAllAdmin())
-  }, [dispatch])
-
-
-
-  let adminData = allAdmin;
-
-  // console.log(adminData);
 
 
   const changeAdminStatus = (admin: any) => {
@@ -99,7 +90,7 @@ const AdminTable = () => {
       <td className='py-4'>
       <ActionBtn text={item?.disabled === false ? 'Active': 'Disabled'} onClick={() => {}} className={`px-2 py-1 text-sm rounded-2xl ${item?.disabled === false ? ' bg-[#EAF7EF] text-[#27AE60]': ' bg-[#EAF7EF] text-[crimson]'} border-[1px] cursor-pointer w-max`}/>
       </td>
-      {/* <td className='py-4'>{item?.last_login}</td> */}
+      <td className='py-4'>{item?.username}</td>
       <td className='py-4'>
         <span className="flex items-center gap-4">
           <ActionBtn text='View' onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1] border-[1px] border-[#6922D1] cursor-pointer'/>
@@ -110,7 +101,7 @@ const AdminTable = () => {
               setSelectedAdminId(item.id)
               setOpen(true)
             }} 
-            className={`px-4  py-2 rounded-3xl ${item?.disabled === false ? 'text-[#6922D1]  border-[#6922D1]': 'text-[crimson]  border-[crimson]'} bg-[#fff]  border-[1px] cursor-pointer w-[95px]`}/>
+            className={`px-4  py-2 rounded-3xl ${item?.disabled === false ? 'text-[#6922D1]  border-[#6922D1]': 'text-[crimson]  border-[crimson]'} bg-[#fff]  border-[1px] cursor-pointer`}/>
         </span>
       </td>
 
@@ -120,7 +111,20 @@ const AdminTable = () => {
 
   return (
     <div className='relative'>
-      <Table columns={columns} data={adminData} renderRow={renderRow} status={status}/>
+      <div className="w-full">
+        {
+          isPending ? 
+            <CircularProgress  sx={{display: 'flex', margin: 'auto'}}/> : 
+
+           ( error || adminData.length === 0 )? 
+            <EmptyState text='No Data' /> :
+
+            <Table 
+              columns={columns} 
+              data={adminData} 
+              renderRow={renderRow}  />
+        }
+      </div>
 
       { open &&
            <BasicModal onClose={() => setOpen(false)} open={open}>
