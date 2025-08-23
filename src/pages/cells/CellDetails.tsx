@@ -35,8 +35,7 @@ const CellDetails = () => {
       if (adminId) {
         dispatch(fetchCellDetail({ cellId: path, userId: adminId }));
     }
-    }, [path, adminId, dispatch])
-
+    }, [path, adminId, dispatch]);
 
 
   return (
