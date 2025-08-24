@@ -75,7 +75,7 @@ const columns = [
           {item.totalRepayment.toLocaleString()}
         </td>
         <td>{item.outstandingAmount.toLocaleString()}</td>
-        <td></td>
+        <td>{moment(item.dueDate).format("MMM Do YY")}</td>
     </tr>
 
   )

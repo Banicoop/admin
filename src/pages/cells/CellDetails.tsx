@@ -38,6 +38,9 @@ const CellDetails = () => {
     }, [path, adminId, dispatch]);
 
 
+    console.log(cell)
+
+
   return (
     <>
       <div className='h-full flex flex-col px-2 md:px-8 gap-3'>

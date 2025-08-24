@@ -14,7 +14,7 @@ interface banneerType {
 
 const CellBanner: FC<banneerType> = ({title, status, isCell, cell}) => {
 
-    let goalFund = (cell?.cell?.duration - 1) * cell?.cell?.contributionAmount
+    let goalFund = (cell?.cell?.duration - 1) * (cell?.cell?.contributionAmount || cell?.cell?.amount)
  
    if(!goalFund){
     goalFund = 0;
@@ -74,10 +74,10 @@ const CellBanner: FC<banneerType> = ({title, status, isCell, cell}) => {
                 </>:
 
                 <>
-                    <div className="flex flex-col gap-2">
-                        <span className="text-xs font-[300]">Contribution Amount</span>
-                        <span className="text-sm font-[500]">NGN {cell?.cell?.contributionAmount.toLocaleString('en-NG') || 0}</span>
-                    </div>
+                    {/* <div className="flex flex-col gap-2"> */}
+                        {/* <span className="text-xs font-[300]">Contribution Amount</span> */}
+                        {/* <span className="text-sm font-[500]">NGN {cell?.cell?.contributionAmount.toLocaleString('en-NG') || cell?.cell?.amount.toLocaleString('en-NG') || 0}</span> */}
+                    {/* </div> */}
 
                     <div className="flex flex-col gap-2">
                         <span className="text-xs font-[300]">Start Date</span>
