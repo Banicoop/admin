@@ -52,7 +52,7 @@ const Cells = () => {
   }, [dispatch])
 
 
-  // console.log(cells)
+  console.log(cells)
 
 
   return (

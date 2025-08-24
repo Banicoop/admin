@@ -117,7 +117,6 @@ const getQueryParams = (label: string) => {
 
   const { data: loanData, isPending: loanPending, error } = useAllLoansQuery(getAllLoanQuery(activeTableItem));
 
-  console.log(loanData);
 
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px]'>
