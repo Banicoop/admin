@@ -3,8 +3,6 @@ import isTokenExpired from "./isTokenExp";
 import { refreshAccessToken } from "../redux/slice/authSlice";
 
 
-
-
 // Axios instance
 const SERVER = axios.create({
     baseURL: process.env.REACT_APP_LIVE_URL, 
