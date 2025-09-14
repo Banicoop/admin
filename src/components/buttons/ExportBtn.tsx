@@ -27,7 +27,7 @@ export const AuthBtn:FC<Itext> = ({text, onClick, disabled, loading}) => {
             <span className="text-bgWhite text-sm text-center">{text}</span>
     
             {loading === 'pending' ? 
-            <svg className="animate-spin h-4 w-4 mr-3 bg-white text-white" viewBox="0 0 24 24"></svg>: 
+            <svg className="animate-spin h-4 w-4 rounded-full mr-3 bg-white text-white" viewBox="0 0 24 24"></svg>: 
             <img src="/autharr.svg" alt="" className="flex my-auto" />}
         </div>
     )

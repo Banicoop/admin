@@ -25,11 +25,11 @@ function DashboardLayout(){
 
       <section className="flex flex-col h-full w-full">
         <Navbar/>
-        <div className="px-8 py-3">
+        <div className="px-8 py-3 flex max-w-[1200px] w-full mx-auto justify-between">
           <Welcome/>
         </div>
 
-        <div className="flex flex-col md:flex-row md:flex-wrap items-center px-2 md:px-8 gap-6 py-2">
+        <div className="flex flex-col md:flex-row md:flex-wrap items-center px-2 md:px-8 gap-6 py-2 max-w-[1200px] w-full mx-auto">
             <Widget className='w-full md:w-[30%]' type='transactions'/>
             <Widget className='w-full md:w-[30%]' type='customers'/>
             <Widget className='w-full md:w-[30%]' type='cells'/>
@@ -37,7 +37,9 @@ function DashboardLayout(){
             <Widget className='w-full md:w-[30%]' type='customers'/>
             <Widget className='w-full md:w-[30%]' type='cells'/>
         </div>
-        <Outlet/>
+        <div className="flex max-w-[1200px] w-full mx-auto">
+          <Outlet/>
+        </div>
       </section>
     </main>
   )
@@ -51,7 +53,9 @@ function CellLayout(){
         <Sidebar/>
       <div className="flex flex-col h-full w-full gap-3">
         <Navbar/>
-        <Outlet/>
+         <div className="flex max-w-[1200px] w-full mx-auto">
+          <Outlet/>
+         </div>
       </div>
     </div>
   )
@@ -89,7 +93,7 @@ function Routes (){
   const token = useSelector((state: any) => state.auth.accessToken);
   const dispatch = useDispatch();
 
-  // console.log(token)
+  console.log(token)
 
   useEffect(() => {
     if (token) {

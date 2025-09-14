@@ -28,7 +28,7 @@ const Signin = () => {
       try {
         dispatch(login({email, password}))
       } catch (error) {
-        console.error(error)
+        console.error('Error', error)
       }
     }
 
