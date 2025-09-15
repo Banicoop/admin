@@ -1,6 +1,6 @@
 import axios from "axios";
 import isTokenExpired from "./isTokenExp";
-import { refreshAccessToken } from "../redux/slice/authSlice";
+import { refreshAccessTokenDirect } from "./refreshToken";
 
 
 // Axios instance
@@ -14,30 +14,28 @@ const SERVER = axios.create({
 });
 
 
+
 SERVER.interceptors.request.use(
-    async (config) => {
-        try {
-            let token = localStorage.getItem('token');
-            const refreshToken = localStorage.getItem('refreshToken');
+  async (config) => {
+    try {
+      let token = localStorage.getItem("token");
+      const refreshToken = localStorage.getItem("refreshToken");
 
-            if (token && isTokenExpired(token) && refreshToken) {
-                //@ts-ignore
-                token = refreshAccessToken(); 
-            }
+      if (token && isTokenExpired(token) && refreshToken) {
+        token = await refreshAccessTokenDirect();
+      }
 
-            if (token) {
-                config.headers.Authorization = `Bearer ${token}`; 
-            }
-            return config;
-        } catch (error) {
-            console.error('Request Interceptor Error:', error);
-            throw error; 
-        }
-    },
-    (error) => {
-        console.error('Request Error:', error);
-        return Promise.reject(error); 
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+
+      return config;
+    } catch (error) {
+      console.error("Request Interceptor Error:", error);
+      throw error;
     }
+  },
+  (error) => Promise.reject(error)
 );
 
 
