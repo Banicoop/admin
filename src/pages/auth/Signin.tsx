@@ -5,7 +5,7 @@ import { AuthInput } from '../../components/inputs/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/slice/authSlice';
 import type { Dispatch } from '../../redux/store';
-import { toastOptions } from '../../utils/toastOptions';
+import { toastOptions } from '../../helpers/toastOptions';
 import { toast } from 'react-toastify'
 
 

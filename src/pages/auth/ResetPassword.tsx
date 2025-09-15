@@ -3,7 +3,7 @@ import { AuthInput } from '../../components/inputs/Input';
 import { AuthBtn } from '../../components/buttons/ExportBtn';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { toastOptions } from '../../utils/toastOptions';
+import { toastOptions } from '../../helpers/toastOptions';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from '../../redux/store';
 import { resetPassword } from '../../redux/slice/authSlice';

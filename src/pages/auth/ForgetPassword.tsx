@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from '../../redux/store';
 import { forgetPassword } from '../../redux/slice/authSlice';
-import { toastOptions } from '../../utils/toastOptions';
+import { toastOptions } from '../../helpers/toastOptions';
 import { toast } from 'react-toastify'
 
 

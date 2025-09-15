@@ -14,7 +14,7 @@ import AddFundsCard from './AddFundsCard';
 import { Option } from '../../components/inputs/Select';
 import SERVER from '../../utils/server';
 import { toast } from 'react-toastify';
-import { toastOptions } from '../../utils/toastOptions';
+import { toastOptions } from '../../helpers/toastOptions';
 import { WType } from '../../type';
 
 

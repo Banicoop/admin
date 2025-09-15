@@ -6,7 +6,7 @@ import type { Dispatch } from '../../redux/store';
 import { useDispatch } from 'react-redux';
 import { useSearchParams  } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { toastOptions } from '../../utils/toastOptions';
+import { toastOptions } from '../../helpers/toastOptions';
 
 
 const imitialSate = {

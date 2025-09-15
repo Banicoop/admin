@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createCell, getCells } from '../../redux/slice/cellSlice';
 import type { Dispatch } from '../../redux/store';
 import { toast } from 'react-toastify';
-import { toastOptions } from '../../utils/toastOptions';
+import { toastOptions } from '../../helpers/toastOptions';
 
 
 interface cType {
