@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './index.css';
 import Routes from './Routes';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
@@ -12,7 +12,7 @@ function App() {
   const queryClient = new QueryClient()
 
   return (
-    <main>
+    <main style={{ fontFamily: 'Satoshi' }}>
         <Provider store={store}>
          <QueryClientProvider client={queryClient}>
           <Routes/>

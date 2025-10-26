@@ -56,10 +56,10 @@ const Header = ({list, activeItem, setActiveItem}: headerType) => {
   
     const handleAdd = async () => {
       dispatch(
-        sendInvite({admin: {email, invitedRole: type}})
-        // sendInvite({
-        //   admin: { email, invitedRole: type },
-        //   adminId })
+        // sendInvite({admin: {email, invitedRole: type}})
+        sendInvite({
+          admin: { email, invitedRole: type },
+          adminId })
       )
       setOpen(false);
     }
