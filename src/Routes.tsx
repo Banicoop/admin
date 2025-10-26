@@ -20,7 +20,7 @@ import Customers from './pages/customer/Customers';
 
 function DashboardLayout(){
   return(
-    <main className="flex min-h-screen w-full">
+    <main className="flex h-full w-full">
       <Sidebar/>
 
       <section className="flex flex-col h-full w-full">
@@ -65,11 +65,11 @@ function CellLayout(){
 function AuthLayout(){
   return(
     <div className="bg-bgR h-[100vh] w-full p-4 md:p-[3rem] lg:p-[5rem] flex items-center justify-center">
-      <div className="rounded-3xl shadow-lg bg-bgWhite flex md:h-[420px] xl:h-[560px]">
+      <div className="rounded-3xl w-full lg:w-[1024px] shadow-lg bg-bgWhite flex md:h-[420px] xl:h-[560px]">
         <div className="w-1/2 hidden md:block h-full ">
           <img src={WelcomeImage} alt="" className="w-fit md:h-[420px] xl:h-[560px]" />
         </div>
-        <div className="w-2/3 flex mx-auto md:w-1/2 md:h-[420px] xl:h-[560px]">
+        <div className="w-[400px] flex mx-auto md:w-1/2 md:h-[420px] xl:h-[560px]">
           <Outlet/>
         </div>
       </div>
