@@ -11,10 +11,18 @@ const Navbar = () => {
 
   return (
     <div className="flex w-full border-b-[1px]">
-      <div className='flex justify-between items-center py-4 px-8 max-w-[1200px] w-full mx-auto'>
-        <h1 className='text-[#000] text-[14px]'>Dashboard Overview</h1>
+      <div className='flex justify-between items-center py-4 px-8 max-w-[1400px] w-full mx-auto'>
+        <div className="flex w-full flex-1 gap-[44px] items-center">
+        <div className="flex flex-row gap-1 items-center ml-[10px]">
+          <img src="/admin/admin.png" alt="" className="h-[22px] w-[40px]" />
+          <span className="text-[#1E0D37] font-[600] text-[20px] hidden lg:block">Banicoop</span>
+        </div>
 
-        <div className="hidden md:flex items-center gap-5">
+        
+        <h1 className='text-[#000] text-[14px]'>Dashboard Overview</h1>
+        </div>
+
+        <div className="hidden md:flex flex-3 items-center gap-5">
           <Search onClick={() => {}}  placeholder='Tap to Search'/>
 
           <div className="flex p-3 rounded-full bg-[#fafafa] relative cursor-pointer">

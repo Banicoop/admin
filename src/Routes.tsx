@@ -13,6 +13,7 @@ import { Cells, CellDetails, CellUserDetails} from './pages/cells';
 import { Signin, ForgetPassword, Verification, Verified, WelcomePage, Splash, ResetPassword } from './pages/auth'
 import { LoanApplicationDetails, Loans, PendingLoan } from './pages/loan';
 import { Wallet, InvestorWallet, WalletTransaction } from './pages/wallet';
+import Merchant from './pages/merchant/Merchant';
 import Customers from './pages/customer/Customers';
 
 
@@ -29,7 +30,7 @@ function DashboardLayout(){
           <Welcome/>
         </div>
 
-        <div className="flex flex-col md:flex-row md:flex-wrap items-center px-2 md:px-8 gap-6 py-2 max-w-[1200px] w-full mx-auto">
+        <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-between px-2 md:px-8 gap-6 py-2 max-w-[1200px] w-full mx-auto">
             <Widget className='w-full md:w-[30%]' type='transactions'/>
             <Widget className='w-full md:w-[30%]' type='customers'/>
             <Widget className='w-full md:w-[30%]' type='cells'/>
@@ -49,13 +50,15 @@ function DashboardLayout(){
 function CellLayout(){
   
   return(
-    <div className="flex min-h-screen w-full">
+    <div className="flex flex-col min-h-screen w-full">
+      <Navbar/>
+      <div className="flex max-w-[1400px] w-full mx-auto relative">
         <Sidebar/>
-      <div className="flex flex-col h-full w-full gap-3">
-        <Navbar/>
-         <div className="flex max-w-[1200px] w-full mx-auto">
+      <div className="flex h-full w-full gap-3">
+         <div className="">
           <Outlet/>
          </div>
+      </div>
       </div>
     </div>
   )
@@ -180,6 +183,12 @@ const router = createBrowserRouter([
       {
         path: '/wallet/:id/transaction',
         element: <WalletTransaction/>
+      },
+
+      //merchant system
+      {
+        path: '/merchant',
+        element: <Merchant/>
       },
 
       //customer mgt

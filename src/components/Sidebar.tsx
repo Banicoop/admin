@@ -26,13 +26,8 @@ const Sidebar = () => {
 
   return (
   
-    <div className='w-[50px] lg:w-[260px] h-screen fixed top-0 right-0 left-0 border-r-[1px] flex flex-col mb-4'>
+    <div className='w-[50px] lg:w-[260px] h-screen  border-r-[1px] flex flex-col mb-4'>
       <div className="px-1 py-6">
-        <div className="flex flex-col lg:flex-row gap-1 items-center ml-[10px]">
-          <img src="/admin/admin.png" alt="" className="h-[22px] w-[40px]" />
-          <span className="text-[#1E0D37] font-[600] text-[20px] hidden lg:block">Banicoop</span>
-          {/* <span className="text-[#1E0D37] font-[400] text-[12px]">Admin</span> */}
-        </div>
 
         {menuData
           .filter((item) => item.visible.includes(role))
