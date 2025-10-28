@@ -59,7 +59,7 @@ const Cells = () => {
     <>
       <div className="h-full flex flex-col px-2 md:px-8 gap-3">
         <Welcome/>
-        <section className="flex flex-col md:flex-row md:flex-wrap items-center gap-2 py-2">
+        <section className="flex flex-col md:flex-row md:flex-wrap justify-between items-center gap-2 py-2">
           <Widget  className='w-full md:w-[32%]' type='cells'/>
           <Widget  className='w-full md:w-[32%]' type='cells'/>
           <Widget  className='w-full md:w-[32%]' type='cells'/>

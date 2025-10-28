@@ -38,7 +38,7 @@ export const menuData = [
     {
       name: 'Merchants',
       icon: '/people.svg',
-      url: '#',
+      url: '/merchant',
       visible: ['super_admin', 'merchant'],
     },
     {
