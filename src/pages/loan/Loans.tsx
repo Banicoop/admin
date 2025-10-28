@@ -50,9 +50,6 @@ const tableList = [
   {
     label: 'disbursed'
   },
-  // {
-  //   label: 'Last 7 days'
-  // },
 ]
 
 const Loans = () => {
