@@ -21,9 +21,11 @@ const ExportBtn:FC<Itext> = ({text, onClick, img}) => {
 
 
 
-export const AuthBtn:FC<Itext> = ({text, onClick, disabled, loading}) => {
+export const AuthBtn:FC<Itext> = ({text, disabled, onClick, loading}) => {
     return(
-        <div onClick={onClick} className={`flex items-center justify-center gap-1 w-max ${disabled ? 'bg-[#3b353b38] cursor-not-allowed': ' bg-bgPurple'}  text-bgWhite rounded-3xl py-2 px-7  ${loading === 'pending' ? 'cursor-not-allowed': 'cursor-pointer'}`}>
+        <div 
+            onClick={onClick}
+            className={`flex items-center justify-center gap-1 w-max ${disabled ? 'bg-[#3b353b38] cursor-not-allowed': ' bg-bgPurple'}  text-bgWhite rounded-3xl py-2 px-7  ${loading === 'pending' ? 'cursor-not-allowed': 'cursor-pointer'}`}>
             <span className="text-bgWhite text-sm text-center">{text}</span>
     
             {loading === 'pending' ? 

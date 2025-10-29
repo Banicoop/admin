@@ -25,9 +25,9 @@ function AppLayout(){
   return(
     <div className="flex flex-col min-h-screen w-full">
       <Navbar/>
-      <div className="flex max-w-[1400px] w-full mx-auto relative">
+      <div className="flex max-w-[1400px] w-full mx-auto relative mt-[65px]">
         <Sidebar/>
-      <div className="flex h-full w-full py-4">
+      <div className="flex h-full w-full py-4 ml-[50px] lg:ml-[260px]">
         <Outlet/>
       </div>
       </div>

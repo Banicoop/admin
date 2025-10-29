@@ -15,13 +15,13 @@ interface IInput {
     checked?: boolean
 }
 
-const Input:FC<IInput> = ({ type, placeholder, onChange, name,  readOnly }) => {
+const Input:FC<IInput> = ({ type, placeholder, onChange, name,  readOnly, className }) => {
   return (
-    <input type={type} name={name} placeholder={placeholder}  readOnly={readOnly} onChange={onChange} className="px-2 py-3 rounded-2xl border-[1px] w-[342px] max-w-full md:max-w-[48%] outline-none"  />
+    <input type={type} name={name} placeholder={placeholder}  readOnly={readOnly} onChange={onChange} className={`px-2 py-3 rounded-2xl border-[1px] outline-none ${className}`}  />
   )
 }
 
-
+// w-[342px] max-w-full md:max-w-[48%]
 
 
 export const CheckboxInput:FC<IInput> = ({label, onChange, name, value, checked}) => {

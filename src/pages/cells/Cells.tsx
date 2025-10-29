@@ -52,8 +52,6 @@ const Cells = () => {
   }, [dispatch])
 
 
-  console.log(cells)
-
 
   return (
     <>

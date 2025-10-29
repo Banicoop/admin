@@ -26,7 +26,7 @@ const Sidebar = () => {
 
   return (
   
-    <div className='w-[50px] lg:w-[260px] h-screen  border-r-[1px] flex flex-col mb-4'>
+    <div className='w-[50px] lg:w-[260px] h-[93vh] fixed border-r-[1px] flex flex-col mb-4'>
       <div className="px-1 py-6">
 
         {menuData
