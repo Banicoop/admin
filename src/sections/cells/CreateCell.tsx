@@ -150,12 +150,31 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
         <div className="flex flex-col w-full gap-3">
 
-          <div className="flex flex-col md:flex-row md:flex-wrap w-full gap-2">
+          <div className="flex flex-col md:flex-row md:flex-wrap w-full gap-5 justify-between">
 
-            <Input type='text' placeholder='Cell Name' name='cellName' value={inputs.cellName} onChange={handleInputsChange}/>
-            <Select className='w-[342px] h-[50px] md:max-w-[47%]' options={options} name='Collection Frequency' id='collection' onChange={handleSelectChange}/>
-            <DateInput value={inputs.launchDate} name='launchDate' onChange={handleInputsChange} text='Start Date'/>
-            <DateInput value={inputs.endDate} name='endDate' onChange={handleInputsChange} text='End Date'/>
+            <Input 
+              type='text' 
+              placeholder='Cell Name' 
+              name='cellName' 
+              className='w-[342px] md:w-[47%]'
+              value={inputs.cellName} onChange={handleInputsChange}/>
+
+            <Select 
+              className='w-[342px] h-[50px] md:w-[47%]' 
+              options={options} name='Collection Frequency' 
+              id='collection' onChange={handleSelectChange}/>
+
+            <DateInput 
+              value={inputs.launchDate} 
+              name='launchDate' 
+              className='w-[342px] md:w-[47%]'
+              onChange={handleInputsChange} text='Start Date'/>
+
+            <DateInput 
+              value={inputs.endDate} 
+              name='endDate' 
+              className='w-[342px] md:w-[47%]'
+              onChange={handleInputsChange} text='End Date'/>
           </div>
             
             {!showAll &&
@@ -165,11 +184,12 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
           
           { showAll &&
           <>
-           <div className="flex flex-col md:flex-row md:flex-wrap w-full gap-2">
+           <div className="flex flex-col md:flex-row w-full gap-3">
 
             <Input type='tel' placeholder={inputs.duration} name='duration'  value={inputs.duration || ''} onChange={handleInputsChange}  readOnly/>
 
             <Input type='tel' placeholder='Max. Number of Participant' name='totalUsers' value={inputs.totalUsers} onChange={handleInputsChange}/>
+
             <Input type='tel' placeholder='Must be 2 less than Max user' name='realUser' value={inputs.realUser} onChange={handleInputsChange}/>
 
             <Input type='text' placeholder='Contribution Amount (Naira)' value={inputs.contributionAmount} name='contributionAmount' onChange={handleInputsChange}/>
