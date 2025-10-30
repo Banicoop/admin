@@ -14,13 +14,11 @@ const Sidebar = () => {
 
   if(!role) {
     dispatch(logout())
-    window.location.replace('/auth/login');
   }
 
 
   const handleLogout = async () => {
     dispatch(logout())
-    window.location.replace('/auth/login');
   }
   
 

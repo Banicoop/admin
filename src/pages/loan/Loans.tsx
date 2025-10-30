@@ -185,7 +185,7 @@ const getQueryParams = (label: string) => {
           </div>
           
 
-          <div className="flex-1 flex w-full md:w-[300px]">
+          <div className="flex-1 flex w-full md:w-[265px]">
             <PendingApp/>
           </div>
       </div>

@@ -88,7 +88,7 @@ const Chart = () => {
                 <img src="/arrow-down.svg" alt="" className="h-4 w-4" />
             </div>
         </div>
-        <div className="w-[300px] md:w-[600px] lg:w-[1000px] h-[400px] flex justify-center items-center mt-3">
+        <div className="w-[300px] md:w-[600px] lg:w-[900px] h-[400px] flex justify-center items-center mt-3">
         <ResponsiveContainer width="100%" height="90%">
             <BarChart
                 data={data}

@@ -61,6 +61,7 @@ const Signin = () => {
 
             <AuthBtn 
               loading={status}
+              onClick={handleSubmit}
               text={`${status === 'pending' ? 'Processing...': 'Continue'}`}/>
         </div>
     </form>

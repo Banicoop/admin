@@ -40,12 +40,13 @@ export const useAllLoansQuery = ({status, startDate, endDate, search}: AllLoanTy
 
 export const useLoanHistory = (Id: string) => {
     const { data, error, isPending } = useQuery({
-        queryKey: ['loan-history'],
+        queryKey: ['loan-history', Id],
         queryFn: async () => {
             const res = await SERVER.get(`admin/${Id}/loans/history`);
             return res.data;
         },
-        enabled: !!Id
+        enabled: !!Id,
+        retry: 1,
     })
 
     return { data, error, isPending }
@@ -55,12 +56,13 @@ export const useLoanHistory = (Id: string) => {
 
 export const useLoanDetailsQuery = (Id: string) => {
     const { data, error, isPending } = useQuery({
-        queryKey: ['loan-details'],
+        queryKey: ['loan-details', Id],
         queryFn: async () => {
             const res = await SERVER.get(`admin/loans/${Id}`)
             return res.data;
         },
-        enabled: !!Id
+        enabled: !!Id,
+        retry: 1,
     })
 
     return { data, error, isPending }
