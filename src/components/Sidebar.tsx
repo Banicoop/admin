@@ -26,7 +26,6 @@ const Sidebar = () => {
   
     <div className='w-[50px] lg:w-[260px] h-[93vh] fixed border-r-[1px] flex flex-col mb-4'>
       <div className="px-1 py-6">
-
         {menuData
           .filter((item) => item.visible.includes(role))
           .map((item) => (
@@ -44,7 +43,7 @@ const Sidebar = () => {
     </div>
 
     {/* BOTTOM */}
-      <div className="mt-auto border-t-[1px] flex items-center px-3 py-6 gap-3 cursor-pointer" onClick={handleLogout}>
+      <div className="mt-auto mb-[50px] border-t-[1px] flex items-center px-3 py-6 gap-3 cursor-pointer" onClick={handleLogout}>
         <img src='/logout.svg' alt="" className="md:ml-[10px] text-bgPurple" />
         <span className='hidden lg:block text-sm'>Log Out</span>
       </div>

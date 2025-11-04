@@ -27,7 +27,7 @@ function AppLayout(){
       <Navbar/>
       <div className="flex max-w-[1400px] w-full mx-auto relative mt-[65px]">
         <Sidebar/>
-      <div className="flex h-full w-full py-4 ml-[50px] lg:ml-[260px]">
+      <div className="flex h-full w-full lg:w-[1024px] py-4 ml-[50px] lg:ml-[260px]">
         <Outlet/>
       </div>
       </div>

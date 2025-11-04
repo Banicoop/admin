@@ -55,15 +55,15 @@ const Cells = () => {
 
   return (
     <>
-      <div className="h-full flex flex-col px-2 md:px-8 gap-3">
+      <div className="h-full flex w-full flex-col px-2 md:px-8 gap-3">
         <Welcome/>
         <section className="flex flex-col md:flex-row md:flex-wrap justify-between items-center gap-2 py-2">
-          <Widget  className='w-full md:w-[32%]' type='cells'/>
-          <Widget  className='w-full md:w-[32%]' type='cells'/>
-          <Widget  className='w-full md:w-[32%]' type='cells'/>
-          <Widget  className='w-full md:w-[32%]' type='cells'/>
-          <Widget  className='w-full md:w-[32%]' type='cells'/>
-          <Widget  className='w-full md:w-[32%]' type='cells'/>
+          <Widget  className='w-full md:w-[300px]' type='cells'/>
+          <Widget  className='w-full md:w-[300px]' type='cells'/>
+          <Widget  className='w-full md:w-[300px]' type='cells'/>
+          <Widget  className='w-full md:w-[300px]' type='cells'/>
+          <Widget  className='w-full md:w-[300px]' type='cells'/>
+          <Widget  className='w-full md:w-[300px]' type='cells'/>
         </section>
 
         <div className='flex flex-col border-[1px] rounded-3xl gap-4 p-4 w-full'>
