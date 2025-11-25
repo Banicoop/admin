@@ -44,3 +44,10 @@
 }
 
 
+.icon-white {
+  filter: brightness(0) invert(1);
+}
+
+.sidebar-height{
+  height: calc(100vh - 85px);
+}

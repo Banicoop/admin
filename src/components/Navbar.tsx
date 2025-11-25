@@ -10,12 +10,12 @@ const Navbar = () => {
 
 
   return (
-    <div className="flex w-full border-b-[1px] h-[65px] fixed z-[9999]">
+    <div className="flex w-full border-b-[1px] h-[85px] fixed z-[9999]">
       <div className='flex justify-between items-center py-4 px-8 max-w-[1400px] w-full mx-auto'>
-        <div className="flex w-full flex-1 gap-[44px] items-center">
-        <div className="flex flex-row gap-1 items-center ml-[10px]">
-          <img src="/admin/admin.png" alt="" className="h-[22px] w-[40px]" />
-          <span className="text-[#1E0D37] font-[600] text-[20px] hidden lg:block">Banicoop</span>
+        <div className="flex w-full flex-1 gap-[84px] items-center">
+        <div className="flex flex-row gap-1 items-center ">
+          <img src="/logo.svg" alt="" className="h-[53px] w-[50px]" />
+          <span className="text-[#016AFF] font-[600] text-[20px] hidden lg:block">CooCredit</span>
         </div>
 
         

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { menuData } from '../constant/menuData';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { logout } from '../redux/slice/authSlice';
 
 
@@ -24,21 +24,31 @@ const Sidebar = () => {
 
   return (
   
-    <div className='w-[50px] lg:w-[260px] h-[93vh] fixed border-r-[1px] flex flex-col mb-4'>
+    <div className='w-[50px] lg:w-[260px] sidebar-height fixed border-r-[1px] flex flex-col'>
       <div className="px-1 py-6">
         {menuData
           .filter((item) => item.visible.includes(role))
           .map((item) => (
-              <Link 
-              to={item.url} 
-              key={item.name} 
-              className={`flex items-center text-[#000] font-[500] gap-2 p-2 lg:p-3 rounded-full mt-2 ${
-                location.pathname === item.url && 'text-[#fff] bg-[#6922D1]'
-              }`}
-            >
-              <img src={item.icon} alt="" className="md:ml-[10px]" style={{ color: '#6922D1' }} />
-              <span className="hidden lg:block text-sm">{item.name}</span>
-            </Link>
+          <NavLink
+            to={item.url}
+            key={item.name}
+            className={({ isActive }) =>
+              `flex items-center text-[#000] font-[500] gap-2 p-2 lg:p-3 rounded-full mt-2 ${
+                isActive ? "text-[#fff] bg-[#016AFF]" : ""
+              }`
+            }
+          >
+            {({ isActive }) => (
+                <>
+                  <img
+                    src={item.icon}
+                    alt=""
+                    className={`md:ml-[10px] ${isActive ? "icon-white" : ""}`}
+                  />
+                  <span className="hidden lg:block text-sm">{item.name}</span>
+                </>
+              )}    
+          </NavLink>
           ))}
     </div>
 

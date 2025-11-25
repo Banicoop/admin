@@ -123,7 +123,7 @@ const router = createBrowserRouter([
         element: <Loans/>
       },
       {
-        path: '/loan/pending',
+        path: '/loans/pending',
         element: <PendingLoan/>
       },
       {
