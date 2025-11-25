@@ -14,7 +14,7 @@ export const menuData = [
     {
       name: 'Transactions',
       icon: '/card.svg',
-      url: '#',
+      url: 'transactions',
       visible: ["super_admin"],
     },
     {
@@ -44,19 +44,19 @@ export const menuData = [
     {
       name: 'POS/ATMs',
       icon: '/card-pos.svg',
-      url: '#',
+      url: 'pos-atm',
       visible: ['super_admin'],
     },
     {
       name: 'Help & Support',
       icon: '/help.svg',
-      url: '#',
+      url: 'help-support',
       visible: ['super_admin', "loan_admin", 'cell_admin', 'merchant'],
     },
     {
       name: 'Account Settings',
       icon: '/setting.svg',
-      url: '#',
+      url: 'settings',
       visible: ['super_admin', "loan_admin", 'cell_admin', 'merchant'],
     },
     {

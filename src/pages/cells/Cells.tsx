@@ -98,7 +98,6 @@ const Cells = () => {
                 ))
             }
           </div>
-
         </div>
       </div>
       <CreateCell open={openModal} onClick={() => setOpenModal(false)} onClose={() => setOpenModal(false)}/>

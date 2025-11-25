@@ -66,16 +66,19 @@ const columns = [
             </Link>
         </td>
         <td className='px-1 py-2'>
-            <ActionBtn text={item?.status} onClick={() => {}} className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1] capitalize cursor-pointer w-[160px]'/>
+            <ActionBtn 
+              text={item?.status} 
+              onClick={() => {}} 
+              className='px-4 py-2 text-sm rounded-3xl bg-[#E6E6E680] text-[#6922D1] capitalize cursor-pointer w-[160px]'/>
         </td>
-        <td>{moment(item.disbursedAt).format("MMM Do YY")}</td>
-        <td className=''>{`₦${item.amount.toLocaleString()}`}</td>
-        <td>{item.paidAmount.toLocaleString()}</td>
+        <td>{moment(item?.disbursedAt).format("MMM Do YY")}</td>
+        <td className=''>{`₦${item?.amount?.toLocaleString() || 0}`}</td>
+        <td>{item?.paidAmount?.toLocaleString() || 0}</td>
         <td>
-          {item.totalRepayment.toLocaleString()}
+          {item?.totalRepayment?.toLocaleString() || 0} 
         </td>
-        <td>{item.outstandingAmount.toLocaleString()}</td>
-        <td>{moment(item.dueDate).format("MMM Do YY")}</td>
+        <td>{item?.outstandingAmount?.toLocaleString() || 0} </td>
+        <td>{moment(item?.dueDate).format("MMM Do YY") || Date.now()} </td>
     </tr>
 
   )

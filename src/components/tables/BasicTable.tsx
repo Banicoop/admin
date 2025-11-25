@@ -3,13 +3,13 @@ import React, { FC } from 'react';
 import ActionBtn  from '../buttons/ActionBtn';
 import Status from '../infos/Status';
 
-interface ITbale {
+interface ITable {
   headcells: any;
   tableData: any[];
   onNavigate?: any
 }
 
-const BasicTable:FC<ITbale> = ({headcells, tableData, onNavigate}) => {
+const BasicTable:FC<ITable> = ({headcells, tableData, onNavigate}) => {
   return (
     <TableContainer sx={{ boxShadow: "none", border: '1px solid #fafafa', borderRadius: '20px 20px 0 0'}}>
       <Table>

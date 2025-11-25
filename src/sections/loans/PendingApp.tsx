@@ -20,7 +20,7 @@ const PendingApp = () => {
             <span className='text-sm font-[400]'>{`Pending Application (${num})`}</span>
             
             {( num !== 0) &&
-              <Link to='/loan/pending' className='text-[#6922D1] underline cursor-pointer'>View All</Link>
+              <Link to='/loans/pending' className='text-[#6922D1] underline cursor-pointer'>View All</Link>
             }
         </div>
 
