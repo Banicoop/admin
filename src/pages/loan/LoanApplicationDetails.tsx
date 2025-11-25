@@ -30,10 +30,7 @@ const LoanApplicationDetails = () => {
   const reasons = [ 'Low credit score', 'Incomplete documentation', 'Outstanding loan balance', 'Other reasons (please specify)']
 
 
-
-  const navigate = useNavigate()
-
-
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
 
@@ -52,30 +49,11 @@ const LoanApplicationDetails = () => {
   const loan = loans.length ? loans[0] : null;
 
 
-  const startDate = new Date(loan?.payload?.loan.createdAt).getTime()
-  const endDate = new Date(loan?.payload?.loan.dueDate).getTime()
-
-
-  let duration;
-
-  if (!isNaN(startDate) && !isNaN(endDate)){
-    const diffInMs = endDate - startDate
-    duration = Math.round(diffInMs / (1000 * 60 * 60 * 24));
-  } else {
-    duration = 0;
-  }
-
-
-
   // var refs = false;
-
 
   useEffect(() => {
     if (!id) return;
-
-    if (id) {
-      dispatch(getLoanDetails(id));
-  }
+    dispatch(getLoanDetails(id));
   }, [id, dispatch]);
 
 
@@ -103,8 +81,8 @@ const LoanApplicationDetails = () => {
 
 
 
-  const loanAmount = Number(loan?.payload.loan.amount) || 0;
-  const interest = Number(loan?.payload.loan.interestAmount) || 0;
+  const loanAmount = Number(loan?.payload?.loan?.loanAmount) || 0;
+  const interest = Number(loan?.payload?.loan?.interestAmount) || 0;
 
   const totalAmount = loanAmount + interest;
 
@@ -148,7 +126,7 @@ const LoanApplicationDetails = () => {
 
               <>
                 <ApplicationCard 
-                  text={`NGN ${loan?.payload?.loan?.amount?.toLocaleString() || 0}` } 
+                  text={`NGN ${loan?.payload?.loan?.loanAmount?.toLocaleString() || 0}` } 
                   title='Loan Amount' 
                   title1='Interest Amount' 
                   text1={`N ${loan?.payload?.loan?.interestAmount.toLocaleString() || 0}`}/>
@@ -165,7 +143,7 @@ const LoanApplicationDetails = () => {
                   text1={`${moment(loan?.payload?.loan?.dueDate).format('MMM Do YY')}` || 0} />
                 
                 <ApplicationCard 
-                  text={`${duration} days`} 
+                  text={`${loan?.payload?.loan?.duration} days`} 
                   title='Repayment Tenure' 
                   title1='Referrer Code'
                   text1='--//--'/>

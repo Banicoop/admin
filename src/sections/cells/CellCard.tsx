@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import  ActionBtn  from '../../components/buttons/ActionBtn';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import Button from '../../components/buttons/Button';
+import Button from '../../components/buttons/Button1';
 import DeleteModal from '../../components/modals/DeleteModal';
 import { deleteCell } from '../../redux/slice/cellSlice';
 import { useDispatch } from 'react-redux';

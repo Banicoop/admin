@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, MouseEventHandler, useState } from 'react'
 import BasicModal from '../../components/modals/BasicModal';
 import Input from '../../components/inputs/Input';
 import TextArea from '../../components/inputs/TextArea';
-import Button from '../../components/buttons/Button';
+import Button from '../../components/buttons/Button1';
 import DateInput from '../../components/inputs/DateInput';
 import Select from '../../components/inputs/Select';
 import { useDispatch, useSelector } from 'react-redux';

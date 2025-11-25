@@ -1,7 +1,7 @@
 import React, { FC, MouseEventHandler } from 'react';
 import BasicModal from '../../components/modals/BasicModal';
 import Input from '../../components/inputs/Input';
-import Button from '../../components/buttons/Button';
+import Button from '../../components/buttons/Button1';
 
 interface cType {
   open: boolean;

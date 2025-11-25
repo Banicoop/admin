@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import type { Dispatch } from '../../redux/store'; 
 import { sendInvite } from '../../redux/slice/adminSlice';
 import Select from '../../components/inputs/Select';
-import Button from '../../components/buttons/Button';
+import Button from '../../components/buttons/Button1';
 import { motion } from 'framer-motion';
 
 
