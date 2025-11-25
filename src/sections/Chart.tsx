@@ -99,7 +99,7 @@ const Chart = () => {
             <Legend
             align="left"
           />
-            <Bar dataKey="Last 6 days" fill="#6922D1" barSize={10}  radius={[10, 10, 10, 10]}/>
+            <Bar dataKey="Last 6 days" fill="#016AFF" barSize={10}  radius={[10, 10, 10, 10]}/>
             <Bar dataKey="Last week" fill="#E6E8EC" barSize={10}  radius={[10, 10, 10, 10]}/>
             </BarChart>
         </ResponsiveContainer>

@@ -131,7 +131,7 @@ const LoanApplicationDetails = () => {
 
             <div className="flex items-center gap-4">
               {
-                loan?.payload?.loan.status !== 'pending' ? <ExportBtn text='Export' onClick={() => {}}/>:
+                loan?.payload?.loan?.status !== 'pending' ? <ExportBtn text='Export' onClick={() => {}}/>:
                 <>
                   <ActionBtn text='Approve Loan' onClick={() => setOpenAccept(true)} className='bg-[#6922D10A] text-bgPurple px-6 py-2 rounded-2xl text-[12px] font-[400] cursor-pointer' />
                   <ActionBtn text='Reject Loan' onClick={() => setOpenRejectModal(true)} className='px-6 py-2 rounded-2xl text-[12px] font-[400] border-[1px] text-[#6B6B6B] cursor-pointer'/>
@@ -147,10 +147,28 @@ const LoanApplicationDetails = () => {
               <CircularProgress sx={{display: 'flex', margin: 'auto'}} />:
 
               <>
-                <ApplicationCard text={`NGN ${loan?.payload?.loan?.amount.toLocaleString()}` || 0} title='Loan Amount' title1='Interest Amount' text1={`N ${loan?.payload?.loan?.interestAmount.toLocaleString()}` || 0}/>
-                <ApplicationCard text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY")}` || Date.now()} title='Submission Date' title1='Total Repayment' text1={`N ${totalAmount.toLocaleString()}`} />
-                <ApplicationCard text={`NGN ${loan?.payload?.user?.salary.toLocaleString()}`} title='Monthly Income' title1='Due Date' text1={`${moment(loan?.payload?.loan?.dueDate).format('MMM Do YY')}`} />
-                <ApplicationCard text={`${duration} days`} title='Repayment Tenure' title1='Referrer Code' text1='--//--'/>
+                <ApplicationCard 
+                  text={`NGN ${loan?.payload?.loan?.amount?.toLocaleString() || 0}` } 
+                  title='Loan Amount' 
+                  title1='Interest Amount' 
+                  text1={`N ${loan?.payload?.loan?.interestAmount.toLocaleString() || 0}`}/>
+
+                <ApplicationCard 
+                  text={`${moment(loan?.payload?.loan?.createdAt).format("MMM Do YY") || Date.now()}`} 
+                  title='Submission Date' 
+                  title1='Total Repayment' 
+                  text1={`N ${totalAmount?.toLocaleString() || 0}`} />
+
+                <ApplicationCard 
+                  text={`NGN ${loan?.payload?.user?.salary?.toLocaleString()}` || 0} 
+                  title='Monthly Income' title1='Due Date' 
+                  text1={`${moment(loan?.payload?.loan?.dueDate).format('MMM Do YY')}` || 0} />
+                
+                <ApplicationCard 
+                  text={`${duration} days`} 
+                  title='Repayment Tenure' 
+                  title1='Referrer Code'
+                  text1='--//--'/>
               </>
               }
             </div>

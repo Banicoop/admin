@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { menuData } from '../constant/menuData';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { logout } from '../redux/slice/authSlice';
 
 
 
 const Sidebar = () => {
 
-  const location = useLocation();
+
   const dispatch = useDispatch();
 
   const role = useSelector((state: any) => state?.auth?.user?.payload?.role);
@@ -24,7 +24,7 @@ const Sidebar = () => {
 
   return (
   
-    <div className='w-[50px] lg:w-[260px] sidebar-height fixed border-r-[1px] flex flex-col'>
+    <div className='w-[50px] lg:w-[260px] h-[calc(100vh-85px)] fixed border-r-[1px] flex flex-col top-[85px] '>
       <div className="px-1 py-6">
         {menuData
           .filter((item) => item.visible.includes(role))
@@ -54,7 +54,7 @@ const Sidebar = () => {
 
     {/* BOTTOM */}
       <div className="mt-auto mb-[50px] border-t-[1px] flex items-center px-3 py-6 gap-3 cursor-pointer" onClick={handleLogout}>
-        <img src='/logout.svg' alt="" className="md:ml-[10px] text-bgPurple" />
+        <img src='/logout.svg' alt="" className="md:ml-[10px] text-[]" />
         <span className='hidden lg:block text-sm'>Log Out</span>
       </div>
     </div>
