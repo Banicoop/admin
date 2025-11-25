@@ -83,7 +83,13 @@ const columns = [
 
   )
 
-const LoanTable = ({loanData, error}: {loanData: any[], error: Error | null}) => {
+const LoanTable = ({loanData, error, page,
+  total,
+  limit,
+  onPageChange}: {loanData: any[], error: Error | null,   page: number,
+  total: number,
+  limit: number,
+  onPageChange: (event: any, value: number) => void}) => {
 
 
   return (
@@ -92,7 +98,15 @@ const LoanTable = ({loanData, error}: {loanData: any[], error: Error | null}) =>
 
         <EmptyState text='No Available Loan' /> :
 
-        <Table data={loanData} columns={columns} renderRow={renderRow} />
+        <Table 
+          data={loanData} 
+          columns={columns} 
+          renderRow={renderRow} 
+          page={page}
+          total={total}
+          perPage={limit}
+          onPageChange={onPageChange}
+          />
       }
     </div>
   )
