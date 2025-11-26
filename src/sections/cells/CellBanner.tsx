@@ -95,13 +95,11 @@ const CellBanner: FC<banneerType> = ({title, status, isCell, cell}) => {
 
             <div className="flex gap-2 items-center">
                 <label htmlFor="progress" className='text-[#000] text-xs font-[500]'>Progress</label>
-                <Progress/>
+                <Progress value={50}/>
                 <p className='text-[#000] text-xs font-[500]'>50%</p>
 
             </div>
         </div>
-
-
     </div>
   )
 }

@@ -89,6 +89,8 @@ const LoanApplicationDetails = () => {
 
   const creditScore = Math.round((loan?.payload?.user?.identityScore / 100) * 850);
 
+  const progressVal = Math.round(loan?.payload?.user?.identityScore)
+
   const { data: loanHistoryData } =  useLoanHistory(loan?.payload?.user?._id ?? '');
 
 
@@ -177,7 +179,7 @@ const LoanApplicationDetails = () => {
                 <div className="flex flex-col gap-2 w-[80%]">
                     <span className="text-xs text-[#000]">Credit Score: {creditScore || 0}</span>
                   <div className='flex items-center gap-4'>
-                    <Progress />
+                    <Progress value={progressVal}/>
                     <span className="text-[#000000] text-[10px] capitalize">{loan?.payload?.user?.identityDescription || 'Status'}</span>
                   </div>
                 </div>

@@ -16,26 +16,33 @@ export const useAdminsQuery = () => {
 }
 
 
+export const useAllLoansQuery = ({
+  status,
+  startDate,
+  endDate,
+  search,
+  page
+}: AllLoanType) => {
 
-export const useAllLoansQuery = ({status, startDate, endDate, search}: AllLoanType) => {
-    const { data, error, isPending } = useQuery({
-        queryKey: ['loans', status, startDate, endDate, search],
-        queryFn: async () => {
+  const { data, error, isPending } = useQuery({
+    queryKey: ['loans', status, startDate, endDate, search, page],
 
-            const params = new URLSearchParams();
+    queryFn: async () => {
+      const params = new URLSearchParams();
 
-            if (status) params.append('status', status);
-            if (startDate) params.append('startDate', startDate);
-            if (endDate) params.append('endDate', endDate);
-            if (search) params.append('search', search);
+      if (status) params.append('status', status);
+      if (startDate) params.append('startDate', startDate);
+      if (endDate) params.append('endDate', endDate);
+      if (search) params.append('search', search);
+      if (page) params.append('page', page.toString());  
 
-            const res = await SERVER.get(`admin/loans?${params.toString()}`)
-            return res.data;
-        }
-    })
+      const res = await SERVER.get(`admin/loans?${params.toString()}`);
+      return res.data;
+    },
+  });
 
-    return { data, error, isPending }
-}
+  return { data, error, isPending };
+};
 
 
 export const useLoanHistory = (Id: string) => {

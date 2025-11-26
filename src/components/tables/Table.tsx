@@ -2,56 +2,85 @@ import { CircularProgress } from '@mui/material';
 import React, { FC } from 'react';
 import PaginationComponent from './Pagination';
 
+interface IColumn {
+  header: string;
+  accessor: string;
+  className?: string;
+}
 
 interface ITable {
-    columns: {
-        header: string; 
-        accessor: string; 
-        className?: string
-    }[];
-    data: any[];
-    renderRow: any;
-    status?: 'pending' | 'failed' | 'succeeded'
+  columns: IColumn[];
+  data: any[];
+  renderRow: (item: any) => React.ReactNode;
+  status?: 'pending' | 'failed' | 'succeeded';
 
-    // NEW pagination props
-    page?: number;
-    perPage?: number;
-    total?: number;
-    onPageChange?: (event: any, value: number) => void;
+  // pagination props
+  page?: number;
+  perPage?: number;
+  total?: number;
+  onPageChange?: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
-const Table:FC<ITable> = ({columns, renderRow, data, status, page, total, onPageChange, perPage}) => {
+const Table: FC<ITable> = ({
+  columns,
+  renderRow,
+  data,
+  status,
+  page = 1,
+  total,
+  onPageChange,
+  perPage,
+}) => {
+  const colSpan = columns?.length || 1;
+
   return (
     <section className="w-full">
-        <table className='mt-4 w-full'>
-            <thead className='text-left text-[#242424] text-sm bg-[#E9E7EB] w-full rounded-lg'>
-                {columns?.map((col) => (
-                    <th className={`${col.className} p-3`} key={col.accessor}>{col.header}</th>
-                ))}
-            </thead>
+      <table className="mt-4 w-full">
+        <thead className="text-left text-[#242424] text-sm bg-[#E9E7EB] w-full rounded-lg">
+          <tr>
+            {columns?.map((col) => (
+              <th className={`${col.className} p-3`} key={col.accessor}>
+                {col.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
 
-            <tbody>
-                { data?.map((item) => renderRow(item))}
-                <span className="flex w-full justify-center items-center m-auto">
-                    {status === 'pending' && 
-                        <CircularProgress  sx={{display: 'flex', margin: 'auto'}}/>
-                    }
-                </span>
-            </tbody>
-        </table>
+        <tbody>
+          {data?.map((item) => {
+            const row = renderRow(item);
+            return React.isValidElement(row) && row.key == null ? (
+              React.cloneElement(row, { key: item._id ?? JSON.stringify(item) })
+            ) : (
+              row
+            );
+          })}
 
-        {/* Pagination Section */}
-        {total && perPage && (
-            <div className="flex justify-center mt-6">
-            <PaginationComponent
-                count={Math.ceil(total / perPage)}
-                page={page ?? 1}
-                onChange={onPageChange!}
-            />
-            </div>
-        )}
+          {status === 'pending' && (
+            <tr>
+              <td colSpan={colSpan} className="py-6">
+                <div className="flex justify-center">
+                  <CircularProgress />
+                </div>
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+
+      {/* Pagination Section */}
+      {typeof total === 'number' && typeof perPage === 'number' && perPage > 0 && (
+        <div className="flex justify-center mt-6">
+          <PaginationComponent
+            count={Math.max(1, Math.ceil(total / perPage))}
+            page={page}
+            onChange={(e, value) => onPageChange?.(e as React.ChangeEvent<unknown>, value)}
+          />
+        </div>
+      )}
     </section>
-  )
-}
+  );
+};
 
 export default Table;
+

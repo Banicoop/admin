@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import ActionBtn from '../../components/buttons/ActionBtn';
 import Table from '../../components/tables/Table';
 import moment from 'moment';
@@ -89,7 +89,7 @@ const LoanTable = ({loanData, error, page,
   onPageChange}: {loanData: any[], error: Error | null,   page: number,
   total: number,
   limit: number,
-  onPageChange: (event: any, value: number) => void}) => {
+  onPageChange: (event: ChangeEvent<unknown>, value: number) => void}) => {
 
 
   return (

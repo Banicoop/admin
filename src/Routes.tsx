@@ -25,9 +25,9 @@ function AppLayout(){
   return(
     <div className="flex flex-col min-h-screen w-full">
       <Navbar/>
-      <div className="flex max-w-[1400px] w-full mx-auto relative mt-[65px]">
+      <div className="flex max-w-[1400px] w-full mx-auto relative mt-[85px]">
         <Sidebar/>
-      <div className="flex h-full w-full lg:w-[1024px] py-4 ml-[50px] lg:ml-[260px]">
+      <div className="flex h-full w-full py-4 ml-[50px] lg:ml-[260px]">
         <Outlet/>
       </div>
       </div>
@@ -39,7 +39,7 @@ function AppLayout(){
 function AuthLayout(){
   return(
     <div className="bg-bgR h-[100vh] w-full p-4 md:p-[3rem] lg:p-[5rem] flex items-center justify-center">
-      <div className="rounded-3xl w-full lg:w-[1024px] shadow-lg bg-bgWhite flex md:h-[420px] xl:h-[560px]">
+      <div className="rounded-3xl w-full lg:max-w-[1024px] shadow-lg bg-bgWhite flex md:h-[420px] xl:h-[560px]">
         <div className="w-1/2 hidden md:block h-full ">
           <img src={WelcomeImage} alt="" className="w-fit md:h-[420px] xl:h-[560px]" />
         </div>
