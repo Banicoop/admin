@@ -3,5 +3,6 @@ export interface AllLoanType {
     startDate?: string;
     endDate?: string;
     search?: string;
+    page?: number
 }
 

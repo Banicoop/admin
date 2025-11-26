@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import SERVER from './server';
 import { AllLoanType } from './type';
 
-
+// Get all Admins endpoint
 export const useAdminsQuery = () => {
     const { data, error, isPending } = useQuery({
         queryKey: ['admins'],
@@ -16,26 +16,48 @@ export const useAdminsQuery = () => {
 }
 
 
-
-export const useAllLoansQuery = ({status, startDate, endDate, search}: AllLoanType) => {
-    const { data, error, isPending } = useQuery({
-        queryKey: ['loans', status, startDate, endDate, search],
+export const useGetAdminDetails = (id: string) => {
+        const { data, error, isPending } = useQuery({
+        queryKey: ['admin', id],
         queryFn: async () => {
-
-            const params = new URLSearchParams();
-
-            if (status) params.append('status', status);
-            if (startDate) params.append('startDate', startDate);
-            if (endDate) params.append('endDate', endDate);
-            if (search) params.append('search', search);
-
-            const res = await SERVER.get(`admin/loans?${params.toString()}`)
+            const res = await SERVER.get(`admin?adminId=${id}`)
             return res.data;
-        }
+        },
+        enabled: !!id,
+        retry: 1
     })
 
     return { data, error, isPending }
 }
+
+
+export const useAllLoansQuery = ({
+  status,
+  startDate,
+  endDate,
+  search,
+  page
+}: AllLoanType) => {
+
+  const { data, error, isPending } = useQuery({
+    queryKey: ['loans', status, startDate, endDate, search, page],
+
+    queryFn: async () => {
+      const params = new URLSearchParams();
+
+      if (status) params.append('status', status);
+      if (startDate) params.append('startDate', startDate);
+      if (endDate) params.append('endDate', endDate);
+      if (search) params.append('search', search);
+      if (page) params.append('page', page.toString());  
+
+      const res = await SERVER.get(`admin/loans?${params.toString()}`);
+      return res.data;
+    },
+  });
+
+  return { data, error, isPending };
+};
 
 
 export const useLoanHistory = (Id: string) => {

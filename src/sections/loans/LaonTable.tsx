@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import ActionBtn from '../../components/buttons/ActionBtn';
 import Table from '../../components/tables/Table';
 import moment from 'moment';
@@ -83,7 +83,13 @@ const columns = [
 
   )
 
-const LoanTable = ({loanData, error}: {loanData: any[], error: Error | null}) => {
+const LoanTable = ({loanData, error, page,
+  total,
+  limit,
+  onPageChange}: {loanData: any[], error: Error | null,   page: number,
+  total: number,
+  limit: number,
+  onPageChange: (event: ChangeEvent<unknown>, value: number) => void}) => {
 
 
   return (
@@ -92,7 +98,15 @@ const LoanTable = ({loanData, error}: {loanData: any[], error: Error | null}) =>
 
         <EmptyState text='No Available Loan' /> :
 
-        <Table data={loanData} columns={columns} renderRow={renderRow} />
+        <Table 
+          data={loanData} 
+          columns={columns} 
+          renderRow={renderRow} 
+          page={page}
+          total={total}
+          perPage={limit}
+          onPageChange={onPageChange}
+          />
       }
     </div>
   )

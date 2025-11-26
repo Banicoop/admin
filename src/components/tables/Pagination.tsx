@@ -1,10 +1,18 @@
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
-export default function PaginationComponent({count}: {count: number}) {
+interface PaginationProps {
+    count: number;
+    page: number;
+    onChange: (e: any, val: number) => void;
+}
+
+export default function PaginationComponent({count, page, onChange}: PaginationProps) {
   return (
     <Stack spacing={2}>
         <Pagination count={count} 
+            onChange={onChange}
+            page={page}
             variant='outlined' 
             color='primary' 
             sx={{

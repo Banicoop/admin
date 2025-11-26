@@ -22,10 +22,10 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-const Progress = () => {
+const Progress = ({value}: {value: number}) => {
   return (
     <Stack spacing={2} sx={{ flexGrow: 1 }}>
-       <BorderLinearProgress variant="determinate" value={50} />
+       <BorderLinearProgress variant="determinate" value={value}/>
     </Stack>
   )
 }

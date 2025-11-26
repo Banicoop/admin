@@ -107,16 +107,15 @@ const getQueryParams = (label: string) => {
     }
   }
 
-  
-
+const [page, setPage] = useState(1);
 
   const { data, isPending } = useLoanMetricsQuery(getQueryParams(activeItem))
 
-  const { data: loanData, isPending: loanPending, error } = useAllLoansQuery(getAllLoanQuery(activeTableItem));
+  const { data: loanData, isPending: loanPending, error } = useAllLoansQuery({...getAllLoanQuery(activeTableItem), page});
 
 
   return (
-    <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px]'>
+    <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] mt-8'>
       <div className="flex flex-col lg:flex-row w-full gap-5">
           <div className="flex-[2] flex gap-4 flex-col w-full justify-between">
             <div className="flex w-full justify-between my-2">
@@ -214,7 +213,15 @@ const getQueryParams = (label: string) => {
                 <CircularProgress sx={{display: 'flex', margin: 'auto'}} />  
               </div>:
               
-               <LoanTable loanData={loanData?.data ?? []} key={loanData?.data?._id} error={error}/> 
+               <LoanTable 
+                loanData={loanData?.data ?? []} 
+                key={loanData?.data?._id} 
+                error={error}
+                page={loanData?.page}
+                total={loanData?.total}
+                limit={loanData?.limit}
+                onPageChange={(event: any, value: number) => setPage(value)}
+                /> 
             } 
             </div>
       </div>
