@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import SERVER from './server';
 import { AllLoanType } from './type';
 
-
+// Get all Admins endpoint
 export const useAdminsQuery = () => {
     const { data, error, isPending } = useQuery({
         queryKey: ['admins'],
@@ -10,6 +10,21 @@ export const useAdminsQuery = () => {
             const res = await SERVER.get(`admin/getAll`)
             return res.data;
         }
+    })
+
+    return { data, error, isPending }
+}
+
+
+export const useGetAdminDetails = (id: string) => {
+        const { data, error, isPending } = useQuery({
+        queryKey: ['admin', id],
+        queryFn: async () => {
+            const res = await SERVER.get(`admin?adminId=${id}`)
+            return res.data;
+        },
+        enabled: !!id,
+        retry: 1
     })
 
     return { data, error, isPending }
