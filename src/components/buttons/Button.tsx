@@ -43,7 +43,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           {!loading && leftIcon && <span className="">{leftIcon}</span>}
 
           {/* Button text */}
-          <span className="mt-1">{loading ? "Loading..." : children}</span>
+          <span className="">{loading ? "Loading..." : children}</span>
 
           {/* Right icon (hidden when loading) */}
           {!loading && rightIcon && <span>{rightIcon}</span>}

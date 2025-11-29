@@ -64,7 +64,7 @@ export const useLoanHistory = (Id: string) => {
     const { data, error, isPending } = useQuery({
         queryKey: ['loan-history', Id],
         queryFn: async () => {
-            const res = await SERVER.get(`admin/${Id}/loans/history`);
+            const res = await SERVER.get(`admin/loans/${Id}/history`);
             return res.data;
         },
         enabled: !!Id,

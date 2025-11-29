@@ -7,6 +7,7 @@ import { login } from '../../redux/slice/authSlice';
 import type { Dispatch } from '../../redux/store';
 import { toastOptions } from '../../helpers/toastOptions';
 import { toast } from 'react-toastify'
+import Button from '../../components/buttons/Button';
 
 
 const Signin = () => {
@@ -59,10 +60,15 @@ const Signin = () => {
         <div className="flex flex-row justify-between w-full items-center">
             <BackBtn onClick={() => navigate('/auth/welcome')} text='Go Back'/>
 
-            <AuthBtn 
-              loading={status}
-              onClick={handleSubmit}
-              text={`${status === 'pending' ? 'Processing...': 'Continue'}`}/>
+            <Button 
+              loading={status === 'pending'}
+              type='submit'
+              className='text-bgWhite rounded-3xl py-2 px-7 bg-bgPurple'
+              rightIcon={<img src="/autharr.svg" alt="" className="flex my-auto" />} 
+              disabled={status === 'pending'}
+            >
+              Continue
+            </Button>
         </div>
     </form>
   )
