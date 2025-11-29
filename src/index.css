@@ -50,4 +50,17 @@
 
 .sidebar-height{
   height: calc(100vh - 85px);
+  overflow-y: scroll;
 }
+
+/* Remove number input arrows */
+.no-arrows::-webkit-inner-spin-button,
+.no-arrows::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-arrows {
+  -moz-appearance: AuthInput;
+}
+

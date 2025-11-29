@@ -62,6 +62,7 @@ const LoanApplicationDetails = () => {
 
     await dispatch(approveLoan(loan?.payload?.loan?._id));
     dispatch(getLoanDetails(id));
+    setOpenAccept(false);
   }
 
 

@@ -5,6 +5,7 @@ import OtpInput from '../../components/inputs/OtpInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { verifyLogin } from '../../redux/slice/authSlice';
 import { Dispatch } from '../../redux/store';
+import Button from '../../components/buttons/Button';
 
 
 
@@ -41,7 +42,7 @@ const Verification = () => {
 
 
   return (
-    <div className='rounded-3xl shadow-lg bg-bgWhite p-[3rem] flex flex-col justify-center items-center gap-[1rem]'>
+    <form className='rounded-3xl shadow-lg bg-bgWhite p-[3rem] flex flex-col justify-center items-center gap-[1rem]'>
         <div className="flex gap-3 items-center">
             <img src="/frame.svg" alt="" className="" />
             <h1 className="text-5xl font-semibold">Two-Factor <br /> Authentication</h1>
@@ -64,13 +65,18 @@ const Verification = () => {
         <div className="flex justify-between w-full">
             <BackBtn onClick={() => navigate('/auth/login')} text='Go Back'/>
 
-            <AuthBtn 
-                loading={status}
-                onClick={verifyOtp} 
-                text={status === 'pending' ? 'Verifying...': 'Continue'}  
-                disabled={!isButtonEnabled}/>
+            <Button
+                loading={status === 'pending'}
+                onClick={verifyOtp}
+                // type='submit'
+                className='text-bgWhite rounded-3xl py-2 px-7 bg-bgPurple'
+                rightIcon={<img src="/autharr.svg" alt="" className="flex my-auto" />} 
+                disabled={!isButtonEnabled}
+            >
+                Continue
+            </Button>
         </div>
-    </div>
+    </form>
   )
 }
 
