@@ -6,7 +6,7 @@ import { Dispatch } from '../../redux/store';
 import { changeStatus } from '../../redux/slice/adminSlice';
 import BasicModal from '../../components/modals/DeleteModal';
 import { motion } from 'framer-motion';
-import { useAdminsQuery, useGetAdminDetails } from '../../utils/api';
+import { useAdminsQuery } from '../../utils/api';
 import { CircularProgress } from '@mui/material';
 import { EmptyState } from '../../components';
 
