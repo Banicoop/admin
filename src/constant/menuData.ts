@@ -5,18 +5,18 @@ export const menuData = [
         url: '/',
         visible: ["super_admin", "loan_admin", 'cell_admin', 'merchant'],
       },
-      {
-      name: 'Customers',
-      icon: '/user.svg',
-      url: 'customers',
-      visible: ["super_admin"],
-    },
-    {
-      name: 'Transactions',
-      icon: '/card.svg',
-      url: 'transactions',
-      visible: ["super_admin"],
-    },
+    //   {
+    //   name: 'Customers',
+    //   icon: '/user.svg',
+    //   url: 'customers',
+    //   visible: ["super_admin"],
+    // },
+    // {
+    //   name: 'Transactions',
+    //   icon: '/card.svg',
+    //   url: 'transactions',
+    //   visible: ["super_admin"],
+    // },
     {
       name: 'Wallet',
       icon: '/card.svg',
@@ -36,84 +36,35 @@ export const menuData = [
       visible: ["super_admin", 'loan_admin'],
     },
     {
-      name: 'Merchants',
+      name: 'Agents',
       icon: '/people.svg',
       url: '/merchant',
       visible: ['super_admin', 'merchant'],
     },
-    {
-      name: 'POS/ATMs',
-      icon: '/card-pos.svg',
-      url: 'pos-atm',
-      visible: ['super_admin'],
-    },
-    {
-      name: 'Help & Support',
-      icon: '/help.svg',
-      url: 'help-support',
-      visible: ['super_admin', "loan_admin", 'cell_admin', 'merchant'],
-    },
-    {
-      name: 'Account Settings',
-      icon: '/setting.svg',
-      url: 'settings',
-      visible: ['super_admin', "loan_admin", 'cell_admin', 'merchant'],
-    },
+    // {
+    //   name: 'POS/ATMs',
+    //   icon: '/card-pos.svg',
+    //   url: 'pos-atm',
+    //   visible: ['super_admin'],
+    // },
+    // {
+    //   name: 'Help & Support',
+    //   icon: '/help.svg',
+    //   url: 'help-support',
+    //   visible: ['super_admin', "loan_admin", 'cell_admin', 'merchant'],
+    // },
+    // {
+    //   name: 'Account Settings',
+    //   icon: '/setting.svg',
+    //   url: 'settings',
+    //   visible: ['super_admin', "loan_admin", 'cell_admin', 'merchant'],
+    // },
     {
       name: 'Admin',
       icon: '/verify.svg',
       url: '/admin',
       visible: ["super_admin"],
     },
-]
-
-
-export const adminData = [
-  {
-    profile: {
-      name: 'Dada Dimeji',
-      img: '/admin/profile.png'
-    },
-    role: 'Super Admin',
-    last_login: '3rd Nov 2023',
-    status: 'Active'
-  },
-  {
-    profile: {
-      name: 'Dada Dimeji',
-      img: '/admin/profile.png'
-    },
-    role: 'Super Admin',
-    last_login: '3rd Nov 2023',
-    status: 'Active'
-  },
-  {
-    profile: {
-      name: 'Dada Dimeji',
-      img: '/admin/profile.png'
-    },
-    role: 'Super Admin',
-    last_login: '3rd Nov 2023',
-    status: 'Active'
-  },
-  {
-    profile: {
-      name: 'Dada Dimeji',
-      img: '/admin/profile.png'
-    },
-    role: 'Super Admin',
-    last_login: '3rd Nov 2023',
-    status: 'Active'
-  },
-  {
-    profile: {
-      name: 'Dada Dimeji',
-      img: '/admin/profile.png'
-    },
-    role: 'Super Admin',
-    last_login: '3rd Nov 2023',
-    status: 'Active'
-  },
 ]
 
 
@@ -167,64 +118,3 @@ export const walletData = [
 
 ]
 
-
-export const loans = [
-  {
-    date: 'Oct 15, 2024',
-    loans: [
-      {
-        img: '/loan/profile.png',
-        name: 'Sarah Olueja',
-        amount: 'N310,000.00'
-      },
-      {
-        img: '/loan/profile.png',
-        name: 'Sarah Olueja',
-        amount: 'N310,000.00'
-      },
-      {
-        img: '/loan/profile.png',
-        name: 'Sarah Olueja',
-        amount: 'N310,000.00'
-      },
-    ]
-  }
-]
-
-export const loans1 = [
-  {
-    date: 'Oct 15, 2024',
-    loans: [
-      {
-        img: '/loan/profile.png',
-        name: 'Sarah Olueja',
-        amount: 'N310,000.00'
-      },
-      {
-        img: '/loan/profile.png',
-        name: 'Sarah Olueja',
-        amount: 'N310,000.00'
-      },
-      {
-        img: '/loan/profile.png',
-        name: 'Sarah Olueja',
-        amount: 'N310,000.00'
-      },
-      {
-        img: '/loan/profile.png',
-        name: 'Sarah Olueja',
-        amount: 'N310,000.00'
-      },
-      {
-        img: '/loan/profile.png',
-        name: 'Sarah Olueja',
-        amount: 'N310,000.00'
-      },
-      {
-        img: '/loan/profile.png',
-        name: 'Sarah Olueja',
-        amount: 'N310,000.00'
-      },
-    ]
-  }
-]

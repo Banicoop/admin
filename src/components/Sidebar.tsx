@@ -24,7 +24,7 @@ const Sidebar = () => {
 
   return (
   
-    <div className='w-[50px] lg:w-[260px] h-[calc(100vh-85px)] overflow-y-scroll border-r-[1px] flex flex-col top-[85px] left-0 sticky'>
+    <div className='w-[50px] lg:w-[260px] h-[calc(100vh-85px)] border-r-[1px] flex flex-col top-[85px] left-0 sticky'>
       <div className="px-1 py-6">
         {menuData
           .filter((item) => item.visible.includes(role))
@@ -53,8 +53,8 @@ const Sidebar = () => {
     </div>
 
     {/* BOTTOM */}
-      <div className="mt-auto mb-[50px] border-t-[1px] flex items-center px-3 py-6 gap-3 cursor-pointer" onClick={handleLogout}>
-        <img src='/logout.svg' alt="" className="md:ml-[10px] text-[]" />
+      <div className="mt-auto mb-[20px] border-t-[1px] flex items-center px-3 py-6 gap-3 cursor-pointer" onClick={handleLogout}>
+        <img src='/logout.svg' alt="" className="md:ml-[10px]" />
         <span className='hidden lg:block text-sm'>Log Out</span>
       </div>
     </div>
