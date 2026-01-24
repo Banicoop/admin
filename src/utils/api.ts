@@ -90,7 +90,6 @@ export const useLoanDetailsQuery = (Id: string) => {
     return { data, error, isPending }
 }
 
-
 export const useLoanMetricsQuery  = ({ duration, startDate, endDate }:  { duration?: string; startDate?: string; endDate?: string;
 }) => {
     const { data, error, isPending } = useQuery({
@@ -109,15 +108,18 @@ export const useLoanMetricsQuery  = ({ duration, startDate, endDate }:  { durati
 
 
 export const useDownLoadLoan = () => {
-    const { data, error, isPending } = useQuery({
-        queryKey: ['download'],
-        queryFn: async () => {
-            const res = await SERVER.get(`admin/loans/download`)
-            return res.data;
-        }
-    })
-    return { data, error, isPending }
-}
+  return useQuery({
+    queryKey: ['download-loans'],
+    queryFn: async () => {
+      const response = await SERVER.get('admin/loans/download', {
+        responseType: 'blob',
+      });
+
+      return response.data;
+    },
+    enabled: false, // 🚨 important
+  });
+};
 
 
 export const useCellsQuery = () => {

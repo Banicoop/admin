@@ -5,7 +5,7 @@ import PendingApp from '../../sections/loans/PendingApp';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import Search from '../../components/Search';
 import LoanTable from '../../sections/loans/LaonTable';
-import { useAllLoansQuery, useLoanMetricsQuery } from '../../utils/api';
+import { useAllLoansQuery, useDownLoadLoan, useLoanMetricsQuery } from '../../utils/api';
 import AppWidgets from '../../components/AppWidgets';
 import { Spinner } from '../../helpers/spinner';
 import { CircularProgress } from '@mui/material';
@@ -24,6 +24,26 @@ const Loans = () => {
   const { data, isPending } = useLoanMetricsQuery(getQueryParams(activeItem))
 
   const { data: loanData, isPending: loanPending, error } = useAllLoansQuery({...getAllLoanQuery(activeTableItem), page});
+
+  const { refetch, isFetching } = useDownLoadLoan();
+
+  const handleLoanDownload = async () => {
+    const { data } = await refetch();
+
+    if (!data) return;
+
+    const url = window.URL.createObjectURL(new Blob([data]));
+    const link = document.createElement('a');
+
+    link.href = url;
+    link.setAttribute('download', 'loans.csv');
+    document.body.appendChild(link);
+    link.click();
+
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  }
+
 
 
   return (
@@ -104,7 +124,10 @@ const Loans = () => {
       <div className="w-full flex flex-col my-2 gap-6 rounded-3xl border-[1px] p-4">
           <div className="flex items-center justify-between">
               <Info text='Loans'/>
-              <ExportBtn text='Export'/>
+              <ExportBtn 
+                text={isFetching ? 'Exporting...' : 'Export'}
+                onClick={handleLoanDownload}
+                />
           </div>
 
           <div className="flex items-center justify-between">
