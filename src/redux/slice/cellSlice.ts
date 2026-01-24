@@ -20,10 +20,12 @@ export const createCell = createAsyncThunk(
     'cell/createCell',
     async (cell: {}, { rejectWithValue }) => {
         try {
-            const response = await SERVER.post('admin/contribution/cell/create', cell);
-            return response.data.cells;
+            const response = await SERVER.post('admin/contribution/cells', cell);
+
+            console.log(response.data)
+            // return response.data.cells;
         } catch (error: any) {
-            const err = error?.response?.data?.message
+            const err = error?.response?.data?.message || 'Something went wrong!'
             toast.error(`${err}`, {...toastOptions})
             return rejectWithValue(error.response.data)
         }
@@ -35,7 +37,7 @@ export const getCells = createAsyncThunk(
     'cell/getCells',
     async (_, {rejectWithValue}) => {
         try {
-            const response = await SERVER.get('admin/contribution/cell/all?type=&startDate&endDate&isActive=&available=true');
+            const response = await SERVER.get('admin/contribution/cells');
             const cells = Array.isArray(response?.data?.cells) ? response.data.cells : [];
 
             const sortedCells = cells.sort(
@@ -49,11 +51,11 @@ export const getCells = createAsyncThunk(
 )
 
 
-export const fetchCellDetail = createAsyncThunk(
-    'cell/fetchCellDetail',
-    async ({ cellId, userId }: { cellId: string; userId: string | null }, { rejectWithValue }) => {
+export const getCellDetails = createAsyncThunk(
+    'cell/getCellDetails',
+    async ({ Id }: {  Id: string | null }, { rejectWithValue }) => {
         try {
-            const response = await SERVER.get(`admin/contribution/cell/single?cellId=${cellId}&adminId=${userId}`);
+            const response = await SERVER.get(`admin/contribution/cells/${Id}`);
             return response.data;
         } catch (error: any) {
             return rejectWithValue(error.response?.data || 'Failed to fetch cell details');
@@ -64,9 +66,9 @@ export const fetchCellDetail = createAsyncThunk(
 
 export const deleteCell = createAsyncThunk(
     'cell/deleteCell',
-    async ({cellId}: {cellId: string}, { rejectWithValue }) => {
+    async ({Id}: {Id: string}, { rejectWithValue }) => {
         try {
-            await SERVER.delete(`admin/contribution/cell?id=${cellId}`);
+            await SERVER.delete(`admin/contribution/cells/${Id}`);
         } catch (error: any) {
             const err = error?.response?.data?.message;
             toast.error(`${err}`, {...toastOptions})
@@ -111,14 +113,14 @@ const cellSlice = createSlice({
 
 
         builder
-        .addCase(fetchCellDetail.pending, (state) => {
+        .addCase(getCellDetails.pending, (state) => {
             state.status = 'pending';
         })
-        .addCase(fetchCellDetail.fulfilled, (state, action) => {
+        .addCase(getCellDetails.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.entities = action.payload;
         })
-        .addCase(fetchCellDetail.rejected, (state) => {
+        .addCase(getCellDetails.rejected, (state) => {
             state.status = 'failed';
             toast.error('Failed to fetch cell details', { ...toastOptions });
         });
@@ -131,7 +133,7 @@ const cellSlice = createSlice({
         })
         .addCase(deleteCell.fulfilled, (state, action) => {
             state.status = 'succeeded';
-            const cellId = action.meta.arg.cellId;
+            const cellId = action.meta.arg.Id;
 
             state.entities = state.entities.filter((cell: any) => cell._id !== cellId);
             toast.success('Cell has been deleted successfully', { ...toastOptions });

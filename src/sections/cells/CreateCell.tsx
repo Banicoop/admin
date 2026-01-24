@@ -121,8 +121,8 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
     try {
       dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, launchDate,  endDate, type}));
         if (status === 'succeeded') {
-          setInputs(initialState);
-          onClose(); 
+          // setInputs(initialState);
+          // onClose(); 
           return;
         }
     } catch (error) {

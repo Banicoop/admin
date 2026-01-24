@@ -91,6 +91,35 @@ export const useLoanDetailsQuery = (Id: string) => {
 }
 
 
+export const useLoanMetricsQuery  = ({ duration, startDate, endDate }:  { duration?: string; startDate?: string; endDate?: string;
+}) => {
+    const { data, error, isPending } = useQuery({
+        queryKey: ['loan-metrics', duration, startDate, endDate],
+        queryFn: async () => {
+            const res = await SERVER.get(`admin/loans/metrics`, {
+                params: { duration, startDate, endDate }
+            });
+            return res.data;
+        },
+        enabled: !!duration || (!!startDate && !!endDate),
+    })
+
+    return { data, error, isPending }
+}
+
+
+export const useDownLoadLoan = () => {
+    const { data, error, isPending } = useQuery({
+        queryKey: ['download'],
+        queryFn: async () => {
+            const res = await SERVER.get(`admin/loans/download`)
+            return res.data;
+        }
+    })
+    return { data, error, isPending }
+}
+
+
 export const useCellsQuery = () => {
     const { data, error, isPending } = useQuery({
         queryKey: ['cells'],
@@ -131,21 +160,6 @@ export const useWalletBankQuery  = () => {
 }
 
 
-export const useLoanMetricsQuery  = ({ duration, startDate, endDate }:  { duration?: string; startDate?: string; endDate?: string;
-}) => {
-    const { data, error, isPending } = useQuery({
-        queryKey: ['loan-metrics', duration, startDate, endDate],
-        queryFn: async () => {
-            const res = await SERVER.get(`admin/loans/metrics`, {
-                params: { duration, startDate, endDate }
-            });
-            return res.data;
-        },
-        enabled: !!duration || (!!startDate && !!endDate),
-    })
-
-    return { data, error, isPending }
-}
 
 
 export const useBankQuery = () => {

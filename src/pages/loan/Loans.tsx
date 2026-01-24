@@ -9,105 +9,17 @@ import { useAllLoansQuery, useLoanMetricsQuery } from '../../utils/api';
 import AppWidgets from '../../components/AppWidgets';
 import { Spinner } from '../../helpers/spinner';
 import { CircularProgress } from '@mui/material';
+import { getQueryParams, getAllLoanQuery } from './funcs';
 
 
 
-
-
-
-const list = [
-  {
-    label: 'All'
-  },
-  {
-    label: 'Today'
-  },
-  {
-    label: 'Last 7 days'
-  },
-  {
-    label: 'Last 30 Days'
-  },
-]
-
-
-const tableList = [
-  {
-    label: 'All'
-  },
-  {
-    label: 'pending'
-  },
-  {
-    label: 'overdue'
-  },
-  {
-    label: 'paid'
-  },
-  {
-    label: 'approved'
-  },
-  {
-    label: 'disbursed'
-  },
-]
 
 const Loans = () => {
 
-  const [activeItem, setActiveItem] = useState(list[0].label);
-  const [activeTableItem, setActiveTableItem] = useState(tableList[0].label);
+  const [activeItem, setActiveItem] = useState('All');
+  const [activeTableItem, setActiveTableItem] = useState('All');
 
-
-  const formatDate = (date: Date): string => {
-  const year = date.getFullYear();
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  return `${year}-${month}-${day}`; 
-};
-
-
-const getQueryParams = (label: string) => {
-  const now = new Date();
-  const endDate = formatDate(now);
-  let startDate: string;
-
-  switch (label) {
-    case 'Last 7 days':
-      startDate = formatDate(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000));
-      return { duration: 'custom', startDate, endDate };
-
-    case 'Last 30 Days':
-      startDate = formatDate(new Date(Date.now() - 30 * 24 * 60 * 60 * 1000));
-      return { duration: 'custom', startDate, endDate };
-
-    case 'Today':
-      return {duration: 'Today' }
-    case 'All Time':
-    default:
-      return { duration: 'allTime' }; 
-  }
-};
-
-
-
-  const getAllLoanQuery = (status: string) => {
-    switch(status){
-      case 'pending':
-        return { status: 'pending' };
-      case 'overdue':
-        return { status: 'overdue' };
-      case 'paid':
-        return { status: 'paid' };
-      case 'approved':
-        return { status: 'approved' };
-      case 'disbursed':
-        return {status: 'disbursed'};
-      default:
-        return {status: ''}
-    }
-  }
-
-const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
 
   const { data, isPending } = useLoanMetricsQuery(getQueryParams(activeItem))
 
@@ -115,19 +27,19 @@ const [page, setPage] = useState(1);
 
 
   return (
-    <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] mt-8'>
+    <main className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] mt-8'>
       <div className="flex flex-col lg:flex-row w-full gap-5">
           <div className="flex-[2] flex gap-4 flex-col w-full justify-between">
             <div className="flex w-full justify-between my-2">
                 <Info text='Overview'/>
 
                 <div className="hidden md:flex items-center gap-4">
-                {list.map((i) => (
+                {['All', 'Today', 'Last 7 days', 'Last 30 days'].map((i) => (
                     <Btn 
-                      onClick={() => setActiveItem(i.label)}
-                      activeItem={activeItem === i.label} 
-                      label={i.label} 
-                      key={i.label}/>
+                      onClick={() => setActiveItem(i)}
+                      activeItem={activeItem === i} 
+                      label={i} 
+                      key={i}/>
                   ))
                   }
                 </div>
@@ -198,8 +110,8 @@ const [page, setPage] = useState(1);
           <div className="flex items-center justify-between">
                <Search onClick={() => {}} placeholder='Search for loans, users, or reports...'/>
               <div className="hidden md:flex items-center gap-4 capitalize">
-                {tableList.map((i) => (
-                    <Btn onClick={() => setActiveTableItem(i.label)} activeItem={activeTableItem === i.label} label={i.label} key={i.label}/>
+                {['All', 'pending', 'overdue', 'paid', 'approved', 'disbursed'].map((i) => (
+                    <Btn onClick={() => setActiveTableItem(i)} activeItem={activeTableItem === i} label={i} key={i}/>
                   ))
                   }
               </div>
@@ -225,7 +137,7 @@ const [page, setPage] = useState(1);
             } 
             </div>
       </div>
-    </div>
+    </main>
   )
 }
 

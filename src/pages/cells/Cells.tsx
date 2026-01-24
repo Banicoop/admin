@@ -44,12 +44,12 @@ const Cells = () => {
 
   const {  entities: cells, status } = useSelector((state: any) => state.cell)
 
-  const dispatch = useDispatch<Dispatch>();
+  // const dispatch = useDispatch<Dispatch>();
 
 
-  useEffect(() => {
-    dispatch(getCells())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getCells())
+  // }, [dispatch])
 
 
 
