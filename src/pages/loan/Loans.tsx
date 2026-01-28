@@ -10,6 +10,7 @@ import AppWidgets from '../../components/AppWidgets';
 import { Spinner } from '../../helpers/spinner';
 import { CircularProgress } from '@mui/material';
 import { getQueryParams, getAllLoanQuery } from './funcs';
+import { formatISODate } from '../../helpers/funcs';
 
 
 
@@ -25,24 +26,31 @@ const Loans = () => {
 
   const { data: loanData, isPending: loanPending, error } = useAllLoansQuery({...getAllLoanQuery(activeTableItem), page});
 
-  const { refetch, isFetching } = useDownLoadLoan();
+const { mutateAsync, isPending: pendingDownload } = useDownLoadLoan();
 
-  const handleLoanDownload = async () => {
-    const { data } = await refetch();
+const handleExport = async () => {
+  const endDate = new Date();
+  const startDate = new Date();
+  startDate.setDate(endDate.getDate() - 30);
 
-    if (!data) return;
+  const data = await mutateAsync({
+    duration: 'custom',
+    startDate: formatISODate(startDate),
+    endDate: formatISODate(endDate),
+  });
 
-    const url = window.URL.createObjectURL(new Blob([data]));
-    const link = document.createElement('a');
+  const blob = new Blob([data], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
 
-    link.href = url;
-    link.setAttribute('download', 'loans.csv');
-    document.body.appendChild(link);
-    link.click();
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'loans-last-30-days.csv';
+  a.click();
 
-    link.remove();
-    window.URL.revokeObjectURL(url);
-  }
+  window.URL.revokeObjectURL(url);
+};
+
+
 
 
 
@@ -125,8 +133,8 @@ const Loans = () => {
           <div className="flex items-center justify-between">
               <Info text='Loans'/>
               <ExportBtn 
-                text={isFetching ? 'Exporting...' : 'Export'}
-                onClick={handleLoanDownload}
+                text={pendingDownload ? 'Exporting...' : 'Export 30 days'}
+                onClick={handleExport}
                 />
           </div>
 

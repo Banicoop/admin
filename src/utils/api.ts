@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import SERVER from './server';
-import { AllLoanType } from './type';
+import { AllLoanType, DownloadLoanParams } from './type';
+
 
 // Get all Admins endpoint
 export const useAdminsQuery = () => {
@@ -108,18 +110,21 @@ export const useLoanMetricsQuery  = ({ duration, startDate, endDate }:  { durati
 
 
 export const useDownLoadLoan = () => {
-  return useQuery({
-    queryKey: ['download-loans'],
-    queryFn: async () => {
-      const response = await SERVER.get('admin/loans/download', {
-        responseType: 'blob',
-      });
+  return useMutation({
+    mutationFn: async (params: DownloadLoanParams) => {
+      const response = await SERVER.get(
+        'admin/loans/download',
+        {
+          params,
+          responseType: 'blob',
+        }
+      );
 
       return response.data;
     },
-    enabled: false, // 🚨 important
   });
 };
+
 
 
 export const useCellsQuery = () => {
