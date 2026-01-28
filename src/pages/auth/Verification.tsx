@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
-import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
+import { BackBtn } from '../../components/buttons/ExportBtn';
 import OtpInput from '../../components/inputs/OtpInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { verifyLogin } from '../../redux/slice/authSlice';

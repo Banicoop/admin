@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AuthBtn, BackBtn } from '../../components/buttons/ExportBtn';
+import { BackBtn } from '../../components/buttons/ExportBtn';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthInput } from '../../components/inputs/Input';
 import { useDispatch, useSelector } from 'react-redux';
