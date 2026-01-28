@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Info from '../../components/infos/Info';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import CellDetailsTable from '../../sections/cells/CellDetailsTable';
@@ -15,8 +15,6 @@ import Updates from '../../sections/cells/Updates';
 
 const CellDetails = () => {
 
-
-
     const { entities: cell,  } = useSelector((state: any) => state.cell);
 
     const location = useLocation();
@@ -26,9 +24,9 @@ const CellDetails = () => {
     const path = location.pathname.split('/')[2];
 
 
-    const adminId = localStorage.getItem('loginData')
-        ? JSON.parse(localStorage.getItem('loginData')!).id
-        : null;
+    // const adminId = localStorage.getItem('loginData')
+    //     ? JSON.parse(localStorage.getItem('loginData')!).id
+    //     : null;
 
 
     useEffect(() => {
