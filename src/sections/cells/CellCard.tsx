@@ -30,7 +30,7 @@ const CellCard = ({data}: any) => {
   }
 
   const handleCellDelete = () => {
-      dispatch(deleteCell({ cellId }));
+      dispatch(deleteCell({ Id: cellId }));
   }
 
   

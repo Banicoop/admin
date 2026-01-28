@@ -5,7 +5,7 @@ import CellDetailsTable from '../../sections/cells/CellDetailsTable';
 import CellBanner from '../../sections/cells/CellBanner';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCellDetail } from '../../redux/slice/cellSlice';
+import { getCellDetails } from '../../redux/slice/cellSlice';
 import type { Dispatch } from '../../redux/store';
 import Updates from '../../sections/cells/Updates';
 
@@ -32,10 +32,8 @@ const CellDetails = () => {
 
 
     useEffect(() => {
-      if (adminId) {
-        dispatch(fetchCellDetail({ cellId: path, userId: adminId }));
-    }
-    }, [path, adminId, dispatch]);
+      dispatch(getCellDetails({ Id: path }));
+    }, [path, dispatch]);
 
 
     console.log(cell)
