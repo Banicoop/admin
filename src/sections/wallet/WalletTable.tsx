@@ -1,7 +1,6 @@
 import React from 'react'
 import Table from '../../components/tables/Table';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import ActionBtn from '../../components/buttons/ActionBtn';
 
 

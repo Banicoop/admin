@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import SERVER from './server';
-import { AllLoanType } from './type';
+import { AllLoanType, DownloadLoanParams } from './type';
+
 
 // Get all Admins endpoint
 export const useAdminsQuery = () => {
@@ -90,6 +92,40 @@ export const useLoanDetailsQuery = (Id: string) => {
     return { data, error, isPending }
 }
 
+export const useLoanMetricsQuery  = ({ duration, startDate, endDate }:  { duration?: string; startDate?: string; endDate?: string;
+}) => {
+    const { data, error, isPending } = useQuery({
+        queryKey: ['loan-metrics', duration, startDate, endDate],
+        queryFn: async () => {
+            const res = await SERVER.get(`admin/loans/metrics`, {
+                params: { duration, startDate, endDate }
+            });
+            return res.data;
+        },
+        enabled: !!duration || (!!startDate && !!endDate),
+    })
+
+    return { data, error, isPending }
+}
+
+
+export const useDownLoadLoan = () => {
+  return useMutation({
+    mutationFn: async (params: DownloadLoanParams) => {
+      const response = await SERVER.get(
+        'admin/loans/download',
+        {
+          params,
+          responseType: 'blob',
+        }
+      );
+
+      return response.data;
+    },
+  });
+};
+
+
 
 export const useCellsQuery = () => {
     const { data, error, isPending } = useQuery({
@@ -131,21 +167,6 @@ export const useWalletBankQuery  = () => {
 }
 
 
-export const useLoanMetricsQuery  = ({ duration, startDate, endDate }:  { duration?: string; startDate?: string; endDate?: string;
-}) => {
-    const { data, error, isPending } = useQuery({
-        queryKey: ['loan-metrics', duration, startDate, endDate],
-        queryFn: async () => {
-            const res = await SERVER.get(`admin/loans/metrics`, {
-                params: { duration, startDate, endDate }
-            });
-            return res.data;
-        },
-        enabled: !!duration || (!!startDate && !!endDate),
-    })
-
-    return { data, error, isPending }
-}
 
 
 export const useBankQuery = () => {

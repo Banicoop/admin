@@ -36,7 +36,7 @@ export const menuData = [
       visible: ["super_admin", 'loan_admin'],
     },
     {
-      name: 'Agents',
+      name: 'Merchant',
       icon: '/people.svg',
       url: '/merchant',
       visible: ['super_admin', 'merchant'],

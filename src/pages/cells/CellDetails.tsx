@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Info from '../../components/infos/Info';
 import ExportBtn from '../../components/buttons/ExportBtn';
 import CellDetailsTable from '../../sections/cells/CellDetailsTable';
 import CellBanner from '../../sections/cells/CellBanner';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCellDetail } from '../../redux/slice/cellSlice';
+import { getCellDetails } from '../../redux/slice/cellSlice';
 import type { Dispatch } from '../../redux/store';
 import Updates from '../../sections/cells/Updates';
 
@@ -14,8 +14,6 @@ import Updates from '../../sections/cells/Updates';
 
 
 const CellDetails = () => {
-
-
 
     const { entities: cell,  } = useSelector((state: any) => state.cell);
 
@@ -26,16 +24,14 @@ const CellDetails = () => {
     const path = location.pathname.split('/')[2];
 
 
-    const adminId = localStorage.getItem('loginData')
-        ? JSON.parse(localStorage.getItem('loginData')!).id
-        : null;
+    // const adminId = localStorage.getItem('loginData')
+    //     ? JSON.parse(localStorage.getItem('loginData')!).id
+    //     : null;
 
 
     useEffect(() => {
-      if (adminId) {
-        dispatch(fetchCellDetail({ cellId: path, userId: adminId }));
-    }
-    }, [path, adminId, dispatch]);
+      dispatch(getCellDetails({ Id: path }));
+    }, [path, dispatch]);
 
 
     console.log(cell)
