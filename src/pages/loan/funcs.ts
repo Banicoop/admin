@@ -10,7 +10,7 @@ export const getQueryParams = (label: string) => {
       startDate = formatDate(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000));
       return { duration: 'custom', startDate, endDate };
 
-    case 'Last 30 Days':
+    case 'Last 30 days':
       startDate = formatDate(new Date(Date.now() - 30 * 24 * 60 * 60 * 1000));
       return { duration: 'custom', startDate, endDate };
 

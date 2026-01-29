@@ -80,28 +80,28 @@ const handleExport = async () => {
                 title='Revenue Generated' 
                 icon='/loan/wallet.png' 
                 icon2='/arrow-right.svg' 
-                num={isPending ? <Spinner/> : data?.data?.revenueGenerated.toLocaleString() || 0} 
+                num={isPending ? <Spinner/> : data?.data?.revenueGenerated?.toLocaleString() || 0} 
                 bgColor='#27AE60' text2='0'/>
 
               <AppWidgets 
                 className='w-full md:w-[48%]' 
                 title='Active Loans' icon='/loan/save-add.png' 
                 icon2='/arrow-right.svg' 
-                num={isPending ? <Spinner/> : data?.data?.activeLoans.toLocaleString() || 0} 
+                num={isPending ? <Spinner/> : data?.data?.activeLoans?.toLocaleString() || 0} 
                 bgColor='#27AE60' text2='0'/>
 
               <AppWidgets 
                 className='w-full md:w-[48%]' 
                 title='Repaid Loans' icon='/loan/archive-tick.png' 
                 icon2='/arrow-right.svg' 
-                num={isPending ? <Spinner/> : data?.data?.repaidLoans.toLocaleString() || 0} 
+                num={isPending ? <Spinner/> : data?.data?.repaidLoans?.toLocaleString() || 0} 
                 bgColor='#27AE60' text2='0'/>
 
               <AppWidgets className='w-full md:w-[48%]' 
                 title='Disbursed Loans' 
                 icon='/loan/information.png' 
                 icon2='/arrow-right.svg' 
-                num={isPending ? <Spinner/> : data?.data?.disbursedLoans.toLocaleString() || 0} 
+                num={isPending ? <Spinner/> : data?.data?.disbursedLoans?.toLocaleString() || 0} 
                 bgColor='#27AE60' text2='0'/>
 
               <AppWidgets 
@@ -109,7 +109,7 @@ const handleExport = async () => {
                 title='Total Loan Disbursed' 
                 icon='/loan/wallet.png' 
                 icon2='/arrow-right.svg' 
-                num={isPending ? <Spinner/> : data?.data?.totalAmountDisbursed.toLocaleString() || 0} 
+                num={isPending ? <Spinner/> : data?.data?.totalAmountDisbursed?.toLocaleString() || 0} 
                 bgColor='#27AE60' text2='0'/> 
 
               <AppWidgets 
@@ -117,7 +117,7 @@ const handleExport = async () => {
                 title='Defaulted Loans' 
                 icon='/loan/information.png' 
                 icon2='/arrow-right.svg' 
-                num={isPending ? <Spinner/> : data?.data?.defaultedLoans.toLocaleString() || 0} 
+                num={isPending ? <Spinner/> : data?.data?.defaultedLoans?.toLocaleString() || 0} 
                 bgColor='#27AE60' text2='0'/>
 
             </div>
