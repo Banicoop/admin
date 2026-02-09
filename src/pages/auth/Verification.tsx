@@ -17,9 +17,13 @@ const Verification = () => {
     
     const [otp, setOtp] = useState('');
     const [adminId, setAdminId] = useState<string | null>(null);
-    
+
     const handleOtpChange = (val: string) => {
         setOtp(val);
+
+        if (val.length === 4 && adminId && status !== 'pending') {
+            dispatch(verifyLogin({ otp, adminId }));
+        }
     };
     
     const isButtonEnabled = otp.length === 4;
@@ -36,44 +40,46 @@ const Verification = () => {
     const { status } = useSelector((state: any) => state.auth)
 
 
-    const verifyOtp = async () => {
-        dispatch(verifyLogin({otp, adminId}))
+    // const verifyOtp = async () => {
+    //     dispatch(verifyLogin({otp, adminId}))
+    // }
+
+    const ResendOTP = () => {
+
     }
 
 
   return (
-    <form className='rounded-3xl shadow-lg bg-bgWhite p-[3rem] flex flex-col justify-center items-center gap-[1rem]'>
-        <div className="flex gap-3 items-center">
+    <form 
+        className='rounded-3xl shadow-lg bg-bgWhite p-[3rem] flex flex-col justify-center items-center gap-[1rem]'>
+        <header className="flex gap-3 items-center">
             <img src="/frame.svg" alt="" className="" />
             <h1 className="text-5xl font-semibold">Two-Factor <br /> Authentication</h1>
-        </div>
+        </header>
 
         <p className='text-lg text-[#000] text-center'>Check your email inbox for a 4-digit OTP. Enter it below</p>
 
-        <div className="flex flex-col gap-1">
+        <section className="flex flex-col gap-1">
             <OtpInput className={`${status === 'failed' ? 'text-[crimson]' : 'text-[#026E78] '}`} onChange={handleOtpChange}/>
-            <div className="flex items-center">
-                { status === 'failed' &&
-                <>
-                     <span className='text-red-400'>Incorrect OTP</span>
-                     {/* <span className="text-lg text-[#6922D1] cursor-pointer font-semibold flex ml-auto" onClick={verifyOtp}>Resend OTP</span> */}
-                </>
-                }
+            { status === 'failed' &&
+            <div className="flex items-center justify-between">
+                <span className='text-red-400'>Incorrect OTP</span>
+                {/* <span className="text-lg text-[#6922D1] cursor-pointer font-semibold flex">Resend OTP</span> */}
             </div>
-        </div>
+            }
+        </section>
 
         <div className="flex justify-between w-full">
             <BackBtn onClick={() => navigate('/auth/login')} text='Go Back'/>
 
             <Button
                 loading={status === 'pending'}
-                onClick={verifyOtp}
-                // type='submit'
+                // onClick={ status === 'failed' ? ResendOTP : verifyOtp }
                 className='text-bgWhite rounded-3xl py-2 px-7 bg-bgPurple'
                 rightIcon={<img src="/autharr.svg" alt="" className="flex my-auto" />} 
                 disabled={!isButtonEnabled}
             >
-                Continue
+                { status === 'failed' ? 'Resend OTP': 'Continue'}
             </Button>
         </div>
     </form>
