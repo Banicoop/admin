@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { BackBtn } from '../../components/buttons/ExportBtn';
 import OtpInput from '../../components/inputs/OtpInput';
@@ -22,7 +22,7 @@ const Verification = () => {
         setOtp(val);
 
         if (val.length === 4 && adminId && status !== 'pending') {
-            dispatch(verifyLogin({ otp, adminId }));
+            dispatch(verifyLogin({ otp: val, adminId }));
         }
     };
     
@@ -39,10 +39,6 @@ const Verification = () => {
 
     const { status } = useSelector((state: any) => state.auth)
 
-
-    // const verifyOtp = async () => {
-    //     dispatch(verifyLogin({otp, adminId}))
-    // }
 
     const ResendOTP = () => {
 
@@ -79,7 +75,8 @@ const Verification = () => {
                 rightIcon={<img src="/autharr.svg" alt="" className="flex my-auto" />} 
                 disabled={!isButtonEnabled}
             >
-                { status === 'failed' ? 'Resend OTP': 'Continue'}
+                Continue
+                {/* { status === 'failed' ? 'Resend OTP': 'Continue'} */}
             </Button>
         </div>
     </form>

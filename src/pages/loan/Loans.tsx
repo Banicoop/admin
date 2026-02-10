@@ -163,7 +163,7 @@ const handleExport = async () => {
                 page={loanData?.page}
                 total={loanData?.total}
                 limit={loanData?.limit}
-                onPageChange={(event: any, value: number) => setPage(value)}
+                onPageChange={(_, value: number) => setPage(value)}
                 /> 
             } 
             </div>

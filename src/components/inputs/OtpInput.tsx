@@ -50,6 +50,24 @@ const OtpInput: FC<OTPinputProps> = ({
     }
   };
 
+    const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const pasted = e.clipboardData
+      .getData("text")
+      .replace(/\D/g, "")
+      .slice(0, digits);
+
+    if (!pasted) return;
+
+    const newOtp = pasted.split("");
+    setOtp(newOtp);
+    onChange(newOtp.join(""));
+
+    // focus last filled input
+    setActiveIndex(Math.min(pasted.length, digits - 1));
+  };
+
   useEffect(() => {
     inputRef.current?.focus();
   }, [activeIndex]);
@@ -66,6 +84,7 @@ const OtpInput: FC<OTPinputProps> = ({
           value={digit}
           onChange={(e) => handleChange(e, index)}
           onKeyDown={(e) => handleKeyDown(e, index)}
+          onPaste={index === 0 ? handlePaste : undefined}
           className={`px-2 py-3 h-[60px] w-[60px] rounded-2xl border-2 text-center text-3xl font-bold ${className}`}
         />
       ))}
