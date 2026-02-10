@@ -7,60 +7,90 @@ interface OTPinputProps {
     className: string
 }
 
-let currentOtpIndex: number = 0;
+const OtpInput: FC<OTPinputProps> = ({
+  onChange,
+  digits = 4,
+  className
+}) => {
+  const [otp, setOtp] = useState<string[]>(Array(digits).fill(""));
+  const [activeIndex, setActiveIndex] = useState(0);
 
-const OtpInput:FC<OTPinputProps> = ({  onChange,  digits = 4, className}) => {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-    const [otp, setOtp] = useState<string[]>(new Array(digits).fill(""));
-    const [activeOtpIndex, setActiveOtpIndex] = useState<number>(0);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const value = e.target.value.replace(/\D/g, "").slice(-1);
 
-    const inputRef = useRef<HTMLInputElement>(null)
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+    onChange(newOtp.join(""));
 
-    const handleChange = ({target}: React.ChangeEvent<HTMLInputElement>): void => {
-        const { value } = target;
-        const newOTP: string[] = [...otp];
-        newOTP[currentOtpIndex] = value.substring(value.length - 1);
-        
-        if (!value) setActiveOtpIndex(currentOtpIndex - 1);
-        else setActiveOtpIndex(currentOtpIndex + 1);
-        setOtp(newOTP);
-
-        onChange(newOTP.join(""));
+    if (value && index < digits - 1) {
+      setActiveIndex(index + 1);
     }
+  };
 
-    const handleKeyDown = ({key}: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-        currentOtpIndex = index;
-        if(key === "Backspace") setActiveOtpIndex(currentOtpIndex - 1);
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    if (e.key === "Backspace") {
+      const newOtp = [...otp];
+
+      if (!otp[index] && index > 0) {
+        setActiveIndex(index - 1);
+      }
+
+      newOtp[index] = "";
+      setOtp(newOtp);
+      onChange(newOtp.join(""));
     }
+  };
 
-    const handleInput = (e: React.FormEvent<HTMLInputElement>): void => {
-        e.preventDefault();
-        const input = e.currentTarget as HTMLInputElement;
-        input.value = input.value.replace(/[-eE]/g, '');
-    };
+    const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
 
-    useEffect(() => {
-        inputRef.current?.focus();
-    }, [activeOtpIndex])
+    const pasted = e.clipboardData
+      .getData("text")
+      .replace(/\D/g, "")
+      .slice(0, digits);
 
-    return (
-        <div className="flex gap-2 w-full justify-between">
-            {otp.map((_, index) => (
-                <React.Fragment key={index}>
-                    <input type='tel' 
-                    maxLength={1} minLength={0} 
-                    ref={index === activeOtpIndex ? inputRef : null}
-                    onInput={handleInput}
-                    value={otp[index]}
-                    onChange={handleChange}
-                    onKeyDown={(e) => handleKeyDown(e, index)}
-                    className={`px-2 py-3 h-[60px] w-[60px] rounded-2xl border-2 border-solid outline-none text-center text-3xl font-bold ${className}`}  />
+    if (!pasted) return;
 
-                </React.Fragment>
-            ))
-            }
-        </div>
-    )
-}
+    const newOtp = pasted.split("");
+    setOtp(newOtp);
+    onChange(newOtp.join(""));
+
+    // focus last filled input
+    setActiveIndex(Math.min(pasted.length, digits - 1));
+  };
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [activeIndex]);
+
+  return (
+    <div className="flex gap-2 w-full justify-between">
+      {otp.map((digit, index) => (
+        <input
+          key={index}
+          ref={index === activeIndex ? inputRef : null}
+          type="tel"
+          inputMode="numeric"
+          maxLength={1}
+          value={digit}
+          onChange={(e) => handleChange(e, index)}
+          onKeyDown={(e) => handleKeyDown(e, index)}
+          onPaste={index === 0 ? handlePaste : undefined}
+          className={`px-2 py-3 h-[60px] w-[60px] rounded-2xl border-2 text-center text-3xl font-bold ${className}`}
+        />
+      ))}
+    </div>
+  );
+};
+
 
 export default OtpInput;

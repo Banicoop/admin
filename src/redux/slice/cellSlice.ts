@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import SERVER from "../../utils/server";
-import { toast } from "react-toastify";
-import { toastOptions } from "../../helpers/toastOptions";
+import { toast } from "sonner";
 
 
 interface CellState {
@@ -22,11 +21,10 @@ export const createCell = createAsyncThunk(
         try {
             const response = await SERVER.post('admin/contribution/cells', cell);
 
-            console.log(response.data)
-            // return response.data.cells;
+            return response.data.cells;
         } catch (error: any) {
             const err = error?.response?.data?.message || 'Something went wrong!'
-            toast.error(`${err}`, {...toastOptions})
+            toast.error(`${err}`)
             return rejectWithValue(error.response.data)
         }
     }
@@ -71,7 +69,7 @@ export const deleteCell = createAsyncThunk(
             await SERVER.delete(`admin/contribution/cells/${Id}`);
         } catch (error: any) {
             const err = error?.response?.data?.message;
-            toast.error(`${err}`, {...toastOptions})
+            toast.error(`${err}`)
             return rejectWithValue('Failed to delete cell');
         }
     }
@@ -93,7 +91,7 @@ const cellSlice = createSlice({
         builder.addCase(createCell.fulfilled, (state, action) => {
             state.status = 'succeeded'
             state.entities.push(action.payload); 
-            toast.success('Contribution cell successfully created', {...toastOptions})
+            toast.success('Successful: Contribution cell has been created')
         })
         builder.addCase(createCell.rejected, (state, action) => {
             state.status = 'failed';
@@ -122,7 +120,7 @@ const cellSlice = createSlice({
         })
         .addCase(getCellDetails.rejected, (state) => {
             state.status = 'failed';
-            toast.error('Failed to fetch cell details', { ...toastOptions });
+            toast.error('Failed to fetch cell details');
         });
 
 
@@ -136,7 +134,7 @@ const cellSlice = createSlice({
             const cellId = action.meta.arg.Id;
 
             state.entities = state.entities.filter((cell: any) => cell._id !== cellId);
-            toast.success('Cell has been deleted successfully', { ...toastOptions });
+            toast.success('Success: Contribution Cell has been deleted ');
         })
         .addCase(deleteCell.rejected, (state, action) => {
             state.status = 'failed';

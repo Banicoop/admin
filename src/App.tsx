@@ -6,6 +6,7 @@ import { store } from './redux/store';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'sonner';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Provider store={store}>
          <QueryClientProvider client={queryClient}>
           <Routes/>
+          <Toaster position='top-center' richColors/>
           <ToastContainer />
           </QueryClientProvider>
         </Provider>

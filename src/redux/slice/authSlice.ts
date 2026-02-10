@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import SERVER from "../../utils/server";
-import { toast } from "react-toastify";
-import { toastOptions } from "../../helpers/toastOptions";
+import { toast } from "sonner";
 
 
 
@@ -31,9 +30,9 @@ export const login = createAsyncThunk(
             window.location.replace('/auth/verification');
             return response.data
         } catch (error:any) {
-            const err = error.response.data.message;
-            toast.error(`${err}`, { ...toastOptions })
-            return rejectWithValue(error.response.data)
+            const err = error?.response?.data?.message || error?.message || 'Something went wrong';
+            toast.error(`${err}`)
+            return rejectWithValue(error?.response?.data)
         }
     },
 )
@@ -60,8 +59,9 @@ export const verifyLogin = createAsyncThunk('auth/otp',
 
             return response.data
         } catch (error:any) {
-            console.log(error)
-            return rejectWithValue(error.response.data)
+            const err = error?.response?.data?.message || error?.message || 'Something went wrong';
+            toast.error(`${err}`)
+            return rejectWithValue(error?.response?.data)
         }
     }
 )
@@ -81,8 +81,8 @@ export const forgetPassword = createAsyncThunk(
             }
             return res.data;
         } catch (error: any) {
-            const err = error.response.data.message;
-            toast.error(`${err}`, { ...toastOptions })
+            const err = error?.response?.data?.message || error?.message || 'Something went wrong';
+            toast.error(`${err}`)
             return rejectWithValue(error);
         }
     }
@@ -96,13 +96,12 @@ export const resetPassword = createAsyncThunk(
         try {
             const res = await SERVER.post('admin/auth/reset-password', credentials);
             if(res.data){
-                 window.location.replace('/auth/verified')
-
+                window.location.replace('/auth/verified')
             }
             return res.data;
         } catch (error: any) {
-            const err = error.response.data.message;
-            toast.error(`${err}`, { ...toastOptions })
+            const err = error?.response?.data?.message || error?.message || 'Something went wrong';
+            toast.error(`${err}`)
             return rejectWithValue(error);
         }
     }
@@ -134,7 +133,7 @@ const authSlice = createSlice({
         builder.addCase(login.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.credentials = action.payload;
-            toast.success('OTP sent', { ...toastOptions })
+            toast.success('Successful: Please verify your email')
         })
         builder.addCase(login.rejected, (state, action) => {
             state.status = 'failed';
@@ -149,11 +148,11 @@ const authSlice = createSlice({
         builder.addCase(verifyLogin.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.user = action.payload;
-            toast.success('OTP verified successfully!', { ...toastOptions })
+            toast.success('OTP verified successfully!')
         })
         builder.addCase(verifyLogin.rejected, (state, action) => {
             state.status = 'failed';
-            toast.error('OTP not valid or expired', { ...toastOptions })
+            // toast.error('OTP not valid or expired')
         })
 
         
@@ -164,7 +163,7 @@ const authSlice = createSlice({
         builder.addCase(forgetPassword.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.credentials = action.payload; 
-            toast.success('OTP sent', { ...toastOptions })
+            toast.success('OTP sent')
         })
         builder.addCase(forgetPassword.rejected, (state, action) => {
             state.status = 'failed';
@@ -178,7 +177,7 @@ const authSlice = createSlice({
         builder.addCase(resetPassword.fulfilled, (state, action) => {
             state.status = 'succeeded';
             state.credentials = action.payload; 
-            toast.success('Password reset successful', { ...toastOptions })
+            toast.success('Password reset successful')
         })
         builder.addCase(resetPassword.rejected, (state, action) => {
             state.status = 'failed';

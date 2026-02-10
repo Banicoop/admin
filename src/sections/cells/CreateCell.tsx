@@ -23,7 +23,7 @@ interface IInput {
   cellName: string;
   totalUsers: number
   realUser: number;
-  contributionAmount: number
+  amount: number
   description: string;
   duration: number
   launchDate: string;
@@ -42,7 +42,7 @@ const initialState= {
   cellName: '',
   totalUsers: 0, 
   realUser: 0, 
-  contributionAmount: 0, 
+  amount: 0, 
   description: '',
   duration: 0, 
   launchDate: '',
@@ -100,7 +100,7 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
     const { name, value } = e.target;
     setInputs({
       ...inputs,
-      [name]: name === 'totalUsers' || name === 'realUser' || name === 'contributionAmount' || name === 'duration'
+      [name]: name === 'totalUsers' || name === 'realUser' || name === 'amount' || name === 'duration'
         ? parseInt(value, 10) || 0
         : value,
     });
@@ -112,17 +112,17 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
 
   const handleSubmit = async () => {
-    const { cellName, totalUsers, realUser, contributionAmount, description, launchDate, endDate } = inputs
-    if( !cellName || !totalUsers || !realUser || !contributionAmount || !description || !launchDate || !endDate) {
+    const { cellName, totalUsers, realUser, amount, description, launchDate, endDate } = inputs
+    if( !cellName || !totalUsers || !realUser || !amount || !description || !launchDate || !endDate) {
         toast.warn(`Please fill out the fields`, {...toastOptions});
         return;
     }
 
     try {
-      dispatch(createCell({cellName, totalUsers, realUser, contributionAmount, description, launchDate,  endDate, type}));
+      dispatch(createCell({cellName, totalUsers, realUser, amount, description, launchDate,  endDate, type}));
         if (status === 'succeeded') {
-          // setInputs(initialState);
-          // onClose(); 
+          setInputs(initialState);
+          onClose(); 
           return;
         }
     } catch (error) {
@@ -192,7 +192,7 @@ const CreateCell:FC<cType> = ({open, onClose, onClick}) => {
 
             <Input type='tel' placeholder='Must be 2 less than Max user' name='realUser' value={inputs.realUser} onChange={handleInputsChange}/>
 
-            <Input type='text' placeholder='Contribution Amount (Naira)' value={inputs.contributionAmount} name='contributionAmount' onChange={handleInputsChange}/>
+            <Input type='text' placeholder='Contribution Amount (Naira)' value={inputs.amount} name='amount' onChange={handleInputsChange}/>
 
           </div>
           <TextArea text='Must be more than 10 words' name='description' value={inputs.description} onChange={handleInputsChange}/>

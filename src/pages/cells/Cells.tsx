@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Info from '../../components/infos/Info';
 import Search from '../../components/Search';
 import ExportBtn from '../../components/buttons/ExportBtn';
@@ -7,12 +7,12 @@ import Btn from '../../components/buttons/Btn';
 import CellCard from '../../sections/cells/CellCard';
 import Welcome from '../../components/Welcome';
 import Widget from '../../components/Widget';
-// import { getCells } from '../../redux/slice/cellSlice';
-// import { useDispatch, useSelector } from 'react-redux';
-// import type { Dispatch } from '.././../redux/store';
+import { getCells } from '../../redux/slice/cellSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import type { Dispatch } from '.././../redux/store';
 import { CircularProgress } from '@mui/material';
 import EmptyState from '../../components/EmptyState';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 
 
@@ -45,12 +45,15 @@ const Cells = () => {
 
   const {  entities: cells, status } = useSelector((state: any) => state.cell)
 
-  // const dispatch = useDispatch<Dispatch>();
+  const dispatch = useDispatch<Dispatch>();
 
 
-  // useEffect(() => {
-  //   dispatch(getCells())
-  // }, [dispatch])
+  useEffect(() => {
+    dispatch(getCells())
+  }, [dispatch])
+
+
+  console.log('CELLS:', cells)
 
 
 
@@ -83,7 +86,7 @@ const Cells = () => {
           </div>
           }
 
-          <div className="flex flex-col justify-between md:flex-row md:flex-wrap gap-4 w-full">
+          <div className="flex flex-col items-center md:flex-row md:flex-wrap gap-4 w-full">
             {status === 'pending' && <CircularProgress sx={{display: 'flex', margin: 'auto'}}/>  }
              {
               (!cells || cells?.length === 0 ) && <div className="flex w-full justify-center items-center">
