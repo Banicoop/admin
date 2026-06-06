@@ -9,29 +9,52 @@ const Wallet = () => {
 
   const { data, isPending, error, refetch } = useWalletQuery();
 
+    const handleRetry = () => {
+      refetch();
+    }
 
-  const handleRetry = () => {
-    refetch();
-  }
+    const walletInfos = data?.payload?.walletInfos ?? [];
 
+    if (isPending) {
+      return (
+        <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] pb-6 pt-2'>
+          <Info text='Wallet Management Hub' />
+
+          <div className='flex w-full h-40'>
+            <CircularProgress sx={{ margin: 'auto' }} />
+          </div>
+        </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] pb-6 pt-2'>
+          <Info text='Wallet Management Hub' />
+          <ErrorPage onClick={handleRetry} />
+        </div>
+      );
+    }
 
   return (
     <div className='h-full flex flex-col w-full px-2 md:px-8 gap-8 lg:gap-[50px] pb-6 pt-2'>
        <Info text='Wallet Management Hub' />
-       <section className="flex flex-col lg:flex-row lg:flex-wrap justify-between gap-6">
-       {
-        isPending ? 
-        <div className="flex w-full h-40">
-          <CircularProgress sx={{display: 'flex', margin: 'auto'}} />
-        </div>
-          : error ? 
-           <ErrorPage onClick={handleRetry}/> : 
-            data.payload?.walletInfos?.map((item: any) => (
-              <WalletCard title={item?.walletName} item={item} url='#' key={item.title} />
-            ))
-           }
+       <section className="grid md:grid-cols-2 gap-6">
+        {walletInfos.length > 0 ? (
+          walletInfos.map((wallet: any) => (
+            <WalletCard
+              key={wallet.id ?? wallet.walletName}
+              title={wallet.walletName}
+              item={wallet}
+              url='#'
+            />
+          ))
+        ) : (
+          <div className='grid col-span-2 w-full place-items-center '>
+            <ErrorPage onClick={handleRetry} />
+          </div>
+        )}
        </section>
-
     </div>
   )
 }
