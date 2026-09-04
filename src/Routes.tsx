@@ -65,12 +65,8 @@ function AuthVerificationLayout(){
 function Routes (){
 
 
-  // const acccessToken = localStorage.getItem('token')
-  // const token = acccessToken ? JSON.parse(acccessToken): null
   const token = useSelector((state: RootState) => state.auth.accessToken);
   const dispatch = useDispatch();
-
-  console.log('token:', token)
 
 
   useEffect(() => {
