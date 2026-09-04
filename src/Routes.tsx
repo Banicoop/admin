@@ -7,7 +7,7 @@ import { getTokenExpirationTime } from './utils/jwtDecode';
 import Register from './pages/admins/Register';
 import Admins from './pages/admins/Admins';
 import { WelcomeImage } from './constant/images';
-import { logout } from './redux/slice/authSlice';
+import { logout, UsersState } from './redux/slice/authSlice';
 import {  Navbar, Sidebar } from './components';
 import { Cells, CellDetails, CellUserDetails} from './pages/cells';
 import { Signin, ForgetPassword, Verification, Verified, WelcomePage, Splash, ResetPassword } from './pages/auth'
@@ -15,6 +15,7 @@ import { LoanApplicationDetails, Loans, PendingLoan } from './pages/loan';
 import { Wallet, InvestorWallet, WalletTransaction } from './pages/wallet';
 import Merchant from './pages/merchant/Merchant';
 import Customers from './pages/customer/Customers';
+import { RootState } from './redux/store';
 
 
 
@@ -64,8 +65,12 @@ function AuthVerificationLayout(){
 function Routes (){
 
 
-  const token = useSelector((state: any) => state.auth.accessToken);
+  // const acccessToken = localStorage.getItem('token')
+  // const token = acccessToken ? JSON.parse(acccessToken): null
+  const token = useSelector((state: RootState) => state.auth.accessToken);
   const dispatch = useDispatch();
+
+  console.log('token:', token)
 
 
   useEffect(() => {

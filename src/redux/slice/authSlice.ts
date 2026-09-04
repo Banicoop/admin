@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 
 
-interface UsersState {
+export interface UsersState {
     user?: any;
     credentials?: any;
     accessToken: string | null;
@@ -41,10 +41,17 @@ export const login = createAsyncThunk(
 export const verifyLogin = createAsyncThunk('auth/otp', 
     async (user: {}, { rejectWithValue,  dispatch  }) => {
         try {
-            const response = await SERVER.post('admin/auth/verifyToken', user);
+            const response = await SERVER.post('admin/auth/verifyToken', user) as any;
 
-            if(response.data.message === 'OTP verified'){
-                const { accessToken, refreshToken, ...payload } = response.data;
+            if(!response.data || response.error){
+                return toast.error(response.error || 'Failed to verify OTP, please try agein later')
+            }
+
+            if(response.data?.data && response.status === 200){
+                const { accessToken, refreshToken, ...payload } = response.data.data;
+                console.log('accessToken:', accessToken);
+                console.log('refreshToken:', refreshToken);
+                console.log('user:', payload);
 
 
                 localStorage.setItem('token', accessToken);
@@ -53,11 +60,12 @@ export const verifyLogin = createAsyncThunk('auth/otp',
                 localStorage.setItem('user', JSON.stringify(payload));
 
                 dispatch(setAuth({ user: payload, accessToken, refreshToken }));
+                console.log('dispatched auth');
                 
                 window.location.replace('/auth/verified');
             }
 
-            return response.data
+            return response.data.data
         } catch (error:any) {
             const err = error?.response?.data?.message || error?.message || 'Something went wrong';
             toast.error(`${err}`)

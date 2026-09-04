@@ -1,3 +1,5 @@
+import { store } from "./redux/store";
+
 export interface WidgetDetails {
     title: string;
     num: number | string;
@@ -19,5 +21,6 @@ export type WType = {
   url?: string;
   item: any
 }
+
 
 

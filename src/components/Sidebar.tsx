@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { menuData } from '../constant/menuData';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../redux/slice/authSlice';
+import { RootState } from '../redux/store';
 
 
 
@@ -10,7 +11,7 @@ const Sidebar = () => {
 
   const dispatch = useDispatch();
 
-  const role = useSelector((state: any) => state?.auth?.user?.payload?.role);
+  const role = useSelector((state: RootState) => state?.auth?.user?.user?.role);
 
   if(!role) {
     dispatch(logout())

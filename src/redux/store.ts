@@ -21,3 +21,4 @@ export const store = configureStore({
 
 export type Dispatch = typeof store.dispatch;
 
+export type RootState = ReturnType<typeof store.getState>;
