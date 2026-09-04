@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, SyntheticEvent } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { BackBtn } from '../../components/buttons/ExportBtn';
 import OtpInput from '../../components/inputs/OtpInput';
@@ -20,10 +20,6 @@ const Verification = () => {
 
     const handleOtpChange = (val: string) => {
         setOtp(val);
-
-        if (val.length === 4 && adminId && status !== 'pending') {
-            dispatch(verifyLogin({ otp: val, adminId }));
-        }
     };
     
     const isButtonEnabled = otp.length === 4;
@@ -32,22 +28,24 @@ const Verification = () => {
         const loginDataString = localStorage.getItem('loginData');
         if (loginDataString) {
             const loginData = JSON.parse(loginDataString);
-            setAdminId(loginData.id);
+            setAdminId(loginData.data?.user?.id || null);
         }
     }, []);
 
 
-    const { status } = useSelector((state: any) => state.auth)
+    const { status } = useSelector((state: any) => state.auth);
 
-
-    const ResendOTP = () => {
-
-    }
+    const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log('Submitting OTP:', otp, 'Admin ID:', adminId);
+        if (otp.length === 4 && adminId) {
+            dispatch(verifyLogin({ otp, adminId }));
+        }
+    }   
 
 
   return (
-    <form 
-        className='rounded-3xl shadow-lg bg-bgWhite p-[3rem] flex flex-col justify-center items-center gap-[1rem]'>
+    <form onSubmit={handleSubmit} className='rounded-3xl shadow-lg bg-bgWhite p-[3rem] flex flex-col justify-center items-center gap-[1rem]'>
         <header className="flex gap-3 items-center">
             <img src="/frame.svg" alt="" className="" />
             <h1 className="text-5xl font-semibold">Two-Factor <br /> Authentication</h1>
@@ -70,13 +68,13 @@ const Verification = () => {
 
             <Button
                 loading={status === 'pending'}
+                type='submit'
                 // onClick={ status === 'failed' ? ResendOTP : verifyOtp }
                 className='text-bgWhite rounded-3xl py-2 px-7 bg-bgPurple'
                 rightIcon={<img src="/autharr.svg" alt="" className="flex my-auto" />} 
                 disabled={!isButtonEnabled}
             >
                 Continue
-                {/* { status === 'failed' ? 'Resend OTP': 'Continue'} */}
             </Button>
         </div>
     </form>

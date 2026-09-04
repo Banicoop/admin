@@ -80,7 +80,7 @@ const handleExport = async () => {
                 title='Revenue Generated' 
                 icon='/loan/wallet.png' 
                 icon2='/arrow-right.svg' 
-                num={isPending ? <Spinner/> : data?.data?.revenueGenerated?.toLocaleString() || 0} 
+                num={isPending ? <Spinner/> : data?.data?.revenueGenerated?.toLocaleString() || '₦0'} 
                 bgColor='#27AE60' text2='0'/>
 
               <AppWidgets 

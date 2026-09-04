@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 const Navbar = () => {
 
 
-  const user = useSelector((state: any) => state.auth.user);
+  const user = useSelector((state: any) => state.auth.user?.user);
 
 
   return (
@@ -18,7 +18,6 @@ const Navbar = () => {
           <span className="text-[#016AFF] font-[600] text-[20px] hidden lg:block">CooCredit</span>
         </div>
 
-        
         <h1 className='text-[#000] text-[14px]'>Dashboard Overview</h1>
         </div>
 
@@ -39,8 +38,15 @@ const Navbar = () => {
             <div className='bg-[#49AC46] rounded-full h-2 w-2 absolute top-[30px] right-1'/>
           </div>
           <div className="flex flex-col">
-            <span className="text-[#000000] font-[500]">{`${user?.payload?.firstName} ${user?.payload?.lastName}`}</span>
-            <span className="text-[#000000] text-xs">Username: {user?.payload?.username}</span>
+            <span className="text-[#000000] font-[500]">
+              {user?.firstName || user?.lastName
+                ? `${user?.firstName || ""} ${user?.lastName || ""}`.trim()
+                : "No name"}
+            </span>
+
+            <span className="text-[#000000] text-xs">
+              Email: {user?.email || "No email"}
+            </span>
           </div>
 
           <img src="/arrow-down.svg" alt="" className="h-4 w-4" />
